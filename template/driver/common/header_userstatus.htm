@@ -1,3 +1,4 @@
+{eval $driverLang = lang('driver');}
 <!--{if $_G['uid']}-->
 <div id="um">
 
@@ -41,7 +42,12 @@
 	<span class="pipe">|</span><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a>
 </p>
 <!--{elseif !$_G[connectguest]}-->
-	<!--{template member/login_simple}-->
+<div class="y">
+	<span><a href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);return false;"><em>{lang login}</em></a></span>
+
+	<span><a href="member.php?mod={$_G[setting][regname]}" class="xi2 xw1">{$driverLang['register']}</a></span>
+</div>
+
 <!--{else}-->
 <div id="um">
 	<div class="avt y"><!--{avatar(0,small)}--></div>

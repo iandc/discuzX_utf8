@@ -42,7 +42,7 @@
 	<!--{if empty($topic) || $topic['useheader']}-->
 		<!--{if $_G['setting']['mobile']['allowmobile'] && (!$_G['setting']['cacheindexlife'] && !$_G['setting']['cachethreadon'] || $_G['uid']) && ($_GET['diy'] != 'yes' || !$_GET['inajax']) && ($_G['mobile'] != '' && $_G['cookie']['mobile'] == '' && $_GET['mobile'] != 'no')}-->
 			<div class="xi1 bm bm_c">
-			    {lang your_mobile_browser}<a href="{$_G['siteurl']}forum.php?mobile=yes">{lang go_to_mobile}</a> <span class="xg1">|</span> <a href="$_G['setting']['mobile']['nomobileurl']">{lang to_be_continue}</a>
+			    {lang your_mobile_browser}<a href="{$_G['siteurl']}forum.php?mobile=yes">{lang go_to_mobile}</a> <span class="xg1">|</span> <a href="$_G['setting']['mobile']['nomobileurl']">{lang to_be_continue}</a>	
 			</div>
 		<!--{/if}-->
 		<!--{if $_G['setting']['shortcut'] && $_G['member'][credits] >= $_G['setting']['shortcut']}-->
@@ -116,13 +116,12 @@
 			<!--{/if}-->
 			<!--{subtemplate common/header_qmenu}-->
 		<!--{/if}-->
-
-		<!--{ad/headerbanner/wp a_h}-->
 		<div id="hd">
 			<div class="wp">
 				<div class="hdc cl">
 					<!--{eval $mnid = getcurrentnav();}-->
 					<h2><!--{if !isset($_G['setting']['navlogos'][$mnid])}--><a href="{if $_G['setting']['domain']['app']['default']}{$_G['scheme']}://{$_G['setting']['domain']['app']['default']}/{else}./{/if}" title="$_G['setting']['bbname']">{$_G['style']['boardlogo']}</a><!--{else}-->$_G['setting']['navlogos'][$mnid]<!--{/if}--></h2>
+					<!--{ad/headerbanner/wp a_h}-->
 				</div>
 
 				<div id="nv">
