@@ -2042,7 +2042,16 @@ function dunserialize($data) {
 	if(($ret = unserialize($data)) === false) {
 		$ret = unserialize(stripslashes($data));
 	}
+    if($ret === false) {
+        $data = preg_replace_callback('/s:([0-9]+?):"([\s\S]*?)";/','_serialize',$data);
+        $ret = unserialize(stripslashes($data));
+    }
 	return $ret;
+}
+
+function _serialize($str) {
+    $l = strlen($str[2]);
+    return 's:'.$l.':"'.$str[2].'";';
 }
 
 function browserversion($type) {
