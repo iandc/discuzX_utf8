@@ -7,8 +7,8 @@
  *      $Id: home.php 32932 2013-03-25 06:53:01Z zhangguosheng $
  */
 
-define('APPTYPEID', 1);
-define('CURSCRIPT', 'home');
+define('APPTYPEID', 5);
+define('CURSCRIPT', 'blog');
 
 if(!empty($_GET['mod']) && ($_GET['mod'] == 'misc' || $_GET['mod'] == 'invite')) {
 	define('ALLOWGUEST', 1);
@@ -28,7 +28,7 @@ $space = array();
 $mod = getgpc('mod');
 if(!in_array($mod, array('space', 'spacecp', 'misc', 'magic', 'editor', 'invite', 'task', 'medal', 'rss', 'follow'))) {
 	$mod = 'space';
-	$_GET['do'] = 'blog';
+	$_GET['do'] = 'index';
 }
 
 if($mod == 'space' && ((empty($_GET['do']) || $_GET['do'] == 'index') && ($_G['inajax']))) {
@@ -38,7 +38,7 @@ $curmod = !empty($_G['setting']['followstatus']) && (empty($_GET['diy']) && empt
 define('CURMODULE', $curmod);
 runhooks($_GET['do'] == 'profile' && $_G['inajax'] ? 'card' : $_GET['do']);
 
-require_once libfile('home/'.$mod, 'module');
+require_once libfile('blog/'.$mod, 'module');
 
 
 ?>
