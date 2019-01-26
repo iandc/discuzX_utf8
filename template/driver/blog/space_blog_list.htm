@@ -1,0 +1,249 @@
+{eval
+	$_G[home_tpl_spacemenus][] = "<a href=\"home.php?mod=space&uid=$space[uid]&do=blog&view=me\">{lang they_blog}</a>";
+	$friendsname = array(1 => '{lang friendname_1}',2 => '{lang friendname_2}',3 => '{lang friendname_3}',4 => '{lang friendname_4}');
+}
+	<!--{template common/header}-->
+    <section class="bigContent clearfix">
+        <div class="w100">
+            <div class="w1100">
+                <div id="pt" class="bm cl">
+                    <div class="z">
+                        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+                        <a href="blog.html">{lang blog}</a>
+                    </div>
+                </div>
+                <div class="conLeft fl">
+                    <div class="all"><a href="blog.html">{lang all}</a></div>
+                    <!--{if $category}-->
+                    <!--{loop $category $value}-->
+                    <!--{if $value['upid'] == 0}-->
+                    <div class="conLeft_top left_nav">
+                        <div class="left_nav_tit fw600">
+                            $value['catname']
+                        </div>
+                        <!--{if $value['children']}-->
+                        <ul>
+                            <!--{loop $value['children'] $v}-->
+                            <li><span>·</span><a href="blog.php?mod=space&do=blog&catid=$v&view=all&order=$_GET[order]">$category[$v]['catname']</a></li>
+                            <!--{/loop}-->
+                        </ul>
+                        <!--{/if}-->
+                    </div>
+                    <!--{/if}-->
+                    <!--{/loop}-->
+                    <!--{/if}-->
+                </div>
+                <div class="conRight fr">
+                    <div class="cR_title">
+                        <!-- <div class="r_tit clearfix">
+                            <span class="fl jcbk">{lang wonderful_blog}</span>
+                            <span class="fr r_tit_more"><a href="">{lang follow_more}</a></span>
+                        </div> -->
+                       <!--  <div class="r_three">
+                            <div class="cards">
+                                <div class="img">
+                                    <a href=""><img src="https://static.oschina.net/uploads/img/201812/20160115_Ffez.png" alt=""></a>
+                                </div>
+                                <div class="des">
+                                    <a href="" class="txt mb10 fw600">SpringBoot服务器压测对比（jetty、tomcat、undertow）</a>
+                                    <div class="meta clearfix">
+                                        <a href="" class="fl">
+                                            <div class="hd_img fl">
+                                                <img src="https://static.oschina.net/uploads/user/1179/2358114_50.jpg?t=1446886028000" alt="">
+                                            </div>
+                                            <span class="fr">李宇成</span>
+                                        </a>
+                                        <a href="" class="fr pl">
+                                            <i class="icon"></i>
+                                            24
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cards">
+                                <div class="img">
+                                    <a href=""><img src="https://static.oschina.net/uploads/img/201812/20160115_Ffez.png" alt=""></a>
+                                </div>
+                                <div class="des">
+                                    <a href="" class="txt mb10 fw600">SpringBoot服务器压测对比（jetty、tomcat、undertow）</a>
+                                    <div class="meta clearfix">
+                                        <a href="" class="fl">
+                                            <div class="hd_img fl">
+                                                <img src="https://static.oschina.net/uploads/user/1179/2358114_50.jpg?t=1446886028000" alt="">
+                                            </div>
+                                            <span class="fr">李宇成</span>
+                                        </a>
+                                        <a href="" class="fr pl">
+                                            <i class="icon"></i>
+                                            24
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cards">
+                                <div class="img">
+                                    <a href=""><img src="https://static.oschina.net/uploads/img/201812/20160115_Ffez.png" alt=""></a>
+                                </div>
+                                <div class="des">
+                                    <a href="" class="txt mb10 fw600">SpringBoot服务器压测对比（jetty、tomcat、undertow）</a>
+                                    <div class="meta clearfix">
+                                        <a href="" class="fl">
+                                            <div class="hd_img fl">
+                                                <img src="https://static.oschina.net/uploads/user/1179/2358114_50.jpg?t=1446886028000" alt="">
+                                            </div>
+                                            <span class="fr">李宇成</span>
+                                        </a>
+                                        <a href="" class="fr pl">
+                                            <i class="icon"></i>
+                                            24
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="cR_content clearfix">
+                        <div id="wrap">
+                            <div>
+                                <div id="tit" class="mb10 fl">
+                                    <span $actives[all]><a href="blog.php?mod=space&do=blog&view=all">{lang new_recommend}</a></span>
+                                    <span $actives[me]><a href="blog.php?mod=space&do=blog&view=me">{lang my_blog}</a></span>
+                                    <span $actives[we]><a href="blog.php?mod=space&do=blog&view=we">{lang friend_blog}</a></span>
+                                </div>
+                                <div class="fr xbk">
+                                        <!--{if helper_access::check_module('blog')}-->
+                                        <a href="home.php?mod=spacecp&ac=blog">{lang post_new_blog}
+                                        <!--{/if}-->
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <ul id="con">
+                                <li class="show">
+                                	<!--{if $count}-->
+                                        <div>
+                                            <!--{if $_GET[view] == 'me' && $classarr}-->
+                                                <!--{loop $classarr $classid $classname}-->
+                                                    <a href="blog.php?mod=space&uid=$space[uid]&do=blog&classid=$classid&view=me" id="classid$classid"{if $_GET[classid]==$classid} class="a"{/if}>$classname</a><span class="pipe">|</span>
+                                                <!--{/loop}-->
+                                            <!--{/if}-->
+                                        </div>
+                                        <!--{if $searchkey}-->
+                                            <p class="tbmu">{lang follow_search_blog} <span style="color: red; font-weight: 700;">$searchkey</span> {lang doing_record_list}</p>
+                                        <!--{/if}-->
+	                                	<!--{loop $list $k $value}-->
+	                                    <div class="list clearfix">
+                                            <div class="z" style="width: 8%;">
+                                                <!--{if empty($diymode)}-->
+                                                <dd class="m">
+                                                    <div class="avt"><a href="home.php?mod=space&uid=$value[uid]" c="1"><!--{avatar($value[uid],middle)}--></a></div>
+                                                </dd>
+                                                <!--{/if}-->
+                                            </div>
+	                                        <div class="listL y" style="width: 92%;">
+	                                            <div class="list_tit clearfix">
+	                                                <!--{eval $stickflag = isset($value['stickflag']) ? 0 : 1;}-->
+                                                    <!--{if !$stickflag}--><span class="xi1">{lang stick}</span> &middot;<!--{/if}-->
+                                                    <!--{if helper_access::check_module('share')}-->
+                                                    <a href="home.php?mod=spacecp&ac=share&type=blog&id=$value[blogid]&handlekey=lsbloghk_{$value[blogid]}" id="a_share_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr xs1 xw0 y">{lang share}</a>
+                                                    <!--{/if}-->
+	                                                <a  href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]"{if $value[magiccolor]} style="color: {$_G[colorarray][$value['magiccolor']]}"{/if} target="_blank" class="fw600 z">$value['subject']</a>
+                                                    <!--{if $value[status] == 1}--> <span class="xi1">({lang pending})</span><!--{/if}-->
+	                                            </div>
+	                                            <div class="list_des clearfix" id="blog_article_$value[blogid]">
+	                                                <p {if $value[pic]} style="width: 100%;{/else}style="80%"{/if}" class="z">
+	                                                    $value['message']
+	                                                </p>
+                                                    <div style="width: 15%;" class="y list_img">
+                                                        <!--{if $value[pic]}--><a href="blog.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" target="_blank"><img src="$value[pic]" alt="$value[subject]" class="tn" /></a><!--{/if}-->
+                                                    </div>
+                                                    
+	                                            </div>
+	                                            <div class="list_items"> 
+                                                    <span>
+                                                        <a href="">{lang riqi}</a>：$value['dateline']
+                                                    </span>
+                                                    <span>
+                                                        <!--{if $classarr[$value[classid]]}--> <a href=""> {lang personal_category}:</a> <a href="blog.php?mod=space&uid=$value[uid]&do=blog&classid=$value[classid]&view=me">{$classarr[$value[classid]]}</a><!--{/if}-->  
+                                                        <!--{if $value['friend']}-->
+                                                    </span>
+                                                    <!--{/if}-->
+	                                                <span>
+                                                        <a href="">{lang username}</a>:
+                                                        <a href="blog.php?mod=space&uid=$value[uid]">$value['username']</a>
+                                                    </span>
+	                                                <span>
+                                                        <!--{if $value[viewnum]}-->
+	                                                	<a href="blog.php?mod=space&uid=$value[uid]&do=blog&classid=$value[classid]&view=me"  target="_blank">
+	                                                		{lang read_num}<span>$value['viewnum']</span>
+	                                                	</a>
+                                                        <!--{/if}-->
+	                                                </span>
+	                                                <span>
+	                                                	<a href="blog.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]#comment" target="_blank">
+	                                                		{lang comment}：<span>$value['replynum']</span>
+	                                                	</a>
+	                                                </span>
+                                                    <!--{if $value['hot']}--> <a href="">{lang hot}</a> ：<em>$value[hot]</em> </span><!--{/if}-->
+                                                    </span>
+                                                    <!--{if $_GET['view']=='me' && $space['self']}-->
+                                                    <span class="pipe">|</span><a href="blog.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=edit">{lang edit}</a><span class="pipe">|</span>
+                                                    <a href="blog.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=delete&handlekey=delbloghk_{$value[blogid]}" id="blog_delete_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
+                                                    <!--{if empty($value['status'])}-->
+                                                    <span class="pipe">|</span>
+                                                    <a href="blog.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=stick&stickflag=$stickflag&handlekey=stickbloghk_{$value[blogid]}" id="blog_stick_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);"><!--{if $stickflag}-->{lang stick}<!--{else}-->{lang cancel_stick}<!--{/if}--></a>
+                                                    <!--{/if}-->
+                                                <!--{/if}-->
+	                                                <!--{if $value['friend']}-->
+							                        <span class="y"><a href="$theurl&friend=$value[friend]" class="xg1">{$friendsname[$value['friend']]}</a></span>
+							                        <!--{/if}-->
+                                                    <span>
+	                                            </div>
+	                                        </div>
+
+	                                    </div>
+	                                    <!--{/loop}-->
+                                        <!--{if $pricount}-->
+                                            <p class="mtm">{lang hide_blog}</p>
+                                        <!--{/if}-->
+
+	                                    <!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+							        <!--{else}-->
+
+                    <!--{eval $userlist = [['fuid'=>1,'fusername'=>'user1'],['fuid' => 2,'fusername' => 'user2']];}-->
+                    <!--{if $_GET[view] == 'we' && $userlist}-->
+                        {lang filter_by_friend}
+                        <select name="fuidsel" onchange="fuidgoto(this.value);" class="ps">
+                            <option value="">{lang all_friends}</option>
+                            <!--{loop $userlist $value}-->
+                            <option value="$value[fuid]" {$fuid_actives[$value[fuid]]}>$value[fusername]</option>
+                            <!--{/loop}-->
+                        </select>
+                    <!--{/if}-->
+							            <div class="emp">{lang no_related_blog}</div>
+							        <!--{/if}-->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <script>
+        $('#tit span').click(function() {
+            var i = $(this).index();
+            $(this).addClass('a').siblings().removeClass('a');
+            $('#con li').eq(i).show().siblings().hide();
+        });
+    </script> -->
+
+<script type="text/javascript">
+	function fuidgoto(fuid) {
+		var parameter = fuid != '' ? '&fuid='+fuid : '';
+		window.location.href = 'blog.php?mod=space&do=blog&view=we'+parameter;
+	}
+</script>
+
+<!--{template common/footer}-->

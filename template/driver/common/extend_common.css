@@ -1,21 +1,49 @@
 #hd h2 { padding: 0 175px 8px 0; float: left; }
-.avt img { padding: 2px; width: 20px; height: 20px; background: {WRAPBG}; border: 1px solid; border-color: {COMMONBG} {COMMONBORDER} {COMMONBORDER} {COMMONBG}; }
+.small_img img{
+    width: 30px;
+    height: 30px;
+}
 .tz{
     position: absolute;
     left: 255px;
     top: -2px;
 }
+#scbar_txt{
+    width: 365px;
+}
+.wp{
+    width: 1100px;
+}
+#toptb { min-width: 1100px; font-size: 12px;}
 .form1,.form2{
     width:48%;
     position: relative;
     margin-top: 3px;
 }
+.ct2_a{
+    background-size: 18%;
+}
+#scbar_type{
+    padding-left: 25px;
+    margin-left: 50px;
+}
+#scbar{
+    padding: 3px 20px;
+}
+#um .showmenu{
+    margin-right: 5px;
+}
+#toptb a.showmenu:hover{
+    border-top: 0;
+}
 .ss{
-    width: 68%;
+    width: 72%;
     height: 36px;
-    border-radius: 5px;
+    border-radius: 5px;cc
     border: none;
     padding: 0 10px;
+
+    
 }
 .sub1{
     float: right;
@@ -26,24 +54,61 @@
     color: #fff;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 0.05em rgba(0,0,0,.4)
+    box-shadow: 0 0 0.05em rgba(0,0,0,.4);
 }
 .all{
-    background-color: #3b5998;
+    background-color: #3b5998 !important;
+}
+#um .avt{
+    display: inline-block;
+    margin-right: 0;
 }
 .sqj{
     background-color: #f60;
 } 
+
+#hd h2{
+    padding: 0 318px 8px 0;
+}
 .i-search{
     width: 17px;
     height: 17px;
     background: url(http://www.21dianyuan.com/home2016/images/spriter/sprite1470793520867.png) -201px -169px no-repeat;
     position: absolute;
-    left: 355px;
+    left: 425px;
     top: 10px;
     cursor: pointer;
 }
-#um{margin-left: 260px;padding-top: 0;padding-right: 0;}
+.pls{
+    width: 180px !important;
+}
+.pls .avatar img{
+    padding: 5px 15px 8px !important;
+}
+.pls dt{
+    margin-right: 10px;
+    margin-left: 20px;
+}
+.bmw .bm_h{
+    border-right: none;
+    border-left: none;
+}
+.bm_h{
+    border-top: none;
+}
+.bm{
+    margin-bottom: 0;
+}
+.bmw{
+    border-bottom: none;
+}
+.oll{
+    margin-bottom: 5px;
+}
+.ct2_a .mn{
+    width: 870px;
+}
+#um{margin-right: 0 !important;padding-top: 0;padding-right: 0;}
 #scbar{margin-top: 5px;padding:3px 10px;}
 .tz{border-left: 1px solid #eee;}
 .xjt{
@@ -53,5 +118,38 @@
     background: url(http://www.21dianyuan.com/home2016/images/spriter/sprite1470793520867.png) -231px -116px no-repeat;
     position: absolute;
     top: 17px;
-    right: 145px;
+    right: 150px;
 }
+#nv{
+    background-size: 100%;
+}
+
+/*公共的样式--------------------------------------------------------*/
+
+.clearfix{ clear: both; content: ""; display: block; overflow: hidden }
+.clear{clear: both;}
+.fl{ float: left; border: none;background: none;}
+.fr{float: right;}
+.w100{width: 100%;}
+.h100{height:100%;}
+.w1100{width: 1100px; height: auto; margin: 0 auto;}
+li{float: left;}
+.c_f{color: #fff;}
+.mt15{margin-top: 15px;}
+.fs12{font-size: 12px;}
+.w50{width:50%;}
+.w49{width: 48%;}
+.por{position: relative;}
+.poa{position: absolute;}
+img{border: 0; max-width: 100%;}
+.list_tit{font-size: 20px; font-weight: 700; }
+.color_gray{color: #999;}
+.mt12{margin-top: 12px;}
+.mb10{margin-bottom: 10px;}
+#wrap{max-width: 960px; margin: 0 auto; }
+a{color: #333;}
+h1,h2,h3,h4,h5,h6,ul{ margin: 0  !important; }
+.fw600{font-weight: 600;}
+.plr{padding: 0 15px;}
+.mtm{margin: 10px 0 30px !important;}
+

@@ -300,6 +300,6 @@ function rectAvatarDone(res) {
         jQuery('#avatarfileselector').hide();            
     }
     else {
-        alert('上传失败');
+        //alert('上传失败');
     }
 }

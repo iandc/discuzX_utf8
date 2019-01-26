@@ -595,6 +595,7 @@ CSS 写作注意事项：
 			#scbar { overflow: hidden; height: 42px; line-height: 42px; border-top: 1px solid #FFF; border-bottom: 1px solid #E9EFF5; background: #E8EFF5; }
 				.scbar_icon_td { width: 21px; background: url({IMGDIR}/search.png) no-repeat 0 -50px; }
 				.scbar_txt_td, .scbar_type_td { background: url({IMGDIR}/search.png) repeat-x 0 -93px; }
+					#scbar_txt { width: 400px; border: 1px solid #FFF; outline: none; }
 					.scbar_narrow #scbar_txt { width: 260px; }
 				.scbar_btn_td { width: 38px; background: url({IMGDIR}/search.png) no-repeat 8px -142px; }
 					#scbar_btn { margin: 0; padding: 0; border: none; background: transparent none; box-shadow: none; }

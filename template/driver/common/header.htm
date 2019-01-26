@@ -42,7 +42,7 @@
 	<!--{if empty($topic) || $topic['useheader']}-->
 		<!--{if $_G['setting']['mobile']['allowmobile'] && (!$_G['setting']['cacheindexlife'] && !$_G['setting']['cachethreadon'] || $_G['uid']) && ($_GET['diy'] != 'yes' || !$_GET['inajax']) && ($_G['mobile'] != '' && $_G['cookie']['mobile'] == '' && $_GET['mobile'] != 'no')}-->
 			<div class="xi1 bm bm_c">
-			    {lang your_mobile_browser}<a href="{$_G['siteurl']}forum.php?mobile=yes">{lang go_to_mobile}</a> <span class="xg1">|</span> <a href="$_G['setting']['mobile']['nomobileurl']">{lang to_be_continue}</a>	
+			    {lang your_mobile_browser}<a href="{$_G['siteurl']}forum.php?mobile=yes">{lang go_to_mobile}</a> <span class="xg1">|</span> <a href="$_G['setting']['mobile']['nomobileurl']">{lang to_be_continue}</a>
 			</div>
 		<!--{/if}-->
 		<!--{if $_G['setting']['shortcut'] && $_G['member'][credits] >= $_G['setting']['shortcut']}-->
@@ -57,24 +57,16 @@
 		<div id="toptb" class="cl">
 			<!--{hook/global_cpnav_top}-->
 			<div class="wp">
-				<div class="z">
+				<div class="z" style="width: 15%;">
 					<!--{loop $_G['setting']['topnavs'][0] $nav}-->
 						<!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->$nav[code]<!--{/if}-->
 					<!--{/loop}-->
 					<!--{hook/global_cpnav_extra1}-->
 				</div>
-
-				<!--{subtemplate common/header_userstatus}-->
-
-			
-					<!--{hook/global_cpnav_extra2}-->
-					<!--{loop $_G['setting']['topnavs'][1] $nav}-->
-						<!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><!--{/if}-->
-					<!--{/loop}-->
-					<!--{if $_G['uid'] && !empty($_G['style']['extstyle'])}--><!--{/if}-->
-					<!--{if check_diy_perm($topic)}-->
-					<!--{/if}-->
+				<div class="y">
+					<!--{subtemplate common/header_userstatus}-->
 				</div>
+				
 			</div>
 		</div>
 
@@ -114,6 +106,7 @@
 			<!--{/if}-->
 			<!--{subtemplate common/header_qmenu}-->
 		<!--{/if}-->
+
 		<div id="hd">
 			<div class="wp">
 				<div class="hdc cl">
