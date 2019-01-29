@@ -1,15 +1,18 @@
 /** blog::space **/
 
 /*我的blog首页的样式-----------------------------------------------------------*/
-.wp{
-    width: 1100px !important;
-}
 body{
     /*background-color: #f5f6f7;*/
 }
 a{
     display: inline-block;
 }
+.header{
+    height: 40px;
+    padding: 5px 0;
+    line-height: 40px;
+}
+
 #nv li a{
     color: #fff !important;
 }
@@ -36,6 +39,10 @@ a{
 .conLeft ul li a{
     color: #666;
 }
+.avt img{
+    width: 30px;
+    height: 30px;
+}
 .conLeft ul li span{
     font-size: 20px;
     margin-right: 10px;
@@ -51,7 +58,7 @@ a{
 }
 
 .conRight{
-    width: 80%;
+    width:60%;
     height: auto;
     background-color: #fff;
     padding: 0 15px;
@@ -75,7 +82,7 @@ a{
 }
 .r_three .cards{
     margin: 7px;
-    width: 31.2%;
+    width: 30%;
     float: left;
     border: 1px solid #eee;
 }
@@ -88,6 +95,10 @@ a{
 }
 .r_three .cards .des{
     padding: 10px;
+}
+.r_three .cards .des a{
+    display: inline-block;
+    height: 30px;
 }
 .r_three .cards .des .meta .hd_img{
     width: 28px;
@@ -221,6 +232,32 @@ a{
     border-radius: 6px;
 }
 
+.conR{
+    width: 20%;
+    height: auto;
+}
+.conR .conR_tit h3{
+    font-size: 17px;
+    font-weight: 600;
+}
+.conR .conR_con ul li{
+    margin-top: 8px;
+}
+.conR .conR_con ul li .conR_con_img img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin-right: 15px;
+}
+.conR .conR_con ul li .conR_con_con p a{
+    font-weight: 600;
+    font-size: 15px;   
+}
+.conR .conR_con ul li .conR_con_con p span{
+    color: #999;
+    margin-right: 10px;
+}
 
 
 
@@ -421,13 +458,13 @@ body{
     border: 1px solid;
     border-radius: 5px;
     border-color: #CCC #A9A9A9 #A9A9A9 #CCC;
-    background: #FFF url(http://bbs.eetop.wang/static/image/common/oshr.png) no-repeat 5px 50%;
+    background: #FFF url({IMGDIR}/oshr.png) no-repeat 5px 50%;
 }
 .showCon .help .ic .ic1{
-    background: url(http://bbs.eetop.wang/static/image/common/activitysmall.gif) no-repeat;
+    background: url({IMGDIR}/activitysmall.gif) no-repeat;
 }
 .showCon .help .ic .ic3{
-    background: url(http://bbs.eetop.wang/static/image/common/fav.gif) no-repeat;  
+    background: url({IMGDIR}/fav.gif) no-repeat;  
 }
 .showCon .syp{
     padding: 15px 15px !important;

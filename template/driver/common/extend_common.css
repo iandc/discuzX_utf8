@@ -9,10 +9,7 @@
     top: -2px;
 }
 #scbar_txt{
-    width: 365px;
-}
-.wp{
-    width: 1100px;
+    width: 305px;
 }
 #toptb { min-width: 1100px; font-size: 12px;}
 .form1,.form2{
@@ -25,7 +22,7 @@
 }
 #scbar_type{
     padding-left: 25px;
-    margin-left: 50px;
+    margin-left: 10px;
 }
 #scbar{
     padding: 3px 20px;
@@ -37,9 +34,9 @@
     border-top: 0;
 }
 .ss{
-    width: 72%;
+    width: 68%;
     height: 36px;
-    border-radius: 5px;cc
+    border-radius: 5px;
     border: none;
     padding: 0 10px;
 
@@ -68,14 +65,14 @@
 } 
 
 #hd h2{
-    padding: 0 318px 8px 0;
+    padding: 0 180px 8px 0;
 }
 .i-search{
     width: 17px;
     height: 17px;
-    background: url(http://www.21dianyuan.com/home2016/images/spriter/sprite1470793520867.png) -201px -169px no-repeat;
+    background: url({IMGDIR}/sprite1470793520867.png) -201px -169px no-repeat;
     position: absolute;
-    left: 425px;
+    left: 356px;
     top: 10px;
     cursor: pointer;
 }
@@ -93,17 +90,19 @@
     border-right: none;
     border-left: none;
 }
-.bm_h{
+.fls{
+    border: 1px solid #CDCDCD;
     border-top: none;
+    background: #FFF;
 }
-.bm{
+.fls .bm{
     margin-bottom: 0;
+    border: none;
 }
-.bmw{
-    border-bottom: none;
-}
-.oll{
-    margin-bottom: 5px;
+.fls .bm_h{
+    border-width: 1px 0;
+    border-color: #C2D5E3;
+    background: #E5EDF2 url({IMGDIR}/titlebg.png) repeat-x 0 0;
 }
 .ct2_a .mn{
     width: 870px;
@@ -115,10 +114,13 @@
     display: inline-block;
     width: 7px;
     height: 4px;
-    background: url(http://www.21dianyuan.com/home2016/images/spriter/sprite1470793520867.png) -231px -116px no-repeat;
+    background: url({IMGDIR}/sprite1470793520867.png) -231px -116px no-repeat;
     position: absolute;
     top: 17px;
-    right: 150px;
+    right: 165px;
+}
+#scbar_btn{
+    padding: 0 20px 0 48px;
 }
 #nv{
     background-size: 100%;
@@ -132,7 +134,7 @@
 .fr{float: right;}
 .w100{width: 100%;}
 .h100{height:100%;}
-.w1100{width: 1100px; height: auto; margin: 0 auto;}
+/*.w1100{width: 1100px; height: auto; margin: 0 auto;}*/
 li{float: left;}
 .c_f{color: #fff;}
 .mt15{margin-top: 15px;}
