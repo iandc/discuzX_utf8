@@ -4,7 +4,7 @@
 }
 	<!--{template common/header}-->
     <header>
-        <div class="header">
+        <div class="header clearfix">
             <div class="hd_logo z">
                 <a href="">ET创芯网论坛(eetop)</a>
             </div>
@@ -22,7 +22,7 @@
                         <a href="blog.html">{lang blog}</a>
                     </div>
                 </div>
-                <div class="conLeft fl">
+                <div class="conLeft fls">
                     <div class="all"><a href="blog.html">{lang all}</a></div>
                     <!--{if $category}-->
                     <!--{loop $category $value}-->
@@ -43,10 +43,10 @@
                     <!--{/loop}-->
                     <!--{/if}-->
                 </div>
-                <div class="conRight fl">
+                <div class="conRight fls">
                     <div class="cR_title">
                         <div class="r_tit clearfix">
-                            <span class="fl jcbk">{lang wonderful_blog}</span>
+                            <span class="fls jcbk">{lang wonderful_blog}</span>
                             <span class="fr r_tit_more"><a href="">{lang follow_more}</a></span>
                         </div>
                         <div class="r_three">
@@ -56,7 +56,7 @@
                     <div class="cR_content clearfix">
                         <div id="wrap">
                             <div>
-                                <div id="tit" class="mb10 fl">
+                                <div id="tit" class="mb10 fls">
                                     <span $actives[all]><a href="blog.php?mod=space&do=blog&view=all">{lang new_recommend}</a></span>
                                     <span $actives[me]><a href="blog.php?mod=space&do=blog&view=me">{lang my_blog}</a></span>
                                     <span $actives[we]><a href="blog.php?mod=space&do=blog&view=we">{lang friend_blog}</a></span>
@@ -182,7 +182,7 @@
                     <div class="conR_tit">
                         <h3>本周最受欢迎博主</h3>
                     </div>
-                    <div class="conR_con">
+                    <div class="conR_con clearfix">
                         <ul>
                             <!--{block/96}-->
                         </ul>
@@ -191,14 +191,6 @@
             </div>
         </div>
     </section>
-
-    <!-- <script>
-        $('#tit span').click(function() {
-            var i = $(this).index();
-            $(this).addClass('a').siblings().removeClass('a');
-            $('#con li').eq(i).show().siblings().hide();
-        });
-    </script> -->
 
 <script type="text/javascript">
 	function fuidgoto(fuid) {

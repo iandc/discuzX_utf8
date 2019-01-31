@@ -58,7 +58,7 @@ a{
 }
 
 .conRight{
-    width:60%;
+    width:65%;
     height: auto;
     background-color: #fff;
     padding: 0 15px;
@@ -78,7 +78,6 @@ a{
 }
 .r_tit span.r_tit_more a{
     color: #4183c4 !important;
-    font-size: 14px;
 }
 .r_three .cards{
     margin: 7px;
@@ -100,14 +99,15 @@ a{
     display: inline-block;
     height: 30px;
 }
-.r_three .cards .des .meta .hd_img{
-    width: 28px;
-    height: 28px;
-    padding-right: 5px;
-}
 .r_three .cards .des .meta .hd_img img{
-    width: 100%;
-    height: 100%;
+    width: 25px;
+    height: 25px;
+    padding: 2px;
+    border-radius: 4px;
+    background: #FFF;
+    border: 1px solid;
+    border-color: #F2F2F2 #CDCDCD #CDCDCD #F2F2F2;
+    margin-right: 10px;
 }
 .r_three .cards .des .meta span,.r_three .cards .des .meta .pl{
     color: rgba(0,0,0,.4);
@@ -119,16 +119,12 @@ a{
     margin: 0 .25rem 0 0;
     width: 1.18em;
     height: 1em;
-    /*font-family: Icons;*/
     font-style: normal;
     font-weight: 400;
     text-decoration: inherit;
     text-align: center;
     speak: none;
-    /*font-smoothing: antialiased;*/
-    /*-moz-osx-font-smoothing: grayscale;*/
     -webkit-font-smoothing: antialiased;
-    /*-webkit-backface-visibility: hidden;*/
     backface-visibility: hidden;
 }
 .cR_content #wrap {
@@ -233,7 +229,7 @@ a{
 }
 
 .conR{
-    width: 20%;
+    width: 16%;
     height: auto;
 }
 .conR .conR_tit h3{
@@ -263,9 +259,6 @@ a{
 
 
 /*我的blog内容页--------------------------------------------------------*/
-body{
-    /*background-color: #f5f6f7;*/
-}
 .p15{
     padding: 15px;
 }
@@ -427,8 +420,6 @@ body{
 }
 .showCon .show_ad p{
     font-size: 14px;
-    /*font-weight: 000;*/
-    /*color: #4183c4;*/
     line-height: 30px;
 }
 .showCon .show_txt{
@@ -582,5 +573,13 @@ body{
     border: none;
     height: auto;
 }
+
+
+/** end **/
+
+/** misc::ranklist **/
+
+
+
 
 /** end **/

@@ -1,46 +1,47 @@
-#hd h2 { padding: 0 175px 8px 0; float: left; }
 .small_img img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    padding: 2px;
+    background: #FFF;
+    border: 1px solid;
+    border-color: #F2F2F2 #CDCDCD #CDCDCD #F2F2F2;
+}
+.wp{
+    width: 1100px !important;
+}
+#hd{
+    background-size: 100% 100% !important;
+}
+#hd h2{
+    padding: 0 315px 23px 0;
+}
+#toptb a{
+    line-height: 28px;
+    padding: 0 7px;
 }
 .tz{
     position: absolute;
-    left: 255px;
+    left: 320px;
     top: -2px;
+    border-left: 1px solid #eee;
 }
 #scbar_txt{
-    width: 305px;
+    width: 370px;
 }
-#toptb { min-width: 1100px; font-size: 12px;}
 .form1,.form2{
     width:48%;
     position: relative;
     margin-top: 3px;
 }
-.ct2_a{
-    background-size: 18%;
-}
-#scbar_type{
-    padding-left: 25px;
-    margin-left: 10px;
-}
-#scbar{
-    padding: 3px 20px;
-}
-#um .showmenu{
-    margin-right: 5px;
-}
-#toptb a.showmenu:hover{
-    border-top: 0;
-}
+
 .ss{
-    width: 68%;
+    width: 72%;
     height: 36px;
     border-radius: 5px;
     border: none;
     padding: 0 10px;
-
-    
 }
 .sub1{
     float: right;
@@ -56,86 +57,44 @@
 .all{
     background-color: #3b5998 !important;
 }
-#um .avt{
-    display: inline-block;
-    margin-right: 0;
-}
 .sqj{
     background-color: #f60;
 } 
-
-#hd h2{
-    padding: 0 180px 8px 0;
-}
 .i-search{
     width: 17px;
     height: 17px;
-    background: url({IMGDIR}/sprite1470793520867.png) -201px -169px no-repeat;
+    background: url(../../../static/image/blog/sprite1470793520867.png) -201px -169px no-repeat;
     position: absolute;
-    left: 356px;
+    left: 420px;
     top: 10px;
     cursor: pointer;
 }
-.pls{
-    width: 180px !important;
-}
-.pls .avatar img{
-    padding: 5px 15px 8px !important;
-}
-.pls dt{
-    margin-right: 10px;
-    margin-left: 20px;
-}
-.bmw .bm_h{
-    border-right: none;
-    border-left: none;
-}
-.fls{
-    border: 1px solid #CDCDCD;
-    border-top: none;
-    background: #FFF;
-}
-.fls .bm{
-    margin-bottom: 0;
-    border: none;
-}
-.fls .bm_h{
-    border-width: 1px 0;
-    border-color: #C2D5E3;
-    background: #E5EDF2 url({IMGDIR}/titlebg.png) repeat-x 0 0;
-}
-.ct2_a .mn{
-    width: 870px;
-}
-#um{margin-right: 0 !important;padding-top: 0;padding-right: 0;}
 #scbar{margin-top: 5px;padding:3px 10px;}
-.tz{border-left: 1px solid #eee;}
+#um{margin-right: 0 !important;padding-top: 0;padding-right: 0;}
+
 .xjt{
     display: inline-block;
     width: 7px;
     height: 4px;
-    background: url({IMGDIR}/sprite1470793520867.png) -231px -116px no-repeat;
+    background: url(../../../static/image/blog/sprite1470793520867.png) -231px -116px no-repeat;
     position: absolute;
     top: 17px;
-    right: 165px;
+    right: 150px;
 }
 #scbar_btn{
     padding: 0 20px 0 48px;
-}
-#nv{
-    background-size: 100%;
 }
 
 /*公共的样式--------------------------------------------------------*/
 
 .clearfix{ clear: both; content: ""; display: block; overflow: hidden }
 .clear{clear: both;}
-.fl{ float: left; border: none;background: none;}
+.fls{ float: left; border: none; background: none;}
 .fr{float: right;}
 .w100{width: 100%;}
 .h100{height:100%;}
 /*.w1100{width: 1100px; height: auto; margin: 0 auto;}*/
-li{float: left;}
+/*li{float: left;}*/
 .c_f{color: #fff;}
 .mt15{margin-top: 15px;}
 .fs12{font-size: 12px;}
@@ -148,7 +107,7 @@ img{border: 0; max-width: 100%;}
 .color_gray{color: #999;}
 .mt12{margin-top: 12px;}
 .mb10{margin-bottom: 10px;}
-#wrap{max-width: 960px; margin: 0 auto; }
+#wrap{max-width: 1100px; margin: 0 auto; }
 a{color: #333;}
 h1,h2,h3,h4,h5,h6,ul{ margin: 0  !important; }
 .fw600{font-weight: 600;}
