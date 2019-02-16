@@ -8,6 +8,18 @@
     border: 1px solid;
     border-color: #F2F2F2 #CDCDCD #CDCDCD #F2F2F2;
 }
+#extcreditmenu, #g_upmine{
+    border: 1px solid #F2F2F2;
+}
+#extcreditmenu.a, #g_upmine.a{
+    margin-right: 2px !important;
+}
+#um .avt{
+    margin-right: 0;
+}
+.um .bg{
+    display: block; 
+}
 .wp{
     width: 1100px !important;
 }
@@ -20,6 +32,9 @@
 #toptb a{
     line-height: 28px;
     padding: 0 7px;
+}
+#toptb{
+    height: 60px;
 }
 .tz{
     position: absolute;
