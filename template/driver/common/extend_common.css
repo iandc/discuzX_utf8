@@ -50,6 +50,22 @@
     position: relative;
     margin-top: 3px;
 }
+.xl2 li{
+    width: 40%;
+    margin: 2px 11px;
+}
+
+#pcd {
+    padding: 15px 4px 15px 13px;
+}
+
+.ct2_a .mn{
+    width: 940px !important;
+}
+
+.sd{
+    width: 260px !important;
+}
 
 .ss{
     width: 72%;
@@ -75,6 +91,10 @@
 .sqj{
     background-color: #f60;
 } 
+
+.bm .bm_c .pbr{
+    width: auto !important;
+}
 .i-search{
     width: 17px;
     height: 17px;
@@ -98,6 +118,17 @@
 }
 #scbar_btn{
     padding: 0 20px 0 48px;
+}
+p .landr{
+    display: inline-block;
+    margin-top: 15px;
+}
+#nv{
+    background-size: 100%;
+    background-color: red;
+    background-image: (a.png);
+    background-position: left left;
+    background-repeat: none-repeat;
 }
 
 /*公共的样式--------------------------------------------------------*/

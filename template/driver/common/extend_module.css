@@ -28,6 +28,8 @@ a{
 .conLeft .all a{
     padding: 15px 0 15px 15px;
     color: #fff !important;
+    font-size: 15px;
+    font-weight: 600;
 }
 .conLeft ul li{
     clear: both;
@@ -38,6 +40,8 @@ a{
 }
 .conLeft ul li a{
     color: #666;
+    font-size: 13px;
+    font-weight: 600;
 }
 .avt img{
     width: 30px;
@@ -48,7 +52,7 @@ a{
     margin-right: 10px;
     margin-top: 3px;
     position: relative;
-    top: 2px;
+    top: 5px;
     color: #666;
 }
 .conLeft .left_nav .left_nav_tit{
@@ -168,8 +172,9 @@ a{
     font-weight: 600;
     color: #fff;
     background-color: #06c;
-    padding: 5px 5px;
+    padding: 5px 10px;
     border-radius: 3px;
+    font-size: 14px;
 }
 #con .list{
     width: 100%;
