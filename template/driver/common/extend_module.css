@@ -1,9 +1,6 @@
 /** blog::space **/
 
 /*我的blog首页的样式-----------------------------------------------------------*/
-body{
-    /*background-color: #f5f6f7;*/
-}
 a{
     display: inline-block;
 }
@@ -17,7 +14,6 @@ a{
     color: #fff !important;
 }
 .bigContent{
-    /*background-color: #fff;*/
     margin-top: 20px;
 }
 .conLeft{
@@ -180,9 +176,6 @@ a{
     width: 100%;
     padding: 15px 0;
 }
-#con .listL{
-    /*width: 80%;*/
-}
 #con .listL .list_tit a{
     font-size: 18px;
 }
@@ -257,11 +250,8 @@ a{
 }
 .conR .conR_con ul li .conR_con_con p span{
     color: #999;
-    margin-right: 10px;
+    margin-right: 5px;
 }
-
-
-
 
 /*我的blog内容页--------------------------------------------------------*/
 .p15{
@@ -578,13 +568,4 @@ a{
     border: none;
     height: auto;
 }
-
-
-/** end **/
-
-/** misc::ranklist **/
-
-
-
-
 /** end **/
