@@ -67,14 +67,13 @@
     width: 260px !important;
 }
 .fs16 a{
-    font-size: 15px;
     position: relative;
     top: 3px;
     font-weight: 600;
     color: #666 !important;
 }
 #toptb{
-    background: #E5EDF2 url(http://bbs.eetop.wang/static/image/common/titlebg.png) repeat-x 0 0;
+    background: #E5EDF2 url(../../../static/image/blog/titlebg.png) repeat-x 0 0;
     -webkit-background-size: 100%;
     background-size: 100%;
 }
