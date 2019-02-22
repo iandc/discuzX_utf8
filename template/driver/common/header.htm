@@ -57,11 +57,9 @@
 		<div id="toptb" class="cl">
 			<!--{hook/global_cpnav_top}-->
 			<div class="wp">
-				<div class="z fs16" style=" margin-top: 13px;">
-					<!--{loop $_G['setting']['topnavs'][0] $nav}-->
-						<!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->$nav[code]<!--{/if}-->
-					<!--{/loop}-->
-					<!--{hook/global_cpnav_extra1}-->
+				<div class="z fs16">
+					<!--{eval $mnid = getcurrentnav();}-->
+					<h2><!--{if !isset($_G['setting']['navlogos'][$mnid])}--><a href="{if $_G['setting']['domain']['app']['default']}{$_G['scheme']}://{$_G['setting']['domain']['app']['default']}/{else}./{/if}" title="$_G['setting']['bbname']">{$_G['style']['boardlogo']}</a><!--{else}-->$_G['setting']['navlogos'][$mnid]<!--{/if}--></h2>
 				</div>
 					<!--{hook/global_cpnav_extra2}-->
 					<!--{subtemplate common/header_userstatus}-->
@@ -109,9 +107,8 @@
 		<div id="hd">
 			<div class="wp">
 				<div class="hdc cl">
-					<!--{eval $mnid = getcurrentnav();}-->
-					<h2><!--{if !isset($_G['setting']['navlogos'][$mnid])}--><a href="{if $_G['setting']['domain']['app']['default']}{$_G['scheme']}://{$_G['setting']['domain']['app']['default']}/{else}./{/if}" title="$_G['setting']['bbname']">{$_G['style']['boardlogo']}</a><!--{else}-->$_G['setting']['navlogos'][$mnid]<!--{/if}--></h2>
 					<!--{ad/headerbanner/wp a_h}-->
+					<!--{ad/headerbanner/wp oshr}-->
 				</div>
 
 				<div id="nv">

@@ -66,16 +66,35 @@
 .sd{
     width: 260px !important;
 }
-.fs16 a{
-    position: relative;
-    top: 3px;
-    font-weight: 600;
-    color: #666 !important;
+.fs16 h2 img{
+    width: 150px;
+    height: 60px;
+}
+.hdc img{
+    width: 540px;
+}
+.hdc {
+    margin-bottom:  15px;
+}
+.hdc .a_h{
+    float: left;
+    text-align: left;   
+    width:  540px !important;
+}
+.hdc .oshr{
+    float: right;
+    width:  540px !important;
+}
+ins{
+    width: 540px !important;
 }
 #toptb{
     background: #E5EDF2 url(../../../static/image/blog/titlebg.png) repeat-x 0 0;
     -webkit-background-size: 100%;
     background-size: 100%;
+}
+.oshr{
+    border: none;
 }
 
 .ss{
