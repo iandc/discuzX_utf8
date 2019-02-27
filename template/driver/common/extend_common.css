@@ -42,8 +42,16 @@
     top: -2px;
     border-left: 1px solid #eee;
 }
+.fl .bm{
+    border: 1px solid #C2D5E3;
+    border-top: none;
+    margin-top: 10px;
+}
 #scbar_txt{
     width: 370px;
+}
+.fl_icn_g a img{
+    border-radius: 10px;
 }
 .form1,.form2{
     width:48%;
@@ -160,6 +168,9 @@ p .landr{
 .pls dt{
     margin-left: 15px;
     margin-right: 20px !important;
+}
+.fl{
+    border: none;
 }
 
 /*公共的样式--------------------------------------------------------*/
