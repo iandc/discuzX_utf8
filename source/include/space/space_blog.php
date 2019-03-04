@@ -61,7 +61,24 @@ if($id) {
 	require_once libfile('function/blog');
 	$blog['message'] = blog_bbcode($blog['message']);
 
-	$otherlist = $newlist = array();
+    $home_url = ''; // 请将此链接地址改为您的 UCHome 站点地址！！！
+    $bbs_url = $_G['siteurl']; // 请将此链接地址改为您的 BBS 站点地址！！！
+    echo $bbs_url;
+    $findarr = array(
+        '<img src="attachment/',  //原uchmoe附件图片目录
+        '<IMG src="'.$home_url.'attachment/',  // 原UCHome附件图片目录
+        $bbs_url.'attachments/month',  // 原论坛附件图片目录
+        '<a href="attachment/',
+    );
+    $replacearr = array(
+        '<img src="'.$_G['setting']['attachurl'].'album/',
+        '<IMG src="'.$_G['setting']['attachurl'].'album/',
+        $bbs_url.$_G['setting']['attachurl'].'forum/month',
+        '<a href="'.$_G['setting']['attachurl'].'album/',
+    );
+    $blog['message'] = str_replace($findarr, $replacearr, $blog['message']);
+
+    $otherlist = $newlist = array();
 
 	$otherlist = array();
 	$query = C::t('home_blog')->fetch_all_by_uid($space['uid'], 'dateline', 0, 6);
