@@ -1,3 +1,8 @@
+body{
+    background: #FFF url(../../../static/image/driver/bgimg.jpg) no-repeat 50% 0;
+    background-size: 100%;
+}
+
 .small_img img{
     width: 20px;
     height: 20px;
@@ -9,10 +14,13 @@
     border-color: #F2F2F2 #CDCDCD #CDCDCD #F2F2F2;
 }
 #extcreditmenu, #g_upmine{
-    border: 1px solid #F2F2F2;
+    border: 1px solid #f4f7f9;
 }
 #extcreditmenu.a, #g_upmine.a{
     margin-right: 2px !important;
+}
+a img{
+    display: block;
 }
 #um .avt{
     margin-right: 0;
@@ -22,6 +30,9 @@
 }
 .wp{
     width: 1100px !important;
+}
+.appl li{
+    height: auto;
 }
 #hd{
     background-size: 100% 100% !important;
