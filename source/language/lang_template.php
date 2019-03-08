@@ -460,6 +460,7 @@ $lang = array (
   'm_stickt' => '置顶帖',
   'm_share' => '如果喜欢这个话题，请点击右上角图标分享',
   'm_logout' => '退出登录',
+  'register' => '注册',
 );
 
 ?>

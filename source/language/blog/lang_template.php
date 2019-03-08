@@ -1545,5 +1545,14 @@ $lang = array (
   'freeze_email_tips' => '您当前的帐号已经太长时间未登录网站已经被冻结，必须验证邮箱后才能解除冻结状态 <a href="home.php?mod=spacecp&ac=profile&op=password&resend=1" class="xi2">重新接收验证邮件</a>',
   'freeze_reason' => '申诉理由',
   'freeze_reason_comment' => '如果您无法通过邮箱验证，请填写申诉理由',
+  'new_recommend' => '最新日志',
+  'day_b' => '每日一搏',
+  'new_publish' => '最新发表',
+  'follow' => '关注',
+  'read_num' => '阅读数：',
+  'wonderful_blog' => '精彩博客',
+  'blogging' => '写博客',
+  'release' => '发布于：',
+  'riqi' => '日期',
 );
 ?>
