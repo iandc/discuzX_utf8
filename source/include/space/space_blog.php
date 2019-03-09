@@ -63,7 +63,6 @@ if($id) {
 
     $home_url = ''; // 请将此链接地址改为您的 UCHome 站点地址！！！
     $bbs_url = $_G['siteurl']; // 请将此链接地址改为您的 BBS 站点地址！！！
-    echo $bbs_url;
     $findarr = array(
         '<img src="attachment/',  //原uchmoe附件图片目录
         '<IMG src="'.$home_url.'attachment/',  // 原UCHome附件图片目录
