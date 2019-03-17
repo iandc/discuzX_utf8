@@ -995,7 +995,7 @@ $lang = array (
   'comment_comment_noexist' => '抱歉，要评论的文章不存在',
   'comment_comment_notallowed' => '该文章不允许评论',
 
-  'post_subject_toolong' => '抱歉，您的标题超过 80 个字符修改标题长度',
+  'post_subject_toolong' => '抱歉，您的标题超过 120 个字符修改标题长度',
   'post_message_tooshort' => '抱歉，您的帖子小于 {minpostsize} 个字符的限制',
 
   'no_privilege_realname' => '抱歉，您需要填写真实姓名后才能进行当前操作，<a href="home.php?mod=spacecp&ac=profile">点击这里设置真实姓名</a>',
