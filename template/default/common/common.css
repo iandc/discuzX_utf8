@@ -206,6 +206,7 @@ CSS 写作注意事项：
 */
 	.xi1, .onerror { color: {NOTICETEXT}; }
 	.xi2, .xi2 a, .xi3 a { color: {HIGHLIGHTLINK} ; }
+
 /*
 	Name:			mod_text_weight_level
 	Level:			Global
@@ -595,13 +596,13 @@ CSS 写作注意事项：
 			#scbar { overflow: hidden; height: 42px; line-height: 42px; border-top: 1px solid #FFF; border-bottom: 1px solid #E9EFF5; background: #E8EFF5; }
 				.scbar_icon_td { width: 21px; background: url({IMGDIR}/search.png) no-repeat 0 -50px; }
 				.scbar_txt_td, .scbar_type_td { background: url({IMGDIR}/search.png) repeat-x 0 -93px; }
-					#scbar_txt { width: 400px; border: 1px solid #FFF; outline: none; }
+					#scbar_txt { border: 1px solid #FFF; outline: none; }
 					.scbar_narrow #scbar_txt { width: 260px; }
 				.scbar_btn_td { width: 38px; background: url({IMGDIR}/search.png) no-repeat 8px -142px; }
-					#scbar_btn { margin: 0; padding: 0; border: none; background: transparent none; box-shadow: none; }
+					#scbar_btn { padding: 0; border: none; background: transparent none; box-shadow: none; }
 						#scbar_btn strong { line-height: 84px; }
 				.scbar_type_td { width: 61px; background: url({IMGDIR}/search.png) no-repeat 0 -193px; }
-					#scbar_type { display: block; padding-left: 10px; text-align: left; text-decoration: none; }
+					#scbar_type {padding-left: 33px; text-align: left; text-decoration: none; }
 						#scbar_type_menu { margin-top: -8px; }
 				#scbar_hot { padding-left: 8px; height: 45px; overflow: hidden; }
 					#scbar_hot strong, #scbar_hot a { float: left; margin-right: 8px; white-space: nowrap; }
@@ -657,6 +658,84 @@ CSS 写作注意事项：
 				#shortcut { position: relative; display: none; height: 30px; line-height: 30px; background-color: #3A83F1; color: white; text-align: center; }
 					#shortcuttip { padding: 2px 8px; background: url({IMGDIR}/search.gif) repeat-x 0 -1px; border-radius: 3px; color: #3A83F1; font-weight: 700; }
 					#shortcutcloseid { position: absolute; right: 8px; top: 8px; display: block; width: 12px; height: 12px; background: url({IMGDIR}/close.gif) no-repeat 0 -12px; text-indent: -999em; }
+
+#scbar_txt{
+    width: 305px;
+}
+.form1,.form2{
+    width:48%;
+    position: relative;
+    margin-top: 3px;
+}
+.ss{
+    width: 72%;
+    height: 36px;
+    border-radius: 5px;
+    border: none;
+    padding: 0 10px;
+}
+.sub1{
+    float: right;
+    padding: 0 20px 0 48px;
+    height: 36px;
+    font-size: 16px;
+    width: 120px;
+    margin-top: 1px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 0.05em rgba(0,0,0,.4);
+}
+.all{
+    background-color: #3b5998 !important;
+}
+.sqj{
+    background-color: #f60;
+} 
+.bm .bm_c .pbr{
+    width: auto !important;
+}
+.i-search{
+    width: 17px;
+    height: 17px;
+    background: url(../../../static/image/blog/sprite1470793520867.png) -201px -169px no-repeat;
+    position: absolute;
+    left: 355px;
+    top: 10px;
+    cursor: pointer;
+}
+#scbar{margin-top: 5px;padding:6px 10px;}
+#um{margin-right: 0 !important;padding-top: 0;padding-right: 0;}
+.xjt{
+    display: inline-block;
+    width: 7px;
+    height: 4px;
+    background: url(../../../static/image/blog/sprite1470793520867.png) -231px -116px no-repeat;
+    position: absolute;
+    top: 17px;
+    right: 170px;
+    display: inline-block;
+}
+#scbar_btn{
+    padding: 0 20px 0 48px;
+}
+p .landr{
+    display: inline-block;
+    margin-top: 15px;
+}
+#scbar_type{
+	position: absolute;	
+	right: 135px;
+	top: -2px;
+	border-left: 1px solid #eee;
+}
+.mn table img{
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+	margin-right: 15px;
+}
+
 
 /*
 	Name:			mn_userapp_menu
@@ -744,7 +823,6 @@ CSS 写作注意事项：
 		.bmn	Notice		整体带有彩色背景，常用于提示信息
 	*/
 	.bm, .bn { margin-bottom: 10px; }
-		.bm { border: 1px solid {COMMONBORDER}; background: {WRAPBG}; }
 			.bm_c { padding: 10px; }
 		.drag {}
 		.bm_h .o { float: right; width: 30px; }
