@@ -296,7 +296,7 @@ CSS 写作注意事项：
 	Explain:		标准尺寸头像样式，默认为 48px*48px，带边框
 	Last Modify:	lushnis
 */
-	.avt img { padding: 2px; width: 48px; height: 48px; background: {WRAPBG}; border: 1px solid; border-color: {COMMONBG} {COMMONBORDER} {COMMONBORDER} {COMMONBG}; }
+	.avt img { margin-left: 10px; padding: 2px; width: 48px; height: 48px; background: {WRAPBG}; border: 1px solid; border-color: {COMMONBG} {COMMONBORDER} {COMMONBORDER} {COMMONBG}; }
 /*
 	Name:			mod_avatar_middle, mod_avatar_small
 	Level:			Global
@@ -628,7 +628,7 @@ CSS 写作注意事项：
 			#um { padding-top: 10px; padding-right: 60px; _padding-right: 54px; line-height: 2.3; zoom: 1; }
 				#um, #um a { color: {HEADERTEXT}; }
 				#um p { text-align: right; }
-				#um .avt { display: inline; margin-right: -60px; }
+				#um .avt { display: inline;}
 				.vwmy { padding-left: 16px; background: url({IMGDIR}/user_online.gif) no-repeat 0 2px; }
 					.vwmy.qq { background: url({IMGDIR}/connect_qq.gif) no-repeat scroll 0 0; padding-left: 20px; }
 				/* .topnav .new, .sch .new 分别为为个人中心和搜索页面头部新消息样式 */
@@ -729,12 +729,12 @@ p .landr{
 	top: -2px;
 	border-left: 1px solid #eee;
 }
-.mn table img{
+/*.mn table img{
 	width: 50px;
 	height: 50px;
 	border-radius: 10px;
 	margin-right: 15px;
-}
+}*/
 
 
 /*
