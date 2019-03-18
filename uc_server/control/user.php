@@ -142,7 +142,7 @@ class usercontrol extends base {
 			$status = -1;
 		} elseif($user['password'] != md5($passwordmd5.$user['salt'])) {
 			$status = -2;
-		} elseif($checkques && $user['secques'] != $_ENV['user']->quescrypt($questionid, $answer)) {
+		} elseif($checkques && $user['secques'] && $user['secques'] != $_ENV['user']->quescrypt($questionid, $answer)) {
 			$status = -3;
 		} else {
 			$status = $user['uid'];
