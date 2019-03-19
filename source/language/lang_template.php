@@ -191,7 +191,7 @@ $lang = array (
   'update' => '更新',
   'delete' => '删除',
   'none_newthread' => '暂无新回复主题',
-  'author' => '作者',
+  'author' => '作者/时间',
   'username' => '用户名',
   'anonymous' => '匿名',
   'edit' => '编辑',
@@ -461,6 +461,9 @@ $lang = array (
   'm_share' => '如果喜欢这个话题，请点击右上角图标分享',
   'm_logout' => '退出登录',
   'register' => '注册',
+  'author_time' => '作者/时间',
+  'reply' => '回复',
+  'last_published' => '最后发表',
 );
 
 ?>
