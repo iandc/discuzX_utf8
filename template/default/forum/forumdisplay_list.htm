@@ -40,9 +40,13 @@
 					<!--{if CURMODULE == 'guide'}-->
 						<td class="by">{lang forum_group}</td>
 					<!--{/if}-->
-				<td class="by">{lang author}</td>
-				<td class="num">{lang replies}</td>
-				<td class="by">{lang lastpost}</td>
+				<td class="by"><a style="color: #069;" href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=author&orderby=dateline$forumdisplayadd[author]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'dateline'}class="xw1"{/if}>{lang zzandsj}</a></td>
+				<td class="num">
+					<a style="color: #069;" href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=reply&orderby=replies$forumdisplayadd[reply]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'replies'}class="xw1"{/if}>{lang reply}</a>
+
+					<a style="color: #069;" href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=reply&orderby=views$forumdisplayadd[view]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'views'}class="xw1"{/if}>{lang focus_show}</a>
+				</td>
+				<td class="by"><a style="color: #069;" href="forum.php?mod=forumdisplay&fid=$_G[fid]&orderby={$_GET['orderby']}&filter=dateline$forumdisplayadd[dateline]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if !$_GET['orderby']}class="xw1"{/if}>{lang last_published}</a></td>
 				<!--{else}-->
 				<td class="by" colspan="3">
 					<a{if empty($_G['cookie']['forumdefstyle'])} href="forum.php?mod=forumdisplay&fid=$_G[fid]&forumdefstyle=yes" class="chked"{else} href="forum.php?mod=forumdisplay&fid=$_G[fid]&forumdefstyle=no" class="unchk"{/if} title="{lang view_thread_imagemode}{lang view_thread}">{lang view_thread_imagemode}</a>

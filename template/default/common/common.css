@@ -658,7 +658,6 @@ CSS 写作注意事项：
 				#shortcut { position: relative; display: none; height: 30px; line-height: 30px; background-color: #3A83F1; color: white; text-align: center; }
 					#shortcuttip { padding: 2px 8px; background: url({IMGDIR}/search.gif) repeat-x 0 -1px; border-radius: 3px; color: #3A83F1; font-weight: 700; }
 					#shortcutcloseid { position: absolute; right: 8px; top: 8px; display: block; width: 12px; height: 12px; background: url({IMGDIR}/close.gif) no-repeat 0 -12px; text-indent: -999em; }
-
 #scbar_txt{
     width: 305px;
 }
@@ -729,6 +728,12 @@ p .landr{
 	top: -2px;
 	border-left: 1px solid #eee;
 }
+#ct .bm2{
+	border: 1px solid #cdcdcd;
+}
+
+
+
 /*.mn table img{
 	width: 50px;
 	height: 50px;
