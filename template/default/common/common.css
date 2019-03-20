@@ -587,7 +587,7 @@ CSS 写作注意事项：
 	#hd { border-bottom: {HEADERBORDER} solid {SPECIALBORDER}; {HEADERBGCODE} }
 		#hd .wp { padding: 10px 0 0; }
 
-			.hdc { min-height: 70px; }
+			.hdc { min-height: 70px; position: relative;}
 				.ie6 .hdc { height: 70px; }
 			#hd h2 { padding: 0 20px 8px 0; float: left; }
 				#space #hd h2 { margin-top: 0; }
@@ -730,6 +730,25 @@ p .landr{
 }
 #ct .bm2{
 	border: 1px solid #cdcdcd;
+}
+.hdc .avt img{
+	margin-left: 15px;
+}
+.user_txt{
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+.user_txt p{
+	font-size: 18px;
+	font-weight: bold;
+	color: #3b5998 ;
+}
+.user_txt p a{
+	color: red ;
+}
+.user_txt .p1{
+	margin-left: 55px;
 }
 
 
