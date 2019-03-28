@@ -61,13 +61,12 @@ if($id) {
 	require_once libfile('function/blog');
 	$blog['message'] = blog_bbcode($blog['message']);
 
-    $home_url = ''; // 请将此链接地址改为您的 UCHome 站点地址！！！
-    $bbs_url = $_G['siteurl']; // 请将此链接地址改为您的 BBS 站点地址！！！
-    echo $bbs_url;
+    $home_url = '';
+    $bbs_url = $_G['siteurl'];
     $findarr = array(
-        '<img src="attachment/',  //原uchmoe附件图片目录
-        '<IMG src="'.$home_url.'attachment/',  // 原UCHome附件图片目录
-        $bbs_url.'attachments/month',  // 原论坛附件图片目录
+        '<img src="attachment/',
+        '<IMG src="'.$home_url.'attachment/',
+        $bbs_url.'attachments/month',
         '<a href="attachment/',
     );
     $replacearr = array(

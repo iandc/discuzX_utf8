@@ -12,42 +12,38 @@
                         <a href="blog.html">{lang blog}</a>
                     </div>
                 </div>
-                <div class="conLeft fls">
+                <div class="conLeft fls z">
+                    <!--{if $_GET[view] == 'all'}-->
                     <div class="all"><a href="blog.html">{lang all}</a></div>
-                    <!--{if $category}-->
-                    <!--{loop $category $value}-->
-                    <!--{if $value['upid'] == 0}-->
                     <div class="conLeft_top left_nav">
                         <div class="left_nav_tit fw600">
-                            $value['catname']
-                        </div>
-                        <!--{if $value['children']}-->
-                        <ul>
-                            <!--{loop $value['children'] $v}-->
-                            <li><span>·</span><a href="blog.php?mod=space&do=blog&catid=$v&view=all&order=$_GET[order]">$category[$v]['catname']</a></li>
+                            <!--{if $category}-->
+                            <!--{loop $category $value}-->
+                                    <a href="blog.php?mod=space&do=blog&catid=$value['catid']&view=all&order="{if $_GET[catid]==$value[catid]} class="a"{/if}>$value[catname]</a>
                             <!--{/loop}-->
-                        </ul>
-                        <!--{/if}-->
+                            <!--{/if}-->
+
+                        </div>
                     </div>
                     <!--{/if}-->
-                    <!--{/loop}-->
-                    <!--{/if}-->
                 </div>
-                <div class="conRight fls">
-                    <div class="cR_title">
+                <div class="conRight fls z">
+                    <div class="cR_title clearfix">
                         <div class="r_tit clearfix">
                             <span class="fls jcbk">{lang wonderful_blog}</span>
-                            <span class="fr r_tit_more"><a href="">{lang follow_more}</a></span>
+                            <span class="y r_tit_more"><a href="">{lang follow_more}</a></span>
                         </div>
-                        <div class="r_three">
+                        <div class="r_three clearfix">
                             <!--{block/119}-->
                         </div>
                     </div>
-                    <div class="cR_content clearfix">
+                    <div class="cR_content">
                         <div id="wrap">
                             <div>
                                 <div id="tit" class="mb10 fls">
+                                    {if $orderactives[hot]}{eval $actives[all]='';$actives['hot']=' class="a"';}{/if}
                                     <span $actives[all]><a href="blog.php?mod=space&do=blog&view=all">{lang new_recommend}</a></span>
+                                    <span $actives[hot]><a href="blog.php?mod=space&do=blog&view=all&order=hot">{lang tuijian_blog}</a></span>
                                     <span $actives[me]><a href="blog.php?mod=space&do=blog&view=me">{lang my_blog}</a></span>
                                     <span $actives[we]><a href="blog.php?mod=space&do=blog&view=we">{lang friend_blog}</a></span>
                                 </div>
@@ -168,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="conR fr">
+                <div class="conR fr y">
                     <div class="conR_tit">
                         <h3>本周最受欢迎博主</h3>
                     </div>
