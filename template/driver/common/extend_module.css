@@ -190,6 +190,8 @@ a{
 #con .listL .list_items span{
     margin-right: 5px;
 }
+
+
 .bigContent{
     margin-top: 0;
 }
@@ -247,6 +249,7 @@ a{
 .conR .conR_con ul li .conR_con_con p a{
     font-weight: 600;
     font-size: 15px;   
+    line-height: 35px;
 }
 .conR .conR_con ul li .conR_con_con p span{
     color: #999;

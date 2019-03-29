@@ -751,10 +751,13 @@ p .landr{
 	margin-left: 55px;
 }
 .left_nav_tit a{
+	color: #369;
 	display: block;
 	margin: 10px 0;
 }
-
+.mn a img{
+	border-radius: 10px;
+}
 
 
 /*.mn table img{
@@ -2125,8 +2128,8 @@ a{
     color: #fff;
 }
 .list_img img{
-    width: 80px;
-    height: 60px;
+    width: 110px;
+    height: 90px;
     border-radius: 6px;
 }
 .fls{

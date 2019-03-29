@@ -1023,7 +1023,7 @@ i.pstatus { display: block; margin-bottom: -30px; font-size: 12px; text-align: c
 		Explain:		帖子左侧用户互动操作
 		Last Modify:	Pony
 	*/
-	.pls .o li { background-position: 0 50%; background-repeat: no-repeat; text-indent: 18px; }
+	.pls .o li { background-position: 0 50%; background-repeat: no-repeat; text-indent: 10px; }
 		.pls .o .callon { background-image: url({IMGDIR}/home.gif); }
 		.pls .o .buddy { background-image: url({STATICURL}image/feed/friend.gif); }
 		.pls .o .poke2 { background-image: url({STATICURL}image/feed/poke.gif); }

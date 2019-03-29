@@ -16,10 +16,10 @@
                     <!--{if $_GET[view] == 'all'}-->
                     <div class="all"><a href="blog.html">{lang all}</a></div>
                     <div class="conLeft_top left_nav">
-                        <div class="left_nav_tit fw600">
+                        <div class="left_nav_tit fw600 tbmu">
                             <!--{if $category}-->
                             <!--{loop $category $value}-->
-                                    <a href="blog.php?mod=space&do=blog&catid=$value['catid']&view=all&order="{if $_GET[catid]==$value[catid]} class="a"{/if}>$value[catname]</a>
+                                    <a href="blog.php?mod=space&do=blog&catid=$value['catid']&view=all&order=" {if $_GET[catid] == $value[catid]} class="a"{/if}>$value[catname]</a>
                             <!--{/loop}-->
                             <!--{/if}-->
 
@@ -88,10 +88,16 @@
                                                     <!--{if $value[status] == 1}--> <span class="xi1">({lang pending})</span><!--{/if}-->
 	                                            </div>
 	                                            <div class="list_des clearfix" id="blog_article_$value[blogid]">
-	                                                <p {if $value[pic]} style="width: 100%;{/else}style="80%"{/if}" class="z">
-	                                                    $value['message']
-	                                                </p>
-                                                    <div style="width: 15%;" class="y list_img">
+                                                    {if $value[pic]}
+    	                                                <p style="width: 80%;" class="z">
+    	                                                    $value['message']
+    	                                                </p>
+                                                    {else}
+                                                        <p style="width: 100%;" class="z">
+                                                            $value['message']
+                                                        </p>
+                                                    {/if}
+                                                    <div style="width: 20%;" class="y list_img">
                                                         <!--{if $value[pic]}--><a href="blog.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" target="_blank"><img src="$value[pic]" alt="$value[subject]" class="tn" /></a><!--{/if}-->
                                                     </div>
                                                     

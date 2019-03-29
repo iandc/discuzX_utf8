@@ -464,6 +464,7 @@ $lang = array (
   'author_time' => '作者/时间',
   'reply' => '回复',
   'last_published' => '最后发表',
+  'tuijian_blog' => '推荐日志',
 );
 
 ?>
