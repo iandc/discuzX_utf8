@@ -1138,7 +1138,7 @@ p .landr{
 			.fpd a.fsml { background-position: -20px -20px; }
 			.fpd a.fat { background-position: -140px 0; }
 		.tedt .area { padding: 4px; background: {WRAPBG}; zoom: 1; }
-		.tedt .pt { width: 100%; margin-right: 0; padding: 0 !important; border: none; background: {WRAPBG} none; }
+		.tedt .pt { width: 100%; margin-right: 0; padding: 0 !important; background: {WRAPBG} none; }
 			.tedt .pt:focus { outline: none; -moz-box-shadow: none; }
 	.m_c .tedt { width: 600px; }
 
