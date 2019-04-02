@@ -755,10 +755,9 @@ p .landr{
 	display: block;
 	margin: 10px 0;
 }
-.mn a img{
-	border-radius: 10px;
+#f_pst{
+	border: 1px solid #cdcdcd;
 }
-
 
 /*.mn table img{
 	width: 50px;
@@ -1047,7 +1046,8 @@ p .landr{
 		.xlda dd .hot { color: {NOTICETEXT}; }
 
 /* 图片列表 */
-.ml {}
+.ml {margin-left: 30px; margin-top: 30px; margin-bottom: 30px; margin-right: 30px;
+	 padding-left: 30px; padding-top: 30px; padding-bottom: 30px; padding-right: 30px;}
 	.ml li { float: left; padding: 0 5px 5px; text-align: center; overflow: hidden; }
 		.ml img { display: block; margin: 0 auto; }
 		.ml p, .ml span { display: block; width: 100%; height: 20px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
@@ -1138,7 +1138,7 @@ p .landr{
 			.fpd a.fsml { background-position: -20px -20px; }
 			.fpd a.fat { background-position: -140px 0; }
 		.tedt .area { padding: 4px; background: {WRAPBG}; zoom: 1; }
-		.tedt .pt { width: 100%; margin-right: 0; padding: 0 !important; background: {WRAPBG} none; }
+		.tedt .pt { width: 100%; margin-right: 0; padding: 0 !important; border: none; background: {WRAPBG} none; }
 			.tedt .pt:focus { outline: none; -moz-box-shadow: none; }
 	.m_c .tedt { width: 600px; }
 
@@ -1950,7 +1950,6 @@ a{
 .conLeft .left_nav .left_nav_tit{
     font-size: 15px;
     padding-left: 15px;
-    margin-top: 10px;
 }
 
 
@@ -2461,8 +2460,8 @@ a{
 }
 .tedt{
     width: 100%;
-    border: none;
 }
+
 .tedt .area{
     padding: 0;
 }
@@ -2470,7 +2469,6 @@ a{
     position: relative;
 }
 .pn{
-    padding: 5px 10px;
     text-align: center;
     background-color: #0b68a9;
     color: #fff;
@@ -2478,5 +2476,6 @@ a{
     background-image: none;
     border: none;
     height: auto;
+    line-height: 26px;
 }
 /** end **/
