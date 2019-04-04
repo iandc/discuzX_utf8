@@ -40,15 +40,7 @@
 	<span class="pipe">|</span><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a>
 </p>
 <!--{elseif !$_G[connectguest]}-->
-	<div class="user_txt y">
-		<p class="p1">您现在是游客状态</p>
-		<p>
-			请您
-			&nbsp;&nbsp;<a href="member.php?mod=logging&action=login">登录</a>&nbsp;&nbsp;
-			或&nbsp;&nbsp;<a href="member.php?mod=register">注册</a>&nbsp;&nbsp;享受更多权益
-		</p>
-		
-	</div>
+	<!--{template member/login_simple}-->
 <!--{else}-->
 <div id="um">
 	<div class="avt y"><!--{avatar(0,small)}--></div>
