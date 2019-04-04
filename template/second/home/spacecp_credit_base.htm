@@ -55,7 +55,7 @@
 		<!--{elseif $_GET['op'] == 'buy'}-->
 
 			<!--{if ($_G[setting][ec_ratio] && ($_G[setting][ec_account] || $_G[setting][ec_tenpay_opentrans_chnid] || $_G[setting][ec_tenpay_bargainor])) || $_G[setting][card][open]}-->
-			<form id="addfundsform" name="addfundsform" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=credit&op=buy" onsubmit="ajaxpost(this.id, 'return_addfundsform');">
+			<form id="addfundsform" name="addfundsform" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=credit&op=buy">
 				<input type="hidden" name="formhash" value="{FORMHASH}" />
 				<input type="hidden" name="addfundssubmit" value="true" />
 				<input type="hidden" name="handlekey" value="buycredit" />
@@ -121,7 +121,7 @@
 					<tr>
 						<th>&nbsp;</th>
 						<td colspan="2">
-							<button type="submit" name="addfundssubmit_btn" class="pn" id="addfundssubmit_btn" value="true"><em>{lang memcp_credits_addfunds}</em></button>
+							<button type="button" name="addfundssubmit_btn" class="pn" id="addfundssubmit_btn" value="true" onclick="ajaxpost('addfundsform', 'return_addfundsform');"><em>{lang memcp_credits_addfunds}</em></button>
 						</td>
 					</tr>
 
