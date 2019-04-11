@@ -758,6 +758,9 @@ p .landr{
 #f_pst{
 	border: 1px solid #cdcdcd;
 }
+.bm .bm_c img{
+	border-radius: 5px;
+}
 
 /*.mn table img{
 	width: 50px;
