@@ -236,6 +236,7 @@ if ($_G['uid'] && $attach['uid'] != $_G['uid']) {
             'extcredits6' => $attachCredit,
         ];
         updatemembercount($_G['uid'], $extCredits, true, 'DAC', $aid, '', 'download file dec', "extCredits2:-$attachCredit,extCredits6:$attachCredit");
+        $attachCredit++;// add 1 extra
         $extCredits = [
             'extcredits2' => $attachCredit,
             'extcredits5' => $attachCredit,
@@ -402,6 +403,7 @@ function getCreditByAttachSize($attachSize)
     }
     return $credit;
 }
+
 //end by yangJie
 
 ?>

@@ -1,0 +1,133 @@
+#scbar_txt{
+    width: 305px;
+}
+.form1,.form2{
+    width:48%;
+    position: relative;
+    margin-top: 3px;
+}
+.ss{
+    width: 72%;
+    height: 36px;
+    border-radius: 5px;
+    border: none;
+    padding: 0 10px;
+}
+.sub1{
+    float: right;
+    padding: 0 20px 0 48px;
+    height: 36px;
+    font-size: 16px;
+    width: 120px;
+    margin-top: 1px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 0.05em rgba(0,0,0,.4);
+}
+.all{
+    background-color: #3b5998 !important;
+}
+.sqj{
+    background-color: #f60;
+} 
+.bm .bm_c .pbr{
+    width: auto !important;
+}
+.i-search{
+    width: 17px;
+    height: 17px;
+    background: url(../../../static/image/blog/sprite1470793520867.png) -201px -169px no-repeat;
+    position: absolute;
+    left: 355px;
+    top: 10px;
+    cursor: pointer;
+}
+#scbar{margin-top: 5px;padding:6px 10px;}
+#um{margin-right: 0 !important;padding-top: 0;padding-right: 0;}
+.xjt{
+    display: inline-block;
+    width: 7px;
+    height: 4px;
+    background: url(../../../static/image/blog/sprite1470793520867.png) -231px -116px no-repeat;
+    position: absolute;
+    top: 17px;
+    right: 170px;
+    display: inline-block;
+}
+#scbar_btn{
+    padding: 0 20px 0 48px;
+}
+p .landr{
+    display: inline-block;
+    margin-top: 15px;
+}
+#scbar_type{
+    position: absolute; 
+    right: 135px;
+    top: -2px;
+    border-left: 1px solid #eee;
+}
+.pls .o li{
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    text-indent: 14px !important;
+}
+.pls dt {
+    margin-right: 3px;
+    width: 55px;
+    margin-left: 20px;
+}
+#ct .bm2{
+    border: 1px solid #cdcdcd;
+}
+.hdc .avt img{
+    margin-left: 15px;
+}
+.user_txt{
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.user_txt p{
+    font-size: 18px;
+    font-weight: bold;
+    color: #3b5998 ;
+}
+.user_txt p a{
+    color: red ;
+}
+.user_txt .p1{
+    margin-left: 55px;
+}
+.left_nav_tit a{
+    color: #369;
+    display: block;
+    margin: 10px 0;
+}
+#f_pst{
+    border: 1px solid #cdcdcd;
+}
+.bm .bm_c img{
+    border-radius: 5px;
+}
+
+.hdc{
+    min-height: 70px;
+    position: relative;
+}
+#scbar_txt { border: 1px solid #FFF; outline: none; }
+#scbar_btn { padding: 0; border: none; background: transparent none; box-shadow: none; }
+#scbar_type {padding-left: 33px; text-align: left; text-decoration: none; }
+#um .avt { display: inline; margin-right: 0 !important;}
+.a_pt, .a_pb { margin: 10px 0; padding-left: 1px; }
+
+#subname_list{
+    display: block !important;
+}
+
+.a_t td{
+    border: none;
+    padding: 4px 0;
+    
+}
