@@ -76,10 +76,9 @@ p .landr{
 .pls dt {
     margin-right: 3px;
     width: 55px;
-    margin-left: 20px;
 }
 #ct .bm2{
-    border: 1px solid #cdcdcd;
+    border: 1px solid #cdcdcd !important;
 }
 .hdc .avt img{
     margin-left: 15px;
@@ -125,9 +124,6 @@ p .landr{
 #subname_list{
     display: block !important;
 }
-
-.a_t td{
-    border: none;
-    padding: 4px 0;
-    
+.mnn>.bm{
+    border: none !important;
 }
