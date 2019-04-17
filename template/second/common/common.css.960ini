@@ -878,7 +878,7 @@ CSS 写作注意事项：
 		.a_t table { width: 100%; }
 		.a_t td { padding: 4px 15px; border: 1px solid {COMMONBORDER}; }
 	/* 帖内广告 */ .a_pr { float: right; overflow: hidden; }
-		.a_pt, .a_pb { background: url({IMGDIR}/ad.gif) no-repeat 0 50%; margin-bottom: 6px; padding-left: 20px; zoom: 1; }
+		.a_pt, .a_pb { margin: 10px 0; padding-left: 1px;  }
 	/* 漂浮广告 */ .a_fl, .a_fr { float: right; position: fixed; top: 350px; z-index: 100; }
 		.a_fl { left: 0; }
 		.a_fr { right: 0; text-align: right; }

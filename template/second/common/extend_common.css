@@ -119,7 +119,7 @@ p .landr{
 #scbar_btn { padding: 0; border: none; background: transparent none; box-shadow: none; }
 #scbar_type {padding-left: 33px; text-align: left; text-decoration: none; }
 #um .avt { display: inline; margin-right: 0 !important;}
-.a_pt, .a_pb { margin: 10px 0; padding-left: 1px; }
+.a_pt, .a_pb { margin: 10px 0; padding-left: 1px; background: none !important;}
 
 #subname_list{
     display: block !important;
