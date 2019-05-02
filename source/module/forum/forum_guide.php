@@ -169,7 +169,7 @@ function get_guide_list($view, $start = 0, $num = 50, $again = 0) {
 			if($_GET['fid']) {
 				$sofa = C::t('forum_sofa')->fetch_all_by_fid($_GET['fid'], $start, $num);
 			} else {
-				$sofa = C::t('forum_sofa')->range($start, $num);
+				$sofa = C::t('forum_sofa')->range($start, $num+500);//edit by seagle
 				foreach($sofa as $sofatid => $sofathread) {
 					if(!in_array($sofathread, $fids)) {
 						unset($sofathread[$sofatid]);

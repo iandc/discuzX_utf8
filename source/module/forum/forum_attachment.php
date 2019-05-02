@@ -10,6 +10,9 @@
 if (!defined('IN_DISCUZ')) {
     exit('Access Denied');
 }
+
+require_once libfile('function/attachment');
+
 define('NOROBOT', TRUE);
 @list($_GET['aid'], $_GET['k'], $_GET['t'], $_GET['uid'], $_GET['tableid']) = daddslashes(explode('|', base64_decode($_GET['aid'])));
 
@@ -264,6 +267,13 @@ if ($attach['remote'] && !$_G['setting']['ftp']['hideurl'] && $isimage) {
 $filesize = !$attach['remote'] ? filesize($filename) : $attach['filesize'];
 $attach['filename'] = '"' . (strtolower(CHARSET) == 'utf-8' && strexists($_SERVER['HTTP_USER_AGENT'], 'MSIE') ? urlencode($attach['filename']) : $attach['filename']) . '"';
 
+//add by seagle 浏览器会自动添加下划线不知道啥原因
+/*$prefix = 'eetop';
+if(strpos($attach['filename'], $prefix) === false) {
+    $attach['filename'] = $prefix . $attach['filename'];
+}*/
+//end by seagle
+
 dheader('Date: ' . gmdate('D, d M Y H:i:s', $attach['dateline']) . ' GMT');
 dheader('Last-Modified: ' . gmdate('D, d M Y H:i:s', $attach['dateline']) . ' GMT');
 dheader('Content-Encoding: none');
@@ -377,33 +387,5 @@ function attachment_updateviews($logfile)
         }
     }
 }
-
-//add by yangJie
-function getCreditByAttachSize($attachSize)
-{
-    $credit = 0;
-    if ($attachSize > 32 * 1048576) {
-        $credit = 11;
-    } else if ($attachSize > 28 * 1048576 && $attachSize <= 32 * 1048576) {
-        $credit = 8;
-    } else if ($attachSize > 24 * 1048576 && $attachSize <= 28 * 1048576) {
-        $credit = 7;
-    } else if ($attachSize > 20 * 1048576 && $attachSize <= 24 * 1048576) {
-        $credit = 6;
-    } else if ($attachSize > 16 * 1048576 && $attachSize <= 20 * 1048576) {
-        $credit = 5;
-    } else if ($attachSize > 12 * 1048576 && $attachSize <= 16 * 1048576) {
-        $credit = 4;
-    } else if ($attachSize > 8 * 1048576 && $attachSize <= 12 * 1048576) {
-        $credit = 3;
-    } else if ($attachSize > 4 * 1048576 && $attachSize <= 8 * 1048576) {
-        $credit = 2;
-    } else if ($attachSize > 0 * 1048576 && $attachSize <= 4 * 1048576) {
-        $credit = 1;
-    }
-    return $credit;
-}
-
-//end by yangJie
 
 ?>

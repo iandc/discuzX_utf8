@@ -322,6 +322,13 @@ if($id) {
 				$value['message'] = preg_replace("/&[a-z]+\;/i", '', $value['message']);
 				if($value['pic']) $value['pic'] = pic_cover_get($value['pic'], $value['picflag']);
 				$value['dateline'] = dgmdate($value['dateline']);
+
+				if(in_array('home_blog', $_G['setting']['rewritestatus'])) {
+					$value['blogurl'] = rewriteoutput('home_blog', 1, '', $value['uid'], $value['blogid']);
+				} else {
+					$value['blogurl'] = "home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]";
+				}
+
 				$list[] = $value;
 			} else {
 				$pricount++;

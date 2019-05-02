@@ -493,16 +493,16 @@ function getuserdefaultdiy() {
 							'attr' => array('name'=>'frame1'),
 							'column`frame1_left' => array(
 									'block`profile' => array('attr' => array('name'=>'profile')),
+                                    'block`personalinfo' => array('attr' => array('name'=>'personalinfo')),
 									'block`statistic' => array('attr' => array('name'=>'statistic')),
 									'block`album' => array('attr' => array('name'=>'album')),
 									'block`doing' => array('attr' => array('name'=>'doing'))
 							),
 							'column`frame1_center' => array(
-									'block`personalinfo' => array('attr' => array('name'=>'personalinfo')),
+                                    'block`blog' => array('attr' => array('name'=>'blog')),
+                                    'block`thread' => array('attr' => array('name'=>'thread')),
 									'block`feed' => array('attr' => array('name'=>'feed')),
 									'block`share' => array('attr' => array('name'=>'share')),
-									'block`blog' => array('attr' => array('name'=>'blog')),
-									'block`thread' => array('attr' => array('name'=>'thread')),
 									'block`wall' => array('attr' => array('name'=>'wall'))
 							),
 							'column`frame1_right' => array(

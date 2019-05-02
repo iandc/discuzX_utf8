@@ -13,6 +13,7 @@ if(!defined('IN_DISCUZ')) {
 define('NOROBOT', TRUE);
 
 require_once libfile('function/post');
+require_once libfile('function/attachment');
 
 $feed = array();
 if($_GET['action'] == 'paysucceed') {
@@ -34,13 +35,18 @@ if($_GET['action'] == 'paysucceed') {
 
 	$attach = C::t('forum_attachment_n')->fetch('aid:'.$aid, $aid);
 	$thread = C::t('forum_thread')->fetch_by_tid_displayorder($attach['tid'], 0);
-
 	checklowerlimit('getattach', 0, 1, $thread['fid']);
 	$getattachcredits = updatecreditbyaction('getattach', $_G['uid'], array(), '', 1, 1, $thread['fid']);
 	$_G['policymsg'] = $p = '';
 	if($getattachcredits['updatecredit']) {
 		if($getattachcredits['updatecredit']) for($i = 1;$i <= 8;$i++) {
 			if($policy = $getattachcredits['extcredits'.$i]) {
+			    if($policy < 0) {
+                    $policy -= getCreditByAttachSize($attach['filesize']);
+                } else {
+                    $policy += getCreditByAttachSize($attach['filesize']);
+                }
+
 				$_G['policymsg'] .= $p.($_G['setting']['extcredits'][$i]['img'] ? $_G['setting']['extcredits'][$i]['img'].' ' : '').$_G['setting']['extcredits'][$i]['title'].' '.$policy.' '.$_G['setting']['extcredits'][$i]['unit'];
 				$p = ', ';
 			}

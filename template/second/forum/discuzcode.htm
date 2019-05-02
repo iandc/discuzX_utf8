@@ -1,5 +1,14 @@
 <!--{eval}-->
 <!--
+function addEeTopCredits($matches) {
+	global $_G;
+	return ($matches[1] + $_G['extraEeTopCredit']) . $matches[2] . ($matches[3] + $_G['extraEeTopCredit']);
+}
+-->
+<!--{/eval}-->
+
+<!--{eval}-->
+<!--
 function tpl_hide_credits_hidden($creditsrequire) {
 	global $_G;
 -->
@@ -77,6 +86,10 @@ function attachlist($attach) {
 	$widthcode = attachwidth($attach['width']);
 	$is_archive = $_G['forum_thread']['is_archived'] ? "&fid=".$_G['fid']."&archiveid=".$_G[forum_thread][archiveid] : '';
 	$pluginhook = !empty($_G['setting']['pluginhooks']['viewthread_attach_extra'][$attach[aid]]) ? $_G['setting']['pluginhooks']['viewthread_attach_extra'][$attach[aid]] : '';
+
+	$_G['extraEeTopCredit'] = getCreditByAttachSize($attach['attachsize']);
+	$patterns = "|(\d+)(.+)(\d+)|"; // 资产 -1 信元, 下载支出 1 信元
+	$_G['geteetopattachcredits'] = preg_replace_callback($patterns, 'addEeTopCredits', $_G['getattachcredits']);
 -->
 <!--{/eval}-->
 <!--{block return}-->
@@ -96,12 +109,12 @@ function attachlist($attach) {
 					<div class="tip_c">
 						<p class="y">$attach[dateline] {lang upload}</p>
 						<p>{lang clicktodownload}</p>
-						<!--{if !$attach['attachimg'] && $_G['getattachcredits']}-->{lang attachcredits}: $_G[getattachcredits]<br /><!--{/if}-->
+						<!--{if !$attach['attachimg'] && $_G['geteetopattachcredits']}-->$extraCredit {lang attachcredits}: $_G['geteetopattachcredits']<br /><!--{/if}-->
 					</div>
 					<div class="tip_horn"></div>
 				</div>
 			</p>
-			<p>$attach[attachsize]<!--{if $attach['readperm']}-->, {lang readperm}: <strong>$attach[readperm]</strong><!--{/if}-->, {lang downloads}: $attach[downloads]<!--{if !$attach['attachimg'] && $_G['getattachcredits']}-->, {lang attachcredits}: $_G[getattachcredits]<!--{/if}--></p>
+			<p>$attach[attachsize]<!--{if $attach['readperm']}-->, {lang readperm}: <strong>$attach[readperm]</strong><!--{/if}-->, {lang downloads}: $attach[downloads]<!--{if !$attach['attachimg'] && $_G['geteetopattachcredits']}-->, {lang attachcredits}: $_G['geteetopattachcredits']<!--{/if}--></p>
 			<p>
 				<!--{if $attach['price']}-->
 					{lang price}: <strong>$attach[price] {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}</strong> &nbsp;[<a href="forum.php?mod=misc&action=viewattachpayments&aid=$attach[aid]" onclick="showWindow('attachpay', this.href)" target="_blank">{lang pay_view}</a>]
@@ -232,6 +245,10 @@ function attachinpost($attach, $post) {
 	if($guestviewthumb) {
 		$guestviewthumbcss = guestviewthumbstyle();
 	}
+	$_G['extraEeTopCredit'] = getCreditByAttachSize($attach['filesize']);
+	$patterns = "|(\d+)(.+)(\d+)|"; // 资产 -1 信元, 下载支出 1 信元
+	$_G['geteetopattachcredits'] = preg_replace_callback($patterns, 'addEeTopCredits', $_G['getattachcredits']);
+
 -->
 <!--{/eval}-->
 <!--{block return}-->
@@ -285,9 +302,9 @@ function attachinpost($attach, $post) {
 		$attach[attachicon]
 		<span style="white-space: nowrap" id="attach_$attach[aid]" {if $_GET['from'] != 'preview'}onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})"{/if}>
 			<!--{if !$attach['price'] || $attach['payed']}-->
-				<a style="display: block; width: 897px; overflow: hidden;" href="forum.php?mod=attachment{$is_archive}&aid=$aidencode" target="_blank">$attach[filename]</a>
+				<a style="display: block; overflow: hidden;" href="forum.php?mod=attachment{$is_archive}&aid=$aidencode" target="_blank">$attach[filename]</a>
 			<!--{else}-->
-				<a style="display: block; width: 897px; overflow: hidden;"  href="forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]" onclick="showWindow('attachpay', this.href)">$attach[filename]</a>
+				<a style="display: block; overflow: hidden;"  href="forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]" onclick="showWindow('attachpay', this.href)">$attach[filename]</a>
 			<!--{/if}-->
 			<em class="xg1">($attach[attachsize], {lang downloads}: $attach[downloads]<!--{if $attach['price']}-->, {lang price}: $attach[price] {$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][unit]}{$_G['setting']['extcredits'][$_G['setting']['creditstransextra'][1]][title]}<!--{/if}-->)</em>
 		</span>
@@ -306,7 +323,7 @@ function attachinpost($attach, $post) {
 						&nbsp;[<a href="forum.php?mod=misc&action=attachpay&aid=$attach[aid]&tid=$attach[tid]" onclick="showWindow('attachpay', this.href)" target="_blank">{lang attachment_buy}</a>]
 					<!--{/if}-->
 				<!--{/if}-->
-				<!--{if !$attach['attachimg'] && $_G['getattachcredits']}--><br />{lang attachcredits}: $_G[getattachcredits]<!--{/if}-->
+				<!--{if !$attach['attachimg'] && $_G['geteetopattachcredits']}--><br />{lang attachcredits}: $_G[geteetopattachcredits]<!--{/if}-->
 						</div>
 						<div class="tip_horn"></div>
 					</div>

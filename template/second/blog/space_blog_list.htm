@@ -9,17 +9,17 @@
                 <div id="pt" class="bm cl">
                     <div class="z">
                         <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
-                        <a href="blog.html">{lang blog}</a>
+                        <a href="blog.php">{lang blog}</a>
                     </div>
                 </div>
                 <div class="conLeft fls z">
                     <!--{if $_GET[view] == 'all'}-->
-                    <div class="all"><a href="blog.html">{lang all}</a></div>
+                    <div class="all"><a href="blog.php">{lang all}</a></div>
                     <div class="conLeft_top left_nav">
                         <div class="left_nav_tit fw600 tbmu">
                             <!--{if $category}-->
                             <!--{loop $category $value}-->
-                                    <a href="blog.php?mod=space&do=blog&catid=$value['catid']&view=all&order=" {if $_GET[catid] == $value[catid]} class="a"{/if}>$value[catname]</a>
+                                <a href="blog.php?mod=space&do=blog&catid=$value['catid']&view=all&order=" {if $_GET[catid] == $value[catid]} class="a"{/if}>$value[catname]</a>
                             <!--{/loop}-->
                             <!--{/if}-->
 
@@ -61,7 +61,7 @@
                                         <div>
                                             <!--{if $_GET[view] == 'me' && $classarr}-->
                                                 <!--{loop $classarr $classid $classname}-->
-                                                    <a href="blog.php?mod=space&uid=$space[uid]&do=blog&classid=$classid&view=me" id="classid$classid"{if $_GET[classid]==$classid} class="a"{/if}>$classname</a><span class="pipe">|</span>
+                                                    <a href="home.php?mod=space&uid=$space[uid]&do=blog&classid=$classid&view=me" id="classid$classid"{if $_GET[classid]==$classid} class="a"{/if}>$classname</a><span class="pipe">|</span>
                                                 <!--{/loop}-->
                                             <!--{/if}-->
                                         </div>
@@ -84,21 +84,21 @@
                                                     <!--{if helper_access::check_module('share')}-->
                                                     <a href="home.php?mod=spacecp&ac=share&type=blog&id=$value[blogid]&handlekey=lsbloghk_{$value[blogid]}" id="a_share_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);" class="oshr xs1 xw0 y">{lang share}</a>
                                                     <!--{/if}-->
-	                                                <a  href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]"{if $value[magiccolor]} style="color: {$_G[colorarray][$value['magiccolor']]}"{/if} target="_blank" class="fw600 z">$value['subject']</a>
+	                                                <a href="$value[blogurl]"{if $value[magiccolor]} style="color: {$_G[colorarray][$value['magiccolor']]}"{/if} target="_blank" class="fw600 z">$value['subject']</a>
                                                     <!--{if $value[status] == 1}--> <span class="xi1">({lang pending})</span><!--{/if}-->
 	                                            </div>
 	                                            <div class="list_des clearfix" id="blog_article_$value[blogid]">
                                                     {if $value[pic]}
     	                                                <p style="width: 80%;" class="z">
-    	                                                    $value['message']
+                                                            <a href="$value[blogurl]" target="_blank">$value['message']</a>
     	                                                </p>
                                                     {else}
                                                         <p style="width: 100%;" class="z">
-                                                            $value['message']
+                                                            <a href="$value[blogurl]" target="_blank">$value['message']</a>
                                                         </p>
                                                     {/if}
                                                     <div style="width: 20%;" class="y list_img">
-                                                        <!--{if $value[pic]}--><a href="blog.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" target="_blank"><img src="$value[pic]" alt="$value[subject]" class="tn" /></a><!--{/if}-->
+                                                        <!--{if $value[pic]}--><a href="$value[blogurl]" target="_blank"><img src="$value[pic]" alt="$value[subject]" class="tn" /></a><!--{/if}-->
                                                     </div>
                                                     
 	                                            </div>
@@ -113,28 +113,28 @@
                                                     <!--{/if}-->
 	                                                <span>
                                                         <a href="">{lang username}</a>:
-                                                        <a href="blog.php?mod=space&uid=$value[uid]">$value['username']</a>
+                                                        <a href="home.php?mod=space&uid=$value[uid]">$value['username']</a>
                                                     </span>
 	                                                <span>
                                                         <!--{if $value[viewnum]}-->
-	                                                	<a href="blog.php?mod=space&uid=$value[uid]&do=blog&classid=$value[classid]&view=me"  target="_blank">
+	                                                	<a href="home.php?mod=space&uid=$value[uid]&do=blog&classid=$value[classid]&view=me"  target="_blank">
 	                                                		{lang read_num}<span>$value['viewnum']</span>
 	                                                	</a>
                                                         <!--{/if}-->
 	                                                </span>
 	                                                <span>
-	                                                	<a href="blog.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]#comment" target="_blank">
+	                                                	<a href="$value[blogurl]#comment" target="_blank">
 	                                                		{lang comment}：<span>$value['replynum']</span>
 	                                                	</a>
 	                                                </span>
                                                     <!--{if $value['hot']}--> <a href="">{lang hot}</a> ：<em>$value[hot]</em> </span><!--{/if}-->
                                                     </span>
                                                     <!--{if $_GET['view']=='me' && $space['self']}-->
-                                                    <span class="pipe">|</span><a href="blog.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=edit">{lang edit}</a><span class="pipe">|</span>
-                                                    <a href="blog.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=delete&handlekey=delbloghk_{$value[blogid]}" id="blog_delete_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
+                                                    <span class="pipe">|</span><a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=edit">{lang edit}</a><span class="pipe">|</span>
+                                                    <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=delete&handlekey=delbloghk_{$value[blogid]}" id="blog_delete_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
                                                     <!--{if empty($value['status'])}-->
                                                     <span class="pipe">|</span>
-                                                    <a href="blog.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=stick&stickflag=$stickflag&handlekey=stickbloghk_{$value[blogid]}" id="blog_stick_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);"><!--{if $stickflag}-->{lang stick}<!--{else}-->{lang cancel_stick}<!--{/if}--></a>
+                                                    <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=stick&stickflag=$stickflag&handlekey=stickbloghk_{$value[blogid]}" id="blog_stick_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);"><!--{if $stickflag}-->{lang stick}<!--{else}-->{lang cancel_stick}<!--{/if}--></a>
                                                     <!--{/if}-->
                                                 <!--{/if}-->
 	                                                <!--{if $value['friend']}-->
