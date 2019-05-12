@@ -85,7 +85,7 @@ if(!empty($_SERVER['QUERY_STRING']) && is_numeric($_SERVER['QUERY_STRING'])) {
 						if($_G['setting']['rewritestatus'] && in_array('home_space', $_G['setting']['rewritestatus'])) {
 							$url = rewriteoutput('home_space', 1, $apphost, $domain['id']);
 						} else {
-							$url = $apphost.'home.php?mod=space&uid='.$domain['id'];
+							$url = $apphost.'home.php?mod=space&uid='.$domain['id'].'&do=index&view=admin';
 						}
 						break;
 					case 'group':

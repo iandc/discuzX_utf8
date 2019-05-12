@@ -23,6 +23,14 @@ if(!in_array($do, array('home', 'doing', 'blog', 'album', 'share', 'wall'))) {
 if(empty($_G['uid']) && in_array($_GET['do'], array('thread', 'trade', 'poll', 'activity', 'debate', 'reward'))) {
 	showmessage('login_before_enter_home', null, array(), array('showmsg' => true, 'login' => 1));
 }
+
+if($_GET['prefixdomain']) {
+    $domain = C::t('common_domain')->fetch_by_domain_domainroot($_GET['prefixdomain'], $_SERVER['SERVER_NAME']);
+    if($domain) {
+        $_GET['uid'] = $domain['id'];
+    }
+}
+
 $uid = empty($_GET['uid']) ? 0 : intval($_GET['uid']);
 
 $member = array();

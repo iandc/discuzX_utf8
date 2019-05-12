@@ -67,7 +67,7 @@
 			<!--{eval $space['domainurl'] = preg_replace("/\?(\d)+/", $space['domain'], $space['domainurl']);}-->
 			<!--{/if}-->
 			<span class="xs0 xw0">
-				<a href="home.php?mod=spacecp&ac=domain">[设置我的域名]</a>
+				<!--{if $space['self']}--><a href="home.php?mod=spacecp&ac=domain">[设置我的域名]</a><!--{/if}-->
 				<a id="domainurl" href="$space[domainurl]" onclick="setCopy('$space[domainurl]', '{lang copy_space_address}');return false;">$space[domainurl]</a>
 				<a href="javascript:;" onclick="addFavorite(location.href, document.title)">[{lang favorite}]</a>
 				<a id="domainurl" href="$space[domainurl]" onclick="setCopy('$space[domainurl]', '{lang copy_space_address}');return false;">[{lang copy}]</a>
