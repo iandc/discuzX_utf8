@@ -269,6 +269,7 @@ $lang = array(
 	'follow_click_play' => '点击播放',
 	'follow_cancle_follow' => '取消收听',
 	'follow_follow_ta' => '收听TA',
+    'blog1' => '博客',
 
 
 );
