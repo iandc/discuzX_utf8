@@ -72,6 +72,7 @@ a{
 .r_tit span.jcbk{
     font-size: 18px;
     font-weight: 600;
+    padding: 7px 0 0 7px;
 }
 .r_tit span.r_tit_more {
     margin-top: 8px;
@@ -79,6 +80,8 @@ a{
 }
 .r_tit span.r_tit_more a{
     color: #4183c4 !important;
+    font-size: 14px;
+    padding-right: 10px;
 }
 .r_three{
     width: auto;
