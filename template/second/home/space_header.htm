@@ -63,8 +63,9 @@
 			<strong id="spacename" class="mbn">
 				<!--{if $space[spacename]}-->$space[spacename]<!--{else}-->$space[username]{lang somebody_space}<!--{/if}-->
 			</strong>
+			<!--{eval $space['domainurl'] = preg_replace("/(\?)+/", '', $space['domainurl']);}-->
 			<!--{if $space['domain']}-->
-			<!--{eval $space['domainurl'] = preg_replace("/\?(\d)+/", $space['domain'], $space['domainurl']);}-->
+			<!--{eval $space['domainurl'] = preg_replace("/(\d)+/", $space['domain'], $space['domainurl']);}-->
 			<!--{/if}-->
 			<span class="xs0 xw0">
 				<!--{if $space['self']}--><a href="home.php?mod=spacecp&ac=domain">[设置我的域名]</a><!--{/if}-->
