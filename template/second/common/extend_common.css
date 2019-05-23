@@ -2,12 +2,12 @@
     width: 305px;
 }
 .form1,.form2{
-    width:48%;
+    width:49%;
     position: relative;
     margin-top: 3px;
 }
 .ss{
-    width: 72%;
+    width: 67%;
     height: 36px;
     border-radius: 5px;
     border: none;
@@ -24,6 +24,7 @@
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 0.05em rgba(0,0,0,.4);
+    cursor: pointer;
 }
 .all{
     background-color: #3b5998 !important;
@@ -39,7 +40,7 @@
     height: 17px;
     background: url(../../../static/image/blog/sprite1470793520867.png) -201px -169px no-repeat;
     position: absolute;
-    left: 355px;
+    left: 365px;
     top: 10px;
     cursor: pointer;
 }
@@ -116,7 +117,7 @@ p .landr{
     position: relative;
 }
 #scbar_txt { border: 1px solid #FFF; outline: none; }
-#scbar_btn { padding: 0; border: none; background: transparent none; box-shadow: none; }
+#scbar_btn { text-align: left; border: none; background: transparent none; box-shadow: none; }
 #scbar_type {padding-left: 33px; text-align: left; text-decoration: none; }
 #um .avt { display: inline; margin-right: 0 !important;}
 .a_pt, .a_pb { margin: 10px 0; padding-left: 1px; background: none !important;}
