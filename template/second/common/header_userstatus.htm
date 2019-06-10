@@ -40,14 +40,17 @@
 	<span class="pipe">|</span><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}">{lang logout}</a>
 </p>
 <!--{elseif !$_G[connectguest]}-->
+ 	
+	<!--{hook/global_login_extra}-->
 	<div class="user_txt y">
-		<p class="p1">您现在是游客状态</p>
-		<p>
-			请您
-			&nbsp;&nbsp;<a href="member.php?mod=logging&action=login">登录</a>&nbsp;&nbsp;
-			或&nbsp;&nbsp;<a href="member.php?mod=register">注册</a>&nbsp;&nbsp;享受更多权益
+		<p class="p1">
+			<a href="javascript:;" onclick="showWindow('login', 'member.php?mod=logging&action=login&viewlostpw=1')">{lang forgotpw}</a>
 		</p>
-		
+		<p class="p2">
+			
+			&nbsp;&nbsp;<a href="member.php?mod=logging&action=login">{lang m_login_submit}</a>
+			&nbsp;&nbsp;<a href="member.php?mod=register">{lang register}</a>&nbsp;&nbsp;
+		</p>
 	</div>
 <!--{else}-->
 <div id="um">
@@ -62,4 +65,4 @@
 		<span class="pipe">|</span>{lang usergroup}: $_G[group][grouptitle]
 	</p>
 </div>
-<!--{/if}-->
+<!--{/if}

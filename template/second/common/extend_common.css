@@ -6,6 +6,13 @@
     position: relative;
     margin-top: 3px;
 }
+
+.fastlg_fm {
+    position: absolute;
+    top: 14px;
+    right: 80px;
+}
+
 .ss{
     width: 67%;
     height: 36px;
@@ -44,6 +51,7 @@
     top: 10px;
     cursor: pointer;
 }
+.fastlg_fm { margin-right: 5px; padding-right: 5px; border-right: 1px solid {COMMONBORDER}; }
 #scbar{margin-top: 5px;padding:6px 10px;}
 #um{margin-right: 0 !important;padding-top: 0;padding-right: 0;}
 .xjt{
@@ -87,18 +95,21 @@ p .landr{
 .user_txt{
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 15px;
 }
 .user_txt p{
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     color: #3b5998 ;
 }
 .user_txt p a{
-    color: red ;
+    color: #3b5998 ;
 }
 .user_txt .p1{
-    margin-left: 55px;
+    margin-left:75px;
+}
+.user_txt .p2{
+    margin-left: 60px;
 }
 .left_nav_tit a{
     color: #369;
