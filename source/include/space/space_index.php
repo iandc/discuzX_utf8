@@ -11,8 +11,8 @@ if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
 
-if(($_G['adminid'] == 1 && $_G['setting']['allowquickviewprofile'] && $_GET['view'] != 'admin' && $_GET['diy'] != 'yes') || defined('IN_MOBILE')) {
-	dheader("Location:home.php?mod=space&uid=$space[uid]&do=profile");
+if(($_G['adminid'] == 1 && $_G['setting']['allowquickviewprofile'] && $_GET['view'] != 'admin' && $_GET['diy'] != 'yes')) {
+	//dheader("Location:home.php?mod=space&uid=$space[uid]&do=profile");
 }
 
 require_once libfile('function/space');
