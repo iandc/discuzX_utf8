@@ -1,0 +1,177 @@
+aaaaa
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../../static/image/blog/mui.min.css">
+    <link rel="stylesheet" href="../../../../static/image/blog/public.css">
+    <link rel="stylesheet" href="../../../../static/image/blog/ph_page.css">
+    <link rel="stylesheet" href="../../../../static/image/blog/index.css">
+    
+    <script src="../../../../static/js/blog/jquery-2.1.1.min.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/blog/rem.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/blog/mui.min.js"></script>
+    <script>
+        mui.init();
+        mui('.mui-off-canvas-wrap').offCanvas('show');
+        mui('.mui-off-canvas-wrap').offCanvas('close');
+        window.onload = function(){
+            mui('.mui-scroll-wrapper').scroll({
+                deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- 侧滑导航根容器 -->
+    <div class="mui-off-canvas-wrap mui-draggable">
+      <!-- 主页面容器 -->
+      <div class="mui-inner-wrap">
+         <!-- 菜单容器 -->
+        <aside id="leftNavs" class="mui-off-canvas-left">
+          <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+              <!-- 菜单具体展示内容 -->
+              <span id="closes"><a href="#leftNavs">×</a></span>
+                <ul class="left_list">
+                    <li><a href="">eetop首页</a></li>
+                    <li><a href="">博客</a></li>
+                    <li><a href="">下载</a></li>
+                    <li><a href="">论坛</a></li>
+                    <li><a href="">APP</a></li>
+                    <li><a href="">商城</a></li>
+                    <li><a href="">活动</a></li>
+                    <li><a href="">招聘</a></li>
+                </ul>
+            </div>
+          </div>
+        </aside>
+        <!-- 主页面标题 -->
+        <header class="mui-bar mui-bar-nav">
+          <a href="#leftNavs" class="fl mui-icon mui-action-menu mui-icon-bars mui-pull-left" id="leftBtn"></a>
+          <h1 class="mui-title"><span>$space[username]</span></h1>
+          <a href="" class="fr login">登录</a>
+          <span class="fr mui-icon mui-icon-search search"></span>
+        </header>
+        <!-- 主页面内容容器 -->
+        <div class="mui-content mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <!-- 主界面具体展示内容 -->
+            <div class="main_list">
+                <h3 class="blog-name">$space[username]的博客</h3>
+                <div class="user_info clearfix">
+                    <div class="user_info1 user clearfix">
+                        <div class="tit_img fl">
+                            <a href=""><img src="<!--{avatar($space[uid], small, true)}-->" alt=""></a>
+                        </div>
+                        <span class="fl">$space[username]</span>
+                    </div>
+                    <div class="user_info2 user clearfix">
+                        <dl>
+                            <dt>
+                                <a href="">原创</a>
+                            </dt>
+                            <dd>
+                                <a href=""><span>56</span></a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="">粉丝</a>
+                            </dt>
+                            <dd>
+                                <a href=""><span>17</span></a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="">喜欢</a>
+                            </dt>
+                            <dd>
+                                <a href=""><span>11</span></a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <a href="">评论</a>
+                            </dt>
+                            <dd>
+                                <a href=""><span>5</span></a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="user_info3 user">
+                        <a href="" class="btn">关注</a>
+                    </div>
+                    <div class="user_info4">
+                        <dl>
+                            <dt>等级：</dt>
+                            <dd><a href="">1</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>访问：</dt>
+                            <dd><a href="">4272</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>积分：</dt>
+                            <dd><a href="">111</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>排名：</dt>
+                            <dd><a href="">12万</a></dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="tab">
+                    <div id="segmentedControl" class="mui-segmented-control">
+                        <a href="#item1mobile" class="mui-control-item mui-active">日志</a>
+                        <a href="#item2mobile" class="mui-control-item">动态</a>
+                        <a href="#item3mobile" class="mui-control-item">分享</a>
+                    </div>
+                    <div class="mui-content-padded clearfix">
+                        <div id="item1mobile" class="mui-control-content mui-active">
+                            <!-- <ul class="mui-table-view">
+                                <li class="mui-table-view-cell">
+                                    <h3 class="tit">
+                                        <a href="">漫画：什么是二分查找？</a>
+                                    </h3>
+                                    <div class="info">
+                                        <span><a href="">前端</a></span>
+                                        <span><a href="">程序员小灰</a></span>
+                                        <span><a href="">1589阅读</a></span>
+                                        <span><a href="">4天前</a></span>
+                                        <span class="mui-icon mui-icon-closeempty fr"></span>
+                                    </div>
+                                </li>
+                            </ul> -->
+                            <!--{loop $centerlist $key $value}-->
+                                <!--{if !empty($key)}-->
+                                    <div id="$key" class="block move-span">
+                                        $value
+                                    </div>
+                                <!--{/if}-->
+                            <!--{/loop}-->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+
+
+
+
+    <script>
+        document.getElementsByClassName('mui-inner-wrap')[0].addEventListener('drag', function(event) {
+            　event.stopPropagation();
+        });
+
+        
+    </script>
+</body>
+</html>

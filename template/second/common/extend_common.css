@@ -1,5 +1,9 @@
+.wp{
+    margin: 0 auto; width: 1010px;
+}
+
 #scbar_txt{
-    width: 305px;
+    width: 340px;
 }
 .form1,.form2{
     width:49%;
@@ -45,9 +49,9 @@
 .i-search{
     width: 17px;
     height: 17px;
-    background: url(../../../static/image/blog/sprite1470793520867.png) -201px -169px no-repeat;
+    background: url(../../../static/image/blog/icos.png) -201px -169px no-repeat;
     position: absolute;
-    left: 365px;
+    left: 390px;
     top: 10px;
     cursor: pointer;
 }
@@ -58,10 +62,10 @@
     display: inline-block;
     width: 7px;
     height: 4px;
-    background: url(../../../static/image/blog/sprite1470793520867.png) -231px -116px no-repeat;
+    background: url(../../../static/image/blog/icos.png) -231px -116px no-repeat;
     position: absolute;
     top: 17px;
-    right: 170px;
+    right: 175px;
     display: inline-block;
 }
 #scbar_btn{
@@ -73,7 +77,7 @@ p .landr{
 }
 #scbar_type{
     position: absolute; 
-    right: 135px;
+    right: 145px;
     top: -2px;
     border-left: 1px solid #eee;
 }
@@ -129,15 +133,61 @@ p .landr{
 }
 #scbar_txt { border: 1px solid #FFF; outline: none; }
 #scbar_btn { text-align: left; border: none; background: transparent none; box-shadow: none; }
-#scbar_type {padding-left: 33px; text-align: left; text-decoration: none; }
+#scbar_type {padding-left: 30px; text-align: left; text-decoration: none; }
 #um .avt { display: inline; margin-right: 0 !important;}
 .a_pt, .a_pb { margin: 10px 0; padding-left: 1px; background: none !important;}
 
 #subname_list{
     display: block !important;
 }
+.mnn{
+    width: 1010px !important;
+}
 .mnn>.bm{
     border: none !important;
 }
 
 .xi2 a{margin-left: 5px;}
+
+#ct {
+    margin: 0 auto !important;
+    width: 1010px;
+}
+#toptb {
+    padding: 0 15px;
+    border-bottom: 1px solid #EFEFEF;
+    /*width: 1010px;*/
+    margin: 0 auto;
+}
+#hd{
+    width: 1010px !important;
+    margin: 0 auto;
+    background-size: cover !important;
+}
+.ct2 .mn{
+    margin-left: 0 !important;
+}
+.ct2 .sd{
+    width: 240px !important;
+    margin-right: 0 !important;
+}
+.area{
+    padding: 0 !important;
+}
+#frame1_center{
+    width: 530px !important;
+}
+
+#frame1_left .block{
+    margin-left: 0 !important;
+}
+#frame1_right .block{
+    margin-right: 0 !important;
+}
+.xl2 li{
+    text-align: center;
+}
+.ptn li{
+    width: 45%;
+    margin-left: 10px;
+}

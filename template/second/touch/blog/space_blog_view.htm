@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{STATICURL}image/blog/index.css">
+    <link rel="stylesheet" href="{STATICURL}image/blog/mui.min.css">
+    <link rel="stylesheet" href="{STATICURL}image/blog/public.css">
+    <link rel="stylesheet" href="{STATICURL}image/blog/blog_show.css">
+
+    <script src="{STATICURL}js/blog/jquery.min.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script src="{STATICURL}js/blog/mui.min.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script src="{STATICURL}js/blog/rem.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script>
+        mui.init();
+        mui('.mui-off-canvas-wrap').offCanvas('show');
+        mui('.mui-off-canvas-wrap').offCanvas('close');
+        window.onload = function(){
+            mui('.mui-scroll-wrapper').scroll({
+                deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- 侧滑导航根容器 -->
+    <div class="mui-off-canvas-wrap mui-draggable">
+      <!-- 主页面容器 -->
+      <div class="mui-inner-wrap">
+         <!-- 菜单容器 -->
+        <aside id="leftNavs" class="mui-off-canvas-left">
+          <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+              <!-- 菜单具体展示内容 -->
+              <span id="closes"><a href="#leftNavs">×</a></span>
+                <ul class="left_list">
+                    <li><a href="">eetop首页</a></li>
+                    <li><a href="">博客</a></li>
+                    <li><a href="">下载</a></li>
+                    <li><a href="">论坛</a></li>
+                    <li><a href="">APP</a></li>
+                    <li><a href="">商城</a></li>
+                    <li><a href="">活动</a></li>
+                    <li><a href="">招聘</a></li>
+                </ul>
+            </div>
+          </div>
+        </aside>
+        <!-- 主页面标题 -->
+        <header class="mui-bar mui-bar-nav">
+          <a href="#leftNavs" class="fl mui-icon mui-action-menu mui-icon-bars mui-pull-left" id="leftBtn"></a>
+          <h1 class="mui-title"><span>lay500</span></h1>
+          <a href="" class="fr login">登录</a>
+          <span class="fr mui-icon mui-icon-search search"></span>
+        </header>
+        <nav class="mui-bar mui-bar-tab">
+                    <a class="mui-tab-item mui-active">
+                        <span class="mui-tab-label">点赞</span>
+                    </a>
+                    <a class="mui-tab-item">
+                        <span class="mui-tab-label">评论</span>
+                    </a>
+                    <a class="mui-tab-item">
+                        <span class="mui-tab-label">收藏</span>
+                    </a>
+                </nav>
+        <!-- 主页面内容容器 -->
+        <div class="mui-content mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <!-- 主界面具体展示内容 -->
+            <div class="blog_show">
+                <div class="show_tit">
+                    <!-- <span>原</span> --><h3>聊聊IT外包公司(外包公司的运作模式和赚钱之道)</h3>
+                </div>
+                <div class="top_user">
+                    <div class="user_info clearfix">
+                        <a href="" class="fl">
+                            <img class="fl" src="https://avatar.csdn.net/3/6/A/3_czh500.jpg" alt="">
+                            <span class="fr">lay500</span>
+                        </a>
+                        <span class="read_num fr">阅读数：2677</span>
+                        <span class="create_time fr">2019-05-18</span>
+                    </div>
+                </div>
+                <div class="show_con">
+                    <div class="content_views">
+                        <h3>聊聊IT外包公司(外包公司的运作模式和赚钱之道)</h3>
+                        <p><strong>外包分类</strong></p>
+                        <p><strong>1、人力外包</strong></p>
+                        <p><strong>2、项目外包</strong></p>
+                        <p><span style="color:#f33b45;"><strong>先说说人力外包</strong></span></p>
+                        <p>比如：华为公司很大，有很多项目在做，但是一些次要的，或者非核心的项目，如果华为公司自己招兵买马的话，那么成本会很高，像员工的社保，公积金等等这些都要华为自己掏钱，这时候，华为公司就会想了，能不能把这部分次要的项目包出去，包给其他公司，交给别人去做，这样的话，直接付款给外包公司就行了，项目一旦做完了就结束了。</p>
+                        <p>试想一下，如果华为不外包出去的话，一旦项目做完了，结束了，那华为还要养着这些员工，不划算，如果你是华为的老板，你是会自己招兵买马还是外包出去呢，哪个更便宜更划算，大家一目了然。</p>
+                    </div>
+                </div>
+                <!-- 评论 -->
+                <div class="comment clearfix">
+                    <div class="comment_title clearfix">
+                        <span class="comment_num fl">14条评论</span>
+                        <span class="write_comment_btn fr"><a href="">写评论</a></span>
+                    </div>
+                    <dl class="comment_content details_page_comment">
+                        <dt class="clearfix">
+                            <a href="" class="avatar fl" style="width: 10%;"><img src="https://avatar.csdn.net/E/4/3/3_csdnhsh.jpg" alt=""></a>
+                            <div class="fr" style="width: 88%;">
+                                <span class="comment_user">
+                                    <a href=""><span class="name">csdnhsh：</span></a>
+                                </span>
+                                <span class="comment_info">
+                                    <span>但凡有点上进心，就不会长期在外包公司工作的，早点出来对自己更加有利的。</span>
+                                </span>
+                                <span class="comment_time">(2019-05-31 <span class="floor">#6楼</span>)</span>
+                                <span class="reply"><a href="">回复</a></span>
+                            </div>
+                        </dt>
+                        <dd>
+                            <div class="reply_content">
+                                <span class="reply_user">
+                                    <span class="reply_user_name">
+                                        <a href="">lin_xiao_zhi</a>
+                                    </span>
+                                </span>
+                                <span class="reply_info">
+                                    <span class="marginLR">回复</span>
+                                    vcsdnhsh：是的，为了前途发展，感觉无论怎样最好选一个正规职位
+                                </span>
+                                <span class="reply_time">2019-06-02</span>
+                            </div>
+                        </dd>
+                    </dl><dl class="comment_content details_page_comment">
+                        <dt class="clearfix">
+                            <a href="" class="avatar fl" style="width: 10%;"><img src="https://avatar.csdn.net/E/4/3/3_csdnhsh.jpg" alt=""></a>
+                            <div class="fr" style="width: 88%;">
+                                <span class="comment_user">
+                                    <a href=""><span class="name">csdnhsh：</span></a>
+                                </span>
+                                <span class="comment_info">
+                                    <span>但凡有点上进心，就不会长期在外包公司工作的，早点出来对自己更加有利的。</span>
+                                </span>
+                                <span class="comment_time">(2019-05-31 <span class="floor">#6楼</span>)</span>
+                                <span class="reply"><a href="">回复</a></span>
+                            </div>
+                        </dt>
+                        <dd>
+                            <div class="reply_content">
+                                <span class="reply_user">
+                                    <span class="reply_user_name">
+                                        <a href="">lin_xiao_zhi</a>
+                                    </span>
+                                </span>
+                                <span class="reply_info">
+                                    <span class="marginLR">回复</span>
+                                    vcsdnhsh：是的，为了前途发展，感觉无论怎样最好选一个正规职位
+                                </span>
+                                <span class="reply_time">2019-06-02</span>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="blog_list">
+                    <div class="content_list">
+                        <ul class="clearfix">
+                            <li>
+                                <h3 class="tit">
+                                    <a href="">漫画：什么是二分查找？</a>
+                                </h3>
+                                <div class="info">
+                                    <span><a href="">前端</a></span>
+                                    <span><a href="">程序员小灰</a></span>
+                                    <span><a href="">1589阅读</a></span>
+                                    <span><a href="">4天前</a></span>
+                                    <span class="mui-icon mui-icon-closeempty fr"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <h3 class="tit">
+                                    <a href="">漫画|一个前端渣渣的成功逆袭</a>
+                                </h3>
+                                <div class="info">
+                                    <span><a href="">前端</a></span>
+                                    <span><a href="">qq_44762698</a></span>
+                                    <span><a href="">905阅读</a></span>
+                                    <span><a href="">3天前</a></span>
+                                    <span class="mui-icon mui-icon-closeempty fr"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <h3 class="tit">
+                                    <a href="">论程序员的自我修养——我在阿里干了十年开发</a>
+                                </h3>
+                                <div class="info">
+                                    <span><a href="">前端</a></span>
+                                    <span><a href="">Stephen_java</a></span>
+                                    <span><a href="">589阅读</a></span>
+                                    <span><a href="">2天前</a></span>
+                                    <span class="mui-icon mui-icon-closeempty fr"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+            
+          </div>
+        </div>  
+      </div>
+    </div>
+
+
+
+
+    <script>
+        document.getElementsByClassName('mui-inner-wrap')[0].addEventListener('drag', function(event) {
+            　event.stopPropagation();
+        });
+    </script>
+</body>
+</html>

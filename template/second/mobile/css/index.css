@@ -1,0 +1,139 @@
+.login{
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+/*导航---------------------------------------*/
+#nav{
+	width: 100%;
+    height: 50px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: relative;
+	white-space: nowrap;    
+    background-color: #cdcdcd;
+}
+            .list {
+                width: 500%;
+                box-sizing: border-box;
+                
+            }
+            .list li {
+                float: left;
+                font-size: 14px;
+                line-height: 50px;
+                /*margin-right: 30px;*/
+                text-align: center;
+            }
+            .list li a{
+            	padding: 0 10px;
+            }
+            ::-webkit-scrollbar{display: none;}
+
+.wrap{position: relative;overflow: hidden;width: 100%;height:100%;margin:0;overflow: hidden;}
+    .box{position: absolute;list-style: none;left:0;top:0;padding:0;margin:0;}
+    .box li{float:left; width: 4% !important}
+    .box{
+        position: relative;
+        height: 50px;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: red;
+    }
+    .box1{
+        height: 50px;
+    }
+    .box2{
+        background: yellow;
+    }
+    .box3{
+        background: yellowgreen;
+    }
+    .box4{
+        background: orange;
+    }
+    .box5{
+        background: cyan;
+    }
+    .box5{
+        background: yellow;
+    }
+    .box7{
+        background: yellowgreen;
+    }
+
+
+.wrapper01 {position:relative;height: 1rem;width: 100%;overflow: hidden;margin:0 auto;border-bottom:1px solid #ccc}
+.wrapper01 .scroller {position:absolute}
+.wrapper01 .scroller li {height: 1rem;color:#333;float: left;line-height: 1rem;font-size: .4rem;text-align: center}
+.wrapper01 .scroller li a{color:#333;display:block;margin:0 .3rem}
+.wrapper01 .scroller li.cur a{color:#1cbb9b;}
+
+
+.left_list li a{
+    color: #fff;
+    font-size: .3rem;
+}
+.left_list li{
+    width: 100%;
+    padding: .3rem;
+    clear: both;
+    text-align: center;
+}
+#closes{
+    position: absolute;
+    top: 0.15rem;
+    right: .2rem;
+}
+#closes a{
+    color: #fff;
+    font-size: .5rem;   
+    
+}
+
+
+/*轮播图--------------------------------------*/
+.swiper-container{
+    background-color: #31A3F5;
+    border:1px solid #31A3F5;
+    height: auto;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 50px;
+}
+.swiper-slide{
+    line-height: auto;
+}
+.swiper-button-prev{
+    color: white;
+}
+.swiper-slide img{
+	height: 4rem;
+}
+
+/*内容*/
+.content_list ul li{
+	width: 100%;
+	position: relative;
+    padding: .24rem .30rem .24rem;
+    border-bottom: 1px solid #d8d8d8;	
+}
+.content_list ul li h3{
+	font-size: .34rem;
+    line-height: .48rem;
+    max-height: .96rem;
+    font-weight: bold;
+    overflow: hidden;
+}
+.content_list ul li .info span{
+	margin-right: 0.2rem;
+}
+
+
+.mui-table-view-cell{
+    padding-right: 0 !important;
+}

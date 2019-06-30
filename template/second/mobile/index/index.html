@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/public.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
+    <link rel="stylesheet" href="../css/datouwang.css">
+    <script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/rem.js"></script>
+    <script src="../js/swiper.min.js"></script>
+	<script type="text/javascript" src="../js/flexible.js"></script>
+	<script type="text/javascript" src="../js/iscroll.js"></script>
+	<script type="text/javascript" src="../js/navbarscroll.js"></script>
+    <script type="text/javascript" charset="utf-8">
+ 		
+		 mui.init({
+            pullRefresh:{
+                container:"#pullRefresher",
+                down:{
+                    style:"circle",
+                    callback:pulldownRefresh
+                },
+                up:{
+                    auto:true,
+                    contentrefresh:"加载中...",
+                    callback:pullupRefresh
+                }
+            }
+        });
+            
+        //限制下拉加载次数的
+        var count=0;
+        function pullupRefresh(){
+            setTimeout(function(){
+                /**
+                 * 上拉加载
+                 * endPullupToRefresh(true/false)
+                 * 参数为true表示没有更多数据,(++count>2)结果为Boolean
+                 * 发现：上拉加载更多，只允许执行两次，就显示没有更多数据
+                 */
+                mui("#pullRefresher").pullRefresh().endPullupToRefresh((++count>2));
+                //table->ul cell->li
+                var table=document.body.querySelector(".mui-table-view");
+                var cell=document.body.querySelectorAll(".mui-table-view-cell");
+                //添加条目数,首次加载20，以后每次增加5条
+                var newCount=cell.length>0?5:20;
+                //根据newCount填充数据
+                //实际就是for(var i=0;i<newcount;i++)
+                for(var i=cell.length,len=i+newCount;i<len;i++){
+                    var li=document.createElement("li");
+                    li.className="mui-table-view-cell";
+                    //给item添加箭头及文字描述
+                    li.innerHTML='<h3 class="tit"><a href="">漫画：什么是二分查找？</a></h3><div class="info"><span><a href="">前端</a></span><span><a href="">程序员小灰</a></span><span><a href="">1589阅读</a></span><span><a href="">4天前</a></span><span class="mui-icon mui-icon-closeempty fr"></span></div>';
+                    //统统添加到table中
+                    table.appendChild(li);
+                }
+                
+            },1500);
+        }
+        
+        
+        function pulldownRefresh(){
+            setTimeout(function(){
+                /**
+                 * 下拉刷新，重新申请数据
+                 * 这里只是动态的添加内容而已
+                 * 此处下拉刷新未做限制次数设置
+                 */
+                var table=document.body.querySelector(".mui-table-view");
+                var cell=document.body.querySelectorAll(".mui-table-view-cell");
+                for(var i=0;i<5;i++){
+                    var li=document.createElement("li");
+                    li.className="mui-table-view-cell";
+                    li.innerHTML="<h3 class='tit'><a href=''>漫画：什么是二分查找？</a></h3>";
+                    //因为刷新数据，直观性添加到最前面
+                    table.insertBefore(li,table.firstChild);
+                    
+                    //区别于上拉加载的下拉刷新
+                    mui("#pullRefresher").pullRefresh().endPulldownToRefresh();
+                    mui.toast("下拉刷新出5个新条目");
+                }
+            },1500);
+        }
+
+
+      	mui('.mui-off-canvas-wrap').offCanvas('show');
+		mui('.mui-off-canvas-wrap').offCanvas('close');
+		
+		window.onload = function(){
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+		}
+
+		// $("#closes").click(function(){
+		//   	$("#leftNav").css("display","none");
+		// });
+    </script>
+</head>
+<body>
+	<!-- 侧滑导航根容器 -->
+	<div class="mui-off-canvas-wrap mui-draggable">
+	  <!-- 主页面容器 -->
+	  <div class="mui-inner-wrap">
+	     <!-- 菜单容器 -->
+	    <aside id="leftNav" class="mui-off-canvas-left">
+	      <div class="mui-scroll-wrapper" id="left-content">
+	        <div class="mui-scroll">
+	        	<!-- 菜单具体展示内容 -->
+				<span id="closes"><a href="#leftNav">×</a></span>
+	        	<ul class="left_list">
+	        		<li><a href="">eetop首页</a></li>
+	        		<li><a href="">博客</a></li>
+	        		<li><a href="">下载</a></li>
+	        		<li><a href="">论坛</a></li>
+	        		<li><a href="">APP</a></li>
+	        		<li><a href="">商城</a></li>
+	        		<li><a href="">活动</a></li>
+	        		<li><a href="">招聘</a></li>
+	        	</ul>
+	        <div>
+	      </div>
+	    </aside>
+	    <!-- 主页面标题 -->
+	    <header class="mui-bar mui-bar-nav">
+	      <a href="#leftNav" class="fl mui-icon mui-action-menu mui-icon-bars mui-pull-left" id="left-menu"></a>
+	      <h1 class="mui-title"><img src="../images/logo.png" alt="" /></h1>
+	      <a href="" class="fr login">登录</a>
+	      <span class="fr mui-icon mui-icon-search search"></span>
+	    </header>
+	    <!-- 主页面内容容器 -->
+	    <div class="mui-content mui-scroll-wrapper content" id="pullRefresher">
+	      <div class="mui-scroll">
+			<div class="wrapper wrapper01" id="retr">
+				<div class="scroller">
+					<ul class="clearfix">
+						<li><a href="javascript:void(0)">全部科目</a></li>
+						<li><a href="javascript:void(0)">会计从业</a></li>
+						<li><a href="javascript:void(0)">会计职称</a></li>
+						<li><a href="javascript:void(0)">注会</a></li>
+						<li><a href="javascript:void(0)">税务师</a></li>
+						<li><a href="javascript:void(0)">国际证书</a></li>
+						<li><a href="javascript:void(0)">更多</a></li>
+						<li><a href="javascript:void(0)">更多注会</a></li>
+						<li><a href="javascript:void(0)">国际证书2</a></li>
+						<li><a href="javascript:void(0)">更多4</a></li>
+						<li><a href="javascript:void(0)">更多5</a></li>
+					</ul>
+				</div>
+			</div>
+	        <!-- 轮播图-------------------------------->
+	        <section class="carousel">
+	            <div class="swiper-container">
+	                <div class="swiper-wrapper">
+	                    <div class="swiper-slide">
+	                        <a href="index/blog_show.html"><img src="../images/lb1.png" alt=""></a>
+	                    </div>
+	                    <div class="swiper-slide">
+	                        <a href="index/blog_show.html"><img src="../images/lb2.jpg" alt=""></a>
+	                    </div>
+	                    <div class="swiper-slide">
+	                        <a href="index/blog_show.html"><img src="../images/lb4.jpg" alt=""></a>
+	                    </div>
+	                </div>
+	                <div class="swiper-pagination"></div>
+	            </div>
+	        </section>
+	        <div class="content_list">
+	        	<ul class="mui-table-view mui-table-view-chevron">
+                	<!--数据列表，使用js动态修改添加-->
+            	</ul>
+        	</div>
+	      	<!--内容----------------------------------->
+	      	<!-- <div class="content_list">
+	      		<ul class="clearfix">
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画：什么是二分查找？</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">程序员小灰</a></span>
+	      					<span><a href="">1589阅读</a></span>
+	      					<span><a href="">4天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画|一个前端渣渣的成功逆袭</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">qq_44762698</a></span>
+	      					<span><a href="">905阅读</a></span>
+	      					<span><a href="">3天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">论程序员的自我修养——我在阿里干了十年开发</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">Stephen_java</a></span>
+	      					<span><a href="">589阅读</a></span>
+	      					<span><a href="">2天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画：什么是二分查找？</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">程序员小灰</a></span>
+	      					<span><a href="">1589阅读</a></span>
+	      					<span><a href="">4天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画：什么是二分查找？</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">程序员小灰</a></span>
+	      					<span><a href="">1589阅读</a></span>
+	      					<span><a href="">4天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画|一个前端渣渣的成功逆袭</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">qq_44762698</a></span>
+	      					<span><a href="">905阅读</a></span>
+	      					<span><a href="">3天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">论程序员的自我修养——我在阿里干了十年开发</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">Stephen_java</a></span>
+	      					<span><a href="">589阅读</a></span>
+	      					<span><a href="">2天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画：什么是二分查找？</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">程序员小灰</a></span>
+	      					<span><a href="">1589阅读</a></span>
+	      					<span><a href="">4天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画：什么是二分查找？</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">程序员小灰</a></span>
+	      					<span><a href="">1589阅读</a></span>
+	      					<span><a href="">4天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画|一个前端渣渣的成功逆袭</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">qq_44762698</a></span>
+	      					<span><a href="">905阅读</a></span>
+	      					<span><a href="">3天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">论程序员的自我修养——我在阿里干了十年开发</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">Stephen_java</a></span>
+	      					<span><a href="">589阅读</a></span>
+	      					<span><a href="">2天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      			<li>
+	      				<h3 class="tit">
+	      					<a href="">漫画：什么是二分查找？</a>
+	      				</h3>
+	      				<div class="info">
+	      					<span><a href="">前端</a></span>
+	      					<span><a href="">程序员小灰</a></span>
+	      					<span><a href="">1589阅读</a></span>
+	      					<span><a href="">4天前</a></span>
+	      					<span class="mui-icon mui-icon-closeempty fr"></span>
+	      				</div>
+	      			</li>
+	      		</ul>
+	      	</div> -->
+	      </div>	
+	    </div>  
+	  </div>
+	</div>
+	
+	<script>
+		document.getElementsByClassName('mui-inner-wrap')[0].addEventListener('drag', function(event) {
+			　event.stopPropagation();
+		});
+
+		
+
+		//轮播
+		var mySwiper = new Swiper('.swiper-container',{
+            autoplay:{
+                disableOnInteraction:false,
+                delay:3000,
+            },
+            loop:true,
+            pagination:{
+                el:'.swiper-pagination',
+                clickable :true,
+            },
+            // navigation:{
+            //     nextEl:'.swiper-button-next',
+            //     prevEl:'.swiper-button-prev',
+            // },
+        });   
+	</script>
+
+	<script>
+		$(function(){
+			//demo示例一到四 通过lass调取，一句可以搞定，用于页面中可能有多个导航的情况
+			$('.wrapper').navbarscroll();
+		});
+	</script>
+</body>
+</html>

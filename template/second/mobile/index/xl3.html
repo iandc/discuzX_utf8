@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello Refresh And Loadmore</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" href="../css/mui.min.css" />
+        <style type="text/css">
+            
+        </style>
+    </head>
+    <body>
+        <!--单webview下拉刷新和上拉加载-->
+        <!--头部-->
+        <header class="mui-bar mui-bar-nav mui-bar-transparent">
+            <a class="mui-backdrop-action mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">单Webview下拉刷新上拉加载</h1>
+        </header>
+        <!--下拉刷新容器-->
+        <div id="pullRefresher" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view mui-table-view-chevron">
+                    <!--数据列表，使用js动态修改添加-->
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript" charset="UTF-8" src="../js/mui.min.js"></script>
+        <script type="text/javascript">
+            mui.init({
+                pullRefresh:{
+                    container:"#pullRefresher",
+                    down:{
+                        style:"circle",
+                        callback:pulldownRefresh
+                    },
+                    up:{
+                        auto:true,
+                        contentrefresh:"加载中...",
+                        callback:pullupRefresh
+                    }
+                }
+            });
+            
+            //限制下拉加载次数的
+            var count=0;
+            function pullupRefresh(){
+                setTimeout(function(){
+                    /**
+                     * 上拉加载
+                     * endPullupToRefresh(true/false)
+                     * 参数为true表示没有更多数据,(++count>2)结果为Boolean
+                     * 发现：上拉加载更多，只允许执行两次，就显示没有更多数据
+                     */
+                    mui("#pullRefresher").pullRefresh().endPullupToRefresh((++count>2));
+                    //table->ul cell->li
+                    var table=document.body.querySelector(".mui-table-view");
+                    var cell=document.body.querySelectorAll(".mui-table-view-cell");
+                    //添加条目数,首次加载20，以后每次增加5条
+                    var newCount=cell.length>0?5:20;
+                    //根据newCount填充数据
+                    //实际就是for(var i=0;i<newcount;i++)
+                    for(var i=cell.length,len=i+newCount;i<len;i++){
+                        var li=document.createElement("li");
+                        li.className="mui-table-view-cell";
+                        //给item添加箭头及文字描述
+                        li.innerHTML="<a class='mui-navigate-right'>item "+(i+1)+"</a>";
+                        //统统添加到table中
+                        table.appendChild(li);
+                    }
+                    
+                },1500);
+            }
+            
+            
+            function pulldownRefresh(){
+                setTimeout(function(){
+                    /**
+                     * 下拉刷新，重新申请数据
+                     * 这里只是动态的添加内容而已
+                     * 此处下拉刷新未做限制次数设置
+                     */
+                    var table=document.body.querySelector(".mui-table-view");
+                    var cell=document.body.querySelectorAll(".mui-table-view-cell");
+                    for(var i=0;i<5;i++){
+                        var li=document.createElement("li");
+                        li.className="mui-table-view-cell";
+                        li.innerHTML="<a class='mui-navigate-right'>new Item "+(i+cell.length+1)+"</a>"
+                        //因为刷新数据，直观性添加到最前面
+                        table.insertBefore(li,table.firstChild);
+                        
+                        //区别于上拉加载的下拉刷新
+                        mui("#pullRefresher").pullRefresh().endPulldownToRefresh();
+                        mui.toast("下拉刷新出5个新条目");
+                    }
+                },1500);
+            }
+            
+            
+            /**
+             * 上拉加载和下拉刷新中的业务逻辑在此处有很多重复
+             * 实际业务逻辑是向服务器发送数据请求并分析，很多相同，可以封装为一个callback方法
+             */
+            
+            
+            
+            
+        </script>
+        
+        
+    </body>
+</html>

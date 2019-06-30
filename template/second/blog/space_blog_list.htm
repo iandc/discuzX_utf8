@@ -152,16 +152,16 @@
 	                                    <!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
 							        <!--{else}-->
 
-                    <!--{eval $userlist = [['fuid'=>1,'fusername'=>'user1'],['fuid' => 2,'fusername' => 'user2']];}-->
-                    <!--{if $_GET[view] == 'we' && $userlist}-->
-                        {lang filter_by_friend}
-                        <select name="fuidsel" onchange="fuidgoto(this.value);" class="ps">
-                            <option value="">{lang all_friends}</option>
-                            <!--{loop $userlist $value}-->
-                            <option value="$value[fuid]" {$fuid_actives[$value[fuid]]}>$value[fusername]</option>
-                            <!--{/loop}-->
-                        </select>
-                    <!--{/if}-->
+                                        <!--{eval $userlist = [['fuid'=>1,'fusername'=>'user1'],['fuid' => 2,'fusername' => 'user2']];}-->
+                                        <!--{if $_GET[view] == 'we' && $userlist}-->
+                                            {lang filter_by_friend}
+                                            <select name="fuidsel" onchange="fuidgoto(this.value);" class="ps">
+                                                <option value="">{lang all_friends}</option>
+                                                <!--{loop $userlist $value}-->
+                                                <option value="$value[fuid]" {$fuid_actives[$value[fuid]]}>$value[fusername]</option>
+                                                <!--{/loop}-->
+                                            </select>
+                                        <!--{/if}-->
 							            <div class="emp">{lang no_related_blog}</div>
 							        <!--{/if}-->
                                 </li>

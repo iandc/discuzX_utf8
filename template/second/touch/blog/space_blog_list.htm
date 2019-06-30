@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="{STATICURL}image/blog/index.css">
+    <link rel="stylesheet" href="{STATICURL}image/blog/mui.min.css">
+    <link rel="stylesheet" href="{STATICURL}image/blog/public.css">
+    <link rel="stylesheet" href="{STATICURL}image/blog/pullToRefresh.css">
+    <link rel="stylesheet" href="{STATICURL}image/blog/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
+
+    <script src="{STATICURL}js/blog/jquery.min.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script src="{STATICURL}js/blog/mui.min.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script src="{STATICURL}js/blog/rem.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script src="{STATICURL}js/blog/swiper.min.js?{VERHASH}" charset="{CHARSET}"></script>
+    <!-- <script src="{STATICURL}js/blog/pullToRefresh.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script src="{STATICURL}js/blog/iscroll.js?{VERHASH}" charset="{CHARSET}"></script>
+    <script src="{STATICURL}js/blog/colorful.js?{VERHASH}" charset="{CHARSET}"></script> -->
+    <script type="text/javascript" charset="utf-8">
+        mui('body').on('tap','a',function(){
+            window.top.location.href=this.href;
+        });
+
+
+        mui.init();
+
+        mui('.mui-off-canvas-wrap').offCanvas('show');
+        mui('.mui-off-canvas-wrap').offCanvas('close');
+        
+        window.onload = function(){
+            mui('.mui-scroll-wrapper').scroll({
+                deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+            });
+        }
+
+        // $("#closes").click(function(){
+        //      $("#leftNav").css("display","none");
+        // });
+        // 
+    </script>
+</head>
+<body>
+    <!-- 侧滑导航根容器 -->
+    <div class="mui-off-canvas-wrap mui-draggable">
+      <!-- 主页面容器 -->
+      <div class="mui-inner-wrap">
+         <!-- 菜单容器 -->
+        <aside id="leftNav" class="mui-off-canvas-left">
+          <div class="mui-scroll-wrapper" id="left-content">
+            <div class="mui-scroll">
+                <!-- 菜单具体展示内容 -->
+                <span id="closes"><a href="#leftNav">×</a></span>
+                <ul class="left_list">
+                    <!--{loop $_G['setting']['navs'] $nav}-->
+                        <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><li {if $mnid == $nav[navid]}class="a" {/if}$nav[nav]></li><!--{/if}-->
+                    <!--{/loop}-->
+                </ul>
+            <div>
+          </div>
+        </aside>
+        <!-- 主页面标题 -->
+        <header class="mui-bar mui-bar-nav">
+          <a href="#leftNav" class="fl mui-icon mui-icon-bars" id="left-menu"></a>
+          <h1 class="mui-title"><img src="{STATICURL}image/blog/logo.png" alt="" /></h1>
+          <a href="" class="fr login">登录</a>
+          <span class="fr mui-icon mui-icon-search search"></span>
+        </header>
+        <nav class="mui-bar mui-bar-tab">
+            <a href="blog.php?mod=space&do=blog&view=all" class="mui-tab-item mui-active">
+                <span $actives[all] class="mui-tab-label">最新日志</span>
+            </a>
+            <a href="blog.php?mod=space&do=blog&view=all&order=hot" class="mui-tab-item">
+                <span $actives[hot] class="mui-tab-label">推荐日志</span>
+            </a>
+            <a href="blog.php?mod=space&do=blog&view=me" class="mui-tab-item">
+                <span $actives[me] class="mui-tab-label">我的日志</span>
+            </a>
+            <a href="blog.php?mod=space&do=blog&view=we" class="mui-tab-item">
+                <span $actives[we] class="mui-tab-label">好友日志</span>
+            </a>
+        </nav>
+        <!-- 主页面内容容器 -->
+        <div class="mui-content mui-scroll-wrapper content" id="pullRefresher">
+          <div class="mui-scroll">
+            <!-- 导航----------------------------- -->
+            <section class="swiper-container swiper-container1" id="swiper1">
+                <div class="swiper-wrapper swiper-wrapper1">
+                    <!--{if $category}-->
+                    <!--{loop $category $value}-->
+                        <div class="swiper-slide">
+                            <a href="blog.php?mod=space&do=blog&catid=$value['catid']&view=all&order=" {if $_GET[catid] == $value[catid]} class="active"{/if}>$value[catname]</a>
+                        </div>
+                    <!--{/loop}-->
+                    <!--{/if}-->
+                </div>
+            </section>
+            <!-- 轮播图-------------------------------->
+            <section class="carousel">
+                <div class="swiper-container" id="swiper2">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href=""><img src="{STATICURL}image/blog/lb1.png" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href=""><img src="{STATICURL}image/blog/lb2.jpg" alt=""></a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href=""><img src="{STATICURL}image/blog/lb4.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section>
+            <!-- <div class="content_list">
+                <ul class="mui-table-view mui-table-view-chevron clearfix"> -->
+                    
+                    <!--数据列表，使用js动态修改添加-->
+               <!--  </ul>
+            </div> -->
+            <!--内容----------------------------------->
+            <div class="content_list">
+                <ul class="clearfix">
+                <!--{if $count}-->
+                    <!--{loop $list $k $value}-->
+                    <li>
+                        <h3 class="tit">
+                            <a href="$value[blogurl]"{if $value[magiccolor]} style="color: {$_G[colorarray][$value['magiccolor']]}"{/if} target="_blank" class="fw600 z">$value['subject']</a>
+                        </h3>
+                        <div class="info">
+                            <!-- <span><a href="">前端</a></span> -->
+                            <span><a href="home.php?mod=space&uid=$value[uid]">$value['username']</a></span>
+                            <!-- <span><a href="">$value['viewnum']阅读</a></span> -->
+                            <span><a href="">$value['dateline']</a></span>
+                            <!--{if $classarr[classname]}--><span class="pipe">|</span><span class="xg1">{lang personal_category}:<a href="home.php?mod=space&uid=$blog[uid]&do=blog&classid=$blog[classid]&view=me">{$classarr[classname]}</a></span><!--{/if}-->
+                            <!--{if $blog[catname]}--><span class="pipe">|</span><span class="xg1">{lang system_cat}:<a href="home.php?mod=space&do=blog&view=all&catid=$blog[catid]">$blog[catname]</a></span><!--{/if}-->
+                        </div>
+                    </li>
+                    <!--{/loop}-->
+                    <!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+                <!--{/if}-->
+                </ul>
+            </div>
+          </div>    
+        </div>  
+      </div>
+    </div>
+    
+    <script>
+        
+
+        // 禁止左滑
+        document.getElementsByClassName('mui-inner-wrap')[0].addEventListener('drag', function(event) {
+            　event.stopPropagation();
+        });
+
+        // 滑动导航
+        var swiper = new Swiper('#swiper1', {
+            slidesPerView: 5,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+        mui(".swiper-wrapper1").on("tap",".swiper-slide",function(event){
+            // alert("哈哈哈")
+            jQuery(this).addClass("active").siblings().removeClass("active")
+        })
+
+
+        //轮播
+        var mySwiper = new Swiper('#swiper2',{
+            autoplay:{
+                disableOnInteraction:false,
+                delay:3000,
+            },
+            loop:true,
+            pagination:{
+                el:'.swiper-pagination',
+                clickable :true,
+            }
+        });
+
+        
+        mui('body').on('tap','a',function(){
+            window.top.location.href=this.href;
+        });
+    </script>
+
+</body>
+</html>

@@ -34,6 +34,7 @@
                     <!--{eval $srchotquery .= '&' . $key . '=' . rawurlencode($value);}-->
                     <input type="hidden" name="$key" value="$value" />
                     <!--{/loop}-->
+
                     <input type="hidden" name="source" value="discuz" />
                     <input type="hidden" name="fId" id="srchFId" value="$_G[fid]" />
                     <input type="hidden" name="q" id="cloudsearchquery" value="" />
@@ -52,10 +53,9 @@
                     </div>
                 <!--{/if}-->
                 <input type="text" name="srchtxt" id="scbar_txt" value="{lang enter_content}" autocomplete="off" class="ss" x-webkit-speech speech />
-                <a href="javascript:;" id="scbar_type" class="xg1 tz" onclick="showMenu(this.id)" hidefocus="true">{lang search}</a>
+                <a href="javascript:;" id="scbar_type" style="display: none;" class="xg1" onclick="showMenu(this.id)" hidefocus="true"></a>
                 <input type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="sub1 all" value="搜索">
                 <i class="i-search"></i>
-                <i class="xjt"></i>
         </form>
     <!--{/if}-->
 
