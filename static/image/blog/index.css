@@ -1,0 +1,166 @@
+.login{
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/*导航---------------------------------------*/
+.swiper-container1{
+    width: 300px;
+    height: 50px;
+    border: 1px solid #efefef !important;
+    background-color: #efefef !important;
+}
+.swiper-container1 .swiper-slide{
+    text-align: center;
+    float: left;
+    color: #666;
+}
+.swiper-container1 .swiper-slide a{
+    line-height: 50px;
+    font-size: 15px;
+}
+.swiper-container1 .active{
+    color: #eb4610;
+}
+
+
+.left_list li a{
+    color: #fff;
+    font-size: .3rem;
+}
+.left_list li{
+    width: 100%;
+    padding: .3rem;
+    clear: both;
+    text-align: center;
+}
+#closes{
+    position: absolute;
+    top: 0.15rem;
+    right: .2rem;
+}
+#closes a{
+    color: #fff;
+    font-size: .5rem;   
+    
+}
+
+.mui-icon{
+    display: inline-block;
+    font-family: Muiicons;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*轮播图--------------------------------------*/
+.swiper-container{
+    background-color: #31A3F5;
+    border:1px solid #31A3F5;
+    height: auto;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 50px;
+}
+.swiper-slide{
+    line-height: auto;
+}
+.swiper-button-prev{
+    color: white;
+}
+.swiper-slide img{
+    height: 4rem;
+}
+
+/*内容*/
+.content_list ul li{
+    width: 100%;
+    position: relative;
+    padding: .24rem .30rem .18rem;
+    border-bottom: 1px solid #d8d8d8;   
+}
+.content_list ul li h3{
+    font-size: .28rem;
+    line-height: .48rem;
+    max-height: .96rem;
+    font-weight: bold;
+    overflow: hidden;
+    margin-bottom: .15rem;
+}
+.content_list ul li .info span{
+    margin-right: 0.2rem;
+    font-size: .24rem;
+}
+
+
+.mui-table-view-cell{
+    padding-right: 0 !important;
+}
+
+
+.mtm {
+    margin-top: 10px !important;
+}
+.pg strong{
+    float: left;
+    display: inline;
+    margin-left: 4px;
+    padding: 0 8px;
+    height: 26px;
+    border: 1px solid;
+    border-color: #C2D5E3;
+    background-color: #FFF;
+    background-repeat: no-repeat;
+    color: #333;
+    overflow: hidden;
+    text-decoration: none;
+}
+.pg a{
+    float: left;
+    display: inline;
+    margin-left: 4px;
+    padding: 0 8px;
+    height: 26px;
+    border: 1px solid;
+    border-color: #C2D5E3;
+    background-color: #FFF;
+    background-repeat: no-repeat;
+    color: #333;
+    overflow: hidden;
+    text-decoration: none;
+}
+.pg label .px {
+    padding: 0;
+    width: 55px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+}
+.pn {
+    vertical-align: middle;
+    overflow: hidden;
+    margin-right: 3px;
+    padding: 0;
+    height: 23px;
+    border: 1px solid #999;
+    background: #E5E5E5 url(http://bbs.eetop.wang/static/image/common/pn.png) repeat-x 0 0;
+    cursor: pointer;
+    -moz-box-shadow: 0 1px 0 #E5E5E5;
+    -webkit-box-shadow: 0 1px 0 #E5E5E5;
+    box-shadow: 0 1px 0 #E5E5E5;
+}
+.pn strong{
+    padding: 0 10px;
+    line-height: 21px;
+}
+.mui-bar-tab .mui-tab-item{
+    width: auto;
+}
+.mui-bar-tab .mui-tab-item span{
+    font-size: .2rem;
+    line-height: 50px;
+}

@@ -154,7 +154,7 @@ p .landr{
     width: 1010px;
 }
 #toptb {
-    padding: 0 15px;
+    /*padding: 0 15px;*/
     border-bottom: 1px solid #EFEFEF;
     /*width: 1010px;*/
     margin: 0 auto;
@@ -190,4 +190,26 @@ p .landr{
 .ptn li{
     width: 45%;
     margin-left: 10px;
+}
+
+.GoogleActiveViewClass img{
+    width: 1010px !important;
+}
+html,body {
+    width:100%;
+    overflow: visible;
+}
+
+
+.appl{
+    float: left;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    width: 162px;
+}
+.ct2_a, .ct3_a {
+    border: 1px solid #CCC;
+    background: url(http://blog.eetop.wang/static/image/common/vlineb.png) repeat-y 0 0;
+    background-size: 18%;   
 }

@@ -20,9 +20,8 @@
     <script src="{STATICURL}js/blog/iscroll.js?{VERHASH}" charset="{CHARSET}"></script>
     <script src="{STATICURL}js/blog/colorful.js?{VERHASH}" charset="{CHARSET}"></script> -->
     <script type="text/javascript" charset="utf-8">
-        mui('body').on('tap','a',function(){
-            window.top.location.href=this.href;
-        });
+
+        
 
 
         mui.init();
@@ -98,7 +97,7 @@
                 </div>
             </section>
             <!-- 轮播图-------------------------------->
-            <section class="carousel">
+            <!-- <section class="carousel">
                 <div class="swiper-container" id="swiper2">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -113,7 +112,7 @@
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
-            </section>
+            </section> -->
             <!-- <div class="content_list">
                 <ul class="mui-table-view mui-table-view-chevron clearfix"> -->
                     
@@ -147,6 +146,12 @@
         </div>  
       </div>
     </div>
+
+    <script>
+        mui('body').on('tap','a',function(){
+            window.top.location.href=this.href;
+        });
+    </script>
     
     <script>
         
@@ -185,9 +190,7 @@
         });
 
         
-        mui('body').on('tap','a',function(){
-            window.top.location.href=this.href;
-        });
+        
     </script>
 
 </body>

@@ -56,7 +56,7 @@
 		<!--{/if}-->
 		<div id="toptb" class="cl">
 			<!--{hook/global_cpnav_top}-->
-			<div class="wp">
+			<div class="wp" style="height: 29px;">
 				<div class="z">
 					<!--{loop $_G['setting']['topnavs'][0] $nav}-->
 						<!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}-->$nav[code]<!--{/if}-->
