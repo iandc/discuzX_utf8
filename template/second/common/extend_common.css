@@ -193,7 +193,7 @@ p .landr{
 }
 
 .GoogleActiveViewClass img{
-    width: 1010px !important;
+    margin-bottom: 10px;
 }
 html,body {
     width:100%;
@@ -211,5 +211,8 @@ html,body {
 .ct2_a, .ct3_a {
     border: 1px solid #CCC;
     background: url(http://blog.eetop.wang/static/image/common/vlineb.png) repeat-y 0 0;
-    background-size: 18%;   
+    background-size: 18% 18%;
+}
+.xl2 li {
+     text-align: left; 
 }
