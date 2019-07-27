@@ -67,25 +67,31 @@
           <a href="" class="fr login">登录</a>
           <span class="fr mui-icon mui-icon-search search"></span>
         </header>
-        <nav class="mui-bar mui-bar-tab">
-            <a href="blog.php?mod=space&do=blog&view=all" class="mui-tab-item">
-                <span $actives[all] class="mui-tab-label">最新日志</span>
+        <div class="nav" id="tit">
+            <!-- <a href="blog.php?mod=space&do=blog&view=all">
+                最新日志
             </a>
-            <a href="blog.php?mod=space&do=blog&view=all&order=hot" class="mui-tab-item">
-                <span $actives[hot] class="mui-tab-label">推荐日志</span>
+            <a href="blog.php?mod=space&do=blog&view=all&order=hot" class="active">
+                推荐日志
             </a>
-            <a href="blog.php?mod=space&do=blog&view=me" class="mui-tab-item active">
-                <span $actives[me] class="mui-tab-label">我的日志</span>
+            <a href="blog.php?mod=space&do=blog&view=me">
+                我的日志
             </a>
-            <a href="blog.php?mod=space&do=blog&view=we" class="mui-tab-item">
-                <span $actives[we] class="mui-tab-label">好友日志</span>
-            </a>
-        </nav>
+            <a href="blog.php?mod=space&do=blog&view=we">
+                好友日志
+            </a> -->
+
+            {if $orderactives[hot]}{eval $actives[all]='';$actives['hot']=' class="a"';}{/if}
+            <span $actives[all]><a href="blog.php?mod=space&do=blog&view=all" class="a">{lang new_recommend}</a></span>
+            <span $actives[hot]><a href="blog.php?mod=space&do=blog&view=all&order=hot">{lang tuijian_blog}</a></span>
+            <span $actives[me]><a href="blog.php?mod=space&do=blog&view=me">{lang my_blog}</a></span>
+            <span $actives[we]><a href="blog.php?mod=space&do=blog&view=we">{lang friend_blog}</a></span>
+        </div>
         <!-- 主页面内容容器 -->
         <div class="mui-content mui-scroll-wrapper content" id="pullRefresher">
           <div class="mui-scroll">
             <!-- 导航----------------------------- -->
-            <section class="swiper-container swiper-container1" id="swiper1">
+            <section class="swiper-container swiper-container1" id="swiper1"> 
                 <div class="swiper-wrapper swiper-wrapper1">
                     <!--{if $category}-->
                     <!--{loop $category $value}-->
