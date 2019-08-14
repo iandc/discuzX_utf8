@@ -3,9 +3,12 @@
 .wp{
     margin: 0 auto; width: 1010px;
 }
-
+#chart{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
 #scbar_txt{
-    width: 340px;
+    width: 335px;
 }
 .form1,.form2{
     width:49%;

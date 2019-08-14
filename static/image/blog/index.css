@@ -165,6 +165,23 @@
     line-height: 50px;
 }
 
-.active{
-    color: red;
+
+.nav{
+    width: 100%;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    border-top: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+    background-color: #efefef;
+}
+.nav a{
+    display: inline-block;
+    width: 23%;
+    text-align: center;
+}
+.nav .a{
+    color: blue;
 }

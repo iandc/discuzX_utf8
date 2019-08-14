@@ -53,7 +53,11 @@
         <header class="mui-bar mui-bar-nav">
           <a href="#leftNavs" class="fl mui-icon mui-action-menu mui-icon-bars mui-pull-left" id="leftBtn"></a>
           <h1 class="mui-title"><span>$space[username]</span></h1>
-          <a href="" class="fr login">登录</a>
+          {if $space[username]}
+            <a href="" class="fr login icon_userinfo">$space[username]</a>
+          {else}
+            <a href="member.php?mod=logging&action=login" class="fr login icon_userinfo">登录</a>
+          {/if}
           <span class="fr mui-icon mui-icon-search search"></span>
         </header>
         <!-- 主页面内容容器 -->
@@ -191,8 +195,11 @@
         document.getElementsByClassName('mui-inner-wrap')[0].addEventListener('drag', function(event) {
             　event.stopPropagation();
         });
-
-        
+    </script>
+    <script>
+        mui('body').on('tap','a',function(){
+            window.top.location.href=this.href;
+        });
     </script>
 </body>
 </html>
