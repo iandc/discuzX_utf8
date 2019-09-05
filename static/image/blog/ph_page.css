@@ -194,3 +194,11 @@ a{
     width: 50%;
     margin-top: .2rem;
 }
+
+#pprl li{
+    width: 100%;
+    line-height: 30px;
+}
+#personalinfo_content p{
+    float: left !important;
+}

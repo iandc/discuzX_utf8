@@ -3,17 +3,27 @@
     margin-top: 10px;
 }
 
+.tit_img img{
+    border-radius: 50%;
+    width: 30px;
+    margin-top: 6px;
+}
+
+#tit span.a a{
+    color: #0756ac;
+}
 /*导航---------------------------------------*/
 .swiper-container1{
     width: 300px;
     height: 50px;
-    border: 1px solid #efefef !important;
+    border-bottom: 1px solid #ddd !important;
     background-color: #efefef !important;
 }
 .swiper-container1 .swiper-slide{
     text-align: center;
     float: left;
     color: #666;
+    width: 80px !important;
 }
 .swiper-container1 .swiper-slide a{
     line-height: 50px;
@@ -58,8 +68,6 @@
 
 /*轮播图--------------------------------------*/
 .swiper-container{
-    background-color: #31A3F5;
-    border:1px solid #31A3F5;
     height: auto;
     text-align: center;
     width: 100%;

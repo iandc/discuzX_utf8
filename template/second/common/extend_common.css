@@ -22,6 +22,24 @@
     right: 80px;
 }
 
+.mui-off-canvas-wrap{
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 55px;
+}
+.focus{
+    position: fixed;
+    right: 10px;
+    bottom: 0;
+    z-index: 10 !important;
+    overflow: hidden;
+    width: 270px;
+    background: #FFF;
+}
+
 .ss{
     width: 69%;
     height: 36px;
@@ -51,6 +69,9 @@
 .bm .bm_c .pbr{
     width: auto !important;
 }
+.mui-scroll{
+    padding-bottom: 50px;
+}
 .i-search{
     width: 17px;
     height: 17px;
@@ -60,7 +81,7 @@
     top: 10px;
     cursor: pointer;
 }
-.fastlg_fm { margin-right: 5px; padding-right: 5px; border-right: 1px solid {COMMONBORDER}; }
+.fastlg_fm { margin-right: 5px; padding-right: 5px; border-right: 1px solid #eee; }
 #scbar{margin-top: 5px;padding:6px 10px;}
 #um{margin-right: 0 !important;padding-top: 0;padding-right: 0;}
 .xjt{
@@ -215,7 +236,7 @@ html,body {
 }
 .ct2_a, .ct3_a {
     border: 1px solid #CCC;
-    background: url(http://blog.eetop.wang/static/image/common/vlineb.png) repeat-y 0 0;
+    background: url(  ) repeat-y 0 0;
     background-size: 18% 18%;
 }
 .xl2 li {
