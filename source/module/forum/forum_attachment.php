@@ -13,6 +13,8 @@ if (!defined('IN_DISCUZ')) {
 
 require_once libfile('function/attachment');
 
+$downloadPrefix = 'eetop.cn';
+
 define('NOROBOT', TRUE);
 @list($_GET['aid'], $_GET['k'], $_GET['t'], $_GET['uid'], $_GET['tableid']) = daddslashes(explode('|', base64_decode($_GET['aid'])));
 
@@ -105,9 +107,15 @@ if (!empty($aid) && is_numeric($aid)) {
         }
         if ($attach && $attach['invisible'] == 0) {
             $thread && $attachexists = TRUE;
+            if(strpos($attach['filename'], $downloadPrefix) === false) {
+                $attach['filename'] = $downloadPrefix . '_'. $attach['filename'];
+            }
         }
     } else {
         $attachexists = TRUE;
+        if(strpos($attach['filename'], $downloadPrefix) === false) {
+            $attach['filename'] = $downloadPrefix . '_'. $attach['filename'];
+        }
     }
 }
 

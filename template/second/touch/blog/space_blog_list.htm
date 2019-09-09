@@ -65,7 +65,7 @@
           <a href="#leftNav" class="fl mui-icon mui-icon-bars" id="left-menu"></a>
           <h1 class="mui-title"><a href="/"><img style="height: 40px;" src="{STATICURL}/image/common/logo_dz.png" alt="" /></a></h1>
           {if $space[username]}
-            <a href="home.php?mod=space&uid=$value[uid]" c="1" class="tit_img fr icon_userinfo">
+            <a href="home.php?mod=space&uid=$space[uid]" c="1" class="tit_img fr icon_userinfo">
                 <img style="height:32px;width:32px;" src="<!--{avatar($_G[uid], small, true)}-->" />
             </a>
           {else}

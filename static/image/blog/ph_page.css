@@ -202,3 +202,15 @@ a{
 #personalinfo_content p{
     float: left !important;
 }
+
+.ec{
+    margin-top: 10px;
+}
+#thread{
+    overflow: hidden;
+}
+#thread_content ul.xl li{
+    width: 100%;
+    float: left;
+    margin: 5px 0;
+}
