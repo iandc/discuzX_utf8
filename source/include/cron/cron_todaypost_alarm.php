@@ -27,7 +27,7 @@ if ($debug) {
     ];
     $webhook = [
         'post' => 'https://oapi.dingtalk.com/robot/send?access_token=6ab852ed50a6369ded074a23050f513b6b44716d9c449e288cd31e797f1f194a',
-        'del' => 'https://oapi.dingtalk.com/robot/send?access_token=6ab852ed50a6369ded074a23050f513b6b44716d9c449e288cd31e797f1f194a',
+        'del'  => 'https://oapi.dingtalk.com/robot/send?access_token=6ab852ed50a6369ded074a23050f513b6b44716d9c449e288cd31e797f1f194a',
     ];
 } else {
     $timeNum = [
@@ -45,8 +45,8 @@ if ($debug) {
         600 => 85,
     ];
     $webhook = [
-        'post' => 'https://oapi.dingtalk.com/robot/send?access_token=bca9fb29854748deb3d3670da600dbea220c4bcb1c996bd0d6d10e4432d8238e',
-        'del' => 'https://oapi.dingtalk.com/robot/send?access_token=135cb5c0d388010d6f075881467d5db6f7625d33fda1aeb9464ecac046e98c2f',
+        'post' => 'https://oapi.dingtalk.com/robot/send?access_token=57c2e420d145c61274bb5eedb0ad4a39dfebddf9497c011cf3ad9e6fa175d8c6',
+        'del'  => 'https://oapi.dingtalk.com/robot/send?access_token=cd8c0cac58261ef1190c62d33de0c28db14eff3ce8a416c9a2a2f52a8670c2cd',
     ];
 }
 
