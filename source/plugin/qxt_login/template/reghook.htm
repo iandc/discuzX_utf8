@@ -1,0 +1,139 @@
+<!--{block reghook}-->
+<div class="rfm">
+<table>
+  <tbody><tr>
+    <th><span class="rq">*</span><label for="mobile_Qxt">{lang qxt_login:login_mobile}:</label></th>
+    <td><input type="text" id="mobile_Qxt" name="mobile_Qxt" autocomplete="off" size="25" tabindex="1" class="px" value="" required="" onblur="check_mobile_Qxt_field();"></td>
+    <td class="tipcol" id='td_mobile_Qxt'><i id="tip_mobile_Qxt" class="p_tip" style="display: none;">{lang qxt_login:tip_mobile}</i><kbd id="chk_mobile_Qxt" class="p_chk"></kbd></td>
+  </tr></tbody>
+</table>
+</div>
+
+<div class="rfm">
+<table>
+  <tbody><tr>
+    <th><span class="rq">*</span><label for="smssec">{lang qxt_login:login_smssec}:</label></th>
+    <td>
+      <input type="text" id="smssec" name="smssec" autocomplete="off" tabindex="1" class="px" value="" required="" style='width:100px;'>
+      &nbsp;<span id='smsbtn'><a href="javascript:sendsmssec();">{lang qxt_login:login_sendsec}</a></span>
+    </td>
+    <td class="tipcol"></td>
+  </tr></tbody>
+</table>
+</div>
+
+<script src="source/plugin/qxt_login/plugins/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  var jq=jQuery.noConflict();
+  var sms_phone;
+  function mwtHasClass(domid,cls) {
+      var dom=document.getElementById(domid);
+	  return dom.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+  }
+  function mwtAddClass(domid,cls) {
+	  if (!mwtHasClass(domid,cls)) 
+          document.getElementById(domid).className += " "+cls;
+  }
+  function mwtRemoveClass(domid,cls) {
+	  if (mwtHasClass(domid,cls)) {
+		  var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+          var dom=document.getElementById(domid);
+		  dom.className=dom.className.replace(reg,' ');
+	  }
+  }
+  function is_phone_number(a)
+  {   
+      if(!(/^1[3|4|5|6|7|8|9][0-9]\d{8}$/.test(a))){
+		  return false;
+	  }   
+	  return true;
+  }
+
+  function my_trim_string(str) {
+      return str.replace(/^\s+/g,"").replace(/\s+$/g,"");
+  }
+
+  function check_mobile_Qxt_field() {
+      var dom=document.getElementById("mobile_Qxt");
+      var dom_tip = document.getElementById("tip_mobile_Qxt");
+      var dom_chk =  document.getElementById("chk_mobile_Qxt");
+      var dom_td  = document.getElementById("td_mobile_Qxt");
+      var value = my_trim_string(dom.value);
+      dom.value = value;
+	  dom_tip.style.display = "none";
+      mwtRemoveClass("td_mobile_Qxt","p_right");
+      if (!is_phone_number(value)) {
+          dom_chk.innerHTML = "{lang qxt_login:tip_mobile}";
+          return "";
+      }
+      dom_chk.innerHTML = "";
+      mwtAddClass("td_mobile_Qxt","p_right");
+      return value;
+  }
+
+  var leftseconds=0;
+  function sendsmssec() {
+      var phone=check_mobile_Qxt_field();
+      if (!is_phone_number(phone)) {
+          document.getElementById("mobile_Qxt").focus();
+          return;
+      }
+      sms_phone  = phone;
+      showWindow('sendsms', 'plugin.php?id=qxt_login&action=sendsms');
+  }
+  function after_send() {
+      leftseconds=60;
+      disable_smsbtn();
+  }
+  
+  function disable_smsbtn() {
+      var dom = document.getElementById('smsbtn');
+      dom.disabled=true;
+      dom.innerHTML = leftseconds+" {lang qxt_login:login_resendtip}";
+      --leftseconds;
+      if (leftseconds<=0) {
+          dom.innerHTML = "<a href='javascript:sendsmssec();'>{lang qxt_login:login_resendsec}</a>";
+          return; 
+      }
+      setTimeout(disable_smsbtn, 1000);
+  }
+
+  function sms_submit() {
+      var errmsgdom = document.getElementById('sms_error_msg');
+      errmsgdom.innerHTML = "";
+      var seccodeverify = jq("#formsms input[name='seccodeverify']").val();
+      var seccodehash = jq("#formsms input[name='seccodehash']").val();
+      if (seccodeverify=="") {
+          errmsgdom.innerHTML = "{lang qxt_login:tip_imgsec}";
+          jq("#formsms input[name='seccodeverify']").focus();
+          return;
+      }
+      var params = {
+          seccodeverify: seccodeverify,
+          seccodehash: seccodehash,
+          mobile: sms_phone,
+		  type: 1
+      };
+      //console.log(params);
+      jq.ajax({
+          type: "post",
+          async: true,
+          url: 'plugin.php?id=qxt_login&action=sendsms&formhash={FORMHASH}',
+          data: params,
+          dataType: "json",
+          complete: function(res) {},
+          success: function (res) {
+              if (res.flag == "fail") {
+                  errmsgdom.innerHTML = res.message;
+              } else {
+                  hideWindow('sendsms');
+                  after_send();
+              }
+          },
+          error: function (data) {
+              errmsgdom.innerHTML = "error: "+data;
+          }
+      });
+  }
+</script>
+<!--{/block}-->

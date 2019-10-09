@@ -1,0 +1,16 @@
+<!--{template common/header}-->
+
+<h3 class="flb"> <em>{lang qxt_login:login_sendsec}</em> <span><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET['handlekey']')" title="{lang close}">{lang close}</a></span> </h3>
+<form action="" method="post" id="formsms" autocomplete="off">
+  <div class="c altw">
+    <!--{eval $seccodecheck = 1;}-->
+    <!--{eval $sectpl = '<div><sec>:<sec></div><p class="d"><sec></p>';}-->
+    <!--{subtemplate common/seccheck}-->
+  </div>
+  <b id='sms_error_msg' style='margin-top:5px;color:red'></b>
+  <p class="o pns">
+    <button class="pn pnc" type="button" onclick="sms_submit()"><strong>{lang submit}</strong></button>
+  </p>
+</form>
+
+<!--{template common/footer}-->

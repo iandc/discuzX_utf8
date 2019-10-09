@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>{$profile[realname]}的博客</title>
+  <link type="text/css" rel="stylesheet" href="{$plugin_path}/template/libs/mwt/4.0/mwt.min.css">
+  <link type="text/css" rel="stylesheet" href="{$plugin_path}/template/dist-20180202213241/base.css">
+  <script type="text/javascript" src="{$plugin_path}/template/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript" src="{$plugin_path}/template/libs/mwt/4.0/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="{$plugin_path}/template/libs/requirejs/2.1.9/require.js"></script>
+  <script type="text/javascript" src="{$plugin_path}/template/dist-20180202213241/japp.js" charset="utf-8"></script>
+</head>
+<body>
+  <div class="header">
+    <div class="wp">
+      <div class="mwt-row">
+        <div class="mwt-col-6">
+          <img src="{avatar($uid,'',true)}" class="avatar"/>
+          <h1><a href="#/">{$profile[username]}的博客</a></h1>
+        </div>
+        <div class="mwt-col-6" style="text-align:right;">
+          <ul class="menuul">
+            <li><a href="#/index">博客首页</a></li>
+            <li><a href="#/s~cateid=0">博文列表</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

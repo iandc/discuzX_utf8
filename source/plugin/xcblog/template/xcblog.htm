@@ -1,0 +1,52 @@
+<!--{template xcblog:header}-->
+  <div class="wp mbody">
+    <div class="mwt-row-flex">
+      <div class="mwt-col-fill">
+        <div id="frame-body" data-init="loading"></div>
+      </div>
+      <div class="mwt-col-wd" style="width:260px;padding-left:10px;">
+        <div class="wall" id="panel-profile" data-init="loading" style="display:none;"></div>
+        <div class="mwt-search" style="width:100%;position:relative;margin-bottom:10px;">
+            <input id="sokey" type="text" class="mwt-field" placeholder="搜索文章标题"/>
+            <i id="sokeybtn" class="icon icon-search" style="position:absolute;top:10px;right:10px;font-size:16px;"></i>
+        </div>
+        <div class="mwt-panel">
+          <div class="mwt-head">分类目录</div>
+          <div id="panel-categories" class="mwt-body" data-init="loading"></div>
+        </div>
+        <div class="mwt-panel">
+          <div class="mwt-head">近期文章</div>
+          <div id="panel-newpapers" class="mwt-body" data-init="loading"></div>
+        </div>
+        <div class="mwt-panel">
+          <div class="mwt-head">文章归档</div>
+          <div id="panel-archives" class="mwt-body" data-init="loading"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+// 全局参数
+var setting = {echo json_encode($setting);};
+var profile = {uid:{$profile[uid]}};
+var dz = {
+	// 基础信息
+	controller : '{$controller}',
+	siteurl    : '$_G['siteurl']',
+	pluginpath : '{$plugin_path}',
+	ajaxapi    : '{$plugin_path}/index.php?version=4&module=',
+    copyright  : '{$copyright}',
+    // 博客的用户id
+    bloguid     : {$uid},
+	// 用户信息
+	uid      : $_G[uid],
+	groupid  : $_G[groupid],
+	username : '$_G['username']',
+	avatar   : '{avatar($_G['uid'],'',true)}'
+};
+var japp=new JApp('{$plugin_path}/template/dist-20180202213241/');
+japp.init();
+</script>
+
+<!--{template xcblog:footer}-->
