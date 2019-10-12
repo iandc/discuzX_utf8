@@ -11,7 +11,6 @@
 <!--{if $_G['setting']['search'] && $slist}-->
 <div id="scbar" class="{if $_G['setting']['srchhotkeywords'] && count($_G['setting']['srchhotkeywords']) > 5}scbar_narrow {/if}cl">
     <!--{if $_G['config']['other']['baidu_search_js_status'] == 2}-->
-        <!-- <form class='form1 z' id="scbar_form" method="{if $_G[fid] && !empty($searchparams[url])}get{else}post{/if}" action="{$_G['config']['other']['baidu_search_action']}" target="_blank"> -->
             <div class="form1 z" id="scbar_form">
                 <input type="text" onkeypress="search_enter()" id="obj1" placeholder="{lang enter_content}" class="ss" style="margin-top: 1px;"/>
             
@@ -22,6 +21,16 @@
         <div class="form1 z">
             {$_G['config']['other']['baidu_search_js']}
         </div>
+    <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 3}-->
+        <form class='form1 z' id="scbar_form" method="get" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="{if $_G[fid] && !empty($searchparams[url])}$searchparams[url]{else}search.php?searchsubmit=yes{/if}" target="_blank">
+            <div class="form1 z" id="scbar_form">
+                <input type="text" onkeypress="search_enter()" id="obj1" placeholder="{lang enter_content}" class="ss" style="margin-top: 1px;"/>
+            
+                <input type="submit" id="btn2"  onclick="f1()" sc="1" class="sub1 all" value="搜内容">
+                <i class="i-search"></i>
+            </div>
+        </form>
+
     <!--{else}-->
         <form class='form1 z' id="scbar_form" method="{if $_G[fid] && !empty($searchparams[url])}get{else}post{/if}" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="{if $_G[fid] && !empty($searchparams[url])}$searchparams[url]{else}search.php?searchsubmit=yes{/if}" target="_blank">
                 <input type="hidden" name="mod" id="scbar_mod" value="search" />
