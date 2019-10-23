@@ -9,27 +9,91 @@
     <!--{block slist[user]}--><li><a href="javascript:;" rel="user">{lang users}</a></li><!--{/block}-->
 <!--{/if}-->
 <!--{if $_G['setting']['search'] && $slist}-->
-<div id="scbar" class="{if $_G['setting']['srchhotkeywords'] && count($_G['setting']['srchhotkeywords']) > 5}scbar_narrow {/if}cl">
-    <!--{if $_G['config']['other']['baidu_search_js_status'] == 2}-->
-            <div class="form1 z" id="scbar_form">
-                <input type="text" onkeypress="search_enter()" id="obj1" placeholder="{lang enter_content}" class="ss" style="margin-top: 1px;"/>
-            
-                <input type="submit" id="btn2"  onclick="f1()" sc="1" class="sub1 all" value="搜内容">
-                <i class="i-search"></i>
+<div id="scbar" class="{if $_G['setting']['srchhotkeywords'] && count($_G['settinxg']['srchhotkeywords']) > 5}scbar_narrow {/if}cl">
+    <!--{if $_G['config']['other']['baidu_search_js_status'] == 1}-->
+            <div class="form1 z">
+                {$_G['config']['other']['baidu_search_js']}
             </div>
-    <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 1}-->
-        <div class="form1 z">
-            {$_G['config']['other']['baidu_search_js']}
+    <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 2}-->
+        <div class="form1 z tb-text1" id="scbar_form">
+            <input type="text" onkeypress="search_enter()" id="obj1" placeholder="{lang enter_content}" class="ss" style="margin-top: 1px;"/>
+        
+            <input type="submit" id="btn2"  onclick="f1()" sc="1" class="sub1 all" value="搜内容">
+            <i class="i-search"></i>
         </div>
     <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 3}-->
-        <form class='form1 z' id="scbar_form" method="get" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="{if $_G[fid] && !empty($searchparams[url])}$searchparams[url]{else}search.php?searchsubmit=yes{/if}" target="_blank">
-            <div class="form1 z" id="scbar_form">
-                <input type="text" onkeypress="search_enter()" id="obj1" placeholder="{lang enter_content}" class="ss" style="margin-top: 1px;"/>
-            
-                <input type="submit" id="btn2"  onclick="f1()" sc="1" class="sub1 all" value="搜内容">
+
+        <div class="form1">
+            <input type="text" class="tb-text" id="input" placeholder="请输入搜索的内容" >
+            <input type="text" id="hiddentext" style="display:none;">
+            <span id="sp1">
+                <a href="javascript:void(0);" id="button" class="coment1">搜索</a>
                 <i class="i-search"></i>
-            </div>
-        </form>
+            </span>
+            <script>
+                function three(){
+                    var val = document.getElementById("input").value;
+                    window.open('http://www.baidu.com/s?wd=site:eetop.cn' + ' ' + val,"_blank");
+                }
+
+                jQuery("#button").click(function(){
+                    three();
+                });
+                
+                jQuery("#input").keypress(function(e){
+                    var curKey = e.which;
+                    if(curKey == "13"){
+                        three();
+                    }
+                });
+            </script>
+        </div>
+    <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 4}-->
+        <div class="form1 site" id="site">
+            <input type="text" class="tb-text" id="input" placeholder="请输入搜索的内容" >
+            <input type="text" id="hiddentext" style="display:none;">
+            <span id="sp1">
+                <a href="javascript:void(0);" id="button" class="coment1">搜索</a>
+                <i class="i-search"></i>
+            </span>
+            <script>
+                function getURL() {
+                    var val = document.getElementById("input").value;
+                    var zn = "$_G['config']['other']['baidu_search_action']";
+                    var znss = zn+val;
+                    var newWindow = window.open();
+                     var url = "http://zhannei.baidu.com/";//请求的url
+                     jQuery.ajax({
+                        type: 'get',
+                        url: url,
+                        cache: false,
+                        dataType: "jsonp",
+                        processData: false,
+                        timeout:1000,
+                        complete: function (data) {
+                            var htmlTxt =[];
+                            if (data.status==200) {
+                              newWindow.location.href=znss;
+                            } else {
+                              newWindow.location.href ='http://www.baidu.com/s?wd=site:eetop.cn' + ' ' + val;
+                            }    
+                        }       
+                    });
+                }
+
+                jQuery("#button").click(function(){
+                    getURL();
+                    
+                });
+                
+                jQuery("#input").keypress(function(e){
+                    var curKey = e.which;
+                    if(curKey == "13"){
+                        getURL();
+                    }
+                });
+            </script>
+        </div>
 
     <!--{else}-->
         <form class='form1 z' id="scbar_form" method="{if $_G[fid] && !empty($searchparams[url])}get{else}post{/if}" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="{if $_G[fid] && !empty($searchparams[url])}$searchparams[url]{else}search.php?searchsubmit=yes{/if}" target="_blank">
@@ -77,7 +141,7 @@
 <ul id="scbar_type_menu" class="p_pop" style="display: none;"><!--{echo implode('', $slist);}--></ul>
 <script type="text/javascript">
     initSearchmenu('scbar', '$searchparams[url]');
-</script>
+</script> 
 
 <script type="text/javascript">
 
