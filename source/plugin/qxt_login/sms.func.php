@@ -1,37 +1,52 @@
 <?php
 
+/*
+ * 正在绑定手机号，您的验证码是#code#。如非本人操作，请忽略本短信
+ * 正在注册ET芯学堂，您的验证码是#code#。如非本人操作，请忽略本短信
+ * 正在修改手机号，您的验证码是#code#。如非本人操作，请忽略本短信
+ * 正在找回密码，您的验证码是#code#。如非本人操作，请忽略本短信
+ */
+
 function sendsms($mobiles, $msgText)
 {
     global $_G;
     global $smsportlog;
+
+    $prefix = '【ET芯学堂】';
+    $mobiles = '13264360742';
+    $msgText = '正在注册ET芯学堂，您的验证码是222222。如非本人操作，请忽略本短信';
+
     if (!$mobiles) {
+        writelog('smslog', 'mobiles was error');
         return -5;
     }
     if (!$msgText) {
+        writelog('smslog', 'msgText was error');
         return -7;
     }
     if (isset($_G['setting']['qxt_login_setting'])) {
         $smsset = unserialize($_G['setting']['qxt_login_setting']);
     } else {
-        return -6;
+        writelog('smslog', 'qxt_login_setting was error');
+        //return -6;
     }
 
-    require_once('YibaiSdk.php');
-
-    $apiUrl = 'https://api.100sms.cn/api/sms/batchSubmit';
+    $apiUrl = 'https://sms.100sms.cn/api/sms/batchSubmit';
     $apiKey = '255ffc031f3940fab4bdd4e8000d492e';
+
+    require_once('YibaiSdk.php');
 
     $client = new YibaiClient($apiUrl, $apiKey);
 
     try {
         $response = $client->smsBatchSubmit(array(
-            new SmsSubmit($mobiles, $msgText),
+            new SmsSubmit($mobiles, $prefix.$msgText),
         ));
-        print_r($response);
+        writelog('smslog', $response);
     } catch (YibaiApiException $e) {
-        print_r('YibaiApiException, code: ' . $e->getCode() . ', message: ' . $e->getMessage());
+        writelog('smslog', 'YibaiApiException, code: ' . $e->getCode() . ', message: ' . $e->getMessage());
     } catch (Exception $e) {
-        print_r('Exception. message: ' . $e->getMessage());
+        writelog('smslog', 'Exception. message: ' . $e->getMessage());
     }
 
     return 1;
