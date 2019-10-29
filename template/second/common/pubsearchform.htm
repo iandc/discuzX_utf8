@@ -69,7 +69,7 @@
                         cache: false,
                         dataType: "jsonp",
                         processData: false,
-                        timeout:1000,
+                        timeout:100,
                         complete: function (data) {
                             var htmlTxt =[];
                             if (data.status==200) {
@@ -126,7 +126,7 @@
                     </div>
                 <!--{/if}-->
                 <input type="text" name="srchtxt" id="scbar_txt" value="{lang enter_content}" autocomplete="off" class="ss" x-webkit-speech speech />
-                <a href="javascript:;" id="scbar_type" style="display: none;" class="xg1" onclick="showMenu(this.id)" hidefocus="true"></a>
+                
                 <input type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="sub1 all" value="搜索">
                 <i class="i-search"></i>
         </form>

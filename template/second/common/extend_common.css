@@ -1,4 +1,7 @@
-
+html,body{
+    min-width: 1010px !important;
+    position: relative;
+}
 
 .wp{
     margin: 0 auto; width: 1010px;
@@ -247,7 +250,7 @@ html,body {
 }
 
 .tb-text{
-    width: 69.5%;;
+    width: 69.5%;
     height: 36px;
     border-radius: 5px;
     border: none;
@@ -275,4 +278,83 @@ html,body {
 }
 .coment1:hover{
     text-decoration: none;
+}
+
+#category_grid h4 span{
+    background: none !important;
+    width: auto !important;
+    height: 30px;
+    display: inline-block;
+}
+#category_grid h4 span.h4{
+    position: absolute;
+    top: 0;
+    left: 70px !important;
+}
+#ul .active{
+    display: block
+}
+#ul{
+    position: relative;
+}
+#tabs .select{
+    color: blue !important;
+}
+#ul .mo{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#tit4,#tit2,#tit3{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 10px;
+    font-size: 12px;
+    cursor: pointer;
+    background: url(../../../static/image/common/tb.png) repeat-x;
+    position: relative;
+}
+#tit4 .select a,#tit2 .select a{
+    color: #2b7acd;
+}
+#tit4 span,#tit2 span{
+    padding: 0 5px;
+    font-weight: 600;
+}
+#tit4 span a,#tit2 span a{
+    text-decoration: none;
+}
+#con4,#con2{
+    position: relative;
+}
+#con4 li a,#con2 li a{
+    display: block;
+    width: 85%;
+    float: left;
+    background: url(../../../static/image/common/dot.gif) no-repeat left center; 
+    height: 21px;
+    line-height: 21px;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#con4 li,#con2 li{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+#con4 li.show,#con2 li.show{
+    display: block;
+}
+
+.category_newlist li a{
+    font-weight: 400;
+    color: #000;
+    font-size: 12px;
+
 }

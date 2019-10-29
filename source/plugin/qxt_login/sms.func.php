@@ -7,7 +7,85 @@
  * 正在找回密码，您的验证码是#code#。如非本人操作，请忽略本短信
  */
 
+$debug = 0;
+
 function sendsms($mobiles, $msgText)
+{
+    global $_G;
+    global $debug;
+
+    $debug == 1 && writelog('smslog', "debug info:mobiles=$mobiles,msgText=$msgText");
+
+    if (!$mobiles) {
+        return -5;
+    }
+    if (!$msgText) {
+        return -7;
+    }
+    if (isset($_G['setting']['qxt_login_setting'])) {
+        $smsset = unserialize($_G['setting']['qxt_login_setting']);
+    } else {
+        $debug == 1 && writelog('smslog', 'qxt_login_setting was error');
+        return -6;
+    }
+
+    $debug == 1 && writelog('smslog', "debug info:smsset=" . json_encode($smsset));
+
+    $url = $smsset['url'];
+    $key = $smsset['key'];
+
+    $response = postJson($url, json_encode(array(
+        'apikey' => $key,
+        'submits' => array(
+            array(
+                'mobile' => $mobiles,
+                'message' => $msgText
+            )
+        )
+    )));
+
+    $debug == 1 && writelog('smslog', "debug info:response=" . $response);
+
+    $response = json_decode($response, true);
+    if ($response['response'][0]['code'] == 200) {
+        return 1;
+    } else {
+        return 2;
+    }
+}
+
+function postJson($url, $json, $timeout = 5)
+{
+    $ch = curl_init($url);
+    curl_setopt_array($ch, array(
+        CURLOPT_POST => TRUE,
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLOPT_SSL_VERIFYPEER => FALSE,
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type:application/json;charset=utf-8'
+        ),
+        CURLOPT_POSTFIELDS => $json,
+        CURLOPT_CONNECTTIMEOUT => $timeout
+    ));
+
+    $output = curl_exec($ch);
+
+    if (curl_errno($ch) !== 0) { // 请求失败
+        $curlError = curl_error($ch);
+        curl_close($ch);
+        throw new Exception('Http request error. ' . $curlError);
+    }
+    $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if ($statusCode !== 200) {
+        curl_close($ch);
+        throw new Exception('Http request error. Status code: ' . $statusCode);
+    }
+    curl_close($ch);
+    return $output;
+}
+
+
+function sendsmsbak1($mobiles, $msgText)
 {
     global $_G;
     global $smsportlog;
@@ -27,7 +105,7 @@ function sendsms($mobiles, $msgText)
     if (isset($_G['setting']['qxt_login_setting'])) {
         $smsset = unserialize($_G['setting']['qxt_login_setting']);
     } else {
-        writelog('smslog', 'qxt_login_setting was error');
+        //writelog('smslog', 'qxt_login_setting was error');
         //return -6;
     }
 
@@ -40,7 +118,7 @@ function sendsms($mobiles, $msgText)
 
     try {
         $response = $client->smsBatchSubmit(array(
-            new SmsSubmit($mobiles, $prefix.$msgText),
+            new SmsSubmit($mobiles, $prefix . $msgText),
         ));
         writelog('smslog', $response);
     } catch (YibaiApiException $e) {

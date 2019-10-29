@@ -83,41 +83,76 @@
 						</td>
 					<!--{/if}-->
 					<td valign="top" class="category_l2">
-						<div class="subjectbox">
-							<h4><span class="tit_subject"></span>{lang collection_lastthread}</h4>
-					        <ul class="category_newlist">
-					        	<!--{loop $grids['newthread'] $thread}-->
-					        	<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
-									<!--{eval $thread[tid]=$thread[closed];}-->
-								<!--{/if}-->
-								<li><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']} tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a></li>
-								<!--{/loop}-->
-					         </ul>
-				         </div>
+						<div>
+					    <div id="tit4">
+					        <span class="select"><a href="forum.php?mod=guide&view=newthread" target="_blank">{lang collection_lastthread}</a></span>
+					        <span $currentview['digest']> <a href="forum.php?mod=guide&view=digest" target="_blank">精华帖</a> </span>
+					        <span><a href="">悬赏</a></span>
+					    </div>
+					    <ul id="con4" class="clearfix">
+					    	<li class="show">
+					        <!--{loop $grids['newthread'] $thread}-->
+						        	<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->     
+										<!--{eval $thread[tid]=$thread[closed];}-->
+									<!--{/if}-->
+									<a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']} tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a>
+									<!--{/loop}-->
+									
+								</li>
+					      <li>
+			            <!--{block/66}-->
+					      </li>
+					      <li>
+					      	<!--{block/70}-->
+					      </li>
+					    </ul>
+					  </div>
+					  <script>
+					  	jQuery('#tit4 span').hover(function() {
+							    var i = jQuery(this).index(); //下标第一种写法
+							    //var i = $('tit').index(this);//下标第二种写法
+							    jQuery(this).addClass('select').siblings().removeClass('select');
+							    jQuery('#con4 li').eq(i).show().siblings().hide();
+							});
+					  </script>
 					</td>
 					<td valign="top" class="category_l3">
-						<div class="replaybox">
-							<h4><span class="tit_replay"></span>{lang show_newthreads}</h4>
-					        <ul class="category_newlist">
-					        	<!--{loop $grids['newreply'] $thread}-->
+						<div id="wrap2">
+					    <div id="tit2">
+					        <span class="select"><a href="forum.php?mod=guide&view=new" target="_blank">{lang show_newthreads}</a></span>
+					        <span $currentview['hot']><a href="forum.php?mod=guide&view=hot" target="_blank">热帖</a></span>
+					    </div>
+					    <ul id="con2" class="clearfix">
+					    	<li class="show">
+					        <!--{loop $grids['newreply'] $thread}-->
 					        	<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
 									<!--{eval $thread[tid]=$thread[closed];}-->
 								<!--{/if}-->
-								<li><a href="forum.php?mod=redirect&tid=$thread[tid]&goto=lastpost#lastpost"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']}tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a></li>
+								<a href="forum.php?mod=redirect&tid=$thread[tid]&goto=lastpost#lastpost"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']}tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a>
 								<!--{/loop}-->
-					         </ul>
-				         </div>
+									
+								</li>
+					      <li>
+						      	<!--{block/67}-->
+					      </li>
+					    </ul>
+					  </div>
+					  <script>
+					  	jQuery('#tit2 span').hover(function() {
+							    var i = jQuery(this).index(); //下标第一种写法
+							    //var i = $('tit').index(this);//下标第二种写法
+							    jQuery(this).addClass('select').siblings().removeClass('select');
+							    jQuery('#con2 li').eq(i).show().siblings().hide();
+							});
+					  </script>
 					</td>
 					<td valign="top" class="category_l3">
 						<div class="hottiebox">
-							<h4><span class="tit_hottie"></span>{lang hot_thread}</h4>
+							<div id="tit2">
+					        <span><a href="http://blog.eetop.cn/" target="_blank">{lang blog}</a></span>
+					    </div>
 					        <ul class="category_newlist">
-					        	<!--{loop $grids['hot'] $thread}-->
-					        	<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
-									<!--{eval $thread[tid]=$thread[closed];}-->
-								<!--{/if}-->
-								<li><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']} tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a></li>
-								<!--{/loop}-->
+					        	<!--{block/109}-->
 					         </ul>
 				         </div>
 					</td>
