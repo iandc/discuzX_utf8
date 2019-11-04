@@ -74,7 +74,8 @@
                     <!--{loop $leftlist $key $value}-->
                     <!--{if !empty($key)}-->
                         <div id="$key" class="block move-span">
-                            $value
+                            $value[1]
+                            {php echo mpty($key);}
                         </div>
                     <!--{/if}-->
                     <!--{/loop}-->
