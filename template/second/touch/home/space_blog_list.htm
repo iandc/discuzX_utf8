@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> {lang waptitle} - Powered by Discuz!</title>
+    <link rel="stylesheet" href="../../../../static/image/blog/index.css">
+    <link rel="stylesheet" href="../../../../static/image/blog/public.css">
+    <!-- <link rel="stylesheet" href="../../../../static/image/blog/mui.min.css"> -->
+    <link rel="stylesheet" href="../../../../static/image/blog/blog_show.css">
+    <link rel="stylesheet" href="../../../../static/image/blog/blog_list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
+
+    <script src="../../../../static/js/blog/jquery-2.1.1.min.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/blog/rem.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/blog/swiper.min.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/mobile/home.js?q63"></script>
+    <script src="../../../../static/js/mobile/common.js?q63"></script>
+   
+</head>
+<body>
+    <!--{subtemplate home/space_header}-->
+    <!-- 主页面标题 -->
+    <div class="left" id="left">
+        <span id="closes" style="color: #fff;" class="closes">×</span>
+        <ul class="left-list">
+            <!--{loop $_G['setting']['navs'] $nav}-->
+                <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><li {if $mnid == $nav[navid]}class="a" {/if}$nav[nav]></li><!--{/if}-->
+            <!--{/loop}-->
+        </ul>
+    </div>
+    <header class="mui-bar mui-bar-nav clearfix">
+      <a id="btn" class="fl" href="javascript:;" style="position: relative; color: #333; margin-top: 8px;">
+          <svg class="Zi Zi--More" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M3.5 5h16a1.5 1.5 0 0 1 0 3h-16a1.5 1.5 0 0 1 0-3zm0 6h16a1.5 1.5 0 0 1 0 3h-16a1.5 1.5 0 0 1 0-3zm0 6h16a1.5 1.5 0 0 1 0 3h-16a1.5 1.5 0 0 1 0-3z" fill-rule="evenodd"></path></svg>
+      </a>
+      <h1 style="width: 80%; display: inline-block; text-align: center; line-height: 40px;" class="fl mui-title"><span style="font-size: 16px;">$space[username]</span></h1>
+        {if $space[username]}
+            <a href="home.php?mod=space&uid=$value[uid]" c="1" class="tit_img fr icon_userinfo">
+                <img style="height:32px;width:32px;" src="<!--{avatar($space[uid], small, true)}-->" />
+            </a>
+          {else}
+            <a href="member.php?mod=logging&action=login" class="fr login icon_userinfo">登录</a>
+          {/if}
+    </header>
+    
+    <!-- 主页面内容容器 -->
+    <div class="mui-content mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <!-- 主界面具体展示内容 -->
+            <div class="blog_web">
+              <!--{if $count}-->
+              <div class="xld {if empty($diymode)}xlda{/if}">
+              <!--{loop $list $k $value}-->
+                <dl class="bbda">
+                  <!--{if empty($diymode)}-->
+                  <dd class="m">
+                    <div class="avt"><a href="home.php?mod=space&uid=$value[uid]" c="1"><!--{avatar($value[uid],small)}--></a></div>
+                  </dd>
+                  <!--{/if}-->
+                    <div class="a">
+                      <a href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]"{if $value[magiccolor]} style="color: {$_G[colorarray][$value[magiccolor]]}"{/if} >$value[subject]</a>
+                    <!--{if $value[status] == 1}--> <span class="xi1">({lang pending})</span><!--{/if}-->
+                    </div>
+                    
+               
+                  <dd>
+                    <!--{if $value['friend']}-->
+                    <span class="y"><a href="$theurl&friend=$value[friend]" class="xg1">{$friendsname[$value[friend]]}</a></span>
+                    <!--{/if}-->
+                    <!--{if empty($diymode)}--><a href="home.php?mod=space&uid=$value[uid]">$value[username]</a> <!--{/if}--><span class="xg1">$value[dateline]</span>
+                  </dd>
+                  <dd class="cl" id="blog_article_$value[blogid]">
+                    <!--{if $value[pic]}--><div class="atc"><a href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" ><img src="$value[pic]" alt="$value[subject]" class="tn" /></a></div><!--{/if}-->
+                    $value[message]
+                  </dd>
+                  <dd class="xg1">
+                    <!--{if $classarr[$value[classid]]}-->{lang personal_category}: <a href="home.php?mod=space&uid=$value[uid]&do=blog&classid=$value[classid]&view=me">{$classarr[$value[classid]]}</a><span class="pipe">|</span><!--{/if}-->
+                    <!--{if $value[viewnum]}--><a href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]" >$value[viewnum] {lang blog_read}</a><span class="pipe">|</span><!--{/if}-->
+                    <a href="home.php?mod=space&uid=$value[uid]&do=blog&id=$value[blogid]#comment" ><span id="replynum_$value[blogid]">$value[replynum]</span> {lang blog_replay}</a>
+                    <!--{hook/space_blog_list_status $k}-->
+                    <!--{if $_GET['view']=='me' && $space['self']}-->
+                      <span class="pipe">|</span><a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=edit">{lang edit}</a><span class="pipe">|</span>
+                      <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=delete&handlekey=delbloghk_{$value[blogid]}" id="blog_delete_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
+                      <!--{if empty($value['status'])}-->
+                      <span class="pipe">|</span>
+                      
+                      <a href="home.php?mod=spacecp&ac=blog&blogid=$value[blogid]&op=stick&stickflag=$stickflag&handlekey=stickbloghk_{$value[blogid]}" id="blog_stick_$value[blogid]" onclick="showWindow(this.id, this.href, 'get', 0);"><!--{if $stickflag}-->{lang stick}<!--{else}-->{lang cancel_stick}<!--{/if}--></a>
+                      <!--{/if}-->
+                    <!--{/if}-->
+                    <!--{if $value['hot']}--><span class="hot">{lang hot} <em>$value[hot]</em> </span><!--{/if}-->
+                  </dd>
+                </dl>
+              <!--{/loop}-->
+              <!--{if $pricount}-->
+                <p class="mtm">{lang hide_blog}</p>
+              <!--{/if}-->
+              </div>
+              <!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
+            <!--{else}-->
+              <div class="emp">{lang no_related_blog}</div>
+            <!--{/if}-->
+            </div>
+            
+            
+          </div>
+    </div>  
+
+
+    <script>
+        jQuery("#btn").click(function(){
+            jQuery("#left").css({
+                "left":"0",
+                "transition":"all 0.5s"
+            });
+        });
+        jQuery("#closes").click(function(){
+            jQuery("#left").css({
+                "left":"-60%",
+                "transition":"all 0.5s"
+            });
+        });
+    </script>
+</body>
+</html>

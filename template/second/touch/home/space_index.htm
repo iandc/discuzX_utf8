@@ -74,8 +74,7 @@
                     <!--{loop $leftlist $key $value}-->
                     <!--{if !empty($key)}-->
                         <div id="$key" class="block move-span">
-                            $value[1]
-                            {php echo mpty($key);}
+                            $value
                         </div>
                     <!--{/if}-->
                     <!--{/loop}-->
@@ -146,11 +145,12 @@
                     </div>
                 </div> -->
                 <div class="tab">
-                    <div id="segmentedControl" class="mui-segmented-control">
+                    <!-- <div id="segmentedControl" class="mui-segmented-control">
                         <a href="#item1mobile" class="mui-control-item mui-active">日志</a>
                         <a href="#item2mobile" class="mui-control-item">动态</a>
                         <a href="#item3mobile" class="mui-control-item">分享</a>
-                    </div>
+                    </div> -->
+                    <span id="luntan_tit">论坛帖子</span>
                     <div class="mui-content-padded clearfix">
                         <div id="item1mobile" class="mui-control-content mui-active">
                             <div id="frame1_center" style="width:{$widths[1]}px" class="z column">
@@ -166,7 +166,7 @@
                                 <!--{/loop}-->
                             </div>
                         </div>
-                        <div id="item2mobile" class="mui-control-content">
+                        <!-- <div id="item2mobile" class="mui-control-content">
                             <ul class="mui-table-view">
                                 <li class="mui-table-view-cell">
                                     第二个选项卡
@@ -179,7 +179,7 @@
                                     第三个选项卡
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
