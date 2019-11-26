@@ -14,14 +14,14 @@
 		<script type="text/javascript">HTMLNODE.className += ' widthauto'</script>
 	<!--{/if}-->
 	<!--{if $_G['basescript'] == 'forum' || $_G['basescript'] == 'group'}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}" async="async"></script>
+		<script type="text/javascript" src="{$_G[setting][jspath]}forum.js?{VERHASH}"></script>
 	<!--{elseif $_G['basescript'] == 'home'}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}" async="async"></script>
+		<script type="text/javascript" src="{$_G[setting][jspath]}home.js?{VERHASH}"></script>
 	<!--{elseif $_G['basescript'] == 'portal'}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}" async="async"></script>
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
 	<!--{/if}-->
 	<!--{if $_G['basescript'] != 'portal' && $_GET['diy'] == 'yes' && check_diy_perm($topic)}-->
-		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}" async="async"></script>
+		<script type="text/javascript" src="{$_G[setting][jspath]}portal.js?{VERHASH}"></script>
 	<!--{/if}-->
 	<!--{if $_GET['diy'] == 'yes' && check_diy_perm($topic)}-->
 		<link rel="stylesheet" type="text/css" id="diy_common" href="{$_G['setting']['csspath']}{STYLEID}_css_diy.css?{VERHASH}" />

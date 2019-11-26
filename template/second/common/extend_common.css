@@ -354,3 +354,69 @@ html,body {
     font-size: 12px;
 
 }
+
+.add_friends{
+    padding: 0 10px;
+}
+
+
+.pm11{
+    overflow: hidden;
+    width: auto;
+}
+.pmfm .tedt{
+    width: 98%;
+}
+.px{
+    margin: 5px 0;
+}
+.mui-scroll #avatardesigner,.mui-scroll #avatarfile,.mui-scroll #avatarfileselector{
+    width: 330px !important;
+}
+.mui-scroll #avatarfileselector {
+    background: url(../../../static/avatar/avatar_upload.gif) no-repeat;
+    position: relative;
+    background-size: 100% 100%;
+}
+
+#blog_article p{
+    padding-bottom: 10px;
+}
+
+#div.p img{
+    text-align: center;
+}
+
+.ttp {
+    margin-bottom: 5px;
+    padding-top: 10px;
+    border-width: 2px 0 0;
+    background: transparent;
+}
+.ttp li {
+    float: left;
+    padding-bottom: 5px;
+}
+.ttp a, .ttp strong {
+    float: left;
+    margin-right: 5px;
+    padding: 4px 8px 3px;
+    height: 18px;
+    border: 1px solid #CDCDCD;
+    background: #FFF;
+    white-space: nowrap;
+}
+.ttp .a a {
+    padding-right: 12px;
+    padding-left: 12px;
+    border-color: #369;
+    background: #E5EDF2;
+    color: #369;
+}
+.fa_fav_0, .fa_fav, .fa_rss, .fa_achv, .fa_bin, .fa_ivt {
+    padding-left: 20px;
+    background: no-repeat 0 50%;
+}
+.fa_rss {
+    background-image: url(http://bbs.eetop.wang/static/image/common/feed.gif);
+}

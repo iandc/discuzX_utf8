@@ -117,6 +117,74 @@ function mb_strlen(str) {
 	return len;
 }
 
+function initSearchmenu(searchform, cloudSearchUrl) {
+	var defaultUrl = 'search.php?searchsubmit=yes';
+	if(typeof cloudSearchUrl == "undefined" || cloudSearchUrl == null || cloudSearchUrl == '') {
+		cloudSearchUrl = defaultUrl;
+	}
+
+	var searchtxt = $(searchform + '_txt');
+	if(!searchtxt) {
+		searchtxt = $(searchform);
+	}
+	var tclass = searchtxt.className;
+	searchtxt.className = tclass + ' xg1';
+	if (!!("placeholder" in document.createElement("input"))) {
+		if(searchtxt.value == '请输入搜索内容') {
+			searchtxt.value = '';
+		}
+		searchtxt.placeholder = '请输入搜索内容';
+	} else {
+		searchtxt.onfocus = function () {
+			if(searchtxt.value == '请输入搜索内容') {
+				searchtxt.value = '';
+				searchtxt.className = tclass;
+			}
+		};
+		searchtxt.onblur = function () {
+			if(searchtxt.value == '' ) {
+				searchtxt.value = '请输入搜索内容';
+				searchtxt.className = tclass + ' xg1';
+			}
+		};
+	}
+	if(!$(searchform + '_type_menu')) return false;
+	var o = $(searchform + '_type');
+	var a = $(searchform + '_type_menu').getElementsByTagName('a');
+	var formobj = searchtxt.form;
+	for(var i=0; i<a.length; i++){
+		if(a[i].className == 'curtype'){
+			o.innerHTML = a[i].innerHTML;
+			$(searchform + '_mod').value = a[i].rel;
+			formobj.method = 'post';
+			if((a[i].rel == 'forum' || a[i].rel == 'curforum') && defaultUrl != cloudSearchUrl) {
+				formobj.action = cloudSearchUrl;
+				formobj.method = 'get';
+				if($('srchFId')) {
+					$('srchFId').value = a[i].rel == 'forum' ? 0 : a[i].getAttribute('fid');
+				}
+			} else {
+				formobj.action = defaultUrl;
+			}
+		}
+		a[i].onclick = function(){
+			o.innerHTML = this.innerHTML;
+			$(searchform + '_mod').value = this.rel;
+			formobj.method = 'post';
+			if((this.rel == 'forum' || this.rel == 'curforum') && defaultUrl != cloudSearchUrl) {
+				formobj.action = cloudSearchUrl;
+				formobj.method = 'get';
+				if($('srchFId')) {
+					$('srchFId').value = this.rel == 'forum' ? 0 : this.getAttribute('fid');
+				}
+			} else {
+				formobj.action = defaultUrl;
+			}
+		};
+	}
+}
+
+
 function mb_cutstr(str, maxlen, dot) {
 	var len = 0;
 	var ret = '';
@@ -1628,72 +1696,6 @@ function setDoodle(fid, oid, url, tid, from) {
 }
 
 
-function initSearchmenu(searchform, cloudSearchUrl) {
-	var defaultUrl = 'search.php?searchsubmit=yes';
-	if(typeof cloudSearchUrl == "undefined" || cloudSearchUrl == null || cloudSearchUrl == '') {
-		cloudSearchUrl = defaultUrl;
-	}
-
-	var searchtxt = $(searchform + '_txt');
-	if(!searchtxt) {
-		searchtxt = $(searchform);
-	}
-	var tclass = searchtxt.className;
-	searchtxt.className = tclass + ' xg1';
-	if (!!("placeholder" in document.createElement("input"))) {
-		if(searchtxt.value == '请输入搜索内容') {
-			searchtxt.value = '';
-		}
-		searchtxt.placeholder = '请输入搜索内容';
-	} else {
-		searchtxt.onfocus = function () {
-			if(searchtxt.value == '请输入搜索内容') {
-				searchtxt.value = '';
-				searchtxt.className = tclass;
-			}
-		};
-		searchtxt.onblur = function () {
-			if(searchtxt.value == '' ) {
-				searchtxt.value = '请输入搜索内容';
-				searchtxt.className = tclass + ' xg1';
-			}
-		};
-	}
-	if(!$(searchform + '_type_menu')) return false;
-	var o = $(searchform + '_type');
-	var a = $(searchform + '_type_menu').getElementsByTagName('a');
-	var formobj = searchtxt.form;
-	for(var i=0; i<a.length; i++){
-		if(a[i].className == 'curtype'){
-			o.innerHTML = a[i].innerHTML;
-			$(searchform + '_mod').value = a[i].rel;
-			formobj.method = 'post';
-			if((a[i].rel == 'forum' || a[i].rel == 'curforum') && defaultUrl != cloudSearchUrl) {
-				formobj.action = cloudSearchUrl;
-				formobj.method = 'get';
-				if($('srchFId')) {
-					$('srchFId').value = a[i].rel == 'forum' ? 0 : a[i].getAttribute('fid');
-				}
-			} else {
-				formobj.action = defaultUrl;
-			}
-		}
-		a[i].onclick = function(){
-			o.innerHTML = this.innerHTML;
-			$(searchform + '_mod').value = this.rel;
-			formobj.method = 'post';
-			if((this.rel == 'forum' || this.rel == 'curforum') && defaultUrl != cloudSearchUrl) {
-				formobj.action = cloudSearchUrl;
-				formobj.method = 'get';
-				if($('srchFId')) {
-					$('srchFId').value = this.rel == 'forum' ? 0 : this.getAttribute('fid');
-				}
-			} else {
-				formobj.action = defaultUrl;
-			}
-		};
-	}
-}
 
 function searchFocus(obj) {
 	if(obj.value == '请输入搜索内容') {

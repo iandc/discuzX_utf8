@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> {lang waptitle} - Powered by Discuz!</title>
+    <link rel="stylesheet" href="../../../../static/image/blog/index.css">
+    <link rel="stylesheet" href="../../../../static/image/blog/public.css">
+    <!-- <link rel="stylesheet" href="../../../../static/image/blog/mui.min.css"> -->
+    <link rel="stylesheet" href="../../../../static/image/blog/blog_show.css">
+    <link rel="stylesheet" href="../../../../static/image/blog/blog_list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
+
+    <script src="../../../../static/js/blog/jquery-2.1.1.min.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/blog/rem.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/blog/swiper.min.js" charset="{CHARSET}"></script>
+    <script src="../../../../static/js/mobile/home.js?q63"></script>
+    <script src="../../../../static/js/mobile/common.js?q63"></script>
+   
+</head>
+<body>
+    <!--{subtemplate home/space_header}-->
+    <!-- 主页面标题 -->
+    <div class="left" id="left">
+        <span id="closes" style="color: #fff;" class="closes">×</span>
+        <ul class="left-list">
+            <!--{loop $_G['setting']['navs'] $nav}-->
+                <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><li {if $mnid == $nav[navid]}class="a" {/if}$nav[nav]></li><!--{/if}-->
+            <!--{/loop}-->
+        </ul>
+    </div>
+    <header class="mui-bar mui-bar-nav clearfix">
+      <a id="btn" class="fl" href="javascript:;" style="position: relative; color: #333; margin-top: 8px;">
+          <svg class="Zi Zi--More" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M3.5 5h16a1.5 1.5 0 0 1 0 3h-16a1.5 1.5 0 0 1 0-3zm0 6h16a1.5 1.5 0 0 1 0 3h-16a1.5 1.5 0 0 1 0-3zm0 6h16a1.5 1.5 0 0 1 0 3h-16a1.5 1.5 0 0 1 0-3z" fill-rule="evenodd"></path></svg>
+      </a>
+      <h1 style="width: 80%; display: inline-block; text-align: center; line-height: 40px;" class="fl mui-title"><span style="font-size: 16px;">$space[username]</span></h1>
+        {if $space[username]}
+            <a href="home.php?mod=space&uid=$value[uid]" c="1" class="tit_img fr icon_userinfo">
+                <img style="height:32px;width:32px;" src="<!--{avatar($space[uid], small, true)}-->" />
+            </a>
+          {else}
+            <a href="member.php?mod=logging&action=login" class="fr login icon_userinfo">登录</a>
+          {/if}
+    </header>
+    
+    <!-- 主页面内容容器 -->
+    <div class="mui-content mui-scroll-wrapper">
+          <div class="mui-scroll" style="padding: 0 10px 50px">
+            <!-- 主界面具体展示内容 -->
+
+  <!--{subtemplate home/spacecp_header}-->
+      <!--{hook/spacecp_avatar_top}-->
+      <script type="text/javascript">
+        function updateavatar() {
+          window.location.href = document.location.href.replace('&reload=1', '') + '&reload=1';
+        }
+        <!--{if !$reload}-->
+        saveUserdata('avatar_redirect', document.referrer);
+        <!--{/if}-->
+      </script>
+      <form id="avatarform" enctype="multipart/form-data" method="post" autocomplete="off" action="home.php?mod=spacecp&ac=avatar&ref">
+        <table cellspacing="0" cellpadding="0" class="tfm">
+          <caption>
+            <span id="retpre" class="y xi2"></span>
+            <h2 class="xs2">{lang current_my_space}</h2>
+            <p>{lang setting_avatar_message}</p>
+          </caption>
+          <tr>
+            <td>
+              <!--{avatar($space[uid],big)}-->
+            </td>
+          </tr>
+        </table>
+
+        <table cellspacing="0" cellpadding="0" class="tfm1">
+          <caption>
+            <h2 class="xs2">{lang setting_my_new_avatar}</h2>
+            <p>{lang setting_my_new_avatar_message}</p>
+          </caption>
+          <tr>
+            <td>
+              <!--{if !empty($_GET['old'])}-->
+                <script type="text/javascript">document.write(AC_FL_RunContent('<!--{echo implode("','", $uc_avatarflash);}-->'));</script>
+              <!--{else}-->             
+                <!--{template home/spacecp_avatar_body}-->
+              <!--{/if}-->              
+            </td>
+          </tr>
+        </table>
+        <!--{if empty($_GET['old'])}-->
+            <a href="home.php?mod=spacecp&ac=avatar&old=1" class="xg1">{lang setting_my_new_avatar_old}</a>       
+        <!--{/if}-->
+        <input type="hidden" name="formhash" value="{FORMHASH}" />
+      </form>
+      <!--{hook/spacecp_avatar_bottom}-->
+    </div>
+  </div>
+  <script type="text/javascript">
+    var redirecturl = loadUserdata('avatar_redirect');
+    if(redirecturl) {
+      jQuery('retpre').innerHTML = '<a href="' + redirecturl + '">{lang previous_page}</a>';
+    }
+  </script>
+</div>
+            
+          </div>
+    </div>  
+
+
+    <script>
+        jQuery("#btn").click(function(){
+            jQuery("#left").css({
+                "left":"0",
+                "transition":"all 0.5s"
+            });
+        });
+        jQuery("#closes").click(function(){
+            jQuery("#left").css({
+                "left":"-60%",
+                "transition":"all 0.5s"
+            });
+        });
+    </script>
+</body>
+</html>

@@ -113,8 +113,7 @@ a{
 }
 
 .move-span{
-    padding:.2rem;
-    padding-bottom: .3rem;
+    padding:0 .2rem;
     clear: both;
 }
 .move-span .blocktitle{
@@ -134,13 +133,21 @@ a{
     margin-bottom: .1rem;
 }
 .move-span dl dt a{
-    font-size: .26rem;
+    font-size: .3rem;
 }
 .move-span dl dt span,.move-span dl dd{
     font-size: .24rem;
+    color: #333;
+    padding: .05rem 0;
+}
+.move-span dl dt span.xg2{
+    float: right;
 }
 .move-span dl dd.xg1{
     margin-top: .1rem;
+}
+.move-span dl dd.xg1 a{
+    font-size: .2rem;
 }
 .move-span .pipe{
     margin: 0 .15rem;
@@ -157,6 +164,7 @@ a{
     content: "";
     display: block;
     overflow: hidden;
+    border-bottom: 2px solid #eee;
 }
 .ptm{
     margin-bottom: 0;
@@ -166,6 +174,7 @@ a{
 .column,.dxb_bc{
     width: 100% !important;
     clear: both;
+    margin-top: .2rem;
 }
 .hm{
     width: 100% !important;
@@ -187,8 +196,9 @@ a{
     font-size: .35rem;
 }
 .ul_list li{
-    width: 50%;
-    margin-bottom: .1rem;
+    width: 33.3%;
+    margin-bottom: .2rem;
+    font-size: 0.28rem;
 }
 .ptn li{
     width: 50%;
@@ -208,9 +218,23 @@ a{
 }
 #thread{
     overflow: hidden;
+    padding-top: .5rem;
 }
 #thread_content ul.xl li{
     width: 100%;
     float: left;
     margin: 5px 0;
+}
+
+#personalinfo,#statistic,#album,#doing,#feed,#share,#wall,.ptn{
+    display: none;
+}
+#luntan_tit{
+    position: absolute;
+    top: 70%;
+    left: .2rem;
+    font-weight: 600;
+}
+.mui-scroll .ul_diy{
+    display: none;
 }
