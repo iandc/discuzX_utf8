@@ -418,5 +418,5 @@ html,body {
     background: no-repeat 0 50%;
 }
 .fa_rss {
-    background-image: url(http://bbs.eetop.wang/static/image/common/feed.gif);
+    background-image: url(../../../static/image/common/feed.gif);
 }
