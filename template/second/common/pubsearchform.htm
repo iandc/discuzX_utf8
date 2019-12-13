@@ -11,19 +11,19 @@
 <!--{if $_G['setting']['search'] && $slist}-->
 <div id="scbar" class="{if $_G['setting']['srchhotkeywords'] && count($_G['settinxg']['srchhotkeywords']) > 5}scbar_narrow {/if}cl">
     <!--{if $_G['config']['other']['baidu_search_js_status'] == 1}-->
-            <div class="form1 z">
+           <!--  <div class="form1 z">
                 {$_G['config']['other']['baidu_search_js']}
-            </div>
+            </div> -->
     <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 2}-->
-        <div class="form1 z tb-text1" id="scbar_form">
+        <!-- <div class="form1 z tb-text1" id="scbar_form">
             <input type="text" onkeypress="search_enter()" id="obj1" placeholder="{lang enter_content}" class="ss" style="margin-top: 1px;"/>
         
             <input type="submit" id="btn2"  onclick="f1()" sc="1" class="sub1 all" value="搜内容">
             <i class="i-search"></i>
-        </div>
+        </div> -->
     <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 3}-->
 
-        <div class="form1">
+        <!-- <div class="form1">
             <input type="text" class="tb-text" id="input" placeholder="请输入搜索的内容" >
             <input type="text" id="hiddentext" style="display:none;">
             <span id="sp1">
@@ -47,9 +47,9 @@
                     }
                 });
             </script>
-        </div>
+        </div> -->
     <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 4}-->
-        <div class="form1 site" id="site">
+        <!-- <div class="form1 site" id="site">
             <input type="text" class="tb-text" id="input" placeholder="请输入搜索的内容" >
             <input type="text" id="hiddentext" style="display:none;">
             <span id="sp1">
@@ -93,26 +93,57 @@
                     }
                 });
             </script>
+        </div> -->
+    
+    <!--{elseif $_G['config']['other']['baidu_search_js_status'] == 5}-->
+
+        <div class="form1 site" id="site">
+            <input type="text" class="tb-text" id="input" placeholder="请输入搜索的内容" >
+            <input type="text" id="hiddentext" style="display:none;">
+            <span id="sp1">
+                <a href="javascript:void(0);" id="button" class="coment1">搜帖子</a>
+                <i class="i-search"></i>
+            </span>
+            <script>
+                    
+                function getURL() { 
+                    var val = document.getElementById("input").value;
+                    var zn = 'https://www.sogou.com/web?query=site:eetop.cn' + '+' + val;
+                    window.open(zn,"_blank");
+                }
+
+                jQuery("#button").click(function(){ 
+                    getURL();
+                    
+                });
+                
+                jQuery("#input").keypress(function(e){
+                    var curKey = e.which;
+                    if(curKey == "13"){
+                        getURL();
+                    }
+                });
+            </script>
         </div>
 
     <!--{else}-->
-        <form class='form1 z' id="scbar_form" method="{if $_G[fid] && !empty($searchparams[url])}get{else}post{/if}" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="{if $_G[fid] && !empty($searchparams[url])}$searchparams[url]{else}search.php?searchsubmit=yes{/if}" target="_blank">
+        <!-- <form class='form1 z' id="scbar_form" method="{if $_G[fid] && !empty($searchparams[url])}get{else}post{/if}" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="{if $_G[fid] && !empty($searchparams[url])}$searchparams[url]{else}search.php?searchsubmit=yes{/if}" target="_blank">
                 <input type="hidden" name="mod" id="scbar_mod" value="search" />
                 <input type="hidden" name="formhash" value="{FORMHASH}" />
                 <input type="hidden" name="srchtype" value="title" />
                 <input type="hidden" name="srhfid" value="$_G[fid]" />
-                <input type="hidden" name="srhlocality" value="$_G['basescript']::{CURMODULE}" />
+                <input type="hidden" name="srhlocality" value="$_G['basescript']::{CURMODULE}" /> -->
                 <!--{if !empty($searchparams[params])}-->
                     <!--{loop $searchparams[params] $key $value}-->
                     <!--{eval $srchotquery .= '&' . $key . '=' . rawurlencode($value);}-->
-                    <input type="hidden" name="$key" value="$value" />
+                    <!-- <input type="hidden" name="$key" value="$value" /> -->
                     <!--{/loop}-->
 
-                    <input type="hidden" name="source" value="discuz" />
+                    <!-- <input type="hidden" name="source" value="discuz" />
                     <input type="hidden" name="fId" id="srchFId" value="$_G[fid]" />
                     <input type="hidden" name="q" id="cloudsearchquery" value="" />
-
-                    <style>
+ -->
+                    <!-- <style>
                     #scbar { overflow: visible; position: relative; }
                     #sg{ background: #FFF; width:456px; border: 1px solid #B2C7DA; }
                     .scbar_narrow #sg { width: 316px; }
@@ -123,13 +154,13 @@
                     </style>
                     <div style="display: none; position: absolute; top:37px; left:44px;" id="sg">
                         <div id="st_box" cellpadding="2" cellspacing="0"></div>
-                    </div>
+                    </div> -->
                 <!--{/if}-->
-                <input type="text" name="srchtxt" id="scbar_txt" value="{lang enter_content}" autocomplete="off" class="ss" x-webkit-speech speech />
+                <!-- <input type="text" name="srchtxt" id="scbar_txt" value="{lang enter_content}" autocomplete="off" class="ss" x-webkit-speech speech />
                 
                 <input type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="sub1 all" value="搜索">
                 <i class="i-search"></i>
-        </form>
+        </form> -->
     <!--{/if}-->
 
     <form class="form2 y" action="http://ic.eetop.cn/index/default_list" target="_blank" method="get" name="b">
