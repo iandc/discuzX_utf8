@@ -1,0 +1,252 @@
+<!--{template common/header}-->
+<link href="./source/plugin/doc/css/com.css" rel="stylesheet" type="text/css"/>
+<link href="./source/plugin/doc/css/ds-doc.css" rel="stylesheet" type="text/css"/>
+<link href="./source/plugin/doc/js/iUUSlide/iuu-slide.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="./source/plugin/doc/js/jquery.min.js"></script>
+<script src="./source/plugin/doc/js/iUUSlide/iuu-slide.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function ($) {
+        var width = $("#wp").width();
+        var bwidth = (width - 10) * 0.7;
+        var lwidth = (width - 10) * 0.3;
+        $(".ds-login").width(lwidth - 20);
+        $(".ds-search-key input").width(lwidth - 57);
+
+        var twidth = width - 252;
+        $(".ds-tui").width(twidth);
+
+        var mwidth = width - 404;
+        $(".ds-homemid-mid").width(mwidth);
+
+        $(".iuu-slide").iuuSlide({
+            width: bwidth + 'px',
+            height: '220px',
+            content: [$doc_banner]
+        });
+
+        $(".ds-docnail").mouseover(function () {
+            var _this = $(this);
+            _this.parent().parent().find(".ds-docnail2").hide();
+            $(_this.attr("data")).show();
+        });
+    });
+
+    function show_box(id)
+    {
+        document.getElementById("type_box_" + id).style.display = "block";
+        document.getElementById("type_box_" + id).style.top = 35 + id * 62 + 'px';
+        document.getElementById("big_type_" + id).style.borderTop = '1px solid #ccc';
+        document.getElementById("big_type_" + id).style.borderBottom = '1px solid #ccc';
+        document.getElementById("big_type_" + id).style.borderLeft = '1px solid #fff';
+        document.getElementById("big_type_" + id).style.background = '#fff';
+        document.getElementById("big_type_" + id).style.zIndex = '3';
+    }
+    function hide_box(id)
+    {
+        document.getElementById("type_box_" + id).style.display = "none";
+        document.getElementById("big_type_" + id).style.border = '1px solid #fff';
+        document.getElementById("big_type_" + id).style.borderBottom = '1px solid #dcede0';
+        document.getElementById("big_type_" + id).style.background = '#f8f8f8';
+        document.getElementById("big_type_" + id).style.zIndex = '0';
+    }
+    function Search()
+    {
+        var keyword = document.getElementById("txt_keyword").value;
+        if ($doc_rewrite) {
+            window.location.href = 'list-0-0-0-p1-k' + keyword + '-s1.html';
+        } else {
+            window.location.href = "plugin.php?id=doc:list" + '&k=' + keyword + "&p=1&t=0-0-0&s=1";
+        }
+    }
+</script>
+<div id="wp" class="wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="$_G['setting']['bbname']" href="./">$_G['setting']['bbname']</a><em></em><a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->">$doc_name</a></div>
+        <div class="ds-search-key">
+            <input type="text" id="txt_keyword" placeholder="{lang doc:list_pleasesearch}" value="$keyword"/><a href="javascript:Search()">{lang doc:list_search}</a>
+        </div>
+    </div>
+    <div class="wp cl">
+        <div class='ds-banner'>
+            <div class="iuu-slide"></div>
+            <div class="ds-login">
+                <div class="ds-login-h1">{lang doc:doc_welcome}$doc_name</div>
+                <div class="ds-login-welcome">$doc_welcome</div>
+                <!--{if $_G['uid']}-->
+                <a href="<!--{if $doc_rewrite}-->doc-upload.html<!--{else}-->plugin.php?id=doc:upload<!--{/if}-->" class="ds-login-upload">{lang doc:doc_uploaddoc}</a>
+                <!--{else}-->
+                <a href="javascript:;" onclick="showWindow('login', 'member.php?mod=logging&action=login')" class="ds-login-upload">{lang doc:doc_uploaddoc}</a>
+                <!--{/if}-->
+                <div class="ds-login-num">{lang doc:doc_have} <span><!--{echo GetTotalDoc()}--></span> {lang doc:doc_adocs}</div>
+            </div>
+        </div> 
+        <div class='ds-nav'>
+            <div class='ds_type'>
+                <div class='h1_type'><a href="<!--{if $doc_rewrite}-->list-0-0-0.html<!--{else}-->plugin.php?id=doc:list&t=0-0-0<!--{/if}-->">{lang doc:doc_doctype}</a></div>
+                <div style='display:none'><!--{echo $id=-1}--></div>
+                {loop GetDocType(0) $fir}
+                <div style='display:none'><!--{echo $id=$id+1;}--></div>
+                <div class='big_type' id='big_type_$id' onmouseover='show_box($id)' onmouseout='hide_box($id)' >
+                    <div class='fir_type'><a href="<!--{if $doc_rewrite}-->list-$fir[0]-0-0.html<!--{else}-->plugin.php?id=doc:list&t=$fir[0]-0-0<!--{/if}-->">$fir[1]</a></div>				
+                    <div class='hot_type'>
+                        {loop GetDocType($fir[0]) $sec} 	
+                        <a href="<!--{if $doc_rewrite}-->list-<!--{echo $fir[0]}-->-$sec[0]-0.html<!--{else}-->plugin.php?id=doc:list&t=<!--{echo $fir[0]}-->-$sec[0]-0<!--{/if}-->">$sec[1]</a>
+                        {/loop}	
+                    </div>						
+                </div>
+                <div class='small_type' id='type_box_$id' onmouseover='show_box($id)' onmouseout='hide_box($id)'>
+                    {loop GetDocType($fir[0]) $sec}			
+                    <div class='m_type'>
+                        <a href="<!--{if $doc_rewrite}-->list-<!--{echo $fir[0]}-->-$sec[0]-0.html<!--{else}-->plugin.php?id=doc:list&t=<!--{echo $fir[0]}-->-$sec[0]-0<!--{/if}-->" class='sec_type'>$sec[1]</a>
+                        {loop GetDocType($sec[0]) $thr}
+                        <a href="<!--{if $doc_rewrite}-->list-<!--{echo $fir[0]}-->-<!--{echo $sec[0]}-->-$thr[0].html<!--{else}-->plugin.php?id=doc:list&t=<!--{echo $fir[0]}-->-<!--{echo $sec[0]}-->-$thr[0]<!--{/if}-->" class='thi_type' style='color:#0455a1;'>$thr[1]</a>
+                        {/loop}	
+                    </div>
+                    {/loop}	
+                </div>	
+                {/loop}	
+            </div>
+            <div class="ds-tui">
+                <div class="ds-tui-title">{lang doc:doc_important}<a href="<!--{if $doc_rewrite}-->mydoc-0-0-0.html<!--{else}-->plugin.php?id=doc:mydoc&t=0-0-0<!--{/if}-->">{lang doc:doc_mydoc}</a></div>
+                <div class="ds-tui-body">
+                    {loop GetDocInfo5('','','','',1,1,8,1,'docid') $docinfo}
+                    <div class="ds-docnail3">
+                        <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail3-png" target="_blank">
+                            <img title="$docinfo[3]" alt="$docinfo[3]" width="132" height="180" src="plugin.php?id=doc:thum&d=$docinfo[0]" />
+                            <i class="$docinfo[1]"></i>
+                        </a>
+                        <div>
+                            <div class="ds-docnail3-title"><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                            <div class="ds-docnail3-author"><span>{lang doc:doc_author}</span>$docinfo[5]</div>
+                            <div class="ds-docnail3-freepay"><span>{lang doc:doc_freepay}</span><!--{if $docinfo[6]=='-1'}--> {lang doc:doc_allpage} <!--{else}--> $docinfo[6] {lang doc:doc_page}<!--{/if}--></div>
+                            <div class="ds-docnail3-readpay"><span>{lang doc:doc_readpay}</span>$docinfo[7] $doc_readcreditname[1]</div>
+                            <div class="ds-docnail3-downpay"><span>{lang doc:doc_downpay}</span>$docinfo[8] $doc_downcreditname[1]</div>
+                            <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail3-read" target="_blank">{lang doc:doc_docread}</a>                                
+                        </div>
+                    </div>
+                    {/loop}
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;margin:15px 0">$doc_ad</div>
+        <div class="ds-homemid">
+            <div class="ds-homemid-head"><a href="<!--{if $doc_rewrite}-->list-0-0-0.html<!--{else}-->plugin.php?id=doc:list&t=0-0-0<!--{/if}-->">{lang doc:doc_newupload}</a></div>
+            <div class="ds-homemid-body">
+                <div class="ds-homemid-left">
+                    <div style='display:none'><!--{echo $isshow=''}--></div>
+                    {loop GetDocInfo5('','','','',0,1,20,1,'docid') $docinfo}
+                    <div id="newdoc_$docinfo[0]" class="ds-docnail2" $isshow>
+                        <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail2-png" target="_blank">
+                            <img title="$docinfo[3]" alt="$docinfo[3]" width="132" height="180" src="plugin.php?id=doc:thum&d=$docinfo[0]" />
+                            <i class="$docinfo[1]"></i>
+                        </a>
+                        <div class="ds-docnail2-title"><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                        <div class="ds-docnail2-author"><span>{lang doc:doc_author}</span>$docinfo[5]</div>
+                        <div class="ds-docnail2-freepay"><span>{lang doc:doc_freepay}</span><!--{if $docinfo[6]=='-1'}-->{lang doc:doc_allpage}<!--{else}-->$docinfo[6] {lang doc:doc_page}<!--{/if}--> </div>
+                        <div class="ds-docnail2-readpay"><span>{lang doc:doc_readpay}</span>$docinfo[7] $doc_readcreditname[1]</div>
+                        <div class="ds-docnail2-downpay"><span>{lang doc:doc_downpay}</span>$docinfo[8] $doc_downcreditname[1]</div>
+                        <div class="ds-docnail2-inf"><span>{lang doc:doc_docinf}</span>$docinfo[4]</div>
+                        <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail2-read" target="_blank">{lang doc:doc_docread}</a>
+                    </div>
+                    <div style='display:none'><!--{echo $isshow='style="display: none"'}--></div>
+                    {/loop}
+                </div>                      
+                <div class="ds-homemid-mid">
+                    {loop GetDocInfo5('','','','',0,1,20,1,'docid') $docinfo}
+                    <div style='display:none'><!--{echo $doc_star = GetCommentStar($docinfo[0]).'px';}--></div>
+                    <div class="ds-docnail" data="#newdoc_$docinfo[0]">
+                        <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail-png" target="_blank">
+                            <img title="$docinfo[3]" alt="$docinfo[3]" src="plugin.php?id=doc:thum&d=$docinfo[0]" />
+                            <i class="$docinfo[1]"></i>
+                        </a>
+                        <div class="ds-docnail-title"><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                        <div class="ds-docnail-readcount">{lang doc:doc_gong}$docinfo[9]{lang doc:doc_perread}</div>
+                        <div class="ds-docnail-judge"><span class="ds-judge-star"><i style="width:$doc_star"></i></span></div>
+                    </div>
+                    {/loop}
+                </div>
+                <div class="ds-homemid-right">
+                    <div class="ds-rank">  
+                        <div class="ds-rank-head">{lang doc:doc_viewrank}</div>                        
+                        <ul>
+                            {loop GetDocInfo5('','','','',0,1,8,1,'viewcount') $docinfo}
+                            <div style='display:none'><!--{echo $doc_star = GetCommentStar($docinfo[0]).'px';}--></div>
+                            <li>                                 
+                                <div class="ds-rank-title"><i class="$docinfo[1]"></i><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                                <div class="ds-rank-dudge"><span class="ds-judge-star"><i style="width:$doc_star"></i></span><span class="ds-docnail-readcount">{lang doc:doc_gong}$docinfo[9]{lang doc:doc_perread}</span></div>                               
+                            </li>
+                            {/loop}
+                        </ul>
+                    </div>
+                </div>
+            </div>           
+        </div>
+        {loop $doc_hometype $hometype}
+        <div style="clear:both;height: 20px;"></div>        
+        <div class="ds-homemid">
+            <div style='display:none'><!--{echo $doctypeid=GetDocTypeID($hometype)}--></div>
+            <div class="ds-homemid-head"><a href="<!--{if $doc_rewrite}-->list-$doctypeid-0-0.html<!--{else}-->plugin.php?id=doc:list&t=$doctypeid-0-0<!--{/if}-->">$hometype</a></div>
+            <div class="ds-homemid-body">                
+                <div class="ds-homemid-left">
+                    <div style='display:none'><!--{echo $isshow=''}--></div>
+                    <!--{if $doctypeid}-->
+                    {loop GetDocInfo5($doctypeid,'','','',0,1,20,1,'docid') $docinfo}
+                    <div id="selectdoc_$docinfo[0]" class="ds-docnail2" $isshow>
+                        <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail2-png" target="_blank">
+                            <img title="$docinfo[3]" alt="$docinfo[3]" width="132" height="180" src="plugin.php?id=doc:thum&d=$docinfo[0]" />
+                            <i class="$docinfo[1]"></i>
+                        </a>
+                        <div class="ds-docnail2-title"><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                        <div class="ds-docnail2-author"><span>{lang doc:doc_author}</span>$docinfo[5]</div>
+                        <div class="ds-docnail2-freepay"><span>{lang doc:doc_freepay}</span><!--{if $docinfo[6]=='-1'}-->{lang doc:doc_allpage}<!--{else}-->$docinfo[6]<!--{/if}--> {lang doc:doc_page}</div>
+                        <div class="ds-docnail2-readpay"><span>{lang doc:doc_readpay}</span>$docinfo[7] $doc_readcreditname[1]</div>
+                        <div class="ds-docnail2-downpay"><span>{lang doc:doc_downpay}</span>$docinfo[8] $doc_downcreditname[1]</div>
+                        <div class="ds-docnail2-inf"><span>{lang doc:doc_docinf}</span>$docinfo[4]</div>
+                        <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail2-read" target="_blank">{lang doc:doc_docread}</a>
+                    </div>
+                    <div style='display:none'><!--{echo $isshow='style="display: none"'}--></div>
+                    {/loop}
+                    <!--{/if}-->
+                </div>                      
+                <div class="ds-homemid-mid">
+                    <!--{if $doctypeid}-->
+                    {loop GetDocInfo5($doctypeid,'','','',0,1,20,1,'docid') $docinfo}
+                    <div style='display:none'><!--{echo $doc_star = GetCommentStar($docinfo[0]).'px';}--></div>
+                    <div class="ds-docnail" data="#selectdoc_$docinfo[0]">
+                        <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail-png" target="_blank">
+                            <img title="$docinfo[3]" alt="$docinfo[3]" src="plugin.php?id=doc:thum&d=$docinfo[0]" />
+                            <i class="$docinfo[1]"></i>
+                        </a>
+                        <div class="ds-docnail-title"><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                        <div class="ds-docnail-readcount">{lang doc:doc_gong}$docinfo[9]{lang doc:doc_perread}</div>
+                        <div class="ds-docnail-judge"><span class="ds-judge-star"><i style="width:$doc_star"></i></span></div>
+                    </div>
+                    {/loop}
+                    <!--{/if}-->
+                </div>
+                <div class="ds-homemid-right">
+                    <div class="ds-rank">  
+                        <div class="ds-rank-head">{lang doc:doc_viewrank}</div>                        
+                        <ul>
+                            <!--{if $doctypeid}-->
+                            {loop GetDocInfo5($doctypeid,'','','',0,1,8,1,'viewcount') $docinfo}
+                            <div style='display:none'><!--{echo $doc_star = GetCommentStar($docinfo[0]).'px';}--></div>
+                            <li>                                 
+                                <div class="ds-rank-title"><i class="$docinfo[1]"></i><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                                <div class="ds-rank-dudge"><span class="ds-judge-star"><i style="width:$doc_star"></i></span><span class="ds-docnail-readcount">{lang doc:doc_gong}$docinfo[9]{lang doc:doc_perdown}</span></div>                               
+                            </li>
+                            {/loop}
+                            <!--{/if}-->
+                        </ul>
+                    </div>
+                </div>
+            </div>           
+        </div>
+        {/loop}
+        <div style="clear:both;margin-top: 15px">$doc_ad2</div>
+    </div>
+</div>
+<div style="clear:both;height: 50px;"></div>
+<!--{template common/footer}-->

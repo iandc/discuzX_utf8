@@ -10,7 +10,6 @@
  */
 
 $lang = array (
-
   'undefined_action' => '未定义操作',
   'plugin_nonexistence' => '插件不存在或已关闭',
   'profile_username_protect' => '用户名包含被系统屏蔽的字符',
@@ -161,6 +160,7 @@ $lang = array (
   'credits_addfunds_toomuch' => '抱歉，您超出本月允许购买 {ec_maxcreditspermonth} 的限额',
   'credits_transaction_amount_invalid' => '抱歉，您要转账或兑换的积分数量输入有误',
   'credits_password_invalid' => '抱歉，您输入的密码错误',
+  'credits_transfer_msg_locked' => '抱歉，正在进行其他的积分转账操作，转账失败，请稍后再试',
   'extcredits_dataerror' => '抱歉，兑换失败，请与管理员联系',
   'start_time_is_greater_than_end_time' => '开始日期不能大于结束日期',
   'should_write_that' => '至少应该写点东西',
@@ -236,8 +236,10 @@ $lang = array (
   'task_not_found' => '任务文件丢失，{taskclassname}',
   'task_not_underway' => '不是进行中的任务',
   'user_banned' => '抱歉，您的 IP 地址不在允许范围内，或您的账号被禁用，无法访问本站点',
+  'user_banned_has_expiry' => '抱歉，您的账号被禁用，暂无法访问本站点。<br />预计解禁时间：{expiry}',
   'submit_seccode_invalid' => '抱歉，验证码填写错误',
   'submit_invalid' => '抱歉，您的请求来路不正确或表单验证串不符，无法提交',
+  'submit_islocked' => '抱歉，您当前的请求正在进行中，请勿重复提交',
   'word_banned' => '抱歉，您填写的内容包含不良信息而无法提交',
   'magics_use_success' => '道具 {magicname} 使用成功 ',
   'magicuse_object_once_limit' => '抱歉，已对该对象使用过此道具，不能重复使用',
@@ -308,6 +310,7 @@ $lang = array (
   'attachment_yetpay' => '您已购买过此附件，无需重复购买，现在将开始附件下载',
   'attachment_buyall' => '本帖所有附件购买成功 ',
   'attachment_buy' => '附件购买成功，开始下载“{filename}”',
+  'attachment_mobile_buy' => '附件购买成功',
   'no_privilege_postimage' => '抱歉，您目前没有权限上传图片，<a href="home.php?mod=spacecp&ac=usergroup" target="_blank">点击这里查看权限</a>',
   'no_privilege_postattach' => '抱歉，您目前没有权限上传附件，<a href="home.php?mod=spacecp&ac=usergroup" target="_blank">点击这里查看权限</a>',
   'thread_closed' => '该帖子已被关闭，不能评论！',
@@ -335,6 +338,7 @@ $lang = array (
   'thread_rate_duplicate' => '抱歉，您不能对同一个帖子重复评分',
   'thread_rate_range_self_invalid' => '抱歉，您的{extcreditstitle}不足，无法评分',
   'thread_rate_ctrl' => '抱歉，24 小时评分数超过限制',
+  'thread_rate_locked' => '抱歉，当前评分正在进行中，请稍后再试',
   'thread_rate_succeed' => '感谢您的参与，现在将转入评分前页面',
   'no_privilege_removerate' => '抱歉，您没有权限撤销评分',
   'thread_rate_removesucceed' => '评分撤销成功 ',
@@ -465,6 +469,7 @@ $lang = array (
   'lostpasswd_many_users_use_email' => '抱歉，存在多个使用此 Email 的用户，请填写您需要找回密码的用户名',
   'getpasswd_account_invalid' => '抱歉，创始人、受保护用户、拥有站点设置权限的用户不能使用取回密码功能',
   'getpasswd_send_succeed' => '取回密码的方法已通过 Email 发送到您的信箱中，<br />请在 3 天之内修改您的密码',
+  'getpasswd_has_send' => '取回密码的方法已通过 Email 发送到您的信箱中，如果您没有收到，请稍等15分钟后重试',
 
   'submit_verify_succeed' => '审核请求提交成功，现在将返回个人中心',
 
@@ -717,6 +722,7 @@ $lang = array (
   'memcp_credits_card_msg_succeed' => '<span class="xi1">{extcreditsval}{extcreditstitle}</span>，充值成功 ',
   'memcp_credits_addfunds_msg_incorrect' => '抱歉，您尚未输入需要充值的数量',
   'memcp_credits_addfunds_msg_notype' => '抱歉，您尚未选择支付方式',
+  'memcp_credits_exchange_msg_locked' => '抱歉，正在进行其他的积分兑换操作，兑换失败，请稍后再试',
   'credits_addfunds_amount_invalid' => '您单次购买的积分数量超出最大值 {ec_maxcredits} 或最小值 {ec_mincredits} 的限制',
   'memcp_credits_transfer_msg_self_incorrect' => '您无需给自己转账',
   'credits_transfer_balance_insufficient' => '抱歉，转账后 {title}不足 {minbalance}',
@@ -978,6 +984,7 @@ $lang = array (
   'magic_is_closed' => '此道具已被禁用',
   'magic_not_for_sale' => '此道具不能通过购买获得',
   'magic_groupid_limit' => '抱歉，您当前所在的用户组没有权限购买本道具',
+  'magics_locked' => '当前道具正在使用/卖出/赠送中，请稍后再试。',
   'bad_buynum' => '抱歉，您输入的购买数目有误',
   'not_enough_coupon' => '抱歉，您的代金券数目不足',
   'credit_is_not_enough' => '抱歉，您的积分不足购买此道具',
@@ -1014,7 +1021,7 @@ $lang = array (
   'location_login_succeed_mobile' => '欢迎您回来，{username}。点击进入登录前页面',
   'location_login_succeed' => '',
   'location_activation' => '您的帐号处于未激活状态，点击进行激活',
-  'login_succeed_inactive_member' => '欢迎您回来，{usergroup} {username}。您的帐号处于非激活状态，现在将转入控制面板',
+  'login_succeed_inactive_member' => '欢迎您回来，{usergroup} {username}。您的帐号处于非激活状态，部分功能可能无法正常使用，现在将转入密码安全页面',
   'login_succeed_password_change' => '您的账户存在安全隐患，建议立即修改密码',
   'login_question_empty' => '请选择安全提问以及填写正确的答案',
   'login_question_invalid' => '抱歉，安全提问答案填写错误',

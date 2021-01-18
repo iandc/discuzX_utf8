@@ -1,0 +1,42 @@
+.ds-type{
+
+}
+.ds-type > .ds-type-line{
+    margin-left:0px;
+}
+.ds-type > .ds-type-line > span{
+    height: 0;
+}
+.ds-type-line{   
+    margin:8px 0 8px 50px;
+}
+.ds-type-line span{
+    display:inline-block;
+    width: 40px;
+    height: 20px;
+    float: left;        
+    background: url(bg_repno.gif) no-repeat -240px -550px;
+}
+.ds-type-line input{
+    padding: 3px;
+}
+
+.ds-type-line input.sort{
+    width: 25px;
+    margin-right: 5px;
+}
+
+.ds-type-line a{
+    margin-left: 10px;
+}
+
+.ds-type-addtype,.ds-type-addbrother, .ds-type-addchlid {
+    padding-left: 17px;
+    line-height: 25px;
+    background: url(bg_repno.gif) no-repeat 0 1px;
+    color: #F60;
+}
+.doctype-tip{
+    margin-left: 10px;
+    color:#f00;
+}

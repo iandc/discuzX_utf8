@@ -62,7 +62,7 @@ class logging_ctl {
 			$cookietimecheck = !empty($_G['cookie']['cookietime']) || !empty($_GET['cookietime']) ? 'checked="checked"' : '';
 
 			if($seccodecheck) {
-				$seccode = random(6, 1) + $seccode{0} * 1000000;
+				$seccode = random(6, 1) + $seccode[0] * 1000000;
 			}
 
 			if($this->extrafile && file_exists($this->extrafile)) {
@@ -247,7 +247,7 @@ class logging_ctl {
 
 				if(!$freeze || !$this->setting['accountguard']['loginpwcheck']) {
 					$loginmessage = $_G['groupid'] == 8 ? 'login_succeed_inactive_member' : 'login_succeed';
-					$location = $invite || $_G['groupid'] == 8 ? 'home.php?mod=space&do=home' : dreferer();
+                    $location = $invite || $_G['groupid'] == 8 ? 'home.php?mod=spacecp&ac=profile&op=password' : dreferer();
 				} else {
 					$loginmessage = 'login_succeed_password_change';
 					$location = 'home.php?mod=spacecp&ac=profile&op=password';
@@ -513,6 +513,8 @@ class register_ctl {
 				if($this->extrafile && file_exists($this->extrafile)) {
 					require_once $this->extrafile;
 				}
+			} else {
+				$navtitle = $this->setting['reglinkname'];
 			}
 			$bbrulestxt = nl2br("\n$bbrulestxt\n\n");
 			$dreferer = dreferer();
@@ -529,15 +531,15 @@ class register_ctl {
 				}
 				$sendurl = false;
 			}
-			if(!$activationauth && $sendurl) {
+			if(!$activationauth) {
 				checkemail($_GET['email']);
 			}
 			if($sendurl) {
 				$hashstr = urlencode(authcode("$_GET[email]\t$_G[timestamp]", 'ENCODE', $_G['config']['security']['authkey']));
-				$registerurl = "{$_G[siteurl]}member.php?mod=".$this->setting['regname']."&amp;hash={$hashstr}&amp;email={$_GET[email]}";
+				$registerurl = $_G['setting']['securesiteurl']."member.php?mod=".$this->setting['regname']."&amp;hash={$hashstr}&amp;email={$_GET[email]}";
 				$email_register_message = lang('email', 'email_register_message', array(
 					'bbname' => $this->setting['bbname'],
-					'siteurl' => $_G['siteurl'],
+					'siteurl' => $_G['setting']['securesiteurl'],
 					'url' => $registerurl
 				));
 				if(!sendmail("$_GET[email] <$_GET[email]>", lang('email', 'email_register_subject'), $email_register_message)) {
@@ -668,9 +670,6 @@ class register_ctl {
 
 			$profile = $verifyarr = array();
 			foreach($_G['cache']['fields_register'] as $field) {
-				if(defined('IN_MOBILE')) {
-					break;
-				}
 				$field_key = $field['fieldid'];
 				$field_val = $_GET[''.$field_key];
 				if($field['formtype'] == 'file' && !empty($_FILES[$field_key]) && $_FILES[$field_key]['error'] == 0) {
@@ -892,11 +891,11 @@ class register_ctl {
 					$idstring = random(6);
 					$authstr = $this->setting['regverify'] == 1 ? "$_G[timestamp]\t2\t$idstring" : '';
 					C::t('common_member_field_forum')->update($_G['uid'], array('authstr' => $authstr));
-					$verifyurl = "{$_G[siteurl]}member.php?mod=activate&amp;uid={$_G[uid]}&amp;id=$idstring";
+					$verifyurl = $_G['setting']['securesiteurl']."member.php?mod=activate&amp;uid={$_G[uid]}&amp;id=$idstring";
 					$email_verify_message = lang('email', 'email_verify_message', array(
 						'username' => $_G['member']['username'],
 						'bbname' => $this->setting['bbname'],
-						'siteurl' => $_G['siteurl'],
+						'siteurl' => $_G['setting']['securesiteurl'],
 						'url' => $verifyurl
 					));
 					if(!sendmail("$username <$email>", lang('email', 'email_verify_subject'), $email_verify_message)) {

@@ -37,7 +37,7 @@ class ucclient_db {
 			$this->halt('Can not connect to MySQL server');
 		}
 
-        $this->link->options(MYSQLI_OPT_LOCAL_INFILE, false);
+		$this->link->options(MYSQLI_OPT_LOCAL_INFILE, false);
 
 		if($this->version() > '4.1') {
 			if($dbcharset) {

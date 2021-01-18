@@ -11,6 +11,9 @@ class plugin_qxt_login {
         if ($_G['uid']) {
             $_G['bindmb'] = DB::result_first("SELECT mobile FROM " . DB::table('qxt_login_user') . " WHERE uid = $_G[uid]");
         }
+        //add by yangJie
+        require_once libfile('isipinchina', 'plugin/ip');
+        //end of yj
     }
 
     function common() {
@@ -60,6 +63,12 @@ class plugin_qxt_login_member extends plugin_qxt_login {
         if (!$_G['cache']['plugin']['qxt_login']['issecreg']) {
             return;
         }
+        //add by yangJie
+        $isIpInChina = is_ip_in_china($_G['clientip']);
+        if($isIpInChina != 1) {
+            return;
+        }
+        //end of yj
         include_once template('qxt_login:reghook');
         return $reghook;
     }
@@ -69,6 +78,12 @@ class plugin_qxt_login_member extends plugin_qxt_login {
         if($_G['uid']){
             return;
         }
+        //add by yangJie
+        $isIpInChina = is_ip_in_china($_G['clientip']);
+        if($isIpInChina != 1) {
+            return;
+        }
+        //end of yj
         if ($_G['cache']['plugin']['qxt_login']['issecreg']) {
             $_G[setting][seccodedata][rule][register][allow] = 0;
             if (submitcheck('regsubmit', 0, $seccodecheck, $secqaacheck)) {
@@ -98,7 +113,7 @@ class plugin_qxt_login_member extends plugin_qxt_login {
         }
         if ($_G['cache']['plugin']['qxt_login']['loginbymb']) {
             $mb = daddslashes(trim($_GET['username']));
-            if (preg_match("/^1[34578]{1}\d{9}$/", $mb)) {
+            if (preg_match("/^1[12345789]{1}\d{9}$/", $mb)) {
                 if (submitcheck('loginsubmit')) {
                     $bind = DB::fetch_first("SELECT * FROM " . DB::table('qxt_login_user') . " WHERE mobile = '$mb'");
                     if ($bind['uid']) {

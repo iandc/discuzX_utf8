@@ -2,7 +2,7 @@
 	<meta name="application-name" content="$_G['setting']['bbname']" />
 	<meta name="msapplication-tooltip" content="$_G['setting']['bbname']" />
 	<!--{if $_G['setting']['portalstatus']}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][1]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['portal']) ? $_G['scheme'].'://'.$_G['setting']['domain']['app']['portal'] : $_G[siteurl].'portal.php'};icon-uri={$_G[siteurl]}{IMGDIR}/portal.ico" /><!--{/if}-->
-	<meta name="msapplication-task" content="name=$_G['setting']['navs'][2]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['forum']) ? $_G['scheme'].'//'.$_G['setting']['domain']['app']['forum'] : $_G[siteurl].'forum.php'};icon-uri={$_G[siteurl]}{IMGDIR}/bbs.ico" />
+	<meta name="msapplication-task" content="name=$_G['setting']['navs'][2]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['forum']) ? $_G['scheme'].'://'.$_G['setting']['domain']['app']['forum'] : $_G[siteurl].'forum.php'};icon-uri={$_G[siteurl]}{IMGDIR}/bbs.ico" />
 	<!--{if $_G['setting']['groupstatus']}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][3]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['group']) ? $_G['scheme'].'://'.$_G['setting']['domain']['app']['group'] : $_G[siteurl].'group.php'};icon-uri={$_G[siteurl]}{IMGDIR}/group.ico" /><!--{/if}-->
 	<!--{if helper_access::check_module('feed')}--><meta name="msapplication-task" content="name=$_G['setting']['navs'][4]['navname'];action-uri={echo !empty($_G['setting']['domain']['app']['home']) ? $_G['scheme'].'://'.$_G['setting']['domain']['app']['home'] : $_G[siteurl].'home.php'};icon-uri={$_G[siteurl]}{IMGDIR}/home.ico" /><!--{/if}-->
 	<!--{if $_G['basescript'] == 'forum' && $_G['setting']['archiver']}-->
@@ -27,6 +27,16 @@
 		<link rel="stylesheet" type="text/css" id="diy_common" href="{$_G['setting']['csspath']}{STYLEID}_css_diy.css?{VERHASH}" />
 	<!--{/if}-->
 </head>
+
+<!--{if strpos($_G['siteurl'], 'bbs') !== false}-->
+	<!--{eval $_G['wwwUrl'] = str_replace('bbs', 'www', $_G['siteurl']);}-->
+	<!--{eval $_G['eduUrl'] = str_replace('bbs', 'edu', $_G['siteurl']);}-->
+	<!--{eval $_G['blogUrl'] = str_replace('bbs', 'blog', $_G['siteurl']);}-->
+<!--{elseif strpos($_G['siteurl'], 'blog') !== false}-->
+	<!--{eval $_G['wwwUrl'] = str_replace('blog', 'www', $_G['siteurl']);}-->
+	<!--{eval $_G['eduUrl'] = str_replace('blog', 'edu', $_G['siteurl']);}-->
+	<!--{eval $_G['blogUrl'] = str_replace('blog', 'blog', $_G['siteurl']);}-->
+<!--{/if}-->
 
 <body id="nv_{$_G[basescript]}" class="pg_{CURMODULE}{if $_G['basescript'] === 'portal' && CURMODULE === 'list' && !empty($cat)} {$cat['bodycss']}{/if}" onkeydown="if(event.keyCode==27) return false;" style="background-color: #fff !important; min-width: 1010px; position: relative;">
 	<div id="append_parent"></div><div id="ajaxwaitid"></div>
@@ -136,7 +146,38 @@
 					</ul>
 					
 					<!--{hook/global_nav_extra}-->
+
+					<style>
+					.nav2{
+					padding: 10px;
+					background-color: #fff;
+					border-bottom: 1px solid #ddd;
+					    				box-shadow:0px 15px 10px -15px #ddd;
+					}
+					.nav2_con a,.nav2_con span{
+							display: inline-block;
+					    padding: 0 5px;
+					    color: #0b68a9;
+					    font-size: 13px;
+					}
+					#nv{
+						height: 75px !important;
+					}
+					#nv ul{
+						height: 35px !important;
+					}
+				</style>
+				<div class="nav2 w">
+					<div class="nav2_con">
+					<span style="color:#F36F60; font-weight: 600;">创芯云服务&nbsp;&nbsp;:</span>
+					            <a href="{$_G['wwwUrl']}investment/index.html" target="_blank">创芯投融资</a>&nbsp;&nbsp;|
+					            <a href="{$_G['eduUrl']}" target="_blank">创芯大讲堂 </a>&nbsp;|
+					            <span>静待更多...</span>
+					</div>
 				</div>
+				</div>
+				
+
 				<!--{if !empty($_G['setting']['plugins']['jsmenu'])}-->
 					<ul class="p_pop h_pop" id="plugin_menu" style="display: none">
 					<!--{loop $_G['setting']['plugins']['jsmenu'] $module}-->

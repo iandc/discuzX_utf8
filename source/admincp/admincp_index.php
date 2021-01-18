@@ -11,10 +11,14 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
     exit('Access Denied');
 }
 
-if(@file_exists(DISCUZ_ROOT.'./install/index.php') && !DISCUZ_DEBUG) {
-    @unlink(DISCUZ_ROOT.'./install/index.php');
-    if(@file_exists(DISCUZ_ROOT.'./install/index.php')) {
-        dexit('Please delete install/index.php via FTP!');
+$sensitivedirs = array('./', './uc_server/', './ucenter/');
+
+foreach ($sensitivedirs as $sdir) {
+    if(@file_exists(DISCUZ_ROOT.$sdir.'install/index.php') && !DISCUZ_DEBUG) {
+        @unlink(DISCUZ_ROOT.$sdir.'install/index.php');
+        if(@file_exists(DISCUZ_ROOT.$sdir.'install/index.php')) {
+            dexit('Please delete '.$sdir.'install/index.php via FTP!');
+        }
     }
 }
 
@@ -113,12 +117,12 @@ cpheader();
 shownav();
 
 require_once libfile('function/cloudaddons');
-$newversion = dunserialize($_G['setting']['cloudaddons_newversion']);
+$newversion = (CHARSET == 'utf-8') ? dunserialize($_G['setting']['cloudaddons_newversion']) : json_decode($_G['setting']['cloudaddons_newversion'],true);
 if(empty($newversion['newversion']) || !is_array($newversion['newversion']) || abs($_G['timestamp'] - $newversion['updatetime']) > 86400 || (isset($_GET['checknewversion']) && $_G['formhash'] == $_GET['formhash'])) {
     $newversion = json_decode(cloudaddons_open('&mod=app&ac=upgrade'), true);
     if(!empty($newversion['newversion'])){
         $newversion['updatetime'] = $_G['timestamp'];
-        C::t('common_setting')->update('cloudaddons_newversion', $newversion);
+        C::t('common_setting')->update('cloudaddons_newversion', ((CHARSET == 'utf-8') ? $newversion : json_encode($newversion)));
         updatecache('setting');
     }else{
         $newversion = array();
@@ -226,6 +230,35 @@ if(isfounder()) {
     }
 }
 
+showtableheader('&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x68C0;&#x6D4B;', 'fixpadding');
+$env_ok = true;
+$now_ver_gd = function_exists('gd_info')? gd_info() : false;
+$now_ver = array('PHP' => constant('PHP_VERSION'), 'MySQL' => helper_dbtool::dbversion(), 'gethostbyname' => function_exists('gethostbyname'), 'file_get_contents' => function_exists('file_get_contents'), 'xml_parser_create' => function_exists('xml_parser_create'),
+    'FileSock Function' => (function_exists('fsockopen') || function_exists('pfsockopen') || function_exists('stream_socket_client') || function_exists('curl_init')), 'GD' => ($now_ver_gd ? preg_replace('/[^0-9.]+/', '', $now_ver_gd['GD Version']) : false));
+$req_ver = array('PHP' => '5.3', 'MySQL' => '5.0', 'filter_var' => true, 'gethostbyname' => true, 'file_get_contents' => true, 'xml_parser_create' => true, 'FileSock Function' => true, 'GD' => '1.0');
+$sug_ver = array('PHP' => '7.1', 'MySQL' => '5.7', 'filter_var' => true, 'gethostbyname' => true, 'file_get_contents' => true, 'xml_parser_create' => true, 'FileSock Function' => true, 'GD' => '2.0');
+foreach ($now_ver as $key => $value) {
+    if($req_ver[$key] === true) {
+        if (!$value) {
+            showtablerow('', array('', 'class="td21" style="text-align:right;"'),
+                '<em class="unfixed">'.lang("admincp", "req_not_found", array('req' => $key)).'</em>'
+            );
+            $env_ok = false;
+        }
+    } else if (version_compare($value, $req_ver[$key], '<')) {
+        showtablerow('', array('', 'class="td21" style="text-align:right;"'),
+            '<em class="unfixed">'.lang("admincp", "req_ver_too_low", array('req' => $key, 'now_ver' => $value, 'sug_ver' => $sug_ver[$key], 'req_ver' => $req_ver[$key])).'</em>'
+        );
+        $env_ok = false;
+    }
+}
+if ($env_ok) {
+    showtablerow('', array('', 'class="td21" style="text-align:right;"'),
+        '<em class="fixed">'.lang("admincp", "req_ok", array('version' => constant("DISCUZ_VERSION").' R'.constant("DISCUZ_RELEASE").' '.strtoupper(constant("CHARSET")))).'</em>'
+    );
+}
+showtablefooter();
+
 showtableheader('home_onlines', 'nobottom fixpadding');
 echo '<tr><td>'.$onlines.'</td></tr>';
 showtablefooter();
@@ -253,6 +286,13 @@ showtablerow('', array(), array(
 ));
 showtablefooter();
 showformfooter();
+
+showtableheader('Discuz! &#x5F00;&#x6E90;&#x8D21;&#x732E;&#x8005;', 'fixpadding');
+showtablerow('', array('', 'class="td21" style="text-align:right;"'),
+    '<a href="https://gitee.com/discuz/DiscuzX/contributors?ref=master" class="lightlink2 smallfont" target="_blank">Click Here To See Them</a>'
+);
+showtablefooter();
+
 
 loaducenter();
 
@@ -336,7 +376,7 @@ echo '<div class="clear"></div>';
 showtableheader('home_dev', 'fixpadding');
 showtablerow('', array('class="vtop td24 lineheight"'), array(
     cplang('home_dev_copyright'),
-    '<span class="bold"><a href="http://www.comsenz.com" class="lightlink2" target="_blank">&#x5317;&#x4EAC;&#x5EB7;&#x76DB;&#x65B0;&#x521B;&#x79D1;&#x6280;&#x6709;&#x9650;&#x8D23;&#x4EFB;&#x516C;&#x53F8;</a></span>'
+    '<span class="bold">&#x817e;&#x8baf;&#x4e91;&#x8ba1;&#x7b97;&#xff08;&#x5317;&#x4eac;&#xff09;&#x6709;&#x9650;&#x8d23;&#x4efb;&#x516c;&#x53f8;</span>'
 ));
 showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight smallfont team"'), array(
     cplang('home_dev_manager'),
@@ -395,7 +435,7 @@ showtablerow('', array('class="vtop td24 lineheight"', 'class="lineheight"'), ar
 	<a href="http://www.discuz.net/redirect.php?service" class="lightlink2" target="_blank">&#x8D2D;&#x4E70;&#x6388;&#x6743;</a>,
 	<a href="http://www.discuz.net/" class="lightlink2" target="_blank">&#x8BA8;&#x8BBA;&#x533A;</a>,
 	<a href="'.ADMINSCRIPT.'?action=cloudaddons" class="lightlink2" target="_blank">Discuz! &#24212;&#29992;&#20013;&#24515;</a>,
-	<a href="https://gitee.com/ComsenzDiscuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>
+	<a href="https://gitee.com/discuz/DiscuzX" class="lightlink2" target="_blank">Discuz! X Git</a>
 '));
 showtablefooter();
 

@@ -1,0 +1,275 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="./source/plugin/doc/css/com.css"/>
+<link rel="stylesheet" type="text/css" href="./source/plugin/doc/css/ds-upload.css" />
+<script type="text/javascript" src="./source/plugin/doc/js/jquery.min.js"></script>
+<script type="text/javascript" src="./source/plugin/doc/js/swfupload.js"></script>
+<script type="text/javascript" src="./source/plugin/doc/js/swfupload.queue.js"></script>
+<script type="text/javascript" src="./source/plugin/doc/js/fileprogress.js"></script>
+<script type="text/javascript" src="./source/plugin/doc/js/handlers.js"></script>
+<script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function ($) {
+        var width = $("#wp").width();
+        var lwidth = width - 370;
+        $(".ds-upload-left").width(lwidth - 24);
+
+        $(".ds-all-type span").click(function () {
+            var type = $("[name=upload_file_doctype]").val();
+			var freepage = $("[name=upload_file_freepage]").val();
+			var readpay = $("[name=upload_file_readpay]").val();
+			var downpay = $("[name=upload_file_downpay]").val();
+			   
+            $("#ds-upload-form .ds-file-body").each(function () {
+                var p = jQuery(this);
+                if (p.css("display") == "none")
+                    return;
+                var title = p.find("[name=upload_file_title]").val();
+                var short = p.find("[name=upload_file_short]").val();
+                var key = p.find("[name=upload_file_key]").val();
+				if(freepage=="")
+					freepage = p.find("[name=upload_file_freepage]").val();
+				if(readpay=="")
+					readpay = p.find("[name=upload_file_readpay]").val();
+				if(downpay=="")
+					downpay = p.find("[name=upload_file_downpay]").val();
+                var doctype = type;
+                var docpath = p.find("[name=upload_file_docpath]").val();
+                var docsize = p.find("[name=upload_file_docsize]").val();
+                title = title.replace("(", "").replace(")", "");
+                short = short.replace("(", "").replace(")", "");
+                key = key.replace("(", "").replace(")", "");
+                freepage = parseInt(freepage);
+                readpay = parseInt(readpay);
+                downpay = parseInt(downpay); 
+				
+                if (isNaN(freepage)) {
+                    freepage = 0;
+                }
+                if (isNaN(readpay)) {
+                    readpay = 0;
+                }
+                if (isNaN(downpay)) {
+                    downpay = 0;
+                }
+                if (title == "") {
+                    showDialog("{lang doc:upload_titlenonull}", "notice", "", "", 0);
+                    return false;
+                }
+                if (short == "") {
+                    showDialog("{lang doc:upload_shortnonull}", "notice", "", "", 0);
+                    return false;
+                }
+                if (doctype == "" || doctype == "-1") {
+                    showDialog("{lang doc:upload_typenonull}", "notice", "", "", 0);
+                    return false;
+                }
+                if (key == "") {
+                    showDialog("{lang doc:upload_keynonull}", "notice", "", "", 0);
+                    return false;
+                }
+                p.slideUp({height: 0});
+                p.parent().height('35px');
+                jQuery.post("plugin.php?id=doc:upload", {action: "submit", title: title, short: short, key: key, freepage: freepage, readpay: readpay, downpay: downpay, doctype: doctype, docpath: docpath, docsize: docsize, formhash: '{FORMHASH}'}, function (data) {
+                    p.parent().find(".ds-file-head-tip").html(data);
+                });
+				$(".ds-all-type").hide();
+            });
+
+        });
+    });
+    var swfu;
+    window.onload = function () {
+        var settings = {
+            flash_url: "./source/plugin/doc/js/swfupload.swf",
+            upload_url: "./source/plugin/doc/savedoc.php",
+            post_params: {"PHPSESSID": "<?php echo session_id(); ?>"},
+            file_size_limit: '$fileupload',
+            file_types: "*.doc;*.docx;*.ppt;*.pptx;*.xls;*.xlsx;*.pdf;*.txt;*.wps;*.dps;*.et",
+            file_types_description: "{lang doc:upload_doc}",
+            file_upload_limit: 0,
+            file_queue_limit: 0,
+            custom_settings: {
+                progressTarget: "swfprogress",
+                cancelButtonId: "btnCancel"
+            },
+            debug: false,
+            button_image_url: "./source/plugin/doc/css/swfbutton.png",
+            button_width: "210",
+            button_height: "44",
+            button_placeholder_id: "swfbutton",
+            button_text: "",
+            button_text_style: "",
+            button_text_left_padding: 38,
+            button_text_top_padding: 8,
+            button_cursor: SWFUpload.CURSOR.HAND,
+            file_queued_handler: fileQueued,
+            file_queue_error_handler: fileQueueError,
+            file_dialog_complete_handler: fileDialogComplete,
+            upload_start_handler: uploadStart,
+            upload_progress_handler: uploadProgress,
+            upload_error_handler: uploadError,
+            upload_success_handler: uploadSuccess,
+            upload_complete_handler: uploadComplete,
+            queue_complete_handler: queueComplete
+        };
+
+        swfu = new SWFUpload(settings);
+    };
+    function uploadSuccess(d, b)
+    {
+        var path = b;
+        var size = d.size;
+        var name = d.name;
+        var fileinfo = '<div class="ds-file"><div class="ds-file-head">' + name + '<div class="ds-file-head-tip"></div></div><div class="ds-file-body"><input type="hidden" name="upload_file_docpath" value="' + path + '" /><input type="hidden" name="upload_file_docsize" value="' + size + '" /><div><div class="ds-file-title">{lang doc:upload_title}</div><input type="text" class="ds-file-text" name="upload_file_title" value="' + name.substr(0, name.lastIndexOf(".")) + '"></div><div><div class="ds-file-title">{lang doc:upload_short}</div><textarea class="ds-file-textarea" name="upload_file_short">' + name.substr(0, name.lastIndexOf(".")) + '</textarea></div><div><div class="ds-file-title">{lang doc:upload_type}</div>$typeop0 $typeop1 $typeop2 $typeop3<input type="hidden" name="upload_file_doctype" value="" /></div><div><div class="ds-file-title">{lang doc:upload_key}</div><input type="text" class="ds-file-text"  name="upload_file_key" value="' + name.substr(0, name.lastIndexOf(".")) + '"></div><div><div class="ds-file-title">{lang doc:upload_freeread}</div><input type="text" class="ds-file-text" style="width:50px" name="upload_file_freepage" value="5"><span>{lang doc:upload_page}</span></div><div><div class="ds-file-title">{lang doc:upload_readpay}$doc_readcreditname[0]:</div><input type="text" class="ds-file-text" style="width:50px" name="upload_file_readpay" value="$doc_readcreditsize"><span>$doc_readcreditname[1]</span></div><div><div class="ds-file-title">{lang doc:upload_downpay}$doc_downcreditname[0]:</div><input type="text" class="ds-file-text" style="width:50px" name="upload_file_downpay" value="$doc_downcreditsize"><span>$doc_downcreditname[1]</span></div><a class="ds-file-submit" href="javascript:void(0)">{lang doc:upload_save}</a></div></div>';
+        jQuery("#ds-upload-form").append(fileinfo);
+        jQuery("input[name='upload_file_freepage']").change(function () {
+            if (jQuery(this).val() == '-1') {
+                jQuery(this).parent().parent().find("input[name='upload_file_readpay']").val('0');
+                jQuery(this).parent().parent().find("input[name='upload_file_readpay']").attr("disabled", "disabled");
+            } else {
+                jQuery(this).parent().parent().find("input[name='upload_file_readpay']").removeAttr("disabled");
+            }
+        });
+        jQuery("select").change(function () {
+            var id = jQuery(this).val();
+            jQuery(this).nextAll("[name=upload_file_doctype]").val(id);
+            jQuery(this).nextAll("select").hide();
+            jQuery(this).nextAll("[name='seltype_" + id + "']").show();
+        });
+        jQuery(".ds-all-type").show();
+        jQuery(".ds-file-submit").unbind().bind('click', function () {
+            var p = jQuery(this).parent();
+            var title = p.find("[name=upload_file_title]").val();
+            var short = p.find("[name=upload_file_short]").val();
+            var key = p.find("[name=upload_file_key]").val();
+            var freepage = p.find("[name=upload_file_freepage]").val();
+            var readpay = p.find("[name=upload_file_readpay]").val();
+            var downpay = p.find("[name=upload_file_downpay]").val();
+            var doctype = p.find("[name=upload_file_doctype]").val();
+            var docpath = p.find("[name=upload_file_docpath]").val();
+            var docsize = p.find("[name=upload_file_docsize]").val();
+            title = title.replace("(", "").replace(")", "");
+            short = short.replace("(", "").replace(")", "");
+            key = key.replace("(", "").replace(")", "");
+            freepage = parseInt(freepage);
+            readpay = parseInt(readpay);
+            downpay = parseInt(downpay);
+
+            if (isNaN(freepage)) {
+                freepage = 0;
+            }
+            if (isNaN(readpay)) {
+                readpay = 0;
+            }
+            if (isNaN(downpay)) {
+                downpay = 0;
+            }
+            if (title == "") {
+                showDialog("{lang doc:upload_titlenonull}", "notice", "", "", 0);
+                return false;
+            }
+            if (short == "") {
+                showDialog("{lang doc:upload_shortnonull}", "notice", "", "", 0);
+                return false;
+            }
+            if (doctype == "" || doctype == "-1") {
+                showDialog("{lang doc:upload_typenonull}", "notice", "", "", 0);
+                return false;
+            }
+            if (key == "") {
+                showDialog("{lang doc:upload_keynonull}", "notice", "", "", 0);
+                return false;
+            }
+            p.slideUp({height: 0});
+            p.parent().height('35px');
+            jQuery.post("plugin.php?id=doc:upload", {action: "submit", title: title, short: short, key: key, freepage: freepage, readpay: readpay, downpay: downpay, doctype: doctype, docpath: docpath, docsize: docsize, formhash: '{FORMHASH}'}, function (data) {
+                p.parent().find(".ds-file-head-tip").html(data);
+            });
+        });
+        return false;
+    }
+    function uploadStart(a)
+    {
+        document.getElementById("swfprogress").style.display = 'block';
+    }
+    function fileQueueError(a)
+    {
+        showDialog("{lang doc:upload_uploadfalse}", "notice", "", "", 0);
+        return false;
+    }
+    function uploadError(b)
+    {
+        showDialog("{lang doc:upload_uploadfalse}", "notice", "", "", 0);
+        return false;
+    }
+    function queueComplete(c)
+    {
+        document.getElementById("swfprogress").style.display = 'none';
+        return true;
+    }
+</script>
+<div id="wp" class="wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="$_G['setting']['bbname']" href="./">$_G['setting']['bbname']</a><em></em><a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->">$doc_name</a><em></em>
+            {lang doc:doc_uploaddoc}</div>
+    </div>
+    <div class="ds-upload">
+        <div class="ds-upload-title">
+            {lang doc:doc_uploaddoc}</div>
+        <div class="ds-upload-body">
+            <div class='ds-upload-left'>
+                <div id="ds-upload-button">
+                    <div id="swfbutton">
+                    </div>
+                    <div id="divStatus">
+                    </div>
+                    <input id="btnCancel" type="button" style="display: none" />
+                </div>
+                <div id="swfprogress">
+                </div>
+            </div>
+            <div class="ds-upload-right">
+                <ul type="square">
+                    <li>
+                        {lang doc:Notice1}</li>
+                    <li>
+                        {lang doc:Notice2}:<font color="red">$doc_docsize</font></li>
+                    <li>
+                        {lang doc:Notice3}
+                    </li>
+                    <li>
+                        <i class="doc"></i> doc,docx <i class="ppt"></i> ppt,pptx <i class="xls"></i> xls,xlsx
+                    </li>
+                    <li>
+                        <i class="wps"></i>wps <i class="dps"></i>dps <i class="et"></i>et
+                        <i class="pdf"></i> pdf
+                        <i class="txt"></i> txt
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ds-all-type">
+		<div>
+			<div class='ds-file-title'>{lang doc:upload_all_type}</div>$typeop0 $typeop1 $typeop2 $typeop3
+			<input type="hidden" name="upload_file_doctype" value="" />
+		</div>
+		<div>
+			<div class="ds-file-title">{lang doc:upload_freeread}</div>
+			<input type="text" class="ds-file-text" style="width:50px" name="upload_file_freepage" value="5"><span>{lang doc:upload_page}</span>
+		</div>
+		<div>
+			<div class="ds-file-title">{lang doc:upload_readpay}$doc_readcreditname[0]:</div>
+			<input type="text" class="ds-file-text" style="width:50px" name="upload_file_readpay" value="$doc_readcreditsize"><span>$doc_readcreditname[1]</span>
+		</div>
+		<div>
+			<div class="ds-file-title">{lang doc:upload_downpay}$doc_downcreditname[0]:</div>
+			<input type="text" class="ds-file-text" style="width:50px" name="upload_file_downpay" value="$doc_downcreditsize"><span>$doc_downcreditname[1]</span>
+		</div>
+        <span>{lang doc:upload_all_save}</span>
+    </div>
+    <div id="ds-upload-form"></div>
+    <a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->" class="ds-file-return">{lang doc:upload_return}</a>
+</div>
+<div style="clear:both;height: 100px"></div>

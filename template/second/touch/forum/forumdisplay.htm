@@ -26,6 +26,56 @@
             <!--{/if}-->
         </span>
     </div>
+
+    <div class="navs" id="navs">
+        <ul class="clearfix">
+            <li><a href="{$_G['wwwUrl']}">资讯</a></li>
+            <li><a href="{$_G['blogUrl']}">博客</a></li>
+            <li><a href="{$_G['eduUrl']}">课程</a></li>
+            <li><a href="/">论坛</a></li>
+        </ul>
+    </div>
+    <style>
+        #navs{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: #fff !important;
+            z-index: 99;
+        }
+        #navs ul{
+            width: 100%;
+            height: 100%;
+        }
+        #navs ul li{
+            float: left;
+            width: 25%;
+            text-align: center;
+        }
+        #navs ul li a{
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        $(function(){
+            $(document).on('scroll',function(){
+              if($(document).scrollTop() > 180){
+                 $('#navs').css({
+                     "position":"fixed",
+                     "top":0,
+                     "border-bottom":"1px solid #eee",
+                     "background":"#eee"
+             })
+            }else{
+               $('#navs').css({
+                   "position":"static",
+                   "border-bottom":"none"
+               })
+            }
+          })
+        })
+    </script>
+
 </header>
 <!-- header end -->
 

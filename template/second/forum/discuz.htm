@@ -41,7 +41,7 @@
 			<div class="y">
 				<!--{hook/index_nav_extra}-->
 				<!--{if $_G['uid']}--><a href="forum.php?mod=guide&view=my" title="{lang my_posts}" class="xi2">{lang my_posts}</a><!--{/if}--><!--{if !empty($_G['setting']['search']['forum']['status'])}--><!--{if $_G['uid']}--><span class="pipe">|</span><!--{/if}--><a href="forum.php?mod=guide&view=new" title="{lang show_newthreads}" class="xi2">{lang show_newthreads}</a><!--{/if}-->
-			</div>
+			</div> 
 		</div>
 	<!--{/if}-->
 	<!--[diy=diy_chart]--><div id="diy_chart" class="area"></div><!--[/diy]-->
@@ -85,7 +85,7 @@
 					<td valign="top" class="category_l2">
 						<div>
 					    <div id="tit4">
-					        <span class="select"><a href="forum.php?mod=guide&view=newthread" target="_blank">{lang collection_lastthread}</a></span>
+					        <span class="select"><a href="http://bbs.eetop.cn/newthread.html" target="_blank">{lang collection_lastthread}</a></span>
 					        <span $currentview['digest']> <a href="forum.php?mod=guide&view=digest" target="_blank">精华帖</a> </span>
 					        <span><a href="other.php?mod=block">悬赏</a></span>
 					    </div>
@@ -149,7 +149,8 @@
 					<td valign="top" class="category_l3">
 						<div class="hottiebox">
 							<div id="tit2">
-					        <span><a href="http://blog.eetop.cn/" target="_blank">{lang blog}</a></span>
+					        <span class="select"><a href="http://blog.eetop.cn/" target="_blank">{lang blog}</a></span>
+					        <span><a href="http://blog.eetop.cn/" target="_blank">资讯</a></span>
 					    </div>
 					        <ul class="category_newlist">
 					        	<!--{block/109}-->
@@ -626,3 +627,10 @@
 
 <!--{if empty($_G['setting']['disfixednv_forumindex']) }--><script>fixed_top_nv();</script><!--{/if}-->
 <!--{template common/footer}-->
+<!-- <style>
+	.tm{
+		display: none;
+	}
+</style>
+ -->
+

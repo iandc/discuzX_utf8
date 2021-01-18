@@ -1,0 +1,114 @@
+<link href="./source/plugin/doc/css/com.css" rel="stylesheet" type="text/css"/>
+<link href="./source/plugin/doc/css/ds-type.css?99999d9996" rel="stylesheet" type="text/css"/>
+<script src="./source/plugin/doc/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $(document).delegate(".ds-type-addbrother", "click", function () {
+            var line = $(this).parent();
+            var lin = "";
+            if ($(this).parent().parent().parent().parent().attr("class") == "ds-type") {
+                lin = '<div class="ds-type-line">  <span></span><input type="text" class="sort" value="0"/><input type="text" class="text" data-id="-1" value="{lang doc:type_newtype}"/> <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a> <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a></div>';
+            } else {
+                lin = '<div class="ds-type-line">  <span></span><input type="text" class="sort" value="0"/><input type="text" class="text" data-id="-1" value="{lang doc:type_newtype}"/> <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a> <a href="javascript:void" class="ds-type-addchlid">{lang doc:type_addchlid}</a> <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a></div>';
+            }
+            line.after(lin);
+            $(".doctype-tip").text("{lang doc:type_nosubmit}");
+        });
+        $(document).delegate(".ds-type-addchlid", "click", function () {
+            var line = $(this).parent();
+            var lin = "";
+            if ($(this).parent().parent().parent().attr("class") == "ds-type") {
+                lin = '<div class="ds-type-line">  <span></span><input type="text" class="sort" value="0"/><input type="text" class="text" data-id="-1" value="{lang doc:type_newtype}"/> <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a> <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a></div>';
+            } else {
+                lin = '<div class="ds-type-line">  <span></span><input type="text" class="sort" value="0"/><input type="text" class="text" data-id="-1" value="{lang doc:type_newtype}"/> <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a> <a href="javascript:void" class="ds-type-addchlid">{lang doc:type_addchlid}</a> <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a></div>';
+            }
+            line.append(lin);
+            $(".doctype-tip").text("{lang doc:type_nosubmit}");
+        });
+        $(document).delegate(".ds-type-del", "click", function () {
+            var line = $(this).parent();
+            typeid = line.children("input.text").attr("data-id");
+
+            if (line.find(".ds-type-line").length > 0) {
+                alert("{lang doc:type_confirm_delchild}");
+                return;
+            }
+
+            if (confirm("{lang doc:type_confirm_del}")) {
+                $.post("admin.php", {action: "plugins", operation: "config", identifier: "doc", pmod: "type", formhash: "{FORMHASH}", typeid: typeid}, function () {
+                    location = location + "&update=1&formhash={FORMHASH}";
+                    line.remove();
+                });
+            }
+        });
+        $(document).delegate("input", "change", function () {
+            $(".doctype-tip").text("{lang doc:type_nosubmit}");
+        });
+        var i = 0;
+        var type = "";
+        $("#btn_submit").click(function () {
+            i = 0;
+            type = "";
+            findchild($(".ds-type"), 0);
+            if (type == "") {
+                type = "-1,{lang doc:type_newtype},0,0|";
+            }
+
+            $.post("admin.php", {action: "plugins", operation: "config", identifier: "doc", pmod: "type", formhash: "{FORMHASH}", type: type}, function () {
+                location = location + "&update=1&formhash={FORMHASH}";
+            });
+        });
+
+        function findchild(parent, id) {
+            var line = parent.children(".ds-type-line");
+            line.each(function () {
+                type += $(this).children("input.text").attr("data-id") + "," + $(this).children("input.text").val() + "," + $(this).children("input.sort").val() + "," + id + "|";
+                findchild($(this), $(this).children("input.text").attr("data-id"));
+            });
+        }
+    });
+</script>
+<div class="ds-type">
+    {loop GetDocType(0) $doctype}   
+    <div class="ds-type-line">
+        <span></span> 
+        <input type="text" class="sort" value="$doctype[2]"/>
+        <input type="text" class="text" data-id="$doctype[0]" value="$doctype[1]"/>
+        <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a>
+        <a href="javascript:void" class="ds-type-addchlid">{lang doc:type_addchlid}</a>
+        <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a>
+        {loop GetDocType($doctype[0]) $doctype}   
+        <div class="ds-type-line">
+            <span></span> 
+            <input type="text" class="sort" value="$doctype[2]"/>
+            <input type="text" class="text" data-id="$doctype[0]" value="$doctype[1]"/>
+            <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a>
+            <a href="javascript:void" class="ds-type-addchlid">{lang doc:type_addchlid}</a>
+            <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a>
+            {loop GetDocType($doctype[0]) $doctype}   
+            <div class="ds-type-line">
+                <span></span> 
+                <input type="text" class="sort" value="$doctype[2]"/>
+                <input type="text" class="text" data-id="$doctype[0]" value="$doctype[1]"/>
+                <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a>
+                <a href="javascript:void" class="ds-type-addchlid">{lang doc:type_addchlid}</a>
+                <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a>
+                {loop GetDocType($doctype[0]) $doctype}   
+                <div class="ds-type-line">
+                    <span></span> 
+                    <input type="text" class="sort" value="$doctype[2]"/>
+                    <input type="text" class="text" data-id="$doctype[0]" value="$doctype[1]"/>
+                    <a href="javascript:void" class="ds-type-addbrother">{lang doc:type_addbrother}</a>
+                    <a href="javascript:void" class="ds-type-del">{lang doc:com_del}</a>
+                </div>    
+                {/loop}
+            </div>    
+            {/loop}
+        </div>    
+        {/loop}
+    </div>
+    {/loop}
+</div> 
+<br> <br> 
+<input type="submit" class="btn" id="btn_submit"  value="{lang doc:com_submit}">
+<span class="doctype-tip">$tip</span>

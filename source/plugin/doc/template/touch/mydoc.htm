@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=$_G['charset']" >
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>$navtitle</title>
+        <meta name="keywords" content="$metakeywords" />
+        <meta name="description" content="$metadescription" />
+        <link href="./source/plugin/doc/css/com.css" rel="stylesheet" type="text/css"/>
+        <link href="./source/plugin/doc/css/m-doc.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript">
+            function Search()
+            {
+                var keyword = document.getElementById("txt_keyword").value;
+                if ($doc_rewrite) {
+                    window.location.href = 'mydoc-$fir-$sec-$thr-p1-k' + keyword + '-s$state.html';
+                } else {
+                    window.location.href = "plugin.php?id=doc:mydoc" + '&k=' + keyword + "&p=1&t=$fir-$sec-$thr&s=$state";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class='m-header'>
+            <a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->" class="m-header-logo">$doc_name</a>      
+            <div class="m-header-login">
+                {if $_G['uid']}
+                <a href="plugin.php?id=doc:upload" class="m-login-upload">{lang doc:mobile_upload}</a>
+                {else}
+                <a href="member.php?mod=logging&action=login">{lang doc:mobile_login} | {lang doc:mobile_regiser}</a>
+                {/if}   
+            </div>
+        </div>
+        <ul class='m-banner'> 
+            <li><a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->">{lang doc:mobile_home}</a></li> 
+            <li><a href="<!--{if $doc_rewrite}-->doc-class.html<!--{else}-->plugin.php?id=doc:class<!--{/if}-->">{lang doc:mobile_class}</a></li> 
+            <li><a href="<!--{if $doc_rewrite}-->doc-rank.html<!--{else}-->plugin.php?id=doc:rank<!--{/if}-->" >{lang doc:mobile_rank}</a></li> 
+            <li><a href="<!--{if $doc_rewrite}-->mydoc-0-0-0.html<!--{else}-->plugin.php?id=doc:mydoc&t=0-0-0<!--{/if}-->" class="active">{lang doc:mobile_mydoc}</a></li>
+        </ul> 
+        <div class="m-search">
+            <input type="text" id="txt_keyword" placeholder="{lang doc:list_pleasesearch}" value="$keyword"/>
+            <a href="javascript:Search()"></a>
+        </div>
+        <div class="m-list-state">
+            <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-s0.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr&s=0<!--{/if}-->" <!--{if $state==0}--> class="m-list-active" <!--{/if}--> >{lang doc:pass_notpass}</a>
+            <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-s1.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr&s=1<!--{/if}-->" <!--{if $state==1}--> class="m-list-active" <!--{/if}-->>{lang doc:pass_passed}</a>
+            <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-s-1.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr&s=-1<!--{/if}-->" <!--{if $state==-1}--> class="m-list-active" <!--{/if}-->>{lang doc:pass_notpassed}</a>       
+        </div>
+        <div class="m-list-middle">
+            {loop GetDocInfo5($dtype,$keyword,'',$uid,'',$state,$pagesize,$cpage,'docid') $docinfo}
+            <div class="m-docnail4">
+                <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="m-docnail4-png" target="_blank">
+                    <img title="$docinfo[3]" alt="$docinfo[3]" width="86" height="118" src="plugin.php?id=doc:thum&d=$docinfo[0]" />
+                    <i class="$docinfo[1]"></i>
+                </a>
+                <div class="m-docnail4-title"><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                <div class="m-docnail4-inf"><span>{lang doc:doc_docinf}</span>$docinfo[4]</div>
+                <div class="m-docnail4-line">
+                    <!--<div class="m-docnail4-author"><span>{lang doc:doc_author}</span>$docinfo[5]</div>
+                    <div class="m-docnail4-freepay"><span>{lang doc:doc_freepay}</span>{if $docinfo[6]=='-1'}{lang doc:doc_allpage}{else}$docinfo[6] {lang doc:doc_page}{/if} </div>-->
+                    <div class="m-docnail4-readpay"><span>{lang doc:doc_readpay}</span>$docinfo[7] $doc_readcreditname[1]</div>
+                    <div class="m-docnail4-downpay"><span>{lang doc:doc_downpay}</span>$docinfo[8] $doc_downcreditname[1]</div></br>
+                    <div class="m-docnail4-readcount">{lang doc:doc_gong}$docinfo[9]{lang doc:doc_perread}</div>
+                    <div class="m-docnail4-downcount">{lang doc:doc_gong}$docinfo[10]{lang doc:doc_perdown}</div>
+                </div>
+                <div class="m-docnail4-share">
+                    <!-- <span>{lang doc:list_share} $docinfo[11]</span> -->
+                    <span class="m-pass-btn">
+                        <a href="<!--{if $doc_rewrite}-->edit-$docinfo[0].html<!--{else}-->plugin.php?id=doc:edit&d=$docinfo[0]<!--{/if}-->" class="m-pass-pass">{lang doc:com_eidt}</a>
+                    </span>
+                </div>
+            </div>
+            {/loop}
+        </div>
+        <div class="m-pagelist">
+            $page
+        </div>
+        <div style="clear:both;height: 10px;"></div>
+    </body>
+</html>

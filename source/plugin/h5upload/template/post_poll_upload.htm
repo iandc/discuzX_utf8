@@ -1,0 +1,46 @@
+<!--{block return}-->
+if (typeof WebUpload != 'undefined') {
+	$(imgid).style.display = 'inline-block';
+	$(imgid).style.backgroundImage = 'url('+IMGDIR+'/uploadbutton_small_pic.png)';
+	$(imgid).style.backgroundRepeat = 'no-repeat';
+	$(imgid).style.backgroundPosition = 'center top';
+	$(imgid).style.width = '26px';
+	$(imgid).style.height = '26px';
+	$(imgid).innerHTML ='<div style="overflow:hidden;width:26px;height:26px;"></div>';
+	new WebUpload({
+		auto: true,
+		upload_url: SITEURL + 'misc.php?mod=swfupload&action=swfupload&operation=poll&fid=$_G[fid]',
+		post_params: {"uid":"$_G[uid]", "hash":"$swfconfig[hash]"},
+		pick: {
+			id: '#'+imgid,
+			multiple: false
+		},
+		accept: {
+			title: "Image File",
+			extensions: "jpg,jpeg,gif,png,bmp",
+			mimeTypes: ".jpg,.jpeg,.gif,.png,.bmp"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: $setconfig['compress_replace'],
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open']}-->
+		fileSingleSizeLimit : "2048000",
+		<!--{/if}-->
+		custom_settings : {
+				progressTarget : pollstr,
+				uploadSource: 'forum',
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+				uploadType: 'poll'
+		}
+	});
+}
+<!--{/block}-->

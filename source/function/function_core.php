@@ -267,7 +267,7 @@ function dsetcookie($var, $value = '', $life = 0, $prefix = 1, $httponly = false
 	$var = ($prefix ? $config['cookiepre'] : '').$var;
 	$_COOKIE[$var] = $value;
 
-	if($value == '' || $life < 0) {
+	if($value === '' || $life < 0) {
 		$value = '';
 		$life = -1;
 	}
@@ -279,7 +279,7 @@ function dsetcookie($var, $value = '', $life = 0, $prefix = 1, $httponly = false
 	$life = $life > 0 ? getglobal('timestamp') + $life : ($life < 0 ? getglobal('timestamp') - 31536000 : 0);
 	$path = $httponly && PHP_VERSION < '5.2.0' ? $config['cookiepath'].'; HttpOnly' : $config['cookiepath'];
 
-	$secure = $_SERVER['SERVER_PORT'] == 443 ? 1 : 0;
+	$secure = $_G['isHTTPS'];
 	if(PHP_VERSION < '5.2.0') {
 		setcookie($var, $value, $life, $path, $config['cookiedomain'], $secure);
 	} else {
@@ -381,7 +381,7 @@ function random($length, $numeric = 0) {
 	}
 	$max = strlen($seed) - 1;
 	for($i = 0; $i < $length; $i++) {
-		$hash .= $seed{mt_rand(0, $max)};
+		$hash .= $seed[mt_rand(0, $max)];
 	}
 	return $hash;
 }
@@ -409,7 +409,8 @@ function avatar($uid, $size = 'middle', $returnsrc = FALSE, $real = FALSE, $stat
 	$size = in_array($size, array('big', 'middle', 'small')) ? $size : 'middle';
 	$uid = abs(intval($uid));
 	if(!$staticavatar && !$static) {
-		return $returnsrc ? $ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '') : '<img src="'.$ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').'" />';
+		$timestamp = $uid == $_G['uid'] ? "&ts=1" : "";
+		return $returnsrc ? $ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').$timestamp : '<img src="'.$ucenterurl.'/avatar.php?uid='.$uid.'&size='.$size.($real ? '&type=real' : '').$timestamp.'" />';
 	} else {
 		$uid = sprintf("%09d", $uid);
 		$dir1 = substr($uid, 0, 3);
@@ -494,10 +495,10 @@ function checktplrefresh($maintpl, $subtpl, $timecompare, $templateid, $cachefil
 	}
 
 	if(empty($timecompare) || $tplrefresh == 1 || ($tplrefresh > 1 && !($timestamp % $tplrefresh))) {
-        if(!file_exists(DISCUZ_ROOT.$subtpl)){
-            $subtpl = substr($subtpl, 0, -4).'.php';
-        }
-	    if(empty($timecompare) || @filemtime(DISCUZ_ROOT.$subtpl) > $timecompare) {
+		if(!file_exists(DISCUZ_ROOT.$subtpl)){
+			$subtpl = substr($subtpl, 0, -4).'.php';
+		}
+		if(empty($timecompare) || @filemtime(DISCUZ_ROOT.$subtpl) > $timecompare) {
 			require_once DISCUZ_ROOT.'/source/class/class_template.php';
 			$template = new template();
 			$template->parse_template($maintpl, $templateid, $tpldir, $file, $cachefile);
@@ -1063,6 +1064,9 @@ function output() {
 		if(diskfreespace(DISCUZ_ROOT.'./'.$_G['setting']['cachethreaddir']) > 1000000) {
 			if($fp = @fopen(CACHE_FILE, 'w')) {
 				flock($fp, LOCK_EX);
+				$content = empty($content) ? ob_get_contents() : $content;
+				$temp_formhash = substr(md5(substr($_G['timestamp'], 0, -3).substr($_G['config']['security']['authkey'], 3, -3)), 8, 8);
+				$content = preg_replace('/(name=[\'|\"]formhash[\'|\"] value=[\'\"]|formhash=)('.constant("FORMHASH").')/ismU', '${1}'.$temp_formhash, $content);
 				fwrite($fp, empty($content) ? ob_get_contents() : $content);
 			}
 			@fclose($fp);
@@ -1515,7 +1519,10 @@ function dreferer($default = '') {
 		$_G['referer'] = '';
 	}
 
-	if(!empty($reurl['host']) && !in_array($reurl['host'], array($_SERVER['HTTP_HOST'], 'www.'.$_SERVER['HTTP_HOST'])) && !in_array($_SERVER['HTTP_HOST'], array($reurl['host'], 'www.'.$reurl['host']))) {
+	// HTTP_HOST变量中有可能有端口号
+	list($http_host,)=explode(':', $_SERVER['HTTP_HOST']);
+
+	if(!empty($reurl['host']) && !in_array($reurl['host'], array($http_host, 'www.'.$http_host)) && !in_array($http_host, array($reurl['host'], 'www.'.$reurl['host']))) {
 		if(!in_array($reurl['host'], $_G['setting']['domain']['app']) && !isset($_G['setting']['domain']['list'][$reurl['host']])) {
 			$domainroot = substr($reurl['host'], strpos($reurl['host'], '.')+1);
 			if(empty($_G['setting']['domain']['root']) || (is_array($_G['setting']['domain']['root']) && !in_array($domainroot, $_G['setting']['domain']['root']))) {
@@ -1662,7 +1669,7 @@ function g_icon($groupid, $return = 0) {
 	if(empty($_G['cache']['usergroups'][$groupid]['icon'])) {
 		$s =  '';
 	} else {
-		if(substr($_G['cache']['usergroups'][$groupid]['icon'], 0, 5) == 'http:') {
+		if(preg_match('/^https?:\/\//is', $_G['cache']['usergroups'][$groupid]['icon'])) {
 			$s = '<img src="'.$_G['cache']['usergroups'][$groupid]['icon'].'" alt="" class="vm" />';
 		} else {
 			$s = '<img src="'.$_G['setting']['attachurl'].'common/'.$_G['cache']['usergroups'][$groupid]['icon'].'" alt="" class="vm" />';
@@ -1701,18 +1708,19 @@ function getposttable($tableid = 0, $prefix = false) {
 function memory($cmd, $key='', $value='', $ttl = 0, $prefix = '') {
 	if($cmd == 'check') {
 		return  C::memory()->enable ? C::memory()->type : '';
-	} elseif(C::memory()->enable && in_array($cmd, array('set', 'get', 'rm', 'inc', 'dec'))) {
+	} elseif(C::memory()->enable && in_array($cmd, array('set', 'add', 'get', 'rm', 'inc', 'dec'))) {
 		if(defined('DISCUZ_DEBUG') && DISCUZ_DEBUG) {
 			if(is_array($key)) {
 				foreach($key as $k) {
-					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$k;
+					C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' || $cmd == 'add' ? $value : '').$prefix.$k;
 				}
 			} else {
-				C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' ? $value : '').$prefix.$key;
+				C::memory()->debug[$cmd][] = ($cmd == 'get' || $cmd == 'rm' || $cmd == 'add' ? $value : '').$prefix.$key;
 			}
 		}
 		switch ($cmd) {
 			case 'set': return C::memory()->set($key, $value, $ttl, $prefix); break;
+			case 'add': return C::memory()->add($key, $value, $ttl, $prefix); break;
 			case 'get': return C::memory()->get($key, $value); break;
 			case 'rm': return C::memory()->rm($key, $value); break;
 			case 'inc': return C::memory()->inc($key, $value ? $value : 1); break;
@@ -1763,13 +1771,16 @@ function sysmessage($message) {
 
 function forumperm($permstr, $groupid = 0) {
 	global $_G;
-
 	$groupidarray = array($_G['groupid']);
 	if($groupid) {
 		return preg_match("/(^|\t)(".$groupid.")(\t|$)/", $permstr);
 	}
+	$groupterms = dunserialize(getuserprofile('groupterms'));
 	foreach(explode("\t", $_G['member']['extgroupids']) as $extgroupid) {
 		if($extgroupid = intval(trim($extgroupid))) {
+			if($groupterms['ext'][$extgroupid] && $groupterms['ext'][$extgroupid] < TIMESTAMP){
+				continue;
+			}
 			$groupidarray[] = $extgroupid;
 		}
 	}
@@ -1892,14 +1903,16 @@ function getexpiration() {
 }
 
 function return_bytes($val) {
-    $val = trim($val);
-    $last = strtolower($val{strlen($val)-1});
-    switch($last) {
-        case 'g': $val *= 1024;
-        case 'm': $val *= 1024;
-        case 'k': $val *= 1024;
-    }
-    return $val;
+	$last = strtolower($val[strlen($val)-1]);
+	if (!is_numeric($val)) {
+		$val = substr(trim($val), 0, -1);
+	}
+	switch($last) {
+		case 'g': $val *= 1024;
+		case 'm': $val *= 1024;
+		case 'k': $val *= 1024;
+	}
+	return $val;
 }
 
 function iswhitelist($host) {
@@ -1938,7 +1951,7 @@ function getattachtablebyaid($aid) {
 
 function getattachtableid($tid) {
 	$tid = (string)$tid;
-	return intval($tid{strlen($tid)-1});
+	return intval($tid[strlen($tid)-1]);
 }
 
 function getattachtablebytid($tid) {
@@ -1979,7 +1992,7 @@ function userappprompt() {
 }
 
 function dintval($int, $allowarray = false) {
-	$ret = floatval($int);
+	$ret = intval($int);
 	if($int == $ret || !$allowarray && is_array($int)) return $ret;
 	if($allowarray && is_array($int)) {
 		foreach($int as &$v) {
@@ -2045,16 +2058,7 @@ function dunserialize($data) {
 	if(($ret = unserialize($data)) === false) {
 		$ret = unserialize(stripslashes($data));
 	}
-    if($ret === false) {
-        $data = preg_replace_callback('/s:([0-9]+?):"([\s\S]*?)";/','_serialize',$data);
-        $ret = unserialize(stripslashes($data));
-    }
 	return $ret;
-}
-
-function _serialize($str) {
-    $l = strlen($str[2]);
-    return 's:'.$l.':"'.$str[2].'";';
 }
 
 function browserversion($type) {

@@ -156,7 +156,7 @@
 					<item id="navsubname"><![CDATA[]]></item>
 					<item id="navsuburl"><![CDATA[]]></item>
 				</item>
-				<item id="12">
+                		<item id="12">
 					<item id="name"><![CDATA[wsq_stat]]></item>
 					<item id="param"><![CDATA[]]></item>
 					<item id="menu"><![CDATA[微社区统计]]></item>
@@ -392,7 +392,7 @@
 				<item id="lang_wechat_login"><![CDATA[关注本站微信公众号登录]]></item>
 				<item id="lang_wechat_bind"><![CDATA[微信扫一扫以绑定帐号]]></item>
 				<item id="lang_wechat_threadmessage"><![CDATA[<br /><a onclick="return false" href="plugin.php?id=wechat:qrcode&threadqr={tid}&access=yes&inajax=yes#post_{pid}" onmouseover="ajaxmenu(this, 500, 1, 2, '43', null, 'p_pop', '');return false;" style="font-size:12px;color:#708090;">来自: 微社区</a>]]></item>
-				<item id="mass_not_exist"><![CDATA[群发消息不存在]]></item>
+			    <item id="mass_not_exist"><![CDATA[群发消息不存在]]></item>
 				<item id="mass_sent_succ"><![CDATA[群发消息提交成功]]></item>
 				<item id="mass_send_expire"><![CDATA[创建消息时间超过三天，媒体数据已经过期，请重新创建群发消息]]></item>
 				<item id="mass_created_succ"><![CDATA[群发消息创建成功]]></item>
@@ -420,64 +420,64 @@
 				<item id="mass_oper_succ"><![CDATA[操作成功]]></item>
 				<item id="mass_group_id"><![CDATA[群发用户组]]></item>
 				<item id="mass_get_group_failed"><![CDATA[获取微信用户组失败]]></item>
-				<item id="mass_main_tips"><![CDATA[
+        <item id="mass_main_tips"><![CDATA[
             <li>由于微信接口限制，群发功能仅限认证服务号使用，订阅号请到微信公众平台后台使用相关功能</li>
         ]]></item>
-				<item id="mass_add_tips"><![CDATA[
+        <item id="mass_add_tips"><![CDATA[
         <li>通过群发素材添加的图文消息，在服务器保存时间为3天，三天后删除，所以您建立消息后应在三天内发出。</li>
         <li>群发用户组是微信中的用户分组，用户组后的数字为这个组的人数。</li>
         <li>群发内容:支持素材和纯文本两种格式。</li>
         <li>发送素材请使用选择素材，选择的素材必须包含图片。</li>
         <li>发送纯文本直接在群发素材框里选择即可。</li>
         ]]></item>
-				<item id="menu_root"><![CDATA[微信登录]]></item>
-				<item id="menu_wsq"><![CDATA[微社区设置]]></item>
-				<item id="menu_wsq_base"><![CDATA[基本设置]]></item>
-				<item id="menu_wsq_show"><![CDATA[晒图]]></item>
-				<item id="menu_wsq_stat"><![CDATA[统计]]></item>
-				<item id="menu_wechat"><![CDATA[微信设置]]></item>
-				<item id="menu_wechat_base"><![CDATA[基本设置]]></item>
-				<item id="menu_wechat_msg"><![CDATA[消息设置]]></item>
-				<item id="menu_wechat_menu"><![CDATA[菜单设置]]></item>
-				<item id="menu_wechat_resource"><![CDATA[素材设置]]></item>
-				<item id="menu_wechat_masssend"><![CDATA[群发设置]]></item>
-				<item id="menu_app"><![CDATA[活动中心<u id="pubEventNum" style="margin-left:1px;background-color:red;padding:1px 2px;color:#fff;text-decoration:none;display:none"></u>]]></item>
-				<item id="menu_api"><![CDATA[接口设置]]></item>
-				<item id="resource_select"><![CDATA[选择素材]]></item>
-				<item id="resource_type_all"><![CDATA[全部素材]]></item>
-				<item id="resource_type_s"><![CDATA[独立素材]]></item>
-				<item id="resource_type_m"><![CDATA[组合素材]]></item>
-				<item id="resource_merge"><![CDATA[组合]]></item>
-				<item id="resource_append_merge"><![CDATA[补充素材]]></item>
-				<item id="resource_edit"><![CDATA[编辑]]></item>
-				<item id="resource_del"><![CDATA[删除]]></item>
-				<item id="resource_remove"><![CDATA[移除]]></item>
-				<item id="resource_merge_count"><![CDATA[内含 {count} 个素材]]></item>
-				<item id="resource_view"><![CDATA[点击查看]]></item>
-				<item id="resource_add"><![CDATA[添加新素材]]></item>
-				<item id="resource_cancel_merge"><![CDATA[(取消组合)]]></item>
-				<item id="resource_name"><![CDATA[素材名称]]></item>
-				<item id="resource_title"><![CDATA[标题]]></item>
-				<item id="resource_pic"><![CDATA[封面]]></item>
-				<item id="resource_desc"><![CDATA[摘要]]></item>
-				<item id="resource_content"><![CDATA[正文]]></item>
-				<item id="resource_url"><![CDATA[原文链接]]></item>
-				<item id="resource_order"><![CDATA[顺序]]></item>
-				<item id="resource_msg_nofound"><![CDATA[无效的素材]]></item>
-				<item id="resource_msg_del"><![CDATA[你确认要删除此素材？]]></item>
-				<item id="resource_msg_remove"><![CDATA[你确认要把此素材出此组合中移除？]]></item>
-				<item id="resource_msg_desc_toolong"><![CDATA[摘要字数超长，请控制在 120 字以内]]></item>
-				<item id="resource_thread_push"><![CDATA[主题推送]]></item>
-				<item id="resource_msg_pushed"><![CDATA[已成功推送到微信素材，请到管理中心中查看]]></item>
-				<item id="stat_failed"><![CDATA[没有统计信息或连接服务器失败]]></item>
-				<item id="stat_newthread"><![CDATA[发帖数]]></item>
-				<item id="stat_reply"><![CDATA[回帖数]]></item>
-				<item id="stat_share"><![CDATA[分享数]]></item>
-				<item id="stat_reflow"><![CDATA[回流数]]></item>
-				<item id="stat_joinsite"><![CDATA[新注册用户数]]></item>
-				<item id="show_export"><![CDATA[导出]]></item>
-				<item id="show_thread_not_found"><![CDATA[晒图主题未找到]]></item>
-				<item id="show_export_title"><![CDATA[用户名,点赞数,楼层数]]></item>
+        <item id="menu_root"><![CDATA[微信登录]]></item>
+        <item id="menu_wsq"><![CDATA[微社区设置]]></item>
+        <item id="menu_wsq_base"><![CDATA[基本设置]]></item>
+        <item id="menu_wsq_show"><![CDATA[晒图]]></item>
+        <item id="menu_wsq_stat"><![CDATA[统计]]></item>
+        <item id="menu_wechat"><![CDATA[微信设置]]></item>
+        <item id="menu_wechat_base"><![CDATA[基本设置]]></item>
+        <item id="menu_wechat_msg"><![CDATA[消息设置]]></item>
+        <item id="menu_wechat_menu"><![CDATA[菜单设置]]></item>
+        <item id="menu_wechat_resource"><![CDATA[素材设置]]></item>
+        <item id="menu_wechat_masssend"><![CDATA[群发设置]]></item>
+        <item id="menu_app"><![CDATA[活动中心<u id="pubEventNum" style="margin-left:1px;background-color:red;padding:1px 2px;color:#fff;text-decoration:none;display:none"></u>]]></item>
+        <item id="menu_api"><![CDATA[接口设置]]></item>
+        <item id="resource_select"><![CDATA[选择素材]]></item>
+        <item id="resource_type_all"><![CDATA[全部素材]]></item>
+        <item id="resource_type_s"><![CDATA[独立素材]]></item>
+        <item id="resource_type_m"><![CDATA[组合素材]]></item>
+        <item id="resource_merge"><![CDATA[组合]]></item>
+        <item id="resource_append_merge"><![CDATA[补充素材]]></item>
+        <item id="resource_edit"><![CDATA[编辑]]></item>
+        <item id="resource_del"><![CDATA[删除]]></item>
+        <item id="resource_remove"><![CDATA[移除]]></item>
+        <item id="resource_merge_count"><![CDATA[内含 {count} 个素材]]></item>
+        <item id="resource_view"><![CDATA[点击查看]]></item>
+        <item id="resource_add"><![CDATA[添加新素材]]></item>
+        <item id="resource_cancel_merge"><![CDATA[(取消组合)]]></item>
+        <item id="resource_name"><![CDATA[素材名称]]></item>
+        <item id="resource_title"><![CDATA[标题]]></item>
+        <item id="resource_pic"><![CDATA[封面]]></item>
+        <item id="resource_desc"><![CDATA[摘要]]></item>
+        <item id="resource_content"><![CDATA[正文]]></item>
+        <item id="resource_url"><![CDATA[原文链接]]></item>
+        <item id="resource_order"><![CDATA[顺序]]></item>
+        <item id="resource_msg_nofound"><![CDATA[无效的素材]]></item>
+        <item id="resource_msg_del"><![CDATA[你确认要删除此素材？]]></item>
+        <item id="resource_msg_remove"><![CDATA[你确认要把此素材出此组合中移除？]]></item>
+        <item id="resource_msg_desc_toolong"><![CDATA[摘要字数超长，请控制在 120 字以内]]></item>
+        <item id="resource_thread_push"><![CDATA[主题推送]]></item>
+        <item id="resource_msg_pushed"><![CDATA[已成功推送到微信素材，请到管理中心中查看]]></item>
+        <item id="stat_failed"><![CDATA[没有统计信息或连接服务器失败]]></item>
+        <item id="stat_newthread"><![CDATA[发帖数]]></item>
+        <item id="stat_reply"><![CDATA[回帖数]]></item>
+        <item id="stat_share"><![CDATA[分享数]]></item>
+        <item id="stat_reflow"><![CDATA[回流数]]></item>
+        <item id="stat_joinsite"><![CDATA[新注册用户数]]></item>
+        <item id="show_export"><![CDATA[导出]]></item>
+        <item id="show_thread_not_found"><![CDATA[晒图主题未找到]]></item>
+        <item id="show_export_title"><![CDATA[用户名,点赞数,楼层数]]></item>
 			</item>
 			<item id="templatelang">
 				<item id="wechat_qrcode_inputcode"><![CDATA[请在扫描关注后输入以下数字码<br />]]></item>

@@ -1,0 +1,237 @@
+<h2 style="font-size: 24px;color:#DC6404;margin: 20px;">{lang doc:rewrite_note}</h2>
+<div class="container" id="cpcontainer"><h1>Apache Web Server({lang doc:rewrite_yun})</h1>
+<pre class="colorbox">
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/view-([0-9]+)\.html$ $1/plugin.php?id=doc:view&d=$2&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/view-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:view&d=$2&ps=$3&seo=1&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/edit-([0-9]+)\.html$ $1/plugin.php?id=doc:edit&d=$2&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/down-([0-9]+)\.html$ $1/plugin.php?id=doc:down&d=$2&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/doc-upload\.html$ $1/plugin.php?id=doc:upload&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4&p=$5&k=$6&s=$7&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&s=$5&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&p=$5&k=$6&s=$7&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4-$5&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4-$5&p=$6&k=$7&s=$8&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&s=$6&%1	
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&p=$6&k=$7&s=$8&%1
+</pre>
+
+<h1>Apache Web Server({lang doc:rewrite_host})</h1>
+<pre class="colorbox">
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^view-([0-9]+)\.html$ plugin.php?id=doc:view&d=$1&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^view-([0-9]+)-([0-9]+)\.html$ plugin.php?id=doc:view&d=$1&ps=$2&seo=1&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^edit-([0-9]+)\.html$ plugin.php?id=doc:edit&d=$1&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^down-([0-9]+)\.html$ plugin.php?id=doc:down&d=$1&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^doc-upload\.html$ plugin.php?id=doc:upload&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^list-([0-9]+)-([0-9]+)-([0-9]+)\.html$ plugin.php?id=doc:list&t=$1-$2-$3&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^mydoc-([0-9]+)-([0-9]+)-([0-9]+)\.html$ plugin.php?id=doc:mydoc&t=$1-$2-$3&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^list-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ plugin.php?id=doc:list&t=$1-$2-$3&p=$4&k=$5&s=$6&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^mydoc-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html$ plugin.php?id=doc:mydoc&t=$1-$2-$3&s=$4&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^mydoc-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ plugin.php?id=doc:mydoc&t=$1-$2-$3&p=$4&k=$5&s=$6&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html$ plugin.php?id=doc:list&t=$1-$2-$3-$4&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html$ plugin.php?id=doc:mydoc&t=$1-$2-$3-$4&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ plugin.php?id=doc:list&t=$1-$2-$3-$4&p=$5&k=$6&s=$7&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html$ plugin.php?id=doc:mydoc&t=$1-$2-$3-$4&s=$5&%1
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ plugin.php?id=doc:mydoc&t=$1-$2-$3-$4&p=$5&k=$6&s=$7&%1
+</pre>
+
+<h1>IIS Web Server({lang doc:rewrite_yun})</h1>
+<pre class="colorbox">
+RewriteRule ^(.*)/view-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:view&d=$2&$4
+RewriteRule ^(.*)/view-([0-9]+)-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:view&d=$2&ps=$3&seo=1&$5
+RewriteRule ^(.*)/edit-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:edit&d=$2&$4
+RewriteRule ^(.*)/down-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:down&d=$2&$4
+RewriteRule ^(.*)/doc-upload\.html(\?(.*))*$ $1/plugin\.php\?id=doc:upload&$3
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:list&t=$2-$3-$4&$6
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:mydoc&t=$2-$3-$4&$6
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:list&t=$2-$3-$4&p=$5&k=$6&s=$7&$9
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:mydoc&t=$2-$3-$4&s=$5&$7
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:mydoc&t=$2-$3-$4&p=$5&k=$6&s=$7&$9
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:list&t=$2-$3-$4-$5&$7
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:mydoc&t=$2-$3-$4-$5&$7
+RewriteRule ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:list&t=$2-$3-$4-$5&p=$6&k=$7&s=$8&$10
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:mydoc&t=$2-$3-$4-$5&s=$6&$9
+RewriteRule ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html(\?(.*))*$ $1/plugin\.php\?id=doc:mydoc&t=$2-$3-$4-$5&p=$6&k=$7&s=$8&$10
+
+</pre>
+
+<h1>IIS7 Web Server({lang doc:rewrite_yun})</h1>
+<pre class="colorbox">
+&lt;rule name="doc_view"&gt;
+            &lt;match url="^(.*/)*view-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:view&amp;amp;d={R:2}&amp;amp;{R:3}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_views"&gt;
+            &lt;match url="^(.*/)*view-([0-9]+)-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:view&amp;amp;d={R:2}&amp;amp;ps={R:3}&amp;amp;seo=1&amp;amp;{R:4}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_edit"&gt;
+            &lt;match url="^(.*/)*edit-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:edit&amp;amp;d={R:2}&amp;amp;{R:3}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_down"&gt;
+            &lt;match url="^(.*/)*down-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:down&amp;amp;d={R:2}&amp;amp;{R:3}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_upload"&gt;
+            &lt;match url="^(.*/)*doc-upload.html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:upload&amp;amp;{R:2}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_list"&gt;
+            &lt;match url="^(.*/)*list-([0-9]+)-([0-9]+)-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:list&amp;amp;t={R:2}-{R:3}-{R:4}&amp;amp;{R:5}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_mydoc"&gt;
+            &lt;match url="^(.*/)*mydoc-([0-9]+)-([0-9]+)-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:mydoc&amp;amp;t={R:2}-{R:3}-{R:4}&amp;amp;{R:5}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_list2"&gt;
+            &lt;match url="^(.*/)*list-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:list&amp;amp;t={R:2}-{R:3}-{R:4}&amp;amp;p={R:5}&amp;amp;k={R:6}&amp;amp;s={R:7}&amp;amp;{R:8}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_mydoc2"&gt;
+            &lt;match url="^(.*/)*mydoc-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:mydoc&amp;amp;t={R:2}-{R:3}-{R:4}&amp;amp;s={R:5}&amp;amp;{R:6}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_mydoc3"&gt;
+            &lt;match url="^(.*/)*mydoc-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:mydoc&amp;amp;t={R:2}-{R:3}-{R:4}&amp;amp;p={R:5}&amp;amp;k={R:6}&amp;amp;s={R:7}&amp;amp;{R:8}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_list3"&gt;
+            &lt;match url="^(.*/)*list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:list&amp;amp;t={R:2}-{R:3}-{R:4}-{R:5}&amp;amp;{R:6}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_mydoc4"&gt;
+            &lt;match url="^(.*/)*mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:mydoc&amp;amp;t={R:2}-{R:3}-{R:4}-{R:5}&amp;amp;{R:6}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_list4"&gt;
+            &lt;match url="^(.*/)*list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:list&amp;amp;t={R:2}-{R:3}-{R:4}-{R:5}&amp;amp;p={R:6}&amp;amp;k={R:7}&amp;amp;s={R:8}&amp;amp;{R:9}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_mydoc5"&gt;
+            &lt;match url="^(.*/)*mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:mydoc&amp;amp;t={R:2}-{R:3}-{R:4}-{R:5}&amp;amp;s={R:6}&amp;amp;{R:7}" /&gt;
+&lt;/rule&gt;
+&lt;rule name="doc_mydoc6"&gt;
+            &lt;match url="^(.*/)*mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+).html\?*(.*)$" /&gt;
+            &lt;action type="Rewrite" url="{R:1}/plugin.php\?id=doc:mydoc&amp;amp;t={R:2}-{R:3}-{R:4}-{R:5}&amp;amp;p={R:6}&amp;amp;k={R:7}&amp;amp;s={R:8}&amp;amp;{R:9}" /&gt;
+&lt;/rule&gt;
+
+</pre>
+
+<h1>Zeus Web Server</h1>
+<pre class="colorbox">
+match URL into $ with ^(.*)/view-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:view&d=$2&$3
+endif
+match URL into $ with ^(.*)/view-([0-9]+)-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:view&d=$2&ps=$3&seo=1&$4
+endif
+match URL into $ with ^(.*)/edit-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:edit&d=$2&$3
+endif
+match URL into $ with ^(.*)/down-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:down&d=$2&$3
+endif
+match URL into $ with ^(.*)/doc-upload\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:upload&$2
+endif
+match URL into $ with ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:list&t=$2-$3-$4&$5
+endif
+match URL into $ with ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&$5
+endif
+match URL into $ with ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:list&t=$2-$3-$4&p=$5&k=$6&s=$7&$8
+endif
+match URL into $ with ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&s=$5&$6
+endif
+match URL into $ with ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&p=$5&k=$6&s=$7&$8
+endif
+match URL into $ with ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:list&t=$2-$3-$4-$5&$6
+endif
+match URL into $ with ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&$6
+endif
+match URL into $ with ^(.*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:list&t=$2-$3-$4-$5&p=$6&k=$7&s=$8&$9
+endif
+match URL into $ with ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&s=$6&$7
+endif
+match URL into $ with ^(.*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html\?*(.*)$
+if matched then
+	set URL = $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&p=$6&k=$7&s=$8&$9
+endif
+
+</pre>
+
+<h1>Nginx Web Server</h1>
+<pre class="colorbox">
+rewrite ^([^\.]*)/view-([0-9]+)\.html$ $1/plugin.php?id=doc:view&d=$2 last;
+rewrite ^([^\.]*)/view-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:view&d=$2&ps=$3&seo=1 last;
+rewrite ^([^\.]*)/edit-([0-9]+)\.html$ $1/plugin.php?id=doc:edit&d=$2 last;
+rewrite ^([^\.]*)/down-([0-9]+)\.html$ $1/plugin.php?id=doc:down&d=$2 last;
+rewrite ^([^\.]*)/doc-upload\.html$ $1/plugin.php?id=doc:upload last;
+rewrite ^([^\.]*)/list-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4 last;
+rewrite ^([^\.]*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4 last;
+rewrite ^([^\.]*)/list-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4&p=$5&k=$6&s=$7 last;
+rewrite ^([^\.]*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&s=$5 last;
+rewrite ^([^\.]*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4&p=$5&k=$6&s=$7 last;
+rewrite ^([^\.]*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4-$5 last;
+rewrite ^([^\.]*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5 last;
+rewrite ^([^\.]*)/list-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:list&t=$2-$3-$4-$5&p=$6&k=$7&s=$8 last;
+rewrite ^([^\.]*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&s=$6 last;
+rewrite ^([^\.]*)/mydoc-([0-9]+)-([0-9]+)-([0-9]+)-([0-9]+)-p([0-9]+)-k(.*)-s([0-9-]+)\.html$ $1/plugin.php?id=doc:mydoc&t=$2-$3-$4-$5&p=$6&k=$7&s=$8 last;
+</pre>

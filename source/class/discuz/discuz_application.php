@@ -187,7 +187,7 @@ class discuz_application extends discuz_base{
         if(defined('IN_NEWMOBILE')) {
             $sitepath = preg_replace("/\/m/i", '', $sitepath);
         }
-        $_G['isHTTPS'] = ($_SERVER['HTTPS'] && strtolower($_SERVER['HTTPS']) != 'off') ? true : false;
+        $_G['isHTTPS'] = $this->_is_https();
         $_G['scheme'] = 'http'.($_G['isHTTPS'] ? 's' : '');
         $_G['siteurl'] = dhtmlspecialchars($_G['scheme'].'://'.$_SERVER['HTTP_HOST'].$sitepath.'/');
 
@@ -281,7 +281,7 @@ class discuz_application extends discuz_base{
         @include DISCUZ_ROOT.'./config/config_global.php';
         if(empty($_config)) {
             if(!file_exists(DISCUZ_ROOT.'./data/install.lock')) {
-                header('location: install');
+                header('location: install/');
                 exit;
             } else {
                 system_error('config_notfound');
@@ -343,6 +343,10 @@ class discuz_application extends discuz_base{
             @header('Content-Type: text/html; charset='.CHARSET);
         }
 
+        if($this->var['isHTTPS'] && isset($this->config['output']['upgradeinsecure']) && $this->config['output']['upgradeinsecure']) {
+            @header('Content-Security-Policy: upgrade-insecure-requests');
+        }
+
     }
 
     public function reject_robot() {
@@ -356,7 +360,13 @@ class discuz_application extends discuz_base{
         static $check = array('"', '>', '<', '\'', '(', ')', 'CONTENT-TRANSFER-ENCODING');
 
         if(isset($_GET['formhash']) && $_GET['formhash'] !== formhash()) {
-            system_error('request_tainting');
+            if(constant('CURMODULE') == 'logging' && isset($_GET['action']) && $_GET['action'] == 'logout') {
+                header("HTTP/1.1 302 Found");// 修复多次点击退出时偶发“您当前的访问请求当中含有非法字符，已经被系统拒绝”的Bug
+                header("Location: index.php");
+                exit();
+            } else {
+                system_error('request_tainting');
+            }
         }
 
         if($_SERVER['REQUEST_METHOD'] == 'GET' ) {
@@ -377,6 +387,25 @@ class discuz_application extends discuz_base{
         }
 
         return true;
+    }
+
+    private function _is_https() {
+        if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) != "off") {
+            return true;
+        }
+        if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strtolower($_SERVER["HTTP_X_FORWARDED_PROTO"]) == "https") {
+            return true;
+        }
+        if (isset($_SERVER["HTTP_SCHEME"]) && strtolower($_SERVER["HTTP_SCHEME"]) == "https") {
+            return true;
+        }
+        if (isset($_SERVER["HTTP_FROM_HTTPS"]) && strtolower($_SERVER["HTTP_FROM_HTTPS"]) != "off") {
+            return true;
+        }
+        if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443) {
+            return true;
+        }
+        return false;
     }
 
     private function _get_client_ip() {
@@ -416,15 +445,15 @@ class discuz_application extends discuz_base{
             $this->var['sid'] = $this->session->sid;
             $this->var['session'] = $this->session->var;
 
-            if(!empty($this->var['sid']) && $this->var['sid'] != $this->var['cookie']['sid']) {
+            if(isset($this->var['sid']) && $this->var['sid'] !== $this->var['cookie']['sid']) {
                 dsetcookie('sid', $this->var['sid'], 86400);
             }
 
-            //if($this->session->isnew) {
+            if($this->session->isnew) {
                 if(ipbanned($this->var['clientip'])) {
                     $this->session->set('groupid', 6);
                 }
-            //}
+            }
 
             if($this->session->get('groupid') == 6) {
                 $this->var['member']['groupid'] = 6;
@@ -473,9 +502,14 @@ class discuz_application extends discuz_base{
                 $memberfieldforum = C::t('common_member_field_forum')->fetch($discuz_uid);
                 $groupterms = dunserialize($memberfieldforum['groupterms']);
                 if(!empty($groupterms['main'])) {
-                    C::t("common_member")->update($user['uid'], array('groupexpiry'=> 0, 'groupid' => $groupterms['main']['groupid'], 'adminid' => $groupterms['main']['adminid']));
-                    $user['groupid'] = $groupterms['main']['groupid'];
+                    if($groupterms['main']['groupid']) {
+                        $user['groupid'] = $groupterms['main']['groupid'];
+                    } else {
+                        $groupnew = C::t('common_usergroup')->fetch_by_credits($user['credits']);
+                        $user['groupid'] = $groupnew['groupid'];
+                    }
                     $user['adminid'] = $groupterms['main']['adminid'];
+                    C::t("common_member")->update($user['uid'], array('groupexpiry'=> 0, 'groupid' => $user['groupid'], 'adminid' => $user['adminid']));
                     unset($groupterms['main'], $groupterms['ext'][$this->var['member']['groupid']]);
                     $this->var['member'] = $user;
                     C::t('common_member_field_forum')->update($discuz_uid, array('groupterms' => serialize($groupterms)));
@@ -584,11 +618,11 @@ class discuz_application extends discuz_base{
             if($this->var['group'] && isset($this->var['group']['allowvisit']) && !$this->var['group']['allowvisit']) {
                 if($this->var['uid'] && !$allowvisitflag) {
                     if(!defined('IN_MOBILE_API')) {
-                        showmessage('user_banned');
+                        ($this->var['member']['groupexpiry'] > 0) ? showmessage('user_banned_has_expiry', '', array('expiry' => dgmdate($_G['member']['groupexpiry'], 'Y-m-d H:i:s'))) : showmessage('user_banned');
                     } else {
-                        mobile_core::result(array('error' => 'user_banned'));
+                        ($this->var['member']['groupexpiry'] > 0) ? mobile_core::result(array('error' => 'user_banned_has_expiry')) : mobile_core::result(array('error' => 'user_banned'));
                     }
-                } elseif((!defined('ALLOWGUEST') || !ALLOWGUEST) && !in_array(CURSCRIPT, array('member', 'api')) && !$this->var['inajax']) {
+                } elseif((!defined('ALLOWGUEST') || !ALLOWGUEST) && !in_array(CURSCRIPT, array('member', 'api'))) {
                     if(defined('IN_ARCHIVER')) {
                         dheader('location: ../member.php?mod=logging&action=login&referer='.rawurlencode($this->var['siteurl']."archiver/".$this->var['basefilename'].($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : '')));
                     } else if(!defined('IN_MOBILE_API')) {
@@ -740,7 +774,7 @@ class discuz_application extends discuz_base{
             return false;
         }
 
-        if(!$this->var['setting'] || !$this->var['setting']['mobile']['allowmobile'] || !is_array($this->var['setting']['mobile']) || IS_ROBOT) {
+        if(!$this->var['setting'] || !$this->var['setting']['mobile']['allowmobile'] || !is_array($this->var['setting']['mobile'])) {
             $nomobile = true;
             $unallowmobile = true;
         }
@@ -791,7 +825,9 @@ class discuz_application extends discuz_base{
                     $mobileurl = $this->var['siteurl'].'forum.php?mobile=yes';
                 }
             }
-            dheader("location:$mobileurl");
+            if(!$this->var['setting']['mobile']['otherindex']){
+                dheader("location:$mobileurl");
+            }
         }
         if($this->var['setting']['mobile']['allowmnew'] && !defined('IN_MOBILE_API') && !defined('NOT_IN_MOBILE_API')) {
             $modid = $this->var['basescript'].'::'.CURMODULE;

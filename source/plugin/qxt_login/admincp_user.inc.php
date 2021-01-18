@@ -76,7 +76,7 @@ if ($actions == null) {
         showformfooter();
     } else {
         $mb = daddslashes($_GET['mobile']);
-        if (!preg_match("/^1[34578]{1}\d{9}$/", $mb)) {
+        if (!preg_match("/^1[12345789]{1}\d{9}$/", $mb)) {
             cpmsg(lang('plugin/qxt_login', 'err_1'), '', 'error');
         }
         if (DB::fetch_first("SELECT * FROM " . DB::table('qxt_login_user') . " WHERE mobile = '$mb'")) {
@@ -106,7 +106,7 @@ if ($actions == null) {
         if (!$theusername || !$mb) {
             cpmsg(lang('plugin/qxt_login', 'err_0'), '', 'error');
         }
-        if (!preg_match("/^1[34578]{1}\d{9}$/", $mb)) {
+        if (!preg_match("/^1[12345789]{1}\d{9}$/", $mb)) {
             cpmsg(lang('plugin/qxt_login', 'err_1'), '', 'error');
         }
         if (DB::fetch_first("SELECT * FROM " . DB::table('qxt_login_user') . " WHERE mobile = '$mb'")) {

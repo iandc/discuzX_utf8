@@ -1,0 +1,105 @@
+<!--{template common/header}-->
+<link href="./source/plugin/doc/css/com.css" rel="stylesheet" type="text/css"/>
+<link href="./source/plugin/doc/css/ds-mydoc.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+    function Search()
+    {
+        var keyword = document.getElementById("txt_keyword").value;
+        if ($doc_rewrite) {
+            window.location.href = 'mydoc-$fir-$sec-$thr-p1-k' + keyword + '-s$state.html';
+        } else {
+            window.location.href = "plugin.php?id=doc:mydoc" + '&k=' + keyword + "&p=1&t=$fir-$sec-$thr&s=$state";
+        }
+    }
+</script>
+<div id="wp" class="wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="$_G['setting']['bbname']" href="./">$_G['setting']['bbname']</a><em></em><a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->">$doc_name</a><em></em><a href="<!--{if $doc_rewrite}-->mydoc-0-0-0.html<!--{else}-->plugin.php?id=doc:mydoc&t=0-0-0<!--{/if}-->">{lang doc:doc_mydoc}</a><em></em>$navtype
+        </div></div>	
+    <div class="wp cl">  
+        <div class="ds-list-left">
+            <div class="ds-list-fir">
+                {loop GetDocType(0) $doctype}
+                <!--{if $fir==$doctype[0]}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$doctype[0]-0-0-s$state.html<!--{else}-->plugin.php?id=doc:mydoc&t=$doctype[0]-0-0&s=$state<!--{/if}-->" class="ds-list-active">$doctype[1]</a>
+                <!--{else}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$doctype[0]-0-0-s$state.html<!--{else}-->plugin.php?id=doc:mydoc&t=$doctype[0]-0-0&s=$state<!--{/if}-->">$doctype[1]</a>
+                <!--{/if}-->                
+                {/loop}
+            </div>
+            <!--{if $fir!=0}-->
+            <div class="ds-list-sec">
+                {loop GetDocType($fir) $doctype}
+                <!--{if $sec==$doctype[0]}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$doctype[0]-0-s$state.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$doctype[0]-0&s=$state<!--{/if}-->" class="ds-list-active">$doctype[1]</a>
+                <!--{else}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$doctype[0]-0-s$state.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$doctype[0]-0&s=$state<!--{/if}-->">$doctype[1]</a>
+                <!--{/if}-->                
+                {/loop}
+            </div>
+            <!--{/if}-->  
+            <!--{if $sec!=0}-->
+            <div class="ds-list-thr">
+                {loop GetDocType($sec) $doctype}
+                <!--{if $thr==$doctype[0]}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$doctype[0]-s$state.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$doctype[0]&s=$state<!--{/if}-->" class="ds-list-active">$doctype[1]</a>
+                <!--{else}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$doctype[0]-s$state.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$doctype[0]&s=$state<!--{/if}-->">$doctype[1]</a>
+                <!--{/if}-->                
+                {/loop}            
+            </div>
+            <!--{/if}-->
+            <!--{if $thr!=0}-->
+            <div class="ds-list-thr">
+                {loop GetDocType($thr) $doctype}
+                <!--{if $four==$doctype[0]}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-$doctype[0].html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr-$doctype[0]<!--{/if}-->" class="ds-list-active">$doctype[1]</a>
+                <!--{else}-->
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-$doctype[0].html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr-$doctype[0]<!--{/if}-->">$doctype[1]</a>
+                <!--{/if}-->                
+                {/loop}            
+            </div>
+            <!--{/if}-->		
+            <div class="ds-list-state">
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-$four-s0.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr-$four&s=0<!--{/if}-->" <!--{if $state==0}--> class="ds-list-active" <!--{/if}--> >{lang doc:pass_notpass}</a>
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-$four-s1.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr-$four&s=1<!--{/if}-->" <!--{if $state==1}--> class="ds-list-active" <!--{/if}-->>{lang doc:pass_passed}</a>
+                <a href="<!--{if $doc_rewrite}-->mydoc-$fir-$sec-$thr-$four-s-1.html<!--{else}-->plugin.php?id=doc:mydoc&t=$fir-$sec-$thr-$four&s=-1<!--{/if}-->" <!--{if $state==-1}--> class="ds-list-active" <!--{/if}-->>{lang doc:pass_notpassed}</a>
+            </div>
+            <div class="ds-list-key">
+                <input type="text" id="txt_keyword" placeholder="{lang doc:list_pleasesearch}" value="$keyword"/><a href="javascript:Search()">{lang doc:list_search}</a>
+            </div>
+            <div class="ds-list-middle">
+                {loop GetDocInfo5($dtype,$keyword,'',$uid,'',$state,$pagesize,$cpage,'docid') $docinfo}
+                <div class="ds-docnail4">
+                    <a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" class="ds-docnail4-png" target="_blank">
+                        <img title="$docinfo[3]" alt="$docinfo[3]" width="86" height="118" src="plugin.php?id=doc:thum&d=$docinfo[0]" />
+                        <i class="$docinfo[1]"></i>
+                    </a>
+                    <div class="ds-docnail4-title"><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                    <div class="ds-docnail4-inf"><span>{lang doc:doc_docinf}</span>$docinfo[4]</div>
+                    <div class="ds-docnail4-line">
+                        <div class="ds-docnail4-author"><span>{lang doc:doc_author}</span>$docinfo[5]</div>
+                        <div class="ds-docnail4-freepay"><span>{lang doc:doc_freepay}</span><!--{if $docinfo[6]=='-1'}-->{lang doc:doc_allpage}<!--{else}-->$docinfo[6] {lang doc:doc_page}<!--{/if}--> </div>
+                        <div class="ds-docnail4-readpay"><span>{lang doc:doc_readpay}</span>$docinfo[7] $doc_readcreditname[1]</div>
+                        <div class="ds-docnail4-downpay"><span>{lang doc:doc_downpay}</span>$docinfo[8] $doc_downcreditname[1]</div>
+                        <div class="ds-docnail4-readcount">{lang doc:doc_gong}$docinfo[9]{lang doc:doc_perread}</div>
+                        <div class="ds-docnail4-downcount">{lang doc:doc_gong}$docinfo[10]{lang doc:doc_perdown}</div>
+                    </div>
+                    <div class="ds-docnail4-share">
+                        <span>{lang doc:list_share} $docinfo[11]</span>                    
+                        <span class="ds-pass-btn">
+                            <a href="<!--{if $doc_rewrite}-->edit-$docinfo[0].html<!--{else}-->plugin.php?id=doc:edit&d=$docinfo[0]<!--{/if}-->" class="ds-pass-pass">{lang doc:com_eidt}</a>
+                        </span>
+                    </div>
+                </div>
+                {/loop}
+            </div>
+            <div class="ds-pagelist">
+                $page
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear:both;height: 50px;"></div>
+<!--{template common/footer}-->

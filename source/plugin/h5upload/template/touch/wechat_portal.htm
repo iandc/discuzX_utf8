@@ -1,0 +1,69 @@
+<!--{block return}-->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	wx.config({
+		debug: false,
+		appId: '{$wxconfig[appid]}',
+		timestamp: '{$wxconfig[timestamp]}',
+		nonceStr: '{$wxconfig[noncestr]}',
+		signature: '{$wxconfig[signature]}',
+		jsApiList: ['checkJsApi', 'hideMenuItems', 'chooseImage', 'uploadImage']
+	});
+	var fileparent = $('#filedata').parent();
+	var fileparent_w = fileparent.width();
+	var fileparent_h = fileparent.height();
+	fileparent.css('background', 'url(source/plugin/h5upload/image/icon_photo.png) no-repeat center center');
+	fileparent.html('<div style="overflow:hidden;" id="wechat_upload"></div>');
+	$('#wechat_upload').width(fileparent_w).height(fileparent_h);
+	var upload_url = "{$_G[siteurl]}plugin.php?id=h5upload:wechat&operation=portal&inajax=yes&infloat=yes&mobile=2";
+	$(document).on("click", "#wechat_upload", function () {
+		wx.chooseImage({
+			count: $swfconfig['limit'],
+			sizeType: ['original', 'compressed'],
+			sourceType: ['album', 'camera'],
+			success: function (res) {
+				var localIds = res.localIds;
+				if (localIds.length == 0) {
+					popup.open(STATUSMSG[7], 'alert');
+					return;
+				}
+				var i = 0;
+				function wxupload() {
+					wx.uploadImage({
+						localId: localIds[i],
+						isShowProgressTips: 1,
+						success: function (res) {
+							var serverId = res.serverId;
+							i++;
+							$.ajax({
+								type: 'POST',
+								url: upload_url,
+								data: { "uid": "$_G[uid]", "hash": "$swfconfig[hash]", "mid": serverId<!--{if $_G['basescript'] == 'portal'}-->,"aid":$aid,"catid":$catid<!--{/if}-->}
+							}).success(function (data) {
+								console.info(data);
+								data = eval('(' + data + ')');
+								if(data.aid){
+									$('#imglist').append('<li><span id="aid_'+data.aid+'" class="p_img" onclick="SettingImg('+data.aid+', \''+data.bigimg+'\');" coverstr=\''+data.cover+'\'><img style="height:48px;" id="aimg_'+data.aid+'" src="'+data.smallimg+'" /></span></li>');
+									document.getElementById('conver').value = data.cover;
+									document.getElementById('attach_ids').value += ','+data.aid;
+								}else{
+									popup.open('errorcode: '+data.errorcode, 'alert');
+								}
+							}).error(function () {
+								popup.open('{lang uploadpicfailed}', 'alert');
+							});
+							if (i < localIds.length) {
+								wxupload();
+							}
+						}
+					});
+				}
+				wxupload();
+			}
+		});
+	});
+});
+</script>
+<!--{if $setconfig['html_mobile']}-->$setconfig['html_mobile']<!--{/if}-->
+<!--{/block}-->

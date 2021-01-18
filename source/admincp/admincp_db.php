@@ -91,7 +91,7 @@ if($operation == 'export') {
 		)), $db_export_key, 'mradio');
 
 		showtagheader('tbody', 'showtables');
-		showtablerow('', '', '<input class="checkbox" name="chkall" onclick="checkAll(\'prefix\', this.form, \'customtables\', \'chkall\', true)" checked="checked" type="checkbox" id="chkalltables" /><label for="chkalltables"> '.cplang('db_export_custom_select_all').' - '.$db_export_discuz_table ).'</label>';
+		showtablerow('', '', '<input class="checkbox" name="chkall" onclick="checkAll(\'prefix\', this.form, \'customtables\', \'chkall\', true)" checked="checked" type="checkbox" id="chkalltables" /><label for="chkalltables"> '.cplang('db_export_custom_select_all').' - '.$db_export_discuz_table.'</label>');
 		showtablerow('', 'colspan="2"', mcheckbox('customtables', $dztables));
 		showtagfooter('tbody');
 
@@ -297,7 +297,7 @@ if($operation == 'export') {
 
 			$tablesstr = '';
 			foreach($tables as $table) {
-                $tablesstr.='"'.addslashes($table).'"'; // add by seagle
+				$tablesstr .= '"'.$table.'" ';
 			}
 
 			require DISCUZ_ROOT . './config/config_global.php';
@@ -307,8 +307,7 @@ if($operation == 'export') {
 			list(, $mysql_base) = DB::fetch($query, DB::$drivertype == 'mysqli' ? MYSQLI_NUM : MYSQL_NUM);
 
 			$dumpfile = addslashes(dirname(dirname(__FILE__))).'/'.$backupfilename.'.sql';
-            @unlink($dumpfile);
-            $tablesstr=escapeshellarg($tablesstr);// add by seagle
+			@unlink($dumpfile);
 
 			$mysqlbin = $mysql_base == '/' ? '' : addslashes($mysql_base).'bin/';
 			@shell_exec($mysqlbin.'mysqldump --force --quick '.($db->version() > '4.1' ? '--skip-opt --create-options' : '-all').' --add-drop-table'.($_GET['extendins'] == 1 ? ' --extended-insert' : '').''.($db->version() > '4.1' && $_GET['sqlcompat'] == 'MYSQL40' ? ' --compatible=mysql40' : '').' --host="'.$dbhost.($dbport ? (is_numeric($dbport) ? ' --port='.$dbport : ' --socket="'.$dbport.'"') : '').'" --user="'.$dbuser.'" --password="'.$dbpw.'" "'.$dbname.'" '.escapeshellarg($tablesstr).' > '.$dumpfile);
@@ -327,7 +326,6 @@ if($operation == 'export') {
 					@fwrite($fp, $zip->file());
 					fclose($fp);
 					@unlink($dumpfile);
-                    $tablesstr=escapeshellarg($tablesstr);// add by seagle
 					@touch('./data/'.$backupdir.'/index.htm');
 					$filename = $backupfilename.'.zip';
 					unset($sqldump, $zip, $content);

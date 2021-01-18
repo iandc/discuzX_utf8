@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=$_G['charset']" >
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>$navtitle</title>
+        <meta name="keywords" content="$metakeywords" />
+        <meta name="description" content="$metadescription" />
+        <link href="./source/plugin/doc/css/m-doc.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="./source/plugin/doc/css/com.css"/>
+        <script type="text/javascript" src="./source/plugin/doc/js/jquery.min.js"></script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $("input[name='upload_file_freepage']").change(function () {
+                    if ($(this).val() == '-1') {
+                        $("input[name='upload_file_readpay']").val('0');
+                        $("input[name='upload_file_readpay']").attr("disabled", "disabled");
+                    } else {
+                        $("input[name='upload_file_readpay']").removeAttr("disabled");
+                    }
+                });
+                $("select").change(function () {
+                    var id = $(this).val();
+                    $(this).nextAll("[name=upload_file_doctype]").val(id);
+                    $(this).nextAll("select").hide();
+                    $(this).nextAll("[name='seltype_" + id + "']").show();
+                });
+                $(".ds-file-submit").click(function () {
+                    var p = $(this).parent();
+                    var title = p.find("[name=upload_file_title]").val();
+                    var short = p.find("[name=upload_file_short]").val();
+                    var key = p.find("[name=upload_file_key]").val();
+                    var freepage = p.find("[name=upload_file_freepage]").val();
+                    var readpay = p.find("[name=upload_file_readpay]").val();
+                    var downpay = p.find("[name=upload_file_downpay]").val();
+                    var doctype = p.find("[name=upload_file_doctype]").val();
+                    title = title.replace("(", "").replace(")", "");
+                    short = short.replace("(", "").replace(")", "");
+                    key = key.replace("(", "").replace(")", "");
+                    freepage = parseInt(freepage);
+                    readpay = parseInt(readpay);
+                    downpay = parseInt(downpay);
+                    if (isNaN(freepage)) {
+                        freepage = 0;
+                    }
+                    if (isNaN(readpay)) {
+                        readpay = 0;
+                    }
+                    if (isNaN(downpay)) {
+                        downpay = 0;
+                    }
+                    if (title == "") {
+                        alert("{lang doc:upload_titlenonull}");
+                        return false;
+                    }
+                    if (short == "") {
+                        alert("{lang doc:upload_shortnonull}");
+                        return false;
+                    }
+                    if (doctype == "" || doctype == "-1") {
+                        alert("{lang doc:upload_typenonull}");
+                        return false;
+                    }
+                    if (key == "") {
+                        alert("{lang doc:upload_keynonull}");
+                        return false;
+                    }
+                    $.post("plugin.php?id=doc:edit", {
+                        action: "submit",
+                        d: $docid,
+                        title: title,
+                        short: short,
+                        key: key,
+                        freepage: freepage,
+                        readpay: readpay,
+                        downpay: downpay,
+                        doctype: doctype,
+                        formhash: '{FORMHASH}'
+                    },
+                    function (data) {
+                        p.parent().find(".ds-file-head-tip").html(data);
+                        alert(data);
+                        if ($doc_rewrite) {
+                            window.location.href = 'mydoc-0-0-0.html';
+                        } else {
+                            window.location.href = "plugin.php?id=doc:mydoc";
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class='m-header'>
+            <a href='javascript:javascript:history.go(-1);' class="m-header-return"></a>
+            <span>{lang doc:com_eidt}</span>
+            <a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->" class="m-header-home">{lang doc:mobile_home}</a>
+        </div>
+        <div style="clear:both;height: 10px"></div>
+        <div id="ds-upload-form">
+            <div class="ds-file">
+                <div class="ds-file-head">
+                    $title
+                    <div class="ds-file-head-tip">
+                    </div>
+                </div>
+                <div class="ds-file-body">
+                    <div>
+                        <div class="ds-file-title">
+                            {lang doc:upload_title}
+                        </div>
+                        <input type="text" class="ds-file-text" name="upload_file_title" value="$title">
+                    </div>
+                    <div>
+                        <div class="ds-file-title">
+                            {lang doc:upload_short}
+                        </div>
+                        <textarea class="ds-file-textarea" name="upload_file_short">$short
+                        </textarea>
+                    </div>
+                    <div>
+                        <div class="ds-file-title">
+                            {lang doc:upload_type}
+                        </div>
+                        $typeop0 $typeop1 $typeop2 $typeop3 <span class="ds-edit-olddoctype">{lang doc:edit_oldtype}<!--{echo GetDocTypeName($doctype)}--></span>
+                        <input type="hidden" name="upload_file_doctype" value="" />
+                    </div>
+                    <div>
+                        <div class="ds-file-title">
+                            {lang doc:upload_key}
+                        </div>
+                        <input type="text" class="ds-file-text" name="upload_file_key" value="$key">
+                    </div>
+                    <div>
+                        <div class="ds-file-title">
+                            {lang doc:upload_freeread}
+                        </div>
+                        <input type="text" class="ds-file-text" style="width:50px" name="upload_file_freepage"
+                               value="$freepage">
+                        <span>
+                            {lang doc:upload_page}
+                        </span>
+                    </div>
+                    <div>
+                        <div class="ds-file-title">
+                            {lang doc:upload_readpay}$doc_readcreditname[0]:
+                        </div>
+                        <input type="text" class="ds-file-text" style="width:50px" name="upload_file_readpay"
+                               value="$readpay">
+                        <span>
+                            $doc_readcreditname[1]
+                        </span>
+                    </div>
+                    <div>
+                        <div class="ds-file-title">
+                            {lang doc:upload_downpay}$doc_downcreditname[0]:
+                        </div>
+                        <input type="text" class="ds-file-text" style="width:50px" name="upload_file_downpay"
+                               value="$downpay">
+                        <span>
+                            $doc_downcreditname[1]
+                        </span>
+                    </div>
+                    <a class="ds-file-submit" href="javascript:void">
+                        {lang doc:upload_save}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;height: 10px"></div>
+    </body>
+</html>

@@ -75,8 +75,8 @@ function validate(theform) {
 	if(($('postsubmit').name != 'replysubmit' && !($('postsubmit').name == 'editsubmit' && !isfirstpost) && theform.subject.value == "") || !sortid && !special && trim(message) == "") {
 		showError('抱歉，您尚未输入标题或内容');
 		return false;
-	} else if(mb_strlen(theform.subject.value) > 120) {
-		showError('您的标题超过 120 个字符的限制');
+	} else if(mb_strlen(theform.subject.value) > 80) {
+		showError('您的标题超过 80 个字符的限制');
 		return false;
 	}
 	if(in_array($('postsubmit').name, ['topicsubmit', 'editsubmit'])) {
@@ -616,13 +616,16 @@ function addpolloption() {
 		addUploadEvent(imgid, proid)
 
 	} else {
-		$('polloption_new').outerHTML = '<span>已达到最大投票数'+maxoptions+'</span>';
+		$('polloption_new').innerHTML = '已达到最大投票数' + maxoptions;
 	}
 }
 
 function delpolloption(obj) {
 	obj.parentNode.parentNode.removeChild(obj.parentNode);
 	curoptions--;
+	if (curoptions < maxoptions) {
+		$('polloption_new').innerHTML = '';
+	}
 }
 
 function insertsave(pid) {
@@ -810,6 +813,7 @@ function getreplycredit() {
 
 	var reply_credits_sum = Math.ceil(parseInt(credit_once * times));
 
+	$('replycredit_sum').innerHTML = reply_credits_sum > 0 ? reply_credits_sum : 0 ;
 	if(real_reply_credit > userextcredit) {
 		$('replycredit').innerHTML = '<b class="xi1">回帖奖励积分总额过大('+real_reply_credit+')</b>';
 	} else {
@@ -818,7 +822,6 @@ function getreplycredit() {
 		} else {
 			$('replycredit').innerHTML = replycredit_result_lang + (real_reply_credit > 0 ? real_reply_credit : 0 );
 		}
-		$('replycredit_sum').innerHTML = reply_credits_sum > 0 ? reply_credits_sum : 0 ;
 	}
 }
 

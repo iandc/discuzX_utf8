@@ -8,13 +8,14 @@
  */
 
 if(!defined('IN_DISCUZ')) {
-	exit('Access Denied');
+    exit('Access Denied');
 }
 
 $ac = empty($_GET['ac']) ? '' : $_GET['ac'];
-$acs = array('lostpasswd', 'swfupload', 'inputpwd', 'ajax', 'seccode', 'sendmail', 'emailcheck');
+$acs = isset($_G['group']['allowvisit']) && $_G['group']['allowvisit'] ? array('swfupload', 'inputpwd', 'ajax', 'sendmail', 'emailcheck') : array('swfupload', 'sendmail', 'emailcheck');
+
 if(empty($ac) || !in_array($ac, $acs)) {
-	showmessage('enter_the_space', 'home.php?mod=space');
+    showmessage('enter_the_space', 'home.php?mod=space');
 }
 
 $theurl = 'home.php?mod=misc&ac='.$ac;

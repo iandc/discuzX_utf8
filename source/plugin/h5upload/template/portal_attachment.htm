@@ -1,0 +1,25 @@
+<!--{subtemplate common/header_ajax}-->
+
+	<table cellpadding="0" cellspacing="0" id="attach_list_$attach[attachid]" summary="post_attachbody" border="0" width="100%">
+		<tbody>
+			<tr>
+				<td class="attswf">
+					<p id="attach$attach[attachid]">
+						<span>$attach[filetype] <a href="javascript:;" class="xi2" id="attachname$attach[attachid]" isimage="{if $attach['isimage']}1{else}0{/if}" onclick="{if $attach['isimage']}insertImage('$bigimg'){else}insertFile('$attach[filename]', 'portal.php?mod=attachment&id=$attach['attachid']'){/if};doane(event);">{$attach[filename]}</a></span>
+						<!--{if $attachmcode}--><a href="javascript:;" class="atturl" title="{lang e_attach_mediacode}" onclick="edit_insert('$attachmcode');doane(event);"><img src="{IMGDIR}/attachmediacode.gif" /></a><!--{/if}-->
+					</p>
+				</td>
+				<td class="atds">$attach[filesize]</td>
+				<td class="attc"><a href="javascript:;" class="d" onclick="deleteAttach($attach[attachid], 'portal.php?mod=attachment&id=$attach[attachid]&op=delete');;return false;" title="{lang delete}">{lang delete}</a></td>
+			</tr>
+		</tbody>
+	</table>
+<script type="text/javascript">
+	parent.$('attach_ids').value += ',' + '$attach['attachid']';
+	<!--{if $coverstr}-->
+		if(parent.$('conver').value == '') {
+			parent.$('conver').value = '$coverstr';
+		}
+	<!--{/if}-->
+</script>
+<!--{subtemplate common/footer_ajax}-->

@@ -56,7 +56,7 @@ class mobile_core {
 		$return = array();
 		foreach($variables as $key => $value) {
 			foreach($keys as $k) {
-				if($k{0} == '/' && preg_match($k, $key) || $key == $k) {
+				if($k[0] == '/' && preg_match($k, $key) || $key == $k) {
 					if($subkeys) {
 						$return[$key] = mobile_core::getvalues($value, $subkeys);
 					} else {
@@ -307,9 +307,6 @@ class base_plugin_mobile {
 		$_G['siteurl'] = preg_replace('/api\/mobile\/$/', '', $_G['siteurl']);
 		$_G['setting']['msgforward'] = '';
 		$_G['setting']['cacheindexlife'] = $_G['setting']['cachethreadlife'] = false;
-		if(!$_G['setting']['mobile']['nomobileurl'] && function_exists('diconv') && !empty($_GET['charset'])) {
-			$_GET = mobile_core::diconv_array($_GET, $_GET['charset'], $_G['charset']);
-		}
 		if($_GET['_auth']) {
 			require_once DISCUZ_ROOT.'./source/plugin/wechat/wsq.class.php';
 			$uid = wsq::decodeauth($_GET['_auth']);

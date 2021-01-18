@@ -1,0 +1,51 @@
+<!--{block return}-->
+<!--{subtemplate h5upload:common/upload}-->
+<style>
+#imgSpanButtonPlaceholder{margin:0 auto;display:block;width: 99px;height: 25px;line-height: 25px;overflow:hidden;background:url("{IMGDIR}/uploadbutton.png") no-repeat 0 0;}
+#imgSpanButtonPlaceholder:hover{background-position:0 -25px;}
+#imgSpanButtonPlaceholder .webuploader-pick{text-indent:-9999px;}
+</style>
+<script type="text/javascript">
+	$('imgSpanButtonPlaceholder').innerHTML = '{lang upload}';
+	var Upload = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=album",
+		post_params : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"},
+		pick: '#imgSpanButtonPlaceholder',
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: $setconfig['compress_replace'],
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		custom_settings : {
+			progressTarget : "imgUploadProgress",
+			uploadSource: 'home',
+			uploadType: 'album',
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			<!--{if $setconfig['insert_allimage']}-->
+			insertAllImage: '$setconfig[insert_allimage]',
+			<!--{/if}-->
+			imgBoxObj: $('attachbody')
+		}
+	});
+
+</script>
+<!--{/block}-->

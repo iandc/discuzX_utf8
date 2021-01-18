@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=$_G['charset']" >
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>$navtitle</title>
+        <meta name="keywords" content="$metakeywords" />
+        <meta name="description" content="$metadescription" />
+        <link href="./source/plugin/doc/css/com.css" rel="stylesheet" type="text/css"/>
+        <link href="./source/plugin/doc/css/m-doc.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class='m-header'>
+            <a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->" class="m-header-logo">$doc_name</a>      
+            <div class="m-header-login">
+                {if $_G['uid']}
+                <a href="plugin.php?id=doc:upload" class="m-login-upload">{lang doc:mobile_upload}</a>
+                {else}
+                <a href="member.php?mod=logging&action=login">{lang doc:mobile_login} | {lang doc:mobile_regiser}</a>
+                {/if}   
+            </div>
+        </div>
+        <ul class='m-banner'> 
+            <li><a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->">{lang doc:mobile_home}</a></li> 
+            <li><a href="<!--{if $doc_rewrite}-->doc-class.html<!--{else}-->plugin.php?id=doc:class<!--{/if}-->">{lang doc:mobile_class}</a></li> 
+            <li><a href="<!--{if $doc_rewrite}-->doc-rank.html<!--{else}-->plugin.php?id=doc:rank<!--{/if}-->" class="active">{lang doc:mobile_rank}</a></li> 
+            <li><a href="<!--{if $doc_rewrite}-->mydoc-0-0-0.html<!--{else}-->plugin.php?id=doc:mydoc&t=0-0-0<!--{/if}-->">{lang doc:mobile_mydoc}</a></li>
+        </ul> 
+        <div class="m-search">
+            <input type="text" id="txt_keyword" placeholder="{lang doc:list_pleasesearch}" value="$keyword"/>
+            <a href="javascript:Search()"></a>
+        </div>
+        <div class="ds-rank">                    
+            <ul>
+                {loop GetDocInfo5('','','','',0,1,20,1,'viewcount') $docinfo}
+                <div style='display:none'><!--{echo $doc_star = GetCommentStar($docinfo[0]).'px';}--></div>
+                <li>                                 
+                    <div class="ds-rank-title"><i class="$docinfo[1]"></i><a href="<!--{if $doc_rewrite}-->view-$docinfo[0].html<!--{else}-->plugin.php?id=doc:view&d=$docinfo[0]<!--{/if}-->" target="_blank" title="$docinfo[3]">$docinfo[3]</a></div>
+                    <div class="ds-rank-dudge"><span class="ds-judge-star"><i style="width:$doc_star"></i></span><span class="ds-docnail-readcount">{lang doc:doc_gong}$docinfo[9]{lang doc:doc_perread}</span></div>                               
+                </li>
+                {/loop}
+            </ul>
+    </body>
+</html>

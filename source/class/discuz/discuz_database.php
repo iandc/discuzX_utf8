@@ -83,10 +83,10 @@ class discuz_database {
 		return self::$db->insert_id();
 	}
 
-    public static function fetch($resourceid, $type = null) {
-        if (!isset($type)) {
-            $type = self::$db->drivertype == 'mysqli' ? MYSQLI_ASSOC : MYSQL_ASSOC;
-        }
+	public static function fetch($resourceid, $type = null) {
+		if (!isset($type)) {
+			$type = self::$db->drivertype == 'mysqli' ? MYSQLI_ASSOC : MYSQL_ASSOC;
+		}
 		return self::$db->fetch_array($resourceid, $type);
 	}
 
@@ -255,6 +255,7 @@ class discuz_database {
 			case '|':
 			case '&':
 			case '^':
+			case '&~':
 				return $field . '=' . $field . $glue . self::quote($val);
 				break;
 			case '>':
@@ -306,8 +307,8 @@ class discuz_database {
 		$i = $find = 0;
 		$ret = '';
 		while ($i <= $len && $find < $count) {
-			if ($sql{$i} == '%') {
-				$next = $sql{$i + 1};
+			if ($sql[$i] == '%') {
+				$next = $sql[$i + 1];
 				if ($next == 't') {
 					$ret .= self::table($arg[$find]);
 				} elseif ($next == 's') {
@@ -330,7 +331,7 @@ class discuz_database {
 				$i++;
 				$find++;
 			} else {
-				$ret .= $sql{$i};
+				$ret .= $sql[$i];
 			}
 			$i++;
 		}

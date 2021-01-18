@@ -77,7 +77,7 @@
           <div class="mui-scroll">
             <!-- 导航----------------------------- -->
             <section class="swiper-container swiper-container1" id="swiper1"> 
-                <div class="swiper-wrapper swiper-wrapper1">
+                <div class="swiper-wrapper swiper-wrapper1" style="padding-top: 20px;">
                     <!--{if $category}-->
                     <div class="swiper-slide">
                         <a href="/" style="font-weight: 900;">全部</a>
@@ -140,7 +140,14 @@
         </div>  
       </div>
     </div>
-
+    <style>
+        #tit span{
+            display: inline-block;
+            width: 23%;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
         <div class="nav" id="tit">
             {if $orderactives[hot]}{eval $actives[all]='';$actives['hot']='class="a"';}{/if}
             <span $actives[all]><a style="font-size: 14px;" href="blog.php?mod=space&do=blog&view=all">{lang new_recommend}</a></span>

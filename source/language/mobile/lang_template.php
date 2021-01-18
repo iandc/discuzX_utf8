@@ -9,6 +9,10 @@
  *      This file is automatically generate
  */
 
+if(!defined('IN_DISCUZ')) {
+	exit('Access Denied');
+}
+
 $lang = array (
   'no_simplemobiletype' => '标准版',
   'nomobiletype' => '电脑版',
@@ -18,6 +22,7 @@ $lang = array (
   'my_posts' => '我的帖子',
   'new_pm' => '新短消息',
   'waptitle' => '手机版',
+  'misc_mobile_title' => '手机版',
   'login_mobile' => '现在就登录 - {$_G[setting][bbname]} 手机版',
   'login_mobile_join' => '立即使用手机访问，获得极速移动体验',
   'mobile_favorite' => '快速收藏',

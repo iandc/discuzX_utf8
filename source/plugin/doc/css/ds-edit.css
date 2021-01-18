@@ -1,0 +1,140 @@
+.ds-upload {
+    position: relative;
+    width:958px;
+    height: 150px;
+    border:#CDCDCD 1px solid;
+    margin-top: 15px;
+}
+.ds-upload-title {
+    position:absolute;
+    left:10px;
+    top:-10px;
+    width: 60px;
+    background-color: #FFF;
+    color: #73b304;
+    font: 700 14px Arial;
+    clear: both;
+}
+.ds-upload-body {
+
+}
+.ds-upload-left {
+    margin: 55px 10px 0 12px;
+    width:570px;
+    float: left;
+}
+.ds-upload-right {
+    width:300px;
+    height:140px;
+    padding: 5px 30px;
+    background-color: #F8F8F8;
+    float:right;
+}
+.ds-upload-right-title{
+    color:#555;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size:120%;
+}
+.ds-upload-right li {
+    height: 28px;
+    line-height: 28px;
+    font-size:110%;
+}
+.ds-upload-right i {
+    position: relative;
+    top:5px; 
+}
+#ds-upload-button {
+    margin: 0px;
+    text-align:center;
+    border: solid 1px #E8E8E8;
+    color:#f00;
+}
+.ds-file{
+    margin-top: 5px;
+    border: solid 1px #CDCDCD;
+    height: 380px;
+}
+.ds-file-head{
+    padding-left:15px;
+    height: 35px;
+    line-height:35px;
+    font-size: 130%;
+    font-weight:bold;
+    font-family: "microsoft yahei""Î¢ÈíÑÅºÚ""ËÎÌå";
+    color:#fff;
+    border-bottom: solid 1px #E8E8E8;
+    background-color:#FE5F32;
+}
+.ds-file-head-tip{    
+    padding-right:10px;
+    font-size: 100%;
+    color:#ff0;
+    float:right;   
+}
+.ds-file-body{
+    position: relative;
+}
+.ds-file-body > div {
+    padding: 8px 12px;
+    clear: both;
+}
+.ds-file-title {
+    line-height: 29px;
+    height: 29px;
+    font-size: 120%;
+    width:85px;
+    margin-right: 10px;
+    text-align: right;
+    color: #666;
+    float: left;
+}
+.ds-file-text,.ds-file-textarea {
+    width: 500px;
+    float: left;
+    text-indent: 5px;
+    line-height: 25px\9;
+}
+.ds-file-text{
+    height: 25px;
+}
+.ds-file-textarea{
+    height: 100px;
+    padding-top: 5px;
+}
+.ds-file-body select{
+    margin-right:5px; 
+    height: 25px;
+    line-height: 25px;
+    float: left;
+}
+.ds-file-body span{
+    display: block;
+    line-height: 29px;
+    height: 29px;
+    margin-left: 5px;
+    font-size: 110%;
+    color: #666;
+    float: left;
+}
+.ds-file-submit {
+    position: absolute;
+    display: block;
+    top:120px;
+    right:120px;
+    padding: 10px 40px;
+    font-size: 150%;
+    font-weight: bold;
+    text-decoration: none;
+    color:#fff;
+    background-color: #23BB8B;
+}
+.ds-file-submit:hover {
+    text-decoration: none;
+}
+.ds-edit-olddoctype{
+    color:#E5673D !important;
+    padding-left:20px;
+}

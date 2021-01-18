@@ -68,7 +68,7 @@ if ($actions == null) {
         $testmb = addslashes(trim($_GET['testmb']));
         $testmsg = addslashes(trim($_GET['testmsg']));
         $smsportlog = "";
-        if(!preg_match("/^1[34578]{1}\d{9}$/",$testmb)){
+        if(!preg_match("/^1[12345789]{1}\d{9}$/",$testmb)){
             cpmsg(lang('plugin/qxt_login', 'err_1'), '', 'error');
         }
         if(!$testmsg){

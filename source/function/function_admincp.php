@@ -198,10 +198,10 @@ function showmenu($key, $menus, $return = 0) {
 	if(is_array($menus)) {
 		foreach($menus as $menu) {
 			if($menu[0] && $menu[1]) {
-                if(strpos($menu[1], 'plugins&operation=config') === false){
-                    list($action, $operation, $do) = explode('_', $menu[1]);
-                    $menu[1] = $action.($operation ? '&operation='.$operation.($do ? '&do='.$do : '') : '');
-                }
+				if(strpos($menu[1], 'plugins&operation=config') === false){
+					list($action, $operation, $do) = explode('_', $menu[1]);
+					$menu[1] = $action.($operation ? '&operation='.$operation.($do ? '&do='.$do : '') : '');
+				}
 				$body .= '<li><a href="'.(substr($menu[1], 0, 4) == 'http' ? $menu[1] : ADMINSCRIPT.'?action='.$menu[1]).'" hidefocus="true" target="'.($menu[2] ? $menu[2] : 'main').'"'.($menu[3] ? $menu[3] : '').'><em onclick="menuNewwin(this)" title="'.cplang('nav_newwin').'"></em>'.cplang($menu[0]).'</a></li>';
 			} elseif($menu[0] && $menu[2]) {
 				if($menu[2] == 1) {
@@ -252,7 +252,7 @@ function cpmsg($message, $url = '', $type = '', $values = array(), $extra = '', 
 		default: $classname = 'marginbot normal';break;
 	}
 	if($url) {
-        $url = preg_match('/^https?:\/\//is', $url) ? $url : ADMINSCRIPT.'?'.$url;
+		$url = preg_match('/^https?:\/\//is', $url) ? $url : ADMINSCRIPT.'?'.$url;
 	}
 	$message = "<h4 class=\"$classname\">$message</h4>";
 	$url .= $url && !empty($_GET['scrolltop']) ? '&scrolltop='.intval($_GET['scrolltop']) : '';
@@ -667,7 +667,7 @@ function showsetting($setname, $varname, $value, $type = 'radio', $disabled = ''
 		$s .= '<ul class="nofloat" onmouseover="altStyle(this'.$check['disabledaltstyle'].');">';
 		foreach($varname[1] as $key => $var) {
 			if($var !== false) {
-				$s .= '<li'.($value{$checkboxs - $i} ? ' class="checked"' : '').'><input class="checkbox" type="checkbox"'.($varnameid ? ' id="_v'.md5($i).'_'.$varnameid.'"' : '').' name="'.$varname[0].'['.$i.']" value="1"'.($value{$checkboxs - $i} ? ' checked' : '').' '.(!empty($varname[2][$key]) ? $varname[2][$key] : '').'>&nbsp;'.$var.'</li>';
+				$s .= '<li'.($value[$checkboxs - $i] ? ' class="checked"' : '').'><input class="checkbox" type="checkbox"'.($varnameid ? ' id="_v'.md5($i).'_'.$varnameid.'"' : '').' name="'.$varname[0].'['.$i.']" value="1"'.($value[$checkboxs - $i] ? ' checked' : '').' '.(!empty($varname[2][$key]) ? $varname[2][$key] : '').'>&nbsp;'.$var.'</li>';
 			}
 			$i++;
 		}
@@ -705,7 +705,7 @@ function showsetting($setname, $varname, $value, $type = 'radio', $disabled = ''
 		$css = '';
 		for($i = 0; $i <= 1; $i++) {
 			if($code[$i] != '') {
-				if($code[$i]{0} == '#') {
+				if($code[$i][0] == '#') {
 					$css .= strtoupper($code[$i]).' ';
 				} elseif(preg_match('/^(https?:)?\/\//i', $code[$i])) {
 					$css .= 'url(\''.$code[$i].'\') ';

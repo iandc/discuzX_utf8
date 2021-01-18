@@ -1,0 +1,78 @@
+<!--{block return}-->
+<!--{if $ad1}-->
+<div class="wp bm">
+{$ad1}
+</div>
+<!--{/if}-->
+<!--{if count($threadlist)>0}-->
+<link rel="stylesheet" type="text/css" href="data/cache/style_{STYLEID}_forum_forumdisplay.css" />
+<div id="threadlist" class="tl bm bmw" style="position: relative;">
+	<div class="th">
+		<table cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<th colspan="2">
+						<div class="tf"><h2>{$title}</h2></div>
+					</th>
+					<td class="by">{lang nimba_forumgroup:forum}</td>
+					<td class="by">{lang nimba_forumgroup:author}</td>
+					<td class="num">{lang nimba_forumgroup:reply}/{lang nimba_forumgroup:view}</td>
+					<td class="by">{lang nimba_forumgroup:lastpost}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="bm_c">
+		<table summary="forum_{$_G['fid']}" cellspacing="0" cellpadding="0" id="threadlisttableid">
+			<tbody id="separatorline" class="emptb">
+				<tr>
+					<td class="icn"></td>
+					<th></th>
+					<td class="by"></td>
+					<td class="by"></td>
+					<td class="num"></td>
+					<td class="by"></td>
+				</tr>
+			</tbody>
+			<!--{loop $threadlist $thread}-->
+			<!--{eval $thread['lastpost']=dgmdate($thread['lastpost'],'Y-m-d H:i');}-->
+			<!--{eval $thread['dateline']=dgmdate($thread['dateline'],'Y-m-d H:i');}-->
+			<!--{eval $thread['subject']=dhtmlspecialchars($thread['subject']);}-->
+			<!--{eval $thread['author']=dhtmlspecialchars($thread['author']);}-->
+			<!--{eval $thread['lastposter']=dhtmlspecialchars($thread['lastposter']);}-->
+			<tbody id="normalthread_{$thread['tid']}">
+				<tr>
+					<td class="icn">
+					<a href="forum.php?mod=viewthread&tid={$thread['tid']}" title="{$thread['subject']}" target="_blank">
+					<img src="static/image/common/folder_common.gif">
+					</a>
+					</td>
+					<th class="common">
+					 <a href="forum.php?mod=viewthread&tid={$thread['tid']}" onclick="atarget(this)" class="s xst">{$thread['subject']}</a>
+					</th>
+					<td class="by"><a href="forum.php?mod=forumdisplay&fid={$thread['fid']}" target="_blank">{$forumlist[$thread['fid']]['name']}</a></td>
+					<td class="by">
+					<cite>
+					<a href="home.php?mod=space&uid={$thread['authorid']}">{$thread['author']}</a></cite>
+					<em><span>{$thread['dateline']}</span></em>
+					</td>
+					<td class="num"><a href="forum.php?mod=viewthread&tid={$thread['tid']}" class="xi2" title="{$thread['subject']}">{$thread['replies']}</a><em>{$thread['views']}</em></td>
+					<td class="by">
+					<cite><a href="home.php?mod=space&username={$thread['lastposter']}">{$thread['lastposter']}</a></cite>
+					<em><a href="forum.php?mod=viewthread&tid={$thread['tid']}" title="{$thread['subject']}">$thread['lastpost']</a></em>
+					</td>
+				</tr>
+			</tbody>
+			<!--{/loop}-->
+		</table>
+	</div>
+	
+</div>
+<div class="bm bw0 pgs cl">{$multi}</div>
+<!--{/if}-->
+<!--{if $ad2}-->
+<div class="wp bm">
+{$ad2}
+</div>
+<!--{/if}-->
+<!--{/block}-->

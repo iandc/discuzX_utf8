@@ -142,7 +142,7 @@ class usercontrol extends base {
 			$status = -1;
 		} elseif($user['password'] != md5($passwordmd5.$user['salt'])) {
 			$status = -2;
-		} elseif($checkques && $user['secques'] && $user['secques'] != $_ENV['user']->quescrypt($questionid, $answer)) {
+		} elseif($checkques && $user['secques'] != $_ENV['user']->quescrypt($questionid, $answer)) {
 			$status = -3;
 		} else {
 			$status = $user['uid'];
@@ -291,7 +291,7 @@ class usercontrol extends base {
 		$this->load('misc');
 		$app = $this->cache['apps'][$appid];
 		$apifilename = isset($app['apifilename']) && $app['apifilename'] ? $app['apifilename'] : 'uc.php';
-		if($app['extra']['apppath'] && substr(strrchr($apifilename, '.'), 1, 10) == 'php' && @include $app['extra']['apppath'].'./api/'.$apifilename) {
+		if($app['extra']['apppath'] && $this->detectescape($app['extra']['apppath'].'./api/', $apifilename) && substr(strrchr($apifilename, '.'), 1, 10) == 'php' && @include $app['extra']['apppath'].'./api/'.$apifilename) {
 			$uc_note = new uc_note();
 			return $uc_note->getcredit(array('uid' => $uid, 'credit' => $credit), '');
 		} else {

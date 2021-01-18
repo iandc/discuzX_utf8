@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=$_G['charset']" >
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>$navtitle</title>
+        <meta name="keywords" content="$metakeywords" />
+        <meta name="description" content="$metadescription" />
+        <link href="./source/plugin/doc/css/com.css" rel="stylesheet" type="text/css"/>
+        <link href="./source/plugin/doc/css/m-doc.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="./source/plugin/doc/js/jquery.min.js"></script>
+        <script type="text/javascript" src="./source/plugin/doc/js/jqfu/vendor/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="./source/plugin/doc/js/jqfu/jquery.iframe-transport.js"></script>
+        <script type="text/javascript" src="./source/plugin/doc/js/jqfu/jquery.fileupload.js"></script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $(".upload_button").click(function () {
+                    $("#Filedata").trigger("click");
+                });
+                $('#Filedata').fileupload({
+                    dataType: 'text',
+                    url: "source/plugin/doc/savedoc.php",
+                    formData: {PHPSESSID: "<?php echo session_id(); ?>"},
+                    acceptFileTypes: "*.doc;*.docx;*.ppt;*.pptx;*.xls;*.xlsx;*.pdf;*.txt;*.wps;*.dps;*.et",
+                    maxNumberOfFiles: 5,
+                    done: function (e, data) {
+                        for (var i = 0; i < data.originalFiles.length; i++) {
+                            uploadSuccess(data.originalFiles[i].name, data.total, data.result);
+                        }
+                    },
+                    fail: function (e, data) {
+                        alert("{lang doc:upload_uploadfalse}");
+                        return false;
+                    }
+                });
+            });
+            function uploadSuccess(a, d, b)
+            {
+                var path = b;
+                var size = d;
+                var name = a;
+                var fileinfo = '<div class="ds-file"><div class="ds-file-head">' + name + '<div class="ds-file-head-tip"></div></div><div class="ds-file-body"><input type="hidden" name="upload_file_docpath" value="' + path + '" /><input type="hidden" name="upload_file_docsize" value="' + size + '" /><div><div class="ds-file-title">{lang doc:upload_title}</div><input type="text" class="ds-file-text" name="upload_file_title" value="' + name.substr(0, name.lastIndexOf(".")) + '"></div><div><div class="ds-file-title">{lang doc:upload_short}</div><textarea class="ds-file-textarea" name="upload_file_short">' + name.substr(0, name.lastIndexOf(".")) + '</textarea></div><div><div class="ds-file-title">{lang doc:upload_type}</div>$typeop0 $typeop1 $typeop2 $typeop3<input type="hidden" name="upload_file_doctype" value="" /></div><div><div class="ds-file-title">{lang doc:upload_key}</div><input type="text" class="ds-file-text"  name="upload_file_key" value="' + name.substr(0, name.lastIndexOf(".")) + '"></div><div><div class="ds-file-title">{lang doc:upload_freeread}</div><input type="text" class="ds-file-text" style="width:50px" name="upload_file_freepage" value="5"><span>{lang doc:upload_page}</span></div><div><div class="ds-file-title">{lang doc:upload_readpay}$doc_readcreditname[0]:</div><input type="text" class="ds-file-text" style="width:50px" name="upload_file_readpay" value="$doc_readcreditsize"><span>$doc_readcreditname[1]</span></div><div><div class="ds-file-title">{lang doc:upload_downpay}$doc_downcreditname[0]:</div><input type="text" class="ds-file-text" style="width:50px" name="upload_file_downpay" value="$doc_downcreditsize"><span>$doc_downcreditname[1]</span></div><a class="ds-file-submit" href="javascript:void(0)">{lang doc:upload_save}</a></div></div>';
+                jQuery("#ds-upload-form").append(fileinfo);
+                jQuery("input[name='upload_file_freepage']").change(function () {
+                    if (jQuery(this).val() == '-1') {
+                        jQuery(this).parent().parent().find("input[name='upload_file_readpay']").val('0');
+                        jQuery(this).parent().parent().find("input[name='upload_file_readpay']").attr("disabled", "disabled");
+                    } else {
+                        jQuery(this).parent().parent().find("input[name='upload_file_readpay']").removeAttr("disabled");
+                    }
+                });
+                jQuery("select").change(function () {
+                    var id = jQuery(this).val();
+                    jQuery(this).nextAll("[name=upload_file_doctype]").val(id);
+                    jQuery(this).nextAll("select").hide();
+                    jQuery(this).nextAll("[name='seltype_" + id + "']").show();
+                });
+                jQuery(".ds-file-submit").unbind().bind('click', function () {
+                    var p = jQuery(this).parent();
+                    var title = p.find("[name=upload_file_title]").val();
+                    var short = p.find("[name=upload_file_short]").val();
+                    var key = p.find("[name=upload_file_key]").val();
+                    var freepage = p.find("[name=upload_file_freepage]").val();
+                    var readpay = p.find("[name=upload_file_readpay]").val();
+                    var downpay = p.find("[name=upload_file_downpay]").val();
+                    var doctype = p.find("[name=upload_file_doctype]").val();
+                    var docpath = p.find("[name=upload_file_docpath]").val();
+                    var docsize = p.find("[name=upload_file_docsize]").val();
+                    title = title.replace("(", "").replace(")", "");
+                    short = short.replace("(", "").replace(")", "");
+                    key = key.replace("(", "").replace(")", "");
+                    freepage = parseInt(freepage);
+                    readpay = parseInt(readpay);
+                    downpay = parseInt(downpay);
+                    if (isNaN(freepage)) {
+                        freepage = 0;
+                    }
+                    if (isNaN(readpay)) {
+                        readpay = 0;
+                    }
+                    if (isNaN(downpay)) {
+                        downpay = 0;
+                    }
+                    if (title == "") {
+                        alert("{lang doc:upload_titlenonull}");
+                        return false;
+                    }
+                    if (short == "") {
+                        alert("{lang doc:upload_shortnonull}");
+                        return false;
+                    }
+                    if (doctype == "" || doctype == "-1") {
+                        alert("{lang doc:upload_typenonull}");
+                        return false;
+                    }
+                    if (key == "") {
+                        alert("{lang doc:upload_keynonull}");
+                        return false;
+                    }
+                    jQuery.post("plugin.php?id=doc:upload", {action: "submit", title: title, short: short, key: key, freepage: freepage, readpay: readpay, downpay: downpay, doctype: doctype, docpath: docpath, docsize: docsize, formhash: '{FORMHASH}'}, function (data) {
+                        p.slideUp({height: 0});
+                        p.parent().height('35px');
+                        p.parent().find(".ds-file-head-tip").html(data);
+                        alert(data);
+                    });
+                });
+                return false;
+            }
+        </script>
+    </head>
+    <body>
+        <div class='m-header'>
+            <a href='javascript:javascript:history.go(-1);' class="m-header-return"></a>
+            <span>{lang doc:mobile_upload}</span>
+            <a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->" class="m-header-home">{lang doc:mobile_home}</a>
+        </div>
+        <div style="clear:both;height: 10px"></div>
+        <form>
+            <a class="upload_button" href="javascript:void(0)">{lang doc:mobile_liulan}</a>
+            <input type="file" id="Filedata" name="Filedata"  style="display: none" />
+        </form>
+        <div id="ds-upload-form">
+        </div>
+        <div style="clear:both;height: 10px"></div>
+    </body>
+</html>
+

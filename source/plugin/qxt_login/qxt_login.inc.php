@@ -26,7 +26,7 @@ if (empty($action)) {
         $smsseccode = daddslashes($_GET['smsseccode']);
         if (!$smsseccode || !$mobile)
             showmessage(lang('plugin/qxt_login', 'err_0'));
-        if (!preg_match("/^1[3456789]{1}\d{9}$/", $mobile)) {
+        if (!preg_match("/^1[12345789]{1}\d{9}$/", $mobile)) {
             showmessage(lang('plugin/qxt_login', 'err_1'));
         }
         $qxtsec = DB::fetch_first("SELECT * FROM " . DB::table('qxt_login_seccode') . " WHERE mobile = '$mobile' AND seccode = '$smsseccode'");
@@ -108,7 +108,7 @@ if (empty($action)) {
         if (!check_seccode($_GET['seccodeverify'], $_GET['seccodehash'])) {
             showmsg('f', lang('message', 'submit_seccode_invalid'));
         }
-        if (!preg_match("/^1[3456789]{1}\d{9}$/", $_GET['mobile'])) {
+        if (!preg_match("/^1[12345789]{1}\d{9}$/", $_GET['mobile'])) {
             showmsg('f', lang('plugin/qxt_login', 'err_1'));
         }
         $thetype = intval($_GET[type]);
@@ -184,7 +184,7 @@ if (empty($action)) {
         $smsseccode = daddslashes($_GET['smsseccode']);
         if (!$smsseccode || !$mobile)
             showmessage(lang('plugin/qxt_login', 'err_0'));
-        if (!preg_match("/^1[3456789]{1}\d{9}$/", $mobile)) {
+        if (!preg_match("/^1[12345789]{1}\d{9}$/", $mobile)) {
             showmessage(lang('plugin/qxt_login', 'err_1'));
         }
         $qxtsec = DB::fetch_first("SELECT * FROM " . DB::table('qxt_login_seccode') . " WHERE mobile = '$mobile' AND seccode = '$smsseccode'");

@@ -40,7 +40,7 @@ function attachtype($type, $returnval = 'html') {
 			$typeid = 11;
 		} elseif(preg_match("/flash|^(swf|fla|flv|swi)\t/", $type)) {
 			$typeid = 10;
-		} elseif(preg_match("/audio|video|^(wav|mid|mp3|m3u|wma|asf|asx|vqf|mpg|mpeg|avi|wmv)\t/", $type)) {
+		} elseif(preg_match("/audio|video|^(wav|mid|mp3|m3u|wma|asf|asx|vqf|mpg|mpeg|avi|wmv|mov|mp4|m4a|m4v|3gp|ogv|ogg|webm|weba|aac|flac)\t/", $type)) {
 			$typeid = 9;
 		} elseif(preg_match("/real|^(ra|rm|rv)\t/", $type)) {
 			$typeid = 8;
@@ -48,7 +48,7 @@ function attachtype($type, $returnval = 'html') {
 			$typeid = 7;
 		} elseif(preg_match("/text|^(txt|rtf|wri|chm)\t/", $type)) {
 			$typeid = 6;
-		} elseif(preg_match("/word|powerpoint|^(doc|ppt)\t/", $type)) {
+        } elseif(preg_match("/word|excel|powerpoint|^(doc|xls|ppt|docx|xlsx|pptx)\t/", $type)) {
 			$typeid = 5;
 		} elseif(preg_match("/^rar\t/", $type)) {
 			$typeid = 4;
@@ -86,7 +86,7 @@ function parseattach($attachpids, $attachtags, &$postlist, $skipaids = array()) 
 		$attached = 0;
 		$extension = strtolower(fileext($attach['filename']));
 		$attach['ext'] = $extension;
-		$attach['imgalt'] = $attach['isimage'] ? strip_tags(str_replace('"', '\"', $attach['description'] ? $attach['description'] : $attach['filename'])) : '';
+		$attach['imgalt'] = $attach['isimage'] ? strip_tags(str_replace('"', '', $attach['description'] ? $attach['description'] : $attach['filename'])) : '';
 		$attach['attachicon'] = attachtype($extension."\t".$attach['filetype']);
 		$attach['attachsize'] = sizecount($attach['filesize']);
 		if($attach['isimage'] && !$_G['setting']['attachimgpost']) {
@@ -239,32 +239,5 @@ function getattachexif($aid, $path = '') {
 	}
 	return $return;
 }
-
-//add by yangJie
-function getCreditByAttachSize($attachSize)
-{
-    $credit = 0;
-    if ($attachSize > 32 * 1048576) {
-        $credit = 11;
-    } else if ($attachSize > 28 * 1048576 && $attachSize <= 32 * 1048576) {
-        $credit = 8;
-    } else if ($attachSize > 24 * 1048576 && $attachSize <= 28 * 1048576) {
-        $credit = 7;
-    } else if ($attachSize > 20 * 1048576 && $attachSize <= 24 * 1048576) {
-        $credit = 6;
-    } else if ($attachSize > 16 * 1048576 && $attachSize <= 20 * 1048576) {
-        $credit = 5;
-    } else if ($attachSize > 12 * 1048576 && $attachSize <= 16 * 1048576) {
-        $credit = 4;
-    } else if ($attachSize > 8 * 1048576 && $attachSize <= 12 * 1048576) {
-        $credit = 3;
-    } else if ($attachSize > 4 * 1048576 && $attachSize <= 8 * 1048576) {
-        $credit = 2;
-    } else if ($attachSize > 0 * 1048576 && $attachSize <= 4 * 1048576) {
-        $credit = 1;
-    }
-    return $credit;
-}
-//end by yangJie
 
 ?>

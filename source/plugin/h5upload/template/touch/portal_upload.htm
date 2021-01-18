@@ -1,0 +1,139 @@
+<!--{block return}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/h5upload/webuploader/webuploader.css">
+<script type="text/javascript" src="source/plugin/h5upload/webuploader/webuploader.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var fileparent = $('#filedata').parent();
+	var fileparent_w = fileparent.width();
+	var fileparent_h = fileparent.height();
+	fileparent.css('background', 'url(source/plugin/h5upload/image/icon_photo.png) no-repeat center center');
+	fileparent.html('<div id="filepick"><div style="overflow:hidden;" id="filepick_bd"></div></div>');
+	$('#filepick_bd').width(fileparent_w).height(fileparent_h);
+	var severurl = "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=<!--{if $_G['basescript'] == 'portal'}-->portal<!--{else}-->album<!--{/if}-->";
+	var imgUpload = new WebUploader.create({
+		auto: false,
+		swf: 'source/plugin/h5upload/webuploader/Uploader.swf',
+		server: severurl,
+		formData : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"<!--{if $_G['basescript'] == 'portal'}-->,"aid":$aid,"catid":$catid<!--{/if}-->},
+		pick: "#filepick",
+		threads: 1,
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		duplicate: true,
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: $setconfig['compress_replace'],
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+	});
+	imgUpload.on( 'fileQueued', function(file) {
+		popup.open('<img src="' + IMGDIR + '/imageloading.gif">');
+		var filename = file.name.replace(/\(/g, '[').replace(/\)/g, ']').replace(/CONTENT-TRANSFER-ENCODING/g, escape('CONTENTTRANSFERENCODING'));
+		<!--{if $setconfig['upload_storage'] == 'cl_qiniuyun'}-->
+			$.ajax({
+				type:'POST',
+				url:severurl.replace('misc.php?mod=swfupload', 'plugin.php?id=cl_qiniuyun:token&filename='+filename),
+				async: false,
+				dataType:'xml'
+			})
+			.success(function(s) {
+                file.token = s.lastChild.firstChild.nodeValue;
+				imgUpload.upload(file);
+			})
+			.error(function() {
+				popup.close();
+			});
+		<!--{else}-->
+			imgUpload.upload(file);
+		<!--{/if}-->
+	});
+	imgUpload.on( 'uploadProgress', function(file, percentage) {
+
+	});
+	imgUpload.on( 'uploadStart', function(file) {
+		<!--{if $setconfig['upload_storage'] == 'cl_qiniuyun'}-->
+           imgUpload.options.server = 'http://up.qiniu.com/';
+           imgUpload.options.fileVal = 'file';
+           imgUpload.options.formData.token = file.token;
+		<!--{/if}-->
+	});
+	imgUpload.on( 'uploadSuccess', function(file, response) {
+		<!--{if $setconfig['upload_storage'] == 'qiniuyun'}-->
+            for(key in imgUpload.options.formData){
+                response[key]  = imgUpload.options.formData[key];
+            }
+			response['name'] = response['name'].replace(/\(/g, '[').replace(/\)/g, ']').replace(/CONTENT-TRANSFER-ENCODING/g, escape('CONTENTTRANSFERENCODING'));
+			response['_raw'] = '';
+			$.ajax({
+				type:'POST',
+				url:severurl.replace('misc.php?mod=swfupload', 'plugin.php?id=cl_qiniuyun:upload'),
+				async: false,
+				data:response
+			})
+			.success(function(s) {
+				uploadSuccess(file, s);
+			})
+			.error(function() {
+				popup.close();
+			});
+		<!--{else}-->
+		console.info(response);
+		var data = response;
+		uploadSuccess(file, data);
+		<!--{/if}-->
+	});
+	imgUpload.on( 'uploadError', function(file) {
+		popup.open('{lang uploadpicfailed}', 'alert');
+	});
+	imgUpload.on( 'uploadComplete', function(file) {
+		popup.close();
+	});
+	imgUpload.on( 'error', function(code) {
+		var err = '';
+		switch (code) {
+		case 'F_EXCEED_SIZE':
+			err = '{lang uploadstatusmsg3}';
+			break;
+		case 'Q_EXCEED_NUM_LIMIT':
+			err = '{lang uploadstatusmsg6}';
+			break;
+		case 'Q_EXCEED_SIZE_LIMIT':
+			err = '{lang uploadstatusmsg3}';
+			break;
+		case 'Q_TYPE_DENIED':
+			err = '{lang uploadstatusmsg1}';
+			break;
+		default:
+			err = '{lang uploadpicfailed}' + code;
+			break;
+		}
+		popup.open(err, 'alert');
+		return false;
+	});
+	function uploadSuccess(file, data) {
+		if(data.aid){
+			$('#imglist').append('<li><span id="aid_'+data.aid+'" class="p_img" onclick="SettingImg('+data.aid+', \''+data.bigimg+'\');" coverstr=\''+data.cover+'\'><img style="height:48px;" id="aimg_'+data.aid+'" src="'+data.smallimg+'" /></span></li>');
+			document.getElementById('conver').value = data.cover;
+			document.getElementById('attach_ids').value += ','+data.aid;
+		}else{
+			popup.open('errorcode: '+data.errorcode, 'alert');
+		}
+	}
+});
+</script>
+<!--{if $setconfig['html_mobile']}-->$setconfig['html_mobile']<!--{/if}-->
+<!--{/block}-->

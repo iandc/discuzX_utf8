@@ -1,0 +1,277 @@
+<!--{template common/header}-->
+<style>
+.qrcodeupload_header{background:#2375f4;height: 48px;line-height: 48px;text-align: center;font-size: 18px;padding: 0 20px;position: relative;}
+.qrcodeupload_nav{color:#fff;}
+.qrcodeupload_home{position:absolute; right:0; top:0;}
+.qrcodeupload_home a{display:block;width: 48px;height: 48px;background: url("source/plugin/h5upload/image/home.png") no-repeat center center;}
+.qrcodeupload_body{}
+.qrcodeupload_uptipbox{padding: 10px 10px;}
+.qrcodeupload_uptip{padding: 3px 5px 3px 20px;background: url("source/plugin/h5upload/image/notice.gif") no-repeat 2px 6px;}
+.qrcodeupload_uptip span{color: #F26C4F;}
+.qrcodeupload_upbox{}
+.qrcodeupload_imglist{padding: 6px 0 6px 10px;overflow:hidden;}
+.qrcodeupload_imglist li{float:left;width: 70px;height: 70px;padding: 6px 10px 6px 0;position: relative;}
+.qrcodeupload_imglist li.upbtn{}
+.qrcodeupload_imglist li.upbtn a{display:block;width: 64px;height: 64px;line-height: 64px;padding: 2px;border: 1px solid #ddd;background:url(source/plugin/h5upload/image/icon_photo.png) #f8f8f8 no-repeat center center}
+.qrcodeupload_imglist li .del {position: absolute;top: -5px;left: -5px;display:none;}
+.qrcodeupload_imglist li .p_img img {padding: 2px;border: 1px solid #ddd;}
+</style>
+<div class="qrcodeupload_header">
+	<div class="qrcodeupload_nav">{lang upload_pic}</div>
+	<div class="qrcodeupload_home"><a href="index.php"><span></span></a></div>
+</div>
+<div class="qrcodeupload_body">
+	<div class="qrcodeupload_uptipbox">
+		<div class="qrcodeupload_uptip">
+		{lang h5upload:attachment_size}: <span class="xi1"><!--{if $_G['group']['maxattachsize']}-->{lang h5upload:lower_than} $maxattachsize_mb <!--{else}-->{lang h5upload:size_no_limit}<!--{/if}--></span>
+		<!--{if $imgexts}-->
+			, {lang h5upload:attachment_allow_exts}: <span class="xi1">$imgexts</span>&nbsp;
+		<!--{/if}-->
+		</div>
+	</div>
+	<div class="qrcodeupload_upbox">
+		<ul id="imglist" class="qrcodeupload_imglist">
+			<li class="upbtn"><a href="javascript:;" id="filepick"></a></li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	var imgexts = typeof imgexts == 'undefined' ? 'jpg, jpeg, gif, png' : imgexts;
+	<!--{if $imgexts}-->
+	imgexts = '$imgexts';
+	<!--{/if}-->
+	var STATUSMSG = {
+		'-1' : '{lang uploadstatusmsgnag1}',
+		'0' : '{lang uploadstatusmsg0}',
+		'1' : '{lang uploadstatusmsg1}',
+		'2' : '{lang uploadstatusmsg2}',
+		'3' : '{lang uploadstatusmsg3}',
+		'4' : '{lang uploadstatusmsg4}',
+		'5' : '{lang uploadstatusmsg5}',
+		'6' : '{lang uploadstatusmsg6}',
+		'7' : '{lang uploadstatusmsg7}(' + imgexts + ')',
+		'8' : '{lang uploadstatusmsg8}',
+		'9' : '{lang uploadstatusmsg9}',
+		'10' : '{lang uploadstatusmsg10}',
+		'11' : '{lang uploadstatusmsg11}'
+	};
+</script>
+<!--{if $wxconfig}-->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	wx.config({
+		debug: false,
+		appId: '{$wxconfig[appid]}',
+		timestamp: '{$wxconfig[timestamp]}',
+		nonceStr: '{$wxconfig[noncestr]}',
+		signature: '{$wxconfig[signature]}',
+		jsApiList: ['checkJsApi', 'hideMenuItems', 'chooseImage', 'uploadImage']
+	});
+	var upload_url = "{$_G[siteurl]}plugin.php?id=h5upload:wechat&operation=portal&inajax=yes&infloat=yes&mobile=2";
+	$(document).on("click", "#filepick", function () {
+		wx.chooseImage({
+			count: $swfconfig['limit'],
+			sizeType: ['original', 'compressed'],
+			sourceType: ['album', 'camera'],
+			success: function (res) {
+				var localIds = res.localIds;
+				if (localIds.length == 0) {
+					popup.open(STATUSMSG[7], 'alert');
+					return;
+				}
+				var i = 0;
+				function wxupload() {
+					wx.uploadImage({
+						localId: localIds[i],
+						isShowProgressTips: 1,
+						success: function (res) {
+							var serverId = res.serverId;
+							i++;
+							$.ajax({
+								type: 'POST',
+								url: upload_url,
+								data: { "uid": "$uid", "hash": "$swfconfig[hash]", "mid": serverId,"aid":$aid,"catid":$catid }
+							}).success(function (data) {
+								if(data.aid) {
+									var img_url = data.smallimg;
+									$('#imglist').append('<li><span aid="'+data.aid+'" class="del"><a href="javascript:;"><img src="{STATICURL}image/mobile/images/icon_del.png"></a></span><span class="p_img"><a href="javascript:;"><img style="height:64px;width:64px;" id="aimg_'+data.aid+'" src="'+img_url+'" /></a></span></li>');
+								} else {
+									popup.open('{lang uploadpicfailed}', 'alert');
+								}
+							}).error(function () {
+								popup.open('{lang uploadpicfailed}', 'alert');
+							});
+							if (i < localIds.length) {
+								wxupload();
+							}
+						}
+					});
+				}
+				wxupload();
+			}
+		});
+	});
+	$(document).on('click', '.del', function() {
+		var obj = $(this);
+		$.ajax({
+			type:'POST',
+			data: { "uid": "$uid", "hash": "$swfconfig[hash]"},
+			url:'portal.php?mod=attachment&op=delete&id=' + obj.attr('aid'),
+		})
+		.success(function(s) {
+			obj.parent().remove();
+		})
+		.error(function() {
+			popup.open('{lang networkerror}', 'alert');
+		});
+		return false;
+	});
+});
+</script>
+<!--{else}-->
+<link rel="stylesheet" type="text/css" href="source/plugin/h5upload/webuploader/webuploader.css">
+<script type="text/javascript" src="source/plugin/h5upload/webuploader/webuploader.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var severurl = "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=portal";
+	var imgUpload = new WebUploader.create({
+		auto: false,
+		swf: 'source/plugin/h5upload/webuploader/Uploader.swf',
+		server: severurl,
+		formData : {"uid":"$uid", "hash":"$swfconfig[hash]","aid":$aid,"catid":$catid},
+		pick: "#filepick",
+		threads: 1,
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		duplicate: true,
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: $setconfig['compress_replace'],
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+	});
+	imgUpload.on( 'fileQueued', function(file) {
+		popup.open('<img src="' + IMGDIR + '/imageloading.gif">');
+		var filename = file.name.replace(/\(/g, '[').replace(/\)/g, ']').replace(/CONTENT-TRANSFER-ENCODING/g, escape('CONTENTTRANSFERENCODING'));
+		<!--{if $setconfig['upload_storage'] == 'cl_qiniuyun'}-->
+			$.ajax({
+				type:'POST',
+				url:severurl.replace('misc.php?mod=swfupload', 'plugin.php?id=cl_qiniuyun:token&filename='+filename),
+				async: false,
+				dataType:'xml'
+			})
+			.success(function(s) {
+                file.token = s.lastChild.firstChild.nodeValue;
+				imgUpload.upload(file);
+			})
+			.error(function() {
+				popup.close();
+			});
+		<!--{else}-->
+			imgUpload.upload(file);
+		<!--{/if}-->
+	});
+	imgUpload.on( 'uploadProgress', function(file, percentage) {
+
+	});
+	imgUpload.on( 'uploadStart', function(file) {
+		<!--{if $setconfig['upload_storage'] == 'cl_qiniuyun'}-->
+           imgUpload.options.server = 'http://up.qiniu.com/';
+           imgUpload.options.fileVal = 'file';
+           imgUpload.options.formData.token = file.token;
+		<!--{/if}-->
+	});
+	imgUpload.on( 'uploadSuccess', function(file, response) {
+		<!--{if $setconfig['upload_storage'] == 'qiniuyun'}-->
+            for(key in imgUpload.options.formData){
+                response[key]  = imgUpload.options.formData[key];
+            }
+			response['name'] = response['name'].replace(/\(/g, '[').replace(/\)/g, ']').replace(/CONTENT-TRANSFER-ENCODING/g, escape('CONTENTTRANSFERENCODING'));
+			response['_raw'] = '';
+			$.ajax({
+				type:'POST',
+				url:severurl.replace('misc.php?mod=swfupload', 'plugin.php?id=cl_qiniuyun:upload'),
+				async: false,
+				data:response
+			})
+			.success(function(s) {
+				uploadSuccess(file, s);
+			})
+			.error(function() {
+				popup.close();
+			});
+		<!--{else}-->
+		uploadSuccess(file, response);
+		<!--{/if}-->
+	});
+	imgUpload.on( 'uploadError', function(file) {
+		popup.open('{lang uploadpicfailed}', 'alert');
+	});
+	imgUpload.on( 'uploadComplete', function(file) {
+		popup.close();
+	});
+	imgUpload.on( 'error', function(code) {
+		var err = '';
+		switch (code) {
+		case 'F_EXCEED_SIZE':
+			err = '{lang uploadstatusmsg3}';
+			break;
+		case 'Q_EXCEED_NUM_LIMIT':
+			err = '{lang uploadstatusmsg6}';
+			break;
+		case 'Q_EXCEED_SIZE_LIMIT':
+			err = '{lang uploadstatusmsg3}';
+			break;
+		case 'Q_TYPE_DENIED':
+			err = '{lang uploadstatusmsg1}';
+			break;
+		default:
+			err = '{lang uploadpicfailed}' + code;
+			break;
+		}
+		popup.open(err, 'alert');
+		return false;
+	});
+	function uploadSuccess(file, data) {
+		if(data.aid) {
+			var img_url = data.smallimg;
+			$('#imglist').append('<li><span aid="'+data.aid+'" class="del"><a href="javascript:;"><img src="{STATICURL}image/mobile/images/icon_del.png"></a></span><span class="p_img"><a href="javascript:;"><img style="height:64px;width:64px;" id="aimg_'+data.aid+'" src="'+img_url+'" /></a></span></li>');
+		} else {
+			popup.open('{lang uploadpicfailed}', 'alert');
+		}
+	}
+	$(document).on('click', '.del', function() {
+		var obj = $(this);
+		$.ajax({
+			type:'POST',
+			data: { "uid": "$uid", "hash": "$swfconfig[hash]"},
+			url:'portal.php?mod=attachment&op=delete&id=' + obj.attr('aid'),
+		})
+		.success(function(s) {
+			obj.parent().remove();
+		})
+		.error(function() {
+			popup.open('{lang networkerror}', 'alert');
+		});
+		return false;
+	});
+});
+</script>
+<!--{/if}-->
+<!--{eval $nofooter = 1;}-->
+<!--{template common/footer}-->

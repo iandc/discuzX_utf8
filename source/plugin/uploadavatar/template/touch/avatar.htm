@@ -1,0 +1,146 @@
+<!--{template uploadavatar:common/header}-->
+<link rel="stylesheet" href="source/plugin/uploadavatar/css/cropper.css?{VERHASH}" type="text/css" media="all">
+<script src="source/plugin/uploadavatar/js/cropper.min.js?{VERHASH}"></script>
+<style>
+html,body { height:100%;}
+.bg { background:#000; box-sizing: border-box;padding-top: 50px;padding-bottom: 70px;}
+.topheader { background:#323436; height:50px; position:absolute; width:100%; z-index:997; left:0px; top:0; width:100%; }
+.topheader a { width:50px; height:50px; position:absolute; left:0px; top:0px;  text-align:center; line-height:50px;   }
+.topheader a i{border-bottom: 2px solid #fff;border-left: 2px solid #fff;height: 12px;margin-top: -6px;position: absolute;left: 17px;top: 50%;transform: rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);width: 12px;display:block;}
+.topheader span { position:absolute; display:block;  height:26px; line-height:26px; font-size:16px; color:#fff; border-left:1px solid #262626; left:50px; padding-left:20px; top:12px;}
+.img-container { width:100%;height:100%;}
+.btn_upload { width:40%; height:50px; position:absolute; left:5%; bottom:10px;  text-align:center; line-height:50px; background:#0084cf;color:#fff;font-size:18px; border-radius:4px;overflow:hidden;cursor:pointer; }
+.btn_upload input {  position:absolute;left:0;width:100%;height:100%;opacity:0;filter:alpha(opacity=0);cursor:pointer; }
+.btn_confirm { width:40%; height:50px; position:absolute; right:5%; bottom:10px;  text-align:center; line-height:50px; background:#e62828;color:#fff;font-size:18px;  border-radius:4px; overflow:hidden;cursor:pointer;}
+</style>
+<div class="topheader">
+	<a href="javascript:history.go(-1);"><i></i></a>
+	<span>{lang uploadavatar:memcp_avatar}</span>
+</div>
+<div class="img-container">
+	<img id="avatarimage" src="<!--{avatar($_G[uid], big, true)}-->">
+</div>
+<div class="btn_upload"><input class="js_upload" type="file" name="cover" accept="image/*"/>{lang uploadavatar:memcp_upload}</div>
+<div class="btn_confirm">{lang uploadavatar:memcp_confirm}</div>
+<form id="avatarform" enctype="multipart/form-data" method="post" autocomplete="off" action="">
+	<input type="hidden" id="avatar1" name="avatar1" />
+	<input type="hidden" id="avatar2" name="avatar2" />
+	<input type="hidden" id="avatar3" name="avatar3" />
+	<input type="hidden" name="formhash" value="{FORMHASH}" />
+</form>
+<iframe name="rectframe" id="rectframe" style="display: none;"></iframe>
+<script type="text/javascript">
+var data = "{echo implode(",", $uc_avatarflash);}".split(',');
+var image = document.getElementById('avatarimage');
+var cropper = new Cropper(image, {
+	dragMode: 'move',
+	aspectRatio: 1,
+	viewMode: 1,
+	restore: false,
+	guides: false,
+	center: false,
+	highlight: false,
+	cropBoxMovable: false,
+	cropBoxResizable: false,
+	toggleDragModeOnDblclick: false,
+	crop: function(e) {
+
+	}
+});
+$(document).on("change", ".js_upload", function(){
+    if (this.files && this.files[0]) {
+        var fr = new FileReader();
+        fr.onload = function(e) {
+		    $("#avatarimage").attr("src",e.target.result);
+			cropper.destroy();
+		    cropper = new Cropper(image, {
+                dragMode: 'move',
+                aspectRatio: 1,
+                viewMode: 1,
+                restore: false,
+                guides: false,
+                center: false,
+                highlight: false,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                toggleDragModeOnDblclick: false,
+                crop: function(e) {
+
+                }
+            });
+        };       
+        fr.readAsDataURL(this.files[0]);
+    }
+});
+$(document).on("click", ".btn_confirm", function(){
+	var canvas = cropper.getCroppedCanvas();
+	var sw = canvas.width;
+	var sh = canvas.height;
+	var tw = sw;
+	var th = sh;
+	if (sw>200 || sh>250) {
+		var r = Math.max(sw/200, sh/250);
+		tw = Math.floor(sw/r);
+		th = Math.floor(sh/r);
+	}
+	var canvas = cropper.getCroppedCanvas({
+		width: tw,
+		height: th
+	});
+	var dataURL = canvas.toDataURL("image/jpeg");
+	$('#avatar1').val(dataURL.substr(dataURL.indexOf(",") + 1));
+							
+	if (sw>120 || sh>120) {
+		var r = Math.max(sw/120, sh/120);
+		tw = Math.floor(sw/r);
+		th = Math.floor(sh/r);
+	}
+	var canvas = cropper.getCroppedCanvas({
+		width: tw,
+		height: th
+	});
+	var dataURL = canvas.toDataURL("image/jpeg");
+	$('#avatar2').val(dataURL.substr(dataURL.indexOf(",") + 1));
+			
+	if (sw>48 || sh>48) {
+		var r = Math.max(sw/48, sh/48);
+		tw = Math.floor(sw/r);
+		th = Math.floor(sh/r);
+	}
+	var canvas = cropper.getCroppedCanvas({
+		width: tw,
+		height: th
+	});
+	var dataURL = canvas.toDataURL("image/jpeg");
+	$('#avatar3').val(dataURL.substr(dataURL.indexOf(",") + 1));
+
+    $('#avatarform').attr('action',data[data.indexOf('src')+1].replace('images/camera.swf?inajax=1', 'index.php?m=user&a=rectavatar&base64=yes'));
+    $('#avatarform').attr('target','rectframe'); 
+    $('#avatarform').submit();
+});
+
+window.addEventListener('message', receiveMessage, false);
+
+function receiveMessage(event) {
+    var msgdata = event.data;
+    if (typeof(msgdata) !== 'string') {
+        return;
+    }
+    rectAvatarDone(msgdata);
+}
+
+function rectAvatarDone(res) {
+    if (!res) return;
+    if (res=='success') {
+        window.location.href = 'home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1&random='+Math.random();           
+    }
+    else {
+        alert('{lang uploadavatar:upload_failed}');
+    }
+}
+</script>
+<!--{if $setconfig['extra_html']}-->
+$setconfig['extra_html']
+<!--{/if}-->
+<!--{eval $nofooter = 1;}-->
+<!--{template uploadavatar:common/footer}-->

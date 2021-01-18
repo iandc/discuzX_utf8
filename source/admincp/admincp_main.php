@@ -124,7 +124,8 @@ echo <<<EOT
 </div>
 <div class="copyright">
 	<p>Powered by <a href="http://www.discuz.net/" target="_blank">Discuz!</a> {$_G['setting']['version']}</p>
-	<p>&copy; 2001-2017, <a href="http://www.comsenz.com/" target="_blank">Comsenz Inc.</a></p>
+	<p>Copyright &copy; 2001-2020</p>
+	<p>Tencent Cloud.</p>
 </div>
 
 <div id="cpmap_menu" class="custom" style="display: none">
@@ -250,7 +251,7 @@ echo <<<EOT
 			obj.scrollTop = obj.scrollTop + scrollh;
 		} else if(op == 3) {
 			if(!e) e = window.event;
-			if(e.wheelDelta <= 0 || e.detail > 0) {
+			if(e.deltaY > 0 || e.wheelDelta <= 0 || e.detail > 0) {
 				obj.scrollTop = obj.scrollTop + 20;
 			} else {
 				obj.scrollTop = obj.scrollTop - 20;
@@ -422,7 +423,9 @@ echo <<<EOT
 	_attachEvent(document.documentElement, 'keydown', resetEscAndF5);
 	_attachEvent(window, 'resize', setMenuScroll, document);
 	_attachEvent(window, 'resize', resizeHeadermenu, document);
-	if(BROWSER.ie){
+	if('onwheel' in document.createElement('div')) {
+		$('leftmenu').addEventListener('wheel', function(e) { menuScroll(3, e) }, false);
+	} else if(document.onmousewheel !== undefined) {
 		$('leftmenu').onmousewheel = function(e) { menuScroll(3, e) };
 	} else {
 		$('leftmenu').addEventListener("DOMMouseScroll", function(e) { menuScroll(3, e) }, false);

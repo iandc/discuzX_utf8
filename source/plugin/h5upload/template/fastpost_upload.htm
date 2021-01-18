@@ -1,0 +1,60 @@
+<!--{block return}-->
+<!--{subtemplate h5upload:common/upload}-->
+<style>
+#spanButtonPlaceholder{display:inline-block;width: 17px;height: 25px;overflow:hidden;background:url("{IMGDIR}/uploadbutton_small.png") no-repeat 0 0;}
+#spanButtonPlaceholder:hover{background-position:0 -25px;}
+#spanButtonPlaceholder .webuploader-pick{text-indent:-9999px;}
+</style>
+<script type="text/javascript">
+	var upload = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid=$_G[fid]",
+		post_params : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"},
+		<!--{if $setconfig['paste_open']}-->
+		paste: '#fastpostmessage',
+		<!--{/if}-->
+		pick: '#spanButtonPlaceholder',
+		accept: {
+			title: "$swfconfig[attachexts][depict]",
+			extensions: "$swfconfig[attachexts][ext]",
+			mimeTypes: "$swfconfig[attachexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: $setconfig['compress_replace'],
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		<!--{if $setconfig['chunk_size']}-->
+		chunked : true,
+		chunkSize : "$setconfig[chunk_size]",
+		<!--{/if}-->
+		custom_settings : {
+			progressTarget : "attachlist",
+			uploadSource: 'forum',
+			uploadType: 'attach',
+			<!--{if $swfconfig['maxsizeperday']}-->
+			maxSizePerDay: $swfconfig['maxsizeperday'],
+			<!--{/if}-->
+			<!--{if $swfconfig['maxattachnum']}-->
+			maxAttachNum: $swfconfig['maxattachnum'],
+			<!--{/if}-->
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			uploadFrom: 'fastpost'
+		}
+	});
+
+</script>
+<!--{/block}-->

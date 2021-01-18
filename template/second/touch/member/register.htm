@@ -1,0 +1,38 @@
+<!--{template common/header}-->
+<!-- header start -->
+<header class="header">
+    <div class="nav">
+        <a href="javascript:;" onclick="history.go(-1)" class="z"><img src="{STATICURL}image/mobile/images/icon_back.png" /></a>
+    <span>{lang register}</span>
+    </div>
+</header>
+<!-- header end -->
+
+<style>
+  .ts{
+    margin: 100px 0;
+  }
+  h3{
+    text-align: center;
+    font-size: 14px;
+  }
+  h3 p{
+    margin: 3px 0;
+  }
+  h3 p span{
+    color: red;
+    font-size: 20px;
+  }
+</style>
+<div class="ts">
+  <h3>本站不支持手机端注册</h3>
+  <h3>
+    <p>请复制链接以下：<span>↓</span></p>
+    <p>$_G['siteurl']member.php?mod=register</p>
+    <p>电脑端打开完成注册</p>
+  </h3>
+</div>
+
+
+<!--{eval updatesession();}-->
+<!--{template common/footer}-->

@@ -12,7 +12,7 @@ var note_timer;
 function addSort(obj) {
 	if (obj.value == 'addoption') {
 		showWindow('addoption', 'home.php?mod=spacecp&ac=blog&op=addoption&handlekey=addoption&oid='+obj.id);
- 	}
+	}
 }
 
 function addOption(sid, aid) {
@@ -219,27 +219,6 @@ function checkImage(url) {
 	return url.match(re);
 }
 
-function quick_validate(obj) {
-	if($('seccode')) {
-		var code = $('seccode').value;
-		var x = new Ajax();
-		x.get('cp.php?ac=common&op=seccode&code=' + code, function(s){
-			s = trim(s);
-			if(s != 'succeed') {
-				alert(s);
-				$('seccode').focus();
-		   		return false;
-			} else {
-				obj.form.submit();
-				return true;
-			}
-		});
-	} else {
-		obj.form.submit();
-		return true;
-	}
-}
-
 function stopMusic(preID, playerID) {
 	var musicFlash = preID.toString() + '_' + playerID.toString();
 	if($(musicFlash)) {
@@ -259,13 +238,13 @@ function showFlash(host, flashvar, obj, shareid) {
 		'flash' : 'FLASHVAR'
 	};
 	var flash = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="480" height="400">'
-	    + '<param name="movie" value="FLASHADDR" />'
-	    + '<param name="quality" value="high" />'
-	    + '<param name="bgcolor" value="#FFFFFF" />'
-	    + '<param name="allowScriptAccess" value="never" />'
-	    + '<param name="allowNetworking" value="internal" />'
-	    + '<embed width="480" height="400" menu="false" quality="high" allowScriptAccess="never" allowNetworking="internal" src="FLASHADDR" type="application/x-shockwave-flash" />'
-	    + '</object>';
+		+ '<param name="movie" value="FLASHADDR" />'
+		+ '<param name="quality" value="high" />'
+		+ '<param name="bgcolor" value="#FFFFFF" />'
+		+ '<param name="allowScriptAccess" value="never" />'
+		+ '<param name="allowNetworking" value="internal" />'
+		+ '<embed width="480" height="400" menu="false" quality="high" allowScriptAccess="never" allowNetworking="internal" src="FLASHADDR" type="application/x-shockwave-flash" />'
+		+ '</object>';
 	var videoFlash = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="480" height="450">'
 		+ '<param value="transparent" name="wmode"/>'
 		+ '<param value="FLASHADDR" name="movie" />'
@@ -279,12 +258,12 @@ function showFlash(host, flashvar, obj, shareid) {
 		+ '<param value="high" name="quality"/>'
 		+ '<param value="false" name="menu"/>'
 		+ '<param value="#FFFFFF" name="bgcolor"/>'
-	    + '</object>';
+		+ '</object>';
 	var musicMedia = '<object height="64" width="290" data="FLASHADDR" type="audio/x-ms-wma">'
-	    + '<param value="FLASHADDR" name="src"/>'
-	    + '<param value="1" name="autostart"/>'
-	    + '<param value="true" name="controller"/>'
-	    + '</object>';
+		+ '<param value="FLASHADDR" name="src"/>'
+		+ '<param value="1" name="autostart"/>'
+		+ '<param value="true" name="controller"/>'
+		+ '</object>';
 	var flashHtml = videoFlash;
 	var videoMp3 = true;
 	if('' == flashvar) {
@@ -347,30 +326,6 @@ function showFlash(host, flashvar, obj, shareid) {
 	}
 }
 
-function userapp_open() {
-	var x = new Ajax();
-	x.get('home.php?mod=spacecp&ac=common&op=getuserapp&inajax=1', function(s){
-		$('my_userapp').innerHTML = s;
-		$('a_app_more').className = 'fold';
-		$('a_app_more').innerHTML = '收起';
-		$('a_app_more').onclick = function() {
-			userapp_close();
-		};
-	});
-}
-
-function userapp_close() {
-	var x = new Ajax();
-	x.get('home.php?mod=spacecp&ac=common&op=getuserapp&subop=off&inajax=1', function(s){
-		$('my_userapp').innerHTML = s;
-		$('a_app_more').className = 'unfold';
-		$('a_app_more').innerHTML = '展开';
-		$('a_app_more').onclick = function() {
-			userapp_open();
-		};
-	});
-}
-
 function startMarquee(h, speed, delay, sid) {
 	var t = null;
 	var p = false;
@@ -380,20 +335,20 @@ function startMarquee(h, speed, delay, sid) {
 	o.onmouseout = function() {p = false};
 	o.scrollTop = 0;
 	function start() {
-	    t = setInterval(scrolling, speed);
-	    if(!p) {
+		t = setInterval(scrolling, speed);
+		if(!p) {
 			o.scrollTop += 2;
 		}
 	}
 	function scrolling() {
-	    if(p) return;
+		if(p) return;
 		if(o.scrollTop % h != 0) {
-	        o.scrollTop += 2;
-	        if(o.scrollTop >= o.scrollHeight/2) o.scrollTop = 0;
-	    } else {
-	        clearInterval(t);
-	        setTimeout(start, delay);
-	    }
+			o.scrollTop += 2;
+			if(o.scrollTop >= o.scrollHeight/2) o.scrollTop = 0;
+		} else {
+			clearInterval(t);
+			setTimeout(start, delay);
+		}
 	}
 	setTimeout(start, delay);
 }
@@ -779,14 +734,6 @@ function resend_mail(mid) {
 	if(mid) {
 		var obj = $('sendmail_'+ mid +'_li');
 		obj.style.display = "none";
-	}
-}
-
-function userapp_delete(id, result) {
-	if(result) {
-		var ids = explode('_', id);
-		var appid = ids[1];
-		$('space_app_'+appid).style.display = "none";
 	}
 }
 

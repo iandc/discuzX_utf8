@@ -1,0 +1,348 @@
+<!--{block return}-->
+<!--{subtemplate h5upload:common/upload}-->
+<style>
+#imgSpanButtonPlaceholder{display:inline-block;width: 99px;height: 25px;line-height: 25px;overflow:hidden;background:url("{IMGDIR}/uploadbutton.png") no-repeat 0 0;}
+#imgSpanButtonPlaceholder:hover{background-position:0 -25px;}
+#imgSpanButtonPlaceholder .webuploader-pick{text-indent:-9999px;}
+#spanButtonPlaceholder{display:inline-block;width: 99px;height: 25px;line-height: 25px;overflow:hidden;background:url("{IMGDIR}/uploadbutton.png") no-repeat 0 0;}
+#spanButtonPlaceholder:hover{background-position:0 -25px;}
+#spanButtonPlaceholder .webuploader-pick{text-indent:-9999px;}
+.spanuploaderdndtip{display:inline-block;height: 25px;line-height: 25px;overflow:hidden;}
+.upfilednd{height:120px;line-height:120px;text-align:center;font-size:24px;color: #cdcdcd;}
+.uploaderdndbox{min-height:165px;border: 2px dashed #cdcdcd;}
+.uploaderdndtip{height:165px;line-height:165px;text-align:center;font-size:24px;color: #cdcdcd;}
+.uploaderdndboxs{margin-top:10px;border: 2px dashed #cdcdcd;height:62px;line-height:62px;text-align:center;font-size:24px;color: #cdcdcd;}
+.webuploader-dnd-over{border: 2px dashed #999999;}
+.zoomqrcode{width:200px;height:200px;cursor: url("source/plugin/h5upload/image/cursor_minify.cur"), pointer;}
+.miniqrcode{width:70px;height:70px;cursor: url("source/plugin/h5upload/image/cursor_zoom.cur"), pointer;}
+</style>
+<script type="text/javascript">
+	if(!wysiwyg) {
+		switchEditor(1);switchEditor(0);
+	}
+	<!--{if $allowpostimg}-->
+	var imgUpload = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid=$_G[fid]",
+		post_params : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]", "type":"image"},
+		<!--{if $setconfig['dnd_open'] == 1 || $setconfig['dnd_open'] == 3}-->
+		dnd: '#'+editorid+'_imgattachlist .upfilelist',
+		<!--{/if}-->
+		<!--{if $setconfig['paste_open']}-->
+		paste: [$(editorid+'_textarea'),($(editorid+'_iframe').contentDocument||$(editorid+'_iframe').contentWindow.document).body],
+		<!--{/if}-->
+		pick: '#imgSpanButtonPlaceholder',
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: $setconfig['compress_replace'],
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		custom_settings : {
+			dndStyle: $setconfig['dnd_style'],
+			progressTarget : "imgUploadProgress",
+			uploadSource: 'forum',
+			uploadType: 'image',
+			imgBoxObj: $('imgattachlist'),
+			<!--{if $swfconfig['maxsizeperday']}-->
+			maxSizePerDay: $swfconfig['maxsizeperday'],
+			<!--{/if}-->
+			<!--{if $swfconfig['maxattachnum']}-->
+			maxAttachNum: $swfconfig['maxattachnum'],
+			<!--{/if}-->
+			<!--{if $swfconfig['filtertype']}-->
+			filterType: $swfconfig['filtertype'],
+			<!--{/if}-->
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			<!--{if $setconfig['insert_allimage']}-->
+			insertAllImage: '$setconfig[insert_allimage]',
+			<!--{/if}-->
+			singleUpload: $('{$editorid}_btn_local')
+		}
+	});
+	<!--{/if}-->
+	<!--{if $_G['group']['allowpostattach']}-->
+	var Upload = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=upload&fid=$_G[fid]",
+		post_params : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"},
+		<!--{if $setconfig['dnd_open'] == 2 || $setconfig['dnd_open'] == 3}-->
+		dnd: '#'+editorid+'_attachlist .upfl',
+		<!--{/if}-->
+		pick: '#spanButtonPlaceholder',
+		accept: {
+			title: "$swfconfig[attachexts][depict]",
+			extensions: "$swfconfig[attachexts][ext]",
+			mimeTypes: "$swfconfig[attachexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: true,
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		<!--{if $setconfig['chunk_size']}-->
+		chunked : true,
+		chunkSize : "$setconfig[chunk_size]",
+		<!--{/if}-->
+		custom_settings : {
+			dndStyle: $setconfig['dnd_style'],
+			progressTarget : "fsUploadProgress",
+			uploadSource: 'forum',
+			uploadType: 'attach',
+			<!--{if $swfconfig['maxsizeperday']}-->
+			maxSizePerDay: $swfconfig['maxsizeperday'],
+			<!--{/if}-->
+			<!--{if $swfconfig['maxattachnum']}-->
+			maxAttachNum: $swfconfig['maxattachnum'],
+			<!--{/if}-->
+			<!--{if $swfconfig['filtertype']}-->
+			filterType: $swfconfig['filtertype'],
+			<!--{/if}-->
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			singleUpload: $('{$editorid}_btn_upload')
+		}
+	});
+	<!--{/if}-->
+
+	
+	<!--{if $_G['forum_optionlist']}-->
+		<!--{loop $_G['forum_optionlist'] $optionid $option}-->
+			<!--{if $option['type'] == 'image'}-->
+	var buttoneles_{$option[identifier]} = $('sortattach_image_{$option[identifier]}').parentNode.getElementsByTagName('button');
+	var button_{$option[identifier]} = buttoneles_{$option[identifier]}.length > 0 ? buttoneles_{$option[identifier]}[0]: null;
+	if(button_{$option[identifier]}){
+		var sortUploadProgress_{$option[identifier]} = document.createElement('div');
+		sortUploadProgress_{$option[identifier]}.id = 'sortUploadProgress_{$option[identifier]}';
+		sortUploadProgress_{$option[identifier]}.style.display = 'none';
+		button_{$option[identifier]}.parentNode.appendChild(sortUploadProgress_{$option[identifier]});
+		button_{$option[identifier]}.onclick = null;
+	var imgUpload_{$option[identifier]} = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&operation=upload&type=image&inajax=yes&infloat=yes&simple=2",
+		post_params : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]", "type":"image"},
+		pick: {
+			id: button_{$option[identifier]},
+			multiple: false
+		},
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: true,
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		custom_settings : {
+			uploadSource: 'forum',
+			uploadType: 'sort',
+			progressTarget : 'sortUploadProgress_{$option[identifier]}',
+			<!--{if $swfconfig['maxsizeperday']}-->
+			maxSizePerDay: $swfconfig['maxsizeperday'],
+			<!--{/if}-->
+			<!--{if $swfconfig['maxattachnum']}-->
+			maxAttachNum: $swfconfig['maxattachnum'],
+			<!--{/if}-->
+			<!--{if $swfconfig['filtertype']}-->
+			filterType: $swfconfig['filtertype'],
+			<!--{/if}-->
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			recall: function (aid, url){sortaid_{$option[identifier]}_upload(aid, url)}
+		}
+	});
+	}
+			<!--{/if}-->
+		<!--{/loop}-->
+	<!--{/if}-->
+
+<!--{if $special == 1}-->
+	<!--{if $_GET[action] == 'newthread'}-->
+	addpolloption(1);
+	addpolloption(1);
+	addpolloption(1);
+	<!--{else}-->
+	for(var i=0; i < curnumber; i++) {
+		addUploadEvent('newpoll_'+i, 'pollUploadProgress_'+i);
+	}
+	<!--{/if}-->
+<!--{elseif $special == 2}-->
+	var buttoneles_tradeaid = $('tradeattach_image').parentNode.getElementsByTagName('button');
+	var button_tradeaid = buttoneles_tradeaid.length > 0 ? buttoneles_tradeaid[0]: null;
+	if(button_tradeaid){
+		var sortUploadProgress_tradeaid = document.createElement('div');
+		sortUploadProgress_tradeaid.id = 'sortUploadProgress_tradeaid';
+		sortUploadProgress_tradeaid.style.display = 'none';
+		button_tradeaid.parentNode.appendChild(sortUploadProgress_tradeaid);
+		button_tradeaid.onclick = null;
+	var imgUpload_tradeaid = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&operation=upload&type=image&inajax=yes&infloat=yes&simple=2",
+		post_params : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]", "type":"image"},
+		pick: {
+			id: button_tradeaid,
+			multiple: false
+		},
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: true,
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		custom_settings : {
+			uploadSource: 'forum',
+			uploadType: 'sort',
+			progressTarget : 'sortUploadProgress_tradeaid',
+			<!--{if $swfconfig['maxsizeperday']}-->
+			maxSizePerDay: $swfconfig['maxsizeperday'],
+			<!--{/if}-->
+			<!--{if $swfconfig['maxattachnum']}-->
+			maxAttachNum: $swfconfig['maxattachnum'],
+			<!--{/if}-->
+			<!--{if $swfconfig['filtertype']}-->
+			filterType: $swfconfig['filtertype'],
+			<!--{/if}-->
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			recall: function (aid, url){tradeaid_upload(aid, url)}
+		}
+	});
+	}
+<!--{elseif $special == 4}-->
+	var buttoneles_activityaid = $('activityattach_image').parentNode.getElementsByTagName('button');
+	var button_activityaid = buttoneles_activityaid.length > 0 ? buttoneles_activityaid[0]: null;
+	if(button_activityaid){
+		var sortUploadProgress_activityaid = document.createElement('div');
+		sortUploadProgress_activityaid.id = 'sortUploadProgress_activityaid';
+		sortUploadProgress_activityaid.style.display = 'none';
+		button_activityaid.parentNode.appendChild(sortUploadProgress_activityaid);
+		button_activityaid.onclick = null;
+	var imgUpload_activityaid = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&operation=upload&type=image&inajax=yes&infloat=yes&simple=2",
+		post_params : {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]", "type":"image"},
+		pick: {
+			id: button_activityaid,
+			multiple: false
+		},
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: true,
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		custom_settings : {
+			uploadSource: 'forum',
+			uploadType: 'sort',
+			progressTarget : 'sortUploadProgress_activityaid',
+			<!--{if $swfconfig['maxsizeperday']}-->
+			maxSizePerDay: $swfconfig['maxsizeperday'],
+			<!--{/if}-->
+			<!--{if $swfconfig['maxattachnum']}-->
+			maxAttachNum: $swfconfig['maxattachnum'],
+			<!--{/if}-->
+			<!--{if $swfconfig['filtertype']}-->
+			filterType: $swfconfig['filtertype'],
+			<!--{/if}-->
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			recall: function (aid, url){activityaid_upload(aid, url)}
+		}
+	});
+	}
+<!--{/if}-->
+<!--{if $setconfig['qrcode_upload']}-->
+	uploadqrcodeforum($_G[fid]);
+<!--{/if}-->
+<!--{if $_G['group']['allowdownremoteimg'] && $setconfig['down_remote'] == 1}-->
+	var h5whitedomain = [{$setconfig['white_domain']}];
+	_attachEvent(window, 'load', function () {
+		_attachEvent(($(editorid+'_iframe').contentDocument||$(editorid+'_iframe').contentWindow.document).body, 'paste', function () {   
+			setTimeout(function() {
+				downremoteforum();
+			}, 1);
+		});
+	});
+<!--{elseif $_G['group']['allowdownremoteimg'] && $setconfig['down_remote'] == 2}-->
+	var h5whitedomain = [{$setconfig['white_domain']}];
+	if($(editorid+'_downremoteimg')){
+		$(editorid+'_downremoteimg').onclick = function(e) {downremoteforum();doane();};
+	}
+<!--{/if}-->
+</script>
+<!--{/block}-->

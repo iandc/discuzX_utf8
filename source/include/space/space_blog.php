@@ -61,23 +61,7 @@ if($id) {
 	require_once libfile('function/blog');
 	$blog['message'] = blog_bbcode($blog['message']);
 
-    $home_url = '';
-    $bbs_url = $_G['siteurl'];
-    $findarr = array(
-        '<img src="attachment/',
-        '<IMG src="'.$home_url.'attachment/',
-        $bbs_url.'attachments/month',
-        '<a href="attachment/',
-    );
-    $replacearr = array(
-        '<img src="'.$_G['setting']['attachurl'].'album/',
-        '<IMG src="'.$_G['setting']['attachurl'].'album/',
-        $bbs_url.$_G['setting']['attachurl'].'forum/month',
-        '<a href="'.$_G['setting']['attachurl'].'album/',
-    );
-    $blog['message'] = str_replace($findarr, $replacearr, $blog['message']);
-
-    $otherlist = $newlist = array();
+	$otherlist = $newlist = array();
 
 	$otherlist = array();
 	$query = C::t('home_blog')->fetch_all_by_uid($space['uid'], 'dateline', 0, 6);

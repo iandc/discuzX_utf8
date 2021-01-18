@@ -124,6 +124,7 @@ $_config['server']['id']		= 1;			// 服务器编号，多webserver的时候，�
 // 附件下载相关
 //
 // 本地文件读取模式; 模式2为最节省内存方式，但不支持多线程下载
+// 如需附件URL地址、媒体附件播放，需选择支持Range参数的读取模式1或4，其他模式会导致部分浏览器下视频播放异常
 // 1=fread 2=readfile 3=fpassthru 4=fpassthru+multiple
 $_config['download']['readmod'] = 2;
 
@@ -142,6 +143,7 @@ $_config['output']['language'] 			= 'zh_cn';	// 页面语言 zh_cn/zh_tw
 $_config['output']['staticurl'] 		= 'static/';	// 站点静态文件路径，“/”结尾
 $_config['output']['ajaxvalidate']		= 0;		// 是否严格验证 Ajax 页面的真实性 0=关闭，1=打开
 $_config['output']['iecompatible']		= 0;		// 页面 IE 兼容模式
+$_config['output']['upgradeinsecure']	= 0;		// 在HTTPS环境下请求浏览器升级HTTP内链到HTTPS，此选项影响外域资源链接且与自定义CSP冲突 0=关闭(默认)，1=打开
 
 // COOKIE 设置
 $_config['cookie']['cookiepre'] 		= 'discuz_'; 	// COOKIE前缀
@@ -167,7 +169,7 @@ $_config['security']['creditsafe']['times'] 	= 10;
 $_config['security']['fsockopensafe']['port']	= array(80);	//fsockopen 有效的端口
 
 $_config['admincp']['founder']			= '1';		// 站点创始人：拥有站点管理后台的最高权限，每个站点可以设置 1名或多名创始人
-								// 可以使用uid，也可以使用用户名；多个创始人之间请使用逗号“,”分开;
+// 可以使用uid，也可以使用用户名；多个创始人之间请使用逗号“,”分开;
 $_config['admincp']['forcesecques']		= 0;		// 管理人员必须设置安全提问才能进入系统设置 0=否, 1=是[安全]
 $_config['admincp']['checkip']			= 1;		// 后台管理操作是否验证管理员的 IP, 1=是[安全], 0=否。仅在管理员无法登陆后台时设置 0。
 $_config['admincp']['runquery']			= 0;		// 是否允许后台运行 SQL 语句 1=是 0=否[安全]

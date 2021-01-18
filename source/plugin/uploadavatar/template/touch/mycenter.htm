@@ -1,0 +1,23 @@
+<!--{block return}-->
+<!--{if $setconfig['link_style'] == 1}-->
+<script type="text/javascript">
+	$('.user_avatar h2').append('<a href="plugin.php?id=uploadavatar:avatar&mobile=2" style="margin-left:5px;color:#ff6600">[{lang uploadavatar:memcp_avatar}]</a>');
+</script>
+<!--{elseif $setconfig['link_style'] == 2}-->
+<script type="text/javascript">
+	$('.myinfo_list').append('<li><a href="plugin.php?id=uploadavatar:avatar&mobile=2">{lang uploadavatar:memcp_avatar}</a></li>');
+</script>
+<!--{elseif $setconfig['link_style'] == 3}-->
+<script type="text/javascript">
+	$('.userinfo').append('<div style="margin: 20px auto;width: 300px;"><a href="plugin.php?id=uploadavatar:avatar&mobile=2" style="background:#2782BA;color:#fff;display:block;height:36px;line-height:36px;text-align:center;font-size:16px;border-radius: 4px;">{lang uploadavatar:memcp_avatar}</a></div>');
+</script>
+<!--{elseif $setconfig['link_style'] == 4}-->
+<style>
+.avatar_m a{margin: 0px auto;display:inline-block;position: relative;border-radius: 45px;overflow:hidden;}
+.avatar_m a span{display:block;position:absolute; left:0px; bottom:0px; width:100%; height:18px;line-height:18px;text-align:center;font-size:12px;background: rgba(0,0,0,.5);color:#fff;}
+</style>
+<script type="text/javascript">
+	$('.avatar_m').html('<a href="plugin.php?id=uploadavatar:avatar&mobile=2">'+$('.avatar_m span').html()+'<span>{lang uploadavatar:memcp_edit}</span></a>');
+</script>
+<!--{/if}-->
+<!--{/block}-->

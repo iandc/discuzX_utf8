@@ -279,53 +279,11 @@
 	.scrolltop.bottom:after { top:23px; }
 	.scrolltop.bottom:before { border-top:9px solid white; border-bottom:0; top:12px; }
 
+/*----- media --------*/
+	.media { display: block; margin-bottom: 30px; max-width: 100%; }
+			.media_container { display: block; width: 100%; height: 100%; min-height: 20px; background: url("./images/img_loader.gif") no-repeat center; }
+					.media_container a { text-decoration: none !important; }
+			.media_tips { display: block; margin: 10px 0; text-align: center; }
+					.media_tips a { font-size: 12px !important; color: #999 !important; text-decoration: none !important; }
+							.media_tips a:hover { text-decoration: underline !important; }
 
-
-.add_friends{
-    padding: 10px 10px 0;
-}
-.add_friends .bm{
-	font-size: 16px;
-}
-.add_friends h3.flb{
-	padding-bottom: 10px;
-}
-.add_friends #addsubmit_btn{
-	border: none;
-}
-strong.strong{
-	background-color: #0b68a9;
-	padding: 5px 10px;
-	color: #fff;
-	margin: 5px 0;
-}
-.add_friends input.px{
-	height: 30px;
-}
-
-.zh{
-	padding: 0 0 10px;
-}
-.tits li{
-	width: 25%;
-	float: left;
-}
-.tits a{
-		display: block;
-    padding: 0 10px;
-    border: 1px solid #CDCDCD;
-    background: #E5EDF2;
-}
-.tits .a a{
-		border-bottom-color: #FFF;
-    background: #FFF;
-    font-weight: 700;
-}
-.cons li{
-	 width: 33.3%;
-	float: left;
-	padding: 8px 0;
-}
-.ts1{
-	padding: 10px 0;
-}

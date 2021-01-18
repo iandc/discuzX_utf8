@@ -48,7 +48,13 @@ if(submitcheck('lostpwsubmit')) {
 		C::t('common_member'.$table_ext)->update($tmp['uid'], array('email' => $tmp['email']));
 	}
 
-	$idstring = random(6);
+    $memberauthstr = C::t('common_member_field_forum'.$table_ext)->fetch($member['uid']);
+    list($dateline, $operation, $idstring) = explode("\t", $memberauthstr['authstr']);
+    if($dateline && $operation == 1 && $dateline>TIMESTAMP-900){
+        showmessage('getpasswd_has_send');
+    }
+
+    $idstring = random(6);
 	C::t('common_member_field_forum'.$table_ext)->update($member['uid'], array('authstr' => "$_G[timestamp]\t1\t$idstring"));
 	require_once libfile('function/mail');
 	$get_passwd_subject = lang('email', 'get_passwd_subject');
@@ -58,7 +64,7 @@ if(submitcheck('lostpwsubmit')) {
 		array(
 			'username' => $member['username'],
 			'bbname' => $_G['setting']['bbname'],
-			'siteurl' => $_G['siteurl'],
+			'siteurl' => $_G['setting']['securesiteurl'],
 			'uid' => $member['uid'],
 			'idstring' => $idstring,
 			'clientip' => $_G['clientip'],

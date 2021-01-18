@@ -1,0 +1,170 @@
+<!--{template common/header}-->
+<link rel="stylesheet" type="text/css" href="./source/plugin/doc/css/com.css"/>
+<link rel="stylesheet" type="text/css" href="./source/plugin/doc/css/ds-edit.css" />
+<script type="text/javascript" src="./source/plugin/doc/js/jquery.min.js"></script>
+<script type="text/javascript">
+    jQuery.noConflict();
+    if ($('css_widthauto')) {
+        CSSLOADED['widthauto'] = 1;
+    }
+    if (!CSSLOADED['widthauto'] || $('css_widthauto').disabled) {
+
+    } else {
+        widthauto(this);
+    }
+    jQuery(function ($) {
+        $("input[name='upload_file_freepage']").change(function () {
+            if ($(this).val() == '-1') {
+                $("input[name='upload_file_readpay']").val('0');
+                $("input[name='upload_file_readpay']").attr("disabled", "disabled");
+            } else {
+                $("input[name='upload_file_readpay']").removeAttr("disabled");
+            }
+        });
+        $("select").change(function () {
+            var id = $(this).val();
+            $(this).nextAll("[name=upload_file_doctype]").val(id);
+            $(this).nextAll("select").hide();
+            $(this).nextAll("[name='seltype_" + id + "']").show();
+        });
+        $(".ds-file-submit").click(function () {
+            var p = $(this).parent();
+            var title = p.find("[name=upload_file_title]").val();
+            var short = p.find("[name=upload_file_short]").val();
+            var key = p.find("[name=upload_file_key]").val();
+            var freepage = p.find("[name=upload_file_freepage]").val();
+            var readpay = p.find("[name=upload_file_readpay]").val();
+            var downpay = p.find("[name=upload_file_downpay]").val();
+            var doctype = p.find("[name=upload_file_doctype]").val();
+            title = title.replace("(", "").replace(")", "");
+            short = short.replace("(", "").replace(")", "");
+            key = key.replace("(", "").replace(")", "");
+            freepage = parseInt(freepage);
+            readpay = parseInt(readpay);
+            downpay = parseInt(downpay);
+            if (isNaN(freepage)) {
+                freepage = 0;
+            }
+            if (isNaN(readpay)) {
+                readpay = 0;
+            }
+            if (isNaN(downpay)) {
+                downpay = 0;
+            }
+            if (title == "") {
+                showDialog("{lang doc:upload_titlenonull}", "notice", "", "", 0);
+                return false;
+            }
+            if (short == "") {
+                showDialog("{lang doc:upload_shortnonull}", "notice", "", "", 0);
+                return false;
+            }
+            if (doctype == "" || doctype == "-1") {
+                showDialog("{lang doc:upload_typenonull}", "notice", "", "", 0);
+                return false;
+            }
+            if (key == "") {
+                showDialog("{lang doc:upload_keynonull}", "notice", "", "", 0);
+                return false;
+            }
+            $.post("plugin.php?id=doc:edit", {
+                action: "submit",
+                d: $docid,
+                title: title,
+                short: short,
+                key: key,
+                freepage: freepage,
+                readpay: readpay,
+                downpay: downpay,
+                doctype: doctype,
+                formhash: '{FORMHASH}'
+            },
+            function (data) {
+                p.parent().find(".ds-file-head-tip").html(data);
+                if ($doc_rewrite) {
+                    showDialog(data, "notice", "", "window.location.href = 'mydoc-0-0-0.html'", 0);
+                } else {
+                    showDialog(data, "notice", "", "window.location.href = \"plugin.php?id=doc:mydoc\"", 0);
+                }
+            });
+        });
+    });
+</script>
+<div id="wp" class="wp">
+    <div id="pt" class="bm cl">
+        <div class="z">
+            <a class="nvhm" title="$_G['setting']['bbname']" href="./">$_G['setting']['bbname']</a><em></em><a href="<!--{if $doc_rewrite}-->doc-doc.html<!--{else}-->plugin.php?id=doc<!--{/if}-->">$doc_name</a><em></em>
+            {lang doc:edit_editdoc}</div>
+    </div>
+    <div id="ds-upload-form">
+        <div class="ds-file">
+            <div class="ds-file-head">
+                $title
+                <div class="ds-file-head-tip">
+                </div>
+            </div>
+            <div class="ds-file-body">
+                <div>
+                    <div class="ds-file-title">
+                        {lang doc:upload_title}
+                    </div>
+                    <input type="text" class="ds-file-text" name="upload_file_title" value="$title">
+                </div>
+                <div>
+                    <div class="ds-file-title">
+                        {lang doc:upload_short}
+                    </div>
+                    <textarea class="ds-file-textarea" name="upload_file_short">$short
+                    </textarea>
+                </div>
+                <div>
+                    <div class="ds-file-title">
+                        {lang doc:upload_type}
+                    </div>
+                    $typeop0 $typeop1 $typeop2 $typeop3 <span class="ds-edit-olddoctype">{lang doc:edit_oldtype}<!--{echo GetDocTypeName($doctype)}--></span>
+                    <input type="hidden" name="upload_file_doctype" value="" />
+                </div>
+                <div>
+                    <div class="ds-file-title">
+                        {lang doc:upload_key}
+                    </div>
+                    <input type="text" class="ds-file-text" name="upload_file_key" value="$key">
+                </div>
+                <div>
+                    <div class="ds-file-title">
+                        {lang doc:upload_freeread}
+                    </div>
+                    <input type="text" class="ds-file-text" style="width:50px" name="upload_file_freepage"
+                           value="$freepage">
+                    <span>
+                        {lang doc:upload_page}
+                    </span>
+                </div>
+                <div>
+                    <div class="ds-file-title">
+                        {lang doc:upload_readpay}$doc_readcreditname[0]:
+                    </div>
+                    <input type="text" class="ds-file-text" style="width:50px" name="upload_file_readpay"
+                           value="$readpay">
+                    <span>
+                        $doc_readcreditname[1]
+                    </span>
+                </div>
+                <div>
+                    <div class="ds-file-title">
+                        {lang doc:upload_downpay}$doc_downcreditname[0]:
+                    </div>
+                    <input type="text" class="ds-file-text" style="width:50px" name="upload_file_downpay"
+                           value="$downpay">
+                    <span>
+                        $doc_downcreditname[1]
+                    </span>
+                </div>
+                <a class="ds-file-submit" href="javascript:void">
+                    {lang doc:upload_save}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="clear:both;height: 100px"></div>

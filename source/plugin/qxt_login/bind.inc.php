@@ -9,7 +9,7 @@ if (submitcheck('bindsubmit')) {
     $smsseccode = daddslashes($_GET['smsseccode']);
     if (!$smsseccode || !$mobile)
         showmessage(lang('plugin/qxt_login', 'err_0'));
-    if (!preg_match("/^1[34578]{1}\d{9}$/", $mobile)) {
+    if (!preg_match("/^1[12345789]{1}\d{9}$/", $mobile)) {
         showmessage(lang('plugin/qxt_login', 'err_1'));
     }
 

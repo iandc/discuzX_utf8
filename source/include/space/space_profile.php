@@ -35,7 +35,7 @@ $encodeusername = rawurlencode($space['username']);
 
 if($space['extgroupids']) {
 	$newgroup = array();
-	$e_ids = explode(',', $space['extgroupids']);
+	$e_ids = explode("\t", $space['extgroupids']);
 	foreach ($e_ids as $e_id) {
 		$newgroup[] = $_G['cache']['usergroups'][$e_id]['grouptitle'];
 	}
@@ -131,7 +131,7 @@ if($count) {
 }
 
 if(!$_G['inajax'] && $_G['setting']['groupstatus']) {
-	$gorupcount = C::t('forum_groupuser')->fetch_all_group_for_user($space['uid'], 1);
+	$groupcount = C::t('forum_groupuser')->fetch_all_group_for_user($space['uid'], 1);
 	if($groupcount > 0) {
 		$fids = C::t('forum_groupuser')->fetch_all_fid_by_uids($space['uid']);
 		$usergrouplist = C::t('forum_forum')->fetch_all_info_by_fids($fids);
@@ -169,6 +169,8 @@ if(in_array($_G['adminid'], array(1, 2, 3))) {
 	include_once libfile('function/member');
 	$clist = crime('getactionlist', $space['uid']);
 }
+
+show_view();
 
 if(!$_G['privacy']) {
 	if(!$_G['inajax']) {

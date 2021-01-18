@@ -1,0 +1,278 @@
+.ds-upload {
+    position: relative;
+    height: 150px;
+    border:#CDCDCD 1px solid;
+    margin-top: 15px;
+}
+.ds-upload-title {
+    position:absolute;
+    left:10px;
+    top:-10px;
+    width: 60px;
+    background-color: #FFF;
+    color: #73b304;
+    font: 700 14px Arial;
+    clear: both;
+}
+.ds-upload-body {
+
+}
+.ds-upload-left {
+    margin: 55px 10px 0 12px;
+    width:570px;
+    float: left;
+}
+.ds-upload-right {
+    width:310px;
+    height:140px;
+    padding: 5px 30px;
+    background-color: #F8F8F8;
+    float:right;
+}
+.ds-upload-right-title{
+    color:#555;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size:120%;
+}
+.ds-upload-right li {
+    height: 28px;
+    line-height: 28px;
+    font-size:110%;
+}
+.ds-upload-right i {
+    position: relative;
+    top:5px; 
+}
+#ds-upload-button {
+    margin: 0px;
+    text-align:center;
+    border: solid 1px #E8E8E8;
+    color:#f00;
+}
+.ds-file{
+    margin-top: 5px;
+    border: solid 1px #CDCDCD;
+    height: 380px;
+}
+.ds-file-head{
+    padding-left:15px;
+    height: 35px;
+    line-height:35px;
+    font-size: 130%;
+    font-weight:bold;
+    font-family: "microsoft yahei""Î¢ÈíÑÅºÚ""ËÎÌå";
+    color:#fff;
+    border-bottom: solid 1px #E8E8E8;
+    background-color:#FE5F32;
+}
+.ds-file-head-tip{    
+    padding-right:10px;
+    font-size: 100%;
+    color:#ff0;
+    float:right;   
+}
+.ds-file-body{
+    position: relative;
+}
+.ds-file-body > div {
+    padding: 8px 12px;
+    clear: both;
+}
+.ds-file-title {
+    line-height: 29px;
+    height: 29px;
+    font-size: 120%;
+    width:100px;
+    margin-right: 10px;
+    text-align: right;
+    color: #666;
+    float: left;
+}
+.ds-file-text,.ds-file-textarea {
+    width: 500px;
+    float: left;
+    text-indent: 5px;
+    line-height: 25px\9;
+}
+.ds-file-text{
+    height: 25px;
+}
+.ds-file-textarea{
+    height: 100px;
+    padding-top: 5px;
+}
+.ds-file-body select{
+    margin-right:5px; 
+    height: 25px;
+    line-height: 25px;
+    float: left;
+}
+.ds-file-body span{
+    display: block;
+    line-height: 29px;
+    height: 29px;
+    margin-left: 5px;
+    font-size: 110%;
+    color: #666;
+    float: left;
+}
+.ds-file-submit {
+    position: absolute;
+    display: block;
+    top:300px;
+    right:25px;
+    padding: 5px 40px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color:#fff;
+    background-color: #23BB8B;
+}
+.ds-file-submit:hover {
+    text-decoration: none;
+}
+.ds-file-return {
+    display: block;
+    margin: 20px 0;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
+    text-decoration: none;
+    border:1px solid #CDCDCD;
+    background-color: #F8F8F8;
+    color:#666;
+}
+.ds-file-return:hover {
+    text-decoration: none;
+}
+.progressWrapper {
+    width: 100%;
+    overflow: hidden;
+}
+.progressContainer {
+    margin: 1px 0px;
+    padding: 0px;
+    border: solid 1px #E8E8E8;
+    background-color: rgb(208, 231, 223);
+    overflow: hidden;
+}
+.progressName {
+    margin: 0px;
+    padding:10px 0px 0px 10px;
+    color: #299;
+    width: 323px;
+    height: 20px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+	text-overflow: ellipsis;
+}
+.progressBarInProgress,
+.progressBarComplete,
+.progressBarError {
+    font-size: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #f00;
+    margin-top: 2px;
+}
+.progressBarComplete {
+    width: 100%;
+    background-color: green;
+    visibility: hidden;
+}
+.progressBarError {
+    width: 100%;
+    background-color: red;
+    visibility: hidden;
+}
+.progressBarStatus {
+    margin-top: 0px;
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+}
+a.progressCancel {
+    font-size: 0;
+    display: none; //del x
+    height: 14px;
+    width: 14px;
+    background-image: url(cancelbutton.gif);
+    background-repeat: no-repeat;
+    background-position: -14px 0px;
+    float: right;
+}
+a.progressCancel:hover {
+    background-position: 0px 0px;
+}
+.swfupload {
+    vertical-align: top;
+}
+.wk_upload_swfbutton {
+    margin:500px;
+}
+.upload_button{
+    display: block;
+    padding: 8px 0;
+    background-color: #3a8;
+    color: #fff;
+    font-size: 120%;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.upload_button:hover{
+    text-decoration: none;
+}
+.ds-all-type{
+	margin-top:10px;
+    padding: 15px 5px;
+    line-height: 30px;
+	background: #f8f8f8;
+	border:1px solid #ccc;
+    display: none;
+	overflow:hidden;
+}
+.ds-all-type > div{
+	padding: 8px 12px;
+    clear: both;
+	overflow:hidden;
+}
+
+.ds-all-type > div > div{
+    font-size: 100%;
+    margin-right: 10px;
+    text-align: right;
+    color: #666;
+    float: left;
+}
+.ds-all-type > div > select{
+    margin-right: 5px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.ds-all-type > div > span{
+	display: block;
+    line-height: 29px;
+    height: 29px;
+    margin-left: 5px;
+    font-size: 110%;
+    color: #666;
+    float: left;
+}
+
+.ds-all-type > span{
+    margin-right:20px;
+    width: 100px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #F83B1D;
+    text-align: center;
+	float:right;
+    cursor: pointer;
+}

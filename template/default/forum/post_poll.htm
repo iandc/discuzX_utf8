@@ -3,58 +3,58 @@
 	<div class="sinf sppoll z">
 		<input type="hidden" name="fid" value="$_G[fid]" />
 		<!--{if $_GET[action] == 'newthread'}-->
-			<input type="hidden" name="tpolloption" value="1" />
-			<div class="cl">
-				<h4 class="z">
-					<em>{lang post_poll_options}: </em>
-					{lang post_poll_comment} &nbsp;
-					<span class="xw0"><input id="pollchecked" type="checkbox" class="pc" onclick="switchpollm(1)" /><label for="pollchecked">{lang post_single_frame_mode}</label></span>
-				</h4>
-			</div>
-			<div id="pollm_c_1" class="mbm">
-				<span id="polloption_new"></span>
-				<p id="polloption_hidden" style="display: none">
-					<a href="javascript:;" class="d" onclick="delpolloption(this)">del</a>
-					<input type="text" name="polloption[]" class="px vm" autocomplete="off" style="width:290px;" tabindex="1" />
-					<span id="pollUploadProgress" class="vm" style="display: none;"></span>
-					<span id="newpoll" class="vm"></span>
-				</p>
-				<p><a href="javascript:;" onclick="addpolloption()">+{lang post_poll_add}</a></p>
-			</div>
-			<div id="pollm_c_2" class="mbm" style="display:none">
-				<textarea name="polloptions" class="pt" style="width:340px;" tabindex="1" rows="6" onchange="switchpollm(0)" /></textarea>
-				<p class="cl">{lang post_poll_comment_s}</p>
-			</div>
-		<!--{else}-->
-			<!--{loop $poll['polloption'] $key $option}-->
-				<!--{eval $ppid = $poll['polloptionid'][$key];}-->
-				<p>
-					<input type="hidden" name="polloptionid[{$poll[polloptionid][$key]}]" value="$poll[polloptionid][$key]" />
-					<input type="text" name="displayorder[{$poll[polloptionid][$key]}]" class="px pxs vm" autocomplete="off" tabindex="1" value="$poll[displayorder][$key]" />
-					<input type="text" name="polloption[{$poll[polloptionid][$key]}]" class="px vm" autocomplete="off" style="width:230px;" tabindex="1" value="$option"{if !$_G['group']['alloweditpoll']} readonly="readonly"{/if} />
-					<!--img src="$poll[imginfo][$ppid][small]" class="cur1" /-->
-
-					<span id="newpoll_{$key}" class="vm"></span>
-					<span id="pollUploadProgress_{$key}" class="vm">
-						<!--{if $poll[isimage]}-->
-						<img src="{IMGDIR}/attachimg_2.png" class="cur1" onmouseover="showMenu({'menuid':'poll_img_preview_{$poll[imginfo][$ppid][aid]}_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});" onmouseout="hideMenu('poll_img_preview_{$poll[imginfo][$ppid][aid]}_menu');" />
-						<!--{/if}-->
-						<input type="hidden" name="pollimage[{$poll[polloptionid][$key]}]" id="pollUploadProgress_{$key}_aid" value="$poll[imginfo][$ppid][aid]" />
-						<span id="poll_img_preview_{$poll[imginfo][$ppid][aid]}_menu" style="display: none">
-							<img src="$poll[imginfo][$ppid][small]" />
-						</span>
-					</span>
-				</p>
-			<!--{/loop}-->
+		<input type="hidden" name="tpolloption" value="1" />
+		<div class="cl">
+			<h4 class="z">
+				<em>{lang post_poll_options}: </em>
+				{lang post_poll_comment} &nbsp;
+				<span class="xw0"><input id="pollchecked" type="checkbox" class="pc" onclick="switchpollm(1)" /><label for="pollchecked">{lang post_single_frame_mode}</label></span>
+			</h4>
+		</div>
+		<div id="pollm_c_1" class="mbm">
 			<span id="polloption_new"></span>
 			<p id="polloption_hidden" style="display: none">
 				<a href="javascript:;" class="d" onclick="delpolloption(this)">del</a>
-				<input type="text" name="displayorder[]" class="px pxs vm" autocomplete="off" tabindex="1" />
-				<input type="text" name="polloption[]" class="px vm" autocomplete="off" style="width:230px;" tabindex="1" />
-				<span id="newpoll" class="vm"></span>
+				<input type="text" name="polloption[]" class="px vm" autocomplete="off" style="width:290px;" tabindex="1" />
 				<span id="pollUploadProgress" class="vm" style="display: none;"></span>
+				<span id="newpoll" class="vm"></span>
 			</p>
 			<p><a href="javascript:;" onclick="addpolloption()">+{lang post_poll_add}</a></p>
+		</div>
+		<div id="pollm_c_2" class="mbm" style="display:none">
+			<textarea name="polloptions" class="pt" style="width:340px;" tabindex="1" rows="6" onchange="switchpollm(0)" /></textarea>
+			<p class="cl">{lang post_poll_comment_s}</p>
+		</div>
+		<!--{else}-->
+		<!--{loop $poll['polloption'] $key $option}-->
+		<!--{eval $ppid = $poll['polloptionid'][$key];}-->
+		<p>
+			<input type="hidden" name="polloptionid[{$poll[polloptionid][$key]}]" value="$poll[polloptionid][$key]" />
+			<input type="text" name="displayorder[{$poll[polloptionid][$key]}]" class="px pxs vm" autocomplete="off" tabindex="1" value="$poll[displayorder][$key]" />
+			<input type="text" name="polloption[{$poll[polloptionid][$key]}]" class="px vm" autocomplete="off" style="width:230px;" tabindex="1" value="$option"{if !$_G['group']['alloweditpoll']} readonly="readonly"{/if} />
+			<!--img src="$poll[imginfo][$ppid][small]" class="cur1" /-->
+
+			<span id="newpoll_{$key}" class="vm"></span>
+			<span id="pollUploadProgress_{$key}" class="vm">
+						<!--{if $poll[isimage]}-->
+						<img src="{IMGDIR}/attachimg_2.png" class="cur1" onmouseover="showMenu({'menuid':'poll_img_preview_{$key}_menu','ctrlclass':'a','duration':2,'timeout':0,'pos':'34'});" onmouseout="hideMenu('poll_img_preview_{$key}_menu');" />
+				<!--{/if}-->
+						<input type="hidden" name="pollimage[{$poll[polloptionid][$key]}]" id="pollUploadProgress_{$key}_aid" value="$poll[imginfo][$ppid][aid]" />
+						<span id="poll_img_preview_{$key}_menu" style="display: none">
+							<img src="{if $poll[imginfo][$ppid][small]}$poll[imginfo][$ppid][small]{else}static/image/common/nophoto.gif{/if}" />
+						</span>
+					</span>
+		</p>
+		<!--{/loop}-->
+		<span id="polloption_new"></span>
+		<p id="polloption_hidden" style="display: none">
+			<a href="javascript:;" class="d" onclick="delpolloption(this)">del</a>
+			<input type="text" name="displayorder[]" class="px pxs vm" autocomplete="off" tabindex="1" />
+			<input type="text" name="polloption[]" class="px vm" autocomplete="off" style="width:230px;" tabindex="1" />
+			<span id="newpoll" class="vm"></span>
+			<span id="pollUploadProgress" class="vm" style="display: none;"></span>
+		</p>
+		<p><a href="javascript:;" onclick="addpolloption()">+{lang post_poll_add}</a></p>
 		<!--{/if}-->
 	</div>
 	<div class="sadd z">
@@ -77,21 +77,21 @@
 </div>
 <!--{subtemplate common/upload}-->
 <script type="text/javascript" reload="1">
-var maxoptions = parseInt('$_G[setting][maxpolloptions]');
-<!--{if $_GET[action] == 'newthread'}-->
+	var maxoptions = parseInt('$_G[setting][maxpolloptions]');
+	<!--{if $_GET[action] == 'newthread'}-->
 	var curoptions = 0;
 	var curnumber = 1;
 	addpolloption();
 	addpolloption();
 	addpolloption();
-<!--{else}-->
+	<!--{else}-->
 	var curnumber = curoptions = <!--{echo count($poll['polloption'])}-->;
 	for(var i=0; i < curnumber; i++) {
 		addUploadEvent('newpoll_'+i, 'pollUploadProgress_'+i);
 	}
-<!--{/if}-->
-function addUploadEvent(imgid, pollstr) {
-	<!--{if empty($_G['setting']['pluginhooks']['post_upload_extend']) && empty($_G['setting']['pluginhooks']['post_poll_upload_extend'])}-->
+	<!--{/if}-->
+	function addUploadEvent(imgid, pollstr) {
+		<!--{if empty($_G['setting']['pluginhooks']['post_upload_extend']) && empty($_G['setting']['pluginhooks']['post_poll_upload_extend'])}-->
 		new SWFUpload({
 			upload_url: SITEURL + 'misc.php?mod=swfupload&action=swfupload&operation=poll&fid=$_G[fid]',
 			post_params: {"uid":"$_G[uid]", "hash":"$swfconfig[hash]"},
@@ -129,8 +129,8 @@ function addUploadEvent(imgid, pollstr) {
 
 			debug: false
 		});
-	<!--{else}-->
+		<!--{else}-->
 		<!--{hook/post_poll_upload_extend}-->
-	<!--{/if}-->
-}
+		<!--{/if}-->
+	}
 </script>

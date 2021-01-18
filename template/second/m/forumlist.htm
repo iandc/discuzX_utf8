@@ -1,0 +1,56 @@
+{template m/header}
+<style>
+    .bottomBarCon ul li{
+        width: 25%;
+        float: left;
+        line-height: 40px;
+    }
+    .bottomBarCon ul li a{
+        font-size: 14px;
+        color: #333;
+    }
+    .bottomBarCon ul li a.col{
+        color: #5a85ce;
+    }
+    
+</style>
+<body>
+    <div class="warp">
+        <div class="interestBox"></div>
+    </div>
+    <!-- <div class="bottomBar">
+        <div class="bottomBarCon">
+            <a href="javascript:TOOLS.pageBack();" class="backBtn"><i class="iconAnswer commF back db"></i></a>
+            <a id="bottomSiteName" class="centerContent"></a>
+        </div>
+    </div> -->
+    <div id="nav1"  class="bottomBar">
+            <section class="nav">
+                <div class="bottomBarCon">
+                    <ul class="clearfix">
+                        <li>
+                            <a class="hover_a lis_a nav_l c_f col" href="http://bbs.eetop.wang">论坛</a>
+                        </li>
+                        <li>
+                            <a class="hover_a lis_a nav_l c_f" href="http://blog.eetop.wang">博客</a>
+                        </li>
+                        <li>
+                            <a class="hover_a lis_a nav_l c_f" href="http://edu.eetop.wang">课程</a>
+                        </li>
+                        <li>
+                            <a class="hover_a lis_a nav_l c_f" href="http://www.eetop.wang">资讯</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    <script type="text/javascript">
+        window.onload = function (){
+            TC.load("forumlist.htm");
+            JC.file("navmenu.js");
+            JC.file("forumlist.js");
+            JC.run();
+            $('#bottomSiteName').text(SITE_INFO.siteName);
+        };
+    </script>
+{template m/footer}

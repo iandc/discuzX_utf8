@@ -187,7 +187,7 @@ $languages = array(
 	'app_api_filename_comment' => '应用接口文件名称，不含路径，默认为uc.php',
 	'app_code' => '应用的 UCenter 配置信息',
 	'app_code_comment' => '当应用的 UCenter 配置信息丢失时可复制左侧的代码到应用的配置文件中',
-
+	'app_not_add_tips' => '不能通过 URL 添加应用的可能原因：1. 通过 URL 添加应用开关被关闭；2. 连续多次错误输入 UCenter 创始人密码',
 
 	'tag_tips' => '设置当前应用获取其他应用标签数据的比例以及扩展数据模板。模板中“&#123;xxx&#125;”表示标签数据的索引，代表相应的数据。',
 	'tag_global_template' => '全局模板',
@@ -300,6 +300,8 @@ $languages = array(
 	'setting_chatpmmemberlimit_comment' => '同一会话最多能有多少用户参与设置，建议在 30 - 100 范围内取值，0为不限制',
 	'setting_pmfloodctrl' => '发短消息灌水预防',
 	'setting_pmfloodctrl_comment' => '两次发短消息间隔小于此时间，单位秒，0 为不限制，此举为了限制通过机器批量发广告',
+	'setting_addappbyurl' => '启用通过 URL 添加应用功能',
+	'setting_addappbyurl_comment' => '是否启用通过 URL 添加应用功能，建议只有必须通过 URL 添加应用时开启',
 
 	'setting_user_failedtime' => '允许用户登录失败次数',
 	'setting_user_failedtime_comment' => '用户登录失败超过设置的数据，将在15分钟内无法登录，0为不限制次数',
@@ -446,6 +448,7 @@ $languages = array(
 	'home_member_count' => '用户总数',
 	'home_app_count' => '应用总数',
 	'home_env' => '系统信息',
+	'home_envstatus' => '运行环境检测',
 	'home_team' => 'UCenter 开发团队',
 
 	'admin_add_succeed' => '添加 $addname 为管理员成功',
@@ -495,5 +498,10 @@ $languages = array(
 
 	'app_allowips' => '允许的IP',
 	'app_allowips_comment' => '限定终端访问的IP, 设置哪些IP可以访问Ucenter  的数据接口',
+
+	'envstatus_result' => '检测结果',
+	'envstatus_ver_too_low' => '您当前系统环境内的 $envstatus[req] 版本 ($envstatus[now_ver]) 过低，程序无法按预期正常运行。我们强烈建议您升级到 $envstatus[sug_ver] 版本，程序正常运行最低要求为 $envstatus[req_ver] 版本。',
+	'envstatus_not_found' => '您当前系统环境内未安装或开启 $envstatus[req] 模块，程序无法按预期正常运行。我们强烈建议您安装或开启此模块，以满足程序正常运行的最低要求。',
+	'envstatus_ok' => '您当前系统环境适合当前版本的 UCenter $envstatus[version] 。',
 
 );

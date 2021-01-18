@@ -85,7 +85,7 @@ if(!empty($_SERVER['QUERY_STRING']) && is_numeric($_SERVER['QUERY_STRING'])) {
 						if($_G['setting']['rewritestatus'] && in_array('home_space', $_G['setting']['rewritestatus'])) {
 							$url = rewriteoutput('home_space', 1, $apphost, $domain['id']);
 						} else {
-							$url = $apphost.'home.php?mod=space&uid='.$domain['id'].'&do=index&view=admin';
+							$url = $apphost.'home.php?mod=space&uid='.$domain['id'];
 						}
 						break;
 					case 'group':
@@ -109,7 +109,7 @@ if(!empty($_SERVER['QUERY_STRING']) && is_numeric($_SERVER['QUERY_STRING'])) {
 				}
 			} else {
 				if($jump) {
-                    $url = empty($_ENV['domain']['app']['default']) ? (!empty($_ENV['domain']['defaultindex']) ? $_ENV['domain']['defaultindex'] : 'forum.php') : ($_SERVER['HTTPS'] == 'on' ? 'https' : 'http').'://'.$_ENV['domain']['app']['default'];
+					$url = empty($_ENV['domain']['app']['default']) ? (!empty($_ENV['domain']['defaultindex']) ? $_ENV['domain']['defaultindex'] : 'forum.php') : (is_https() ? 'https' : 'http').'://'.$_ENV['domain']['app']['default'];
 				} else {
 					$_ENV['curapp'] = 'forum';
 				}
@@ -131,7 +131,6 @@ if(!empty($url)) {
 		}
 		require './'.$parse['path'];
 	} else {
-		header("HTTP/1.1 301 Moved Permanently");
 		header("location: $url");
 	}
 } else {
@@ -161,4 +160,24 @@ function checkholddomain($domain) {
 	}
 	return $ishold;
 }
+
+function is_https() {
+	if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) != "off") {
+		return true;
+	}
+	if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && strtolower($_SERVER["HTTP_X_FORWARDED_PROTO"]) == "https") {
+		return true;
+	}
+	if (isset($_SERVER["HTTP_SCHEME"]) && strtolower($_SERVER["HTTP_SCHEME"]) == "https") {
+		return true;
+	}
+	if (isset($_SERVER["HTTP_FROM_HTTPS"]) && strtolower($_SERVER["HTTP_FROM_HTTPS"]) != "off") {
+		return true;
+	}
+	if (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] == 443) {
+		return true;
+	}
+	return false;
+}
+
 ?>

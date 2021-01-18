@@ -1,0 +1,144 @@
+<!--{block return}-->
+<input type="hidden" name="posttime" id="posttime" value="$_G[timestamp]" />
+<!--{subtemplate h5upload:common/upload}-->
+<style>
+#imgSpanButtonPlaceholder{display:inline-block;width: 99px;height: 25px;line-height: 25px;overflow:hidden;background:url("{IMGDIR}/uploadbutton.png") no-repeat 0 0;}
+#imgSpanButtonPlaceholder:hover{background-position:0 -25px;}
+#imgSpanButtonPlaceholder .webuploader-pick{text-indent:-9999px;}
+#spanButtonPlaceholder{display:inline-block;width: 99px;height: 25px;line-height: 25px;overflow:hidden;background:url("{IMGDIR}/uploadbutton.png") no-repeat 0 0;}
+#spanButtonPlaceholder:hover{background-position:0 -25px;}
+#spanButtonPlaceholder .webuploader-pick{text-indent:-9999px;}
+.spanuploaderdndtip{display:inline-block;height: 25px;line-height: 25px;overflow:hidden;}
+.upfilednd{height:120px;line-height:120px;text-align:center;font-size:24px;color: #cdcdcd;}
+.uploaderdndbox{min-height:165px;border: 2px dashed #cdcdcd;}
+.uploaderdndtip{height:165px;line-height:165px;text-align:center;font-size:24px;color: #cdcdcd;}
+.uploaderdndboxs{margin-top:10px;border: 2px dashed #cdcdcd;height:62px;line-height:62px;text-align:center;font-size:24px;color: #cdcdcd;}
+.webuploader-dnd-over{border: 2px dashed #999999;}
+.zoomqrcode{width:200px;height:200px;cursor: url("source/plugin/h5upload/image/cursor_minify.cur"), pointer;}
+.miniqrcode{width:60px;height:60px;cursor: url("source/plugin/h5upload/image/cursor_zoom.cur"), pointer;}
+</style>
+<script type="text/javascript">
+<!--{if $setconfig['down_remote']}-->
+var h5whitedomain = [{$setconfig['white_domain']}];
+<!--{/if}-->
+var attachUpload, upload;
+_attachEvent(window, 'load', function () {
+	upload = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=<!--{if $_G['basescript'] == 'portal'}-->portal<!--{else}-->album<!--{/if}-->",
+		post_params: {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"<!--{if $_G['basescript'] == 'portal'}-->,"aid":$aid,"catid":$catid<!--{/if}-->},
+		<!--{if $setconfig['dnd_open'] == 1 || $setconfig['dnd_open'] == 3}-->
+		dnd: '#icoImg_imgattachlist .upfilelist',
+		<!--{/if}-->
+		<!--{if $setconfig['paste_open']}-->
+		paste: [window.frames['uchome-ifrHtmlEditor'].document.getElementById('sourceEditor'),window.frames['uchome-ifrHtmlEditor'].window.frames['HtmlEditor'].document.body],
+		<!--{/if}-->
+		pick: '#imgSpanButtonPlaceholder',
+		accept: {
+			title: "$swfconfig[imageexts][depict]",
+			extensions: "$swfconfig[imageexts][ext]",
+			mimeTypes: "$swfconfig[imageexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: $setconfig['compress_replace'],
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if !$setconfig['compress_open'] && $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		custom_settings : {
+			dndStyle: $setconfig['dnd_style'],
+			progressTarget : "imgUploadProgress",
+			uploadSource: 'portal',
+			uploadType: <!--{if $_G['basescript'] == 'portal'}-->'portal'<!--{else}-->'blog'<!--{/if}-->,
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			<!--{if $setconfig['insert_allimage']}-->
+			insertAllImage: '$setconfig[insert_allimage]',
+			<!--{/if}-->
+			imgBoxObj: $('imgattachlist')
+			//thumbnail_height: 400,
+			//thumbnail_width: 400,
+			//thumbnail_quality: 100
+		}
+	});
+
+	attachUpload = new WebUpload({
+		auto: true,
+		upload_url: "{$_G[siteurl]}misc.php?mod=swfupload&action=swfupload&operation=<!--{if $_G['basescript'] == 'portal'}-->portal<!--{else}-->album<!--{/if}-->",
+		post_params: {"uid" : "$_G[uid]", "hash":"$swfconfig[hash]"<!--{if $_G['basescript'] == 'portal'}-->,"aid":$aid,"catid":$catid<!--{/if}-->},
+		<!--{if $setconfig['dnd_open'] == 2 || $setconfig['dnd_open'] == 3}-->
+		dnd: '#icoAttach_attachlist .upfl',
+		<!--{/if}-->
+		pick: '#spanButtonPlaceholder',
+		accept: {
+			title: "$swfconfig[attachexts][depict]",
+			extensions: "$swfconfig[attachexts][ext]",
+			mimeTypes: "$swfconfig[attachexts][mime]"
+		},
+		fileVal: 'Filedata',
+		<!--{if $setconfig['compress_open'] == 1}-->
+		compress : {
+			width: $setconfig['compress_width'],
+			height: $setconfig['compress_height'],
+			quality: $setconfig['compress_quality'],
+			noCompressIfLarger: true,
+			compressSize: $setconfig['compress_size']
+		},
+		<!--{/if}-->
+		<!--{if $swfconfig['limit']}-->
+		fileNumLimit : $swfconfig['limit'],
+		<!--{/if}-->
+		<!--{if $swfconfig['max']}-->
+		fileSingleSizeLimit : "$swfconfig[max]",
+		<!--{/if}-->
+		<!--{if $setconfig['chunk_size']}-->
+		chunked : true,
+		chunkSize : "$setconfig[chunk_size]",
+		<!--{/if}-->
+		custom_settings : {
+			dndStyle: $setconfig['dnd_style'],
+			progressTarget : "fsUploadProgress",
+			uploadSource: 'portal',
+			uploadType: 'attach',
+			<!--{if $setconfig['upload_storage']}-->
+			uploadStorage: '$setconfig[upload_storage]',
+			<!--{/if}-->
+			imgBoxObj: $('attachlist')
+			//thumbnail_height: 400,
+			//thumbnail_width: 400,
+			//thumbnail_quality: 100
+		}
+	});
+<!--{if $setconfig['qrcode_upload']}-->
+	uploadqrcodeportal($aid, $catid);
+<!--{/if}-->
+<!--{if $_G['group']['allowdownremoteimg'] && $setconfig['down_remote'] == 1}-->
+	_attachEvent(window.frames['uchome-ifrHtmlEditor'].window.frames['HtmlEditor'].document.body, 'paste', function () {    
+		setTimeout(function() { 
+		<!--{if $_G['basescript'] == 'portal'}-->
+			downremoteportal();
+		<!--{else}-->
+			//downremoteblog();
+		<!--{/if}-->
+		}, 1);
+	});
+<!--{elseif $_G['group']['allowdownremoteimg'] && $setconfig['down_remote'] == 2}-->
+	if(window.frames['uchome-ifrHtmlEditor'].document.getElementById('icoDown')){
+		window.frames['uchome-ifrHtmlEditor'].document.getElementById('icoDown').onclick = function(e) {downremoteportal();doane();};
+	}
+<!--{/if}-->
+});
+
+</script>
+<!--{/block}-->

@@ -297,7 +297,7 @@ function rectAvatarDone(res) {
         jQuery('#avatardisplayer').show();
         refreshAvatarCanvasForDisplay();
         jQuery('#avataradjuster').hide();
-        jQuery('#avatarfileselector').hide();
+        jQuery('#avatarfileselector').hide();            
     } else if (res == 'failure') {
         alert('上传失败');
     }

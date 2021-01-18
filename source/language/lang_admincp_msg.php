@@ -450,6 +450,7 @@ $lang = array (
     'setting_extcredits_must_available' => '您需要开启至少一种扩展积分',
     'uc_database_connect_error' => '连接用户中心数据库服务器失败检查设置',
     'uc_config_write_error' => '配置文件写入失败，请检查设置',
+    'uc_config_appid_error' => 'UCenter 应用 ID 必须为数字，请检查设置',
     'uc_config_load_data_local_infile_error' => '服务器开启了 MySQL LOAD DATA LOCAL IN FILE 功能，为避免可能发生的安全威胁，不允许在线编辑 UCenter 数据库服务器地址，如需修改请编辑 config/config_ucenter.php 内 UC_DBHOST 常量',
     'setting_ipaccess_invalid' => '操作错误！您必须将自己的 IP 加入到允许访问站点的 IP 列表中',
     'setting_adminipaccess_invalid' => '操作错误！您必须将自己的 IP 加入到允许访问后台的 IP 列表中',
@@ -630,11 +631,13 @@ $lang = array (
 
     'cloudaddons_check_url_fopen_error' => '您的服务器无法访问应用中心，这将会导致应用无法安装。请联系您的服务商或者网站技术人员，确保您的服务器能够正常访问 addon.dismall.com',
     'cloudaddons_check_gzuncompress_error' => '您的服务器不支持 Zlib，这将会导致应用无法安装。请联系您的服务商或者网站技术人员。',
+    'cloudaddons_check_curl_error' => '您的服务器不支持 CURL，这将会导致应用无法安装。请联系您的服务商或者网站技术人员。',
     'cloudaddons_genuine_message' => '对不起，您安装的不是正版应用，安装程序无法继续执行<br /><br /><a href="admin.php?action=cloudaddons&id={addonid}">点击这里安装正版应用</a>',
 
     'admincp_makehtml_cleanhtml_error' => '对不起，开启生成HTML静态文件时，不能清理HTML文件。',
     'admincp_makehtml_cleanhtml_succeed' => '清理HTML文件成功。',
     'admincp_makehtml_cleanhtml_choose_item' => '对不起，请选择需要清理HTML文件。',
+    'attach_readmod_error' => '抱歉，当前的本地文件读取模式会导致部分浏览器下视频播放异常，如需开启附件URL地址、媒体附件播放，请在 config_global.php 内修改本地文件读取模式为 1 或 4 后再试',
 );
 
 ?>
